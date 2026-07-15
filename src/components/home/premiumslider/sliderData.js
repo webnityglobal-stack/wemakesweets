@@ -1,0 +1,42 @@
+export const slides = [
+  {
+    id: 1,
+    image: "/slider1.webp",
+    title: "Real Ingredients.",
+    subtitle: "Premium Dry Fruits.",
+    description: "Modern Indian Snacking.",
+    button: "Shop Now",
+  },
+  {
+    id: 2,
+    image: "/slider2.webp",
+    title: "Healthy Every Day",
+    subtitle: "Crafted With Love",
+    description: "Made Using Finest Ingredients.",
+    button: "Explore",
+  },
+  {
+    id: 3,
+    image: "/slider3.webp",
+    title: "Traditional Taste",
+    subtitle: "Modern Experience",
+    description: "Premium Indian Sweets & Snacks",
+    button: "View Collection",
+  },
+  {
+    id: 4,
+    image: "/slider4.webp",
+    title: "Celebrate Every Moment",
+    subtitle: "Gift Happiness",
+    description: "Perfect For Every Occasion",
+    button: "Shop Gifts",
+  },
+  {
+  id: 5,
+  image: "/slider5.webp",
+  title: "Pure Ingredients.",
+  subtitle: "Timeless Indulgence.",
+  description: "Crafted For Every Celebration.",
+  button: "Shop Now",
+},
+];
