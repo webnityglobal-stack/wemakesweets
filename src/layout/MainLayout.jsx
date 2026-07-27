@@ -7,7 +7,7 @@ import TopBanner from '../components/topbanner/TopBanner'
 const MainLayout = () => {
   return (
     <div className=' flex flex-col'>
-        {/* <TopBanner/> */}
+        <TopBanner/>
         <div className=''>
             <Navbar/>
         </div>
