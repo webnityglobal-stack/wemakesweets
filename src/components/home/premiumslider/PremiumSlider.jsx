@@ -75,7 +75,7 @@ const PremiumSlider = () => {
 <div className="absolute inset-0 flex items-center justify-center z-20">
   <div className="text-center max-w-3xl px-6">
 
-    <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif font-semibold text-gray-800 leading-tight">
+    <h2 className="text md:text-4xl lg:text-5xl font-serif font-semibold text-gray-800 leading-tight">
       {slide.title}
     </h2>
 

@@ -35,7 +35,7 @@ const commitments = [
 
 const OurStory = () => {
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-2">
+    <section className="grid grid-cols-1 lg:grid-cols-2 flex ">
       {/* Left Section */}
       <div
         className="relative min-h-[340px] bg-cover bg-center"

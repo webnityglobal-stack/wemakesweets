@@ -13,7 +13,7 @@ const images = [
 
 export default function ProductSlider() {
   return (
-    <section className="w-full bg-white">
+    <section className="w-full bg-[#f9e4bf]">
       <div className="max-w-7xl mx-auto">
 
         <Swiper

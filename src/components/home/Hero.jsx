@@ -5,6 +5,7 @@ import {
   Sparkles,
   Heart,
 } from "lucide-react";
+import OurProduct from "./OurProduct";
 
 const features = [
   {
@@ -51,7 +52,7 @@ function Hero() {
           <div className="w-full lg:w-1/2 px-5 sm:px-7 lg:px-20 pt-24 sm:pt-28 lg:pt-0">
             <div className="max-w-[205px] sm:max-w-[240px] lg:max-w-xl text-[#EFC46B]">
               {/* Heading */}
-              <h1 className="font-serif font-bold leading-[1.08] text-[2rem] sm:text-[2.3rem] lg:text-6xl">
+              <h1 className="font-bold leading-[1.08] text-[2rem] sm:text-[2.3rem] lg:text-6xl">
                 Delight<br/> in
                 <br />
                 Nature's Finest
@@ -64,10 +65,11 @@ function Hero() {
               </p>
 
               {/* Button */}
-              <button className="mt-6 flex w-fit items-center gap-2 rounded-lg bg-[#E8B357] px-5 py-3 text-sm font-semibold text-[#3C2148] transition hover:bg-[#d9a044] lg:mt-7 lg:px-6 lg:py-3 lg:text-base">
+              {/* <button className="mt-6 flex w-fit items-center gap-2 rounded-lg bg-[#E8B357] px-5 py-3 text-sm font-semibold text-[#3C2148] transition hover:bg-[#d9a044] lg:mt-7 lg:px-6 lg:py-3 lg:text-base">
                 SHOP NOW
-                {/* <ArrowRight size={18} /> */}
-              </button>
+              </button> */}
+
+              {/* <OurProduct/> */}
 
               {/* Mobile Features */}
               <div className="mt-8 flex max-w-[190px] sm:max-w-[220px] flex-col gap-6 lg:hidden">

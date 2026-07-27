@@ -23,14 +23,14 @@ export const slides = [
     description: "Premium Indian Sweets & Snacks",
     button: "View Collection",
   },
-  {
-    id: 4,
-    image: "/slider4.webp",
-    title: "Celebrate Every Moment",
-    subtitle: "Gift Happiness",
-    description: "Perfect For Every Occasion",
-    button: "Shop Gifts",
-  },
+  // {
+  //   id: 4,
+  //   image: "/slider4.webp",
+  //   title: "Celebrate Moment",
+  //   subtitle: "Gift Happiness",
+  //   description: "Perfect For Every Occasion",
+  //   button: "Shop Gifts",
+  // },
   {
   id: 5,
   image: "/slider5.webp",

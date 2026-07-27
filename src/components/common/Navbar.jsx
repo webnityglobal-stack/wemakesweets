@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const navLinks = [
   { name: "Home", path: "/" },
-  { name: "Products", path: "/products" },
+  // { name: "Products", path: "/products" },
   { name: "Our Story", path: "/our-story" },
   { name: "Benefits", path: "/benefits" },
   { name: "Contact", path: "/contact" },
@@ -14,7 +14,7 @@ function Navbar() {
 
   return (
     // <header className="absolute top-0 left-0 w-full z-50 px-4 md:px-8 lg:px-10 pt-5">
-    <header className="w-full z-50 px-4 md:px-8 lg:px-10 py- bg-white">
+    <header className="w-full z-50 px-4 md:px-8 lg:px-10 py- bg-[#f9e4bf] ">
       <nav className=" px-6 lg:px-10 h-20 flex items-center justify-between">
 
         {/* Logo */}
@@ -22,17 +22,17 @@ function Navbar() {
           <img
             src="/logo.webp"
             alt="Logo"
-            className="h-12 w-auto object-contain"
+            className="h-12 w-auto object-contain border border-white rounded-[4px]"
           />
         </a>
 
         {/* Desktop Menu */}
-        <ul className="hidden lg:flex items-center gap-12 font-medium text-[#2F1C14]">
+        <ul className="hidden lg:flex items-center gap-12 font-medium ">
           {navLinks.map((item) => (
-            <li key={item.name}  className="">
+            <li key={item.name}  className="text-[#f9e4bf]">
               <a
                 href={item.path}
-                className="hover:text-[#EFC46B] hover:bg-[#573b03]  px-5 py-2 rounded-[20px] transition bg-[#EFC46B]"
+                className="hover:text-[#EFC46B] hover:bg-[#573b03]  px-5 py-2 rounded-[20px] transition bg-[#552b12]"
               >
                 {item.name}
               </a>
@@ -41,7 +41,7 @@ function Navbar() {
         </ul>
 
         {/* Desktop Icons */}
-        <div className="hidden lg:flex items-center gap-6 text-[#2F1C14]">
+        <div className="hidden lg:flex items-center gap-6 text-[#552b12]">
           <Search
             size={24}
             className="cursor-pointer hover:text-[#B8792C] "
@@ -75,7 +75,7 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="lg:hidden mt-3 bg-[#FDF4E6] rounded-2xl shadow-md p-6">
+        <div className="lg:hidden mt-3 bg-[#f9e4bf] rounded-2xl shadow-md p-6">
 
           <ul className="space-y-5 text-center font-medium">
             {navLinks.map((item) => (
