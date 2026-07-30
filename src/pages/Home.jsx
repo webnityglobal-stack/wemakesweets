@@ -10,6 +10,10 @@ import OurProduct from '../components/home/OurProduct'
 import GatewayOfIndia from '../components/home/GatewayOfIndia'
 import HowrahBridge from '../components/home/HowrahBridge'
 import ProductConsumption from '../components/ProductConsumption'
+import products from '../constants/productData'
+import ProductGrid from '../components/products/ProductGrid'
+import { Link } from 'react-router-dom'
+import Testimonials from '../components/testimonials/Testimonials'
 
 const Home = () => {
   return (
@@ -17,14 +21,57 @@ const Home = () => {
       <PremiumSlider/>
       
         <Hero/>
+       
         {/* <ProductSlider/> */}<OurProduct/>
         <ProductConsumption/>
+        
+
+<div>
+  <section className="bg-[#f9e4bf] py-14">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+
+      {/* Heading */}
+      <div className="mb-10 text-center">
+        <p className="font-semibold uppercase tracking-[0.25em] text-[#572340]">
+          Our Collection
+        </p>
+
+        <h2 className="mt-3 text-3xl font-bold text-[#603917] md:text-5xl">
+          Best Selling Products
+        </h2>
+
+        {/* Decorative Line */}
+        <div className="mx-auto mt-5 h-1 w-28 rounded-full bg-[#3e5a2c]" />
+      </div>
+
+      {/* Products */}
+      <ProductGrid products={products.slice(0, 4)} />
+
+      {/* Button */}
+      <div className="mt-12 flex justify-center">
+        <Link
+          to="/products"
+          className="inline-flex items-center justify-center rounded-full bg-[#8b183d] px-8 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-[#164984] hover:shadow-lg"
+        >
+          View All Products
+        </Link>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+
+
+       
         <HowrahBridge/>
         <HeroContent/>
         <GatewayOfIndia/>
         <PerfectOccasion/>
         <InspiredByHeritage/>
+        
         <OurStory/>
+        <Testimonials/>
     </div>
   )
 }

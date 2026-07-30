@@ -7,6 +7,50 @@ import {
   Sparkles,
 } from "lucide-react";
 
+// const occasions = [
+//   {
+//     icon: HeartHandshake,
+//     title: "Wedding",
+//     desc: "Luxury wedding hampers & return gifts",
+//     color: "#810c26",
+//     bg: "#552b12",
+//   },
+//   {
+//     icon: Building2,
+//     title: "Corporate",
+//     desc: "Employee & client gifting solutions",
+//     color: "#08376c",
+//     bg: "#08376c",   
+//   },
+//   {
+//     icon: Sparkles,
+//     title: "Festivals",
+//     desc: "Celebrate every festival with sweetness",
+//     color: "#2a4d25",
+//     bg: "#552b12",
+//   },
+//   {
+//     icon: Dumbbell,
+//     title: "Healthy Snacking",
+//     desc: "Perfect for gym & daily nutrition",
+//     color: "#552b12",
+//     bg: "#2a4d25",
+//   },
+//   {
+//     icon: Plane,
+//     title: "Travel Friendly",
+//     desc: "Easy to carry & enjoy anywhere",
+//     color: "#254a21",
+//     bg: "#810c26",
+//   },
+//   {
+//     icon: Gift,
+//     title: "Family Celebrations",
+//     desc: "Birthdays, parties & family moments",
+//     color: "#E8B357",
+//     bg: "#254a21",
+//   },
+// ];
 const occasions = [
   {
     icon: HeartHandshake,
@@ -14,13 +58,15 @@ const occasions = [
     desc: "Luxury wedding hampers & return gifts",
     color: "#810c26",
     bg: "#552b12",
+    image: "/occasions/wedding.webp",
   },
   {
     icon: Building2,
     title: "Corporate",
     desc: "Employee & client gifting solutions",
     color: "#08376c",
-    bg: "#08376c",   
+    bg: "#08376c",
+    image: "/occasions/corporate.webp",
   },
   {
     icon: Sparkles,
@@ -28,6 +74,7 @@ const occasions = [
     desc: "Celebrate every festival with sweetness",
     color: "#2a4d25",
     bg: "#552b12",
+    image: "/occasions/festivals.webp",
   },
   {
     icon: Dumbbell,
@@ -35,6 +82,7 @@ const occasions = [
     desc: "Perfect for gym & daily nutrition",
     color: "#552b12",
     bg: "#2a4d25",
+    image: "/occasions/gym.webp",
   },
   {
     icon: Plane,
@@ -42,6 +90,7 @@ const occasions = [
     desc: "Easy to carry & enjoy anywhere",
     color: "#254a21",
     bg: "#810c26",
+    image: "/occasions/travel.webp",
   },
   {
     icon: Gift,
@@ -49,9 +98,9 @@ const occasions = [
     desc: "Birthdays, parties & family moments",
     color: "#E8B357",
     bg: "#254a21",
+    image: "/occasions/family.webp",
   },
 ];
-
 const ProductConsumption = () => {
   return (
     <section className="bg-[#f9e4bf] py-14 lg:py-20">
@@ -73,7 +122,7 @@ const ProductConsumption = () => {
           </p>
 
         </div>
-
+{/* 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
           {occasions.map((item) => {
@@ -82,7 +131,6 @@ const ProductConsumption = () => {
             return (
               <div
                 key={item.title}
-                // className="group relative overflow-hidden rounded-3xl border border-[#E8B357]/40 bg-white/70 p-7 backdrop-blur transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
                 style={{
   backgroundColor: item.bg,
   borderColor: item.color + "40",
@@ -110,8 +158,58 @@ className="group relative overflow-hidden rounded-3xl border p-7 backdrop-blur t
               </div>
             );
           })}
-        </div>
+        </div> */}
+<div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  {occasions.map((item) => {
+    const Icon = item.icon;
 
+    return (
+      <div
+        key={item.title}
+        style={{
+          backgroundColor: item.bg,
+          borderColor: item.color + "40",
+        }}
+        className="group relative overflow-hidden rounded-3xl border transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+      >
+        {/* Background Image */}
+        <img
+          src={item.image}
+          alt={item.title}
+          className="absolute inset-0 h-full w-full object-cover opacity-[0.3] transition-all duration-700 group-hover:scale-110 group-hover:opacity-[0.22]"
+        />
+
+        {/* Dark Overlay */}
+        <div
+          className="absolute inset-0"
+          style={{
+            // background: `linear-gradient(to bottom, ${item.bg}CC, ${item.bg}F2)`,
+          }}
+        />
+
+        {/* Decorative Glow */}
+        <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-[#E8B357]/10 blur-3xl transition-all duration-500 group-hover:scale-150" />
+
+        {/* Content */}
+        <div className="relative z-10 p-7">
+
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#f9e4bf]/15 backdrop-blur-md border border-white/20 text-[#f9e4bf] transition-all duration-500 group-hover:rotate-6 group-hover:scale-110">
+            <Icon size={30} />
+          </div>
+
+          <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
+            {item.title}
+          </h3>
+
+          <p className="mt-3 leading-7 text-[#f9e4bf]/90">
+            {item.desc}
+          </p>
+
+        </div>
+      </div>
+    );
+  })}
+</div>
         <div className="mt-14 rounded-3xl bg-[#08376c] px-8 py-8 text-center shadow-xl">
 
           <h3 className="font-serif text-3xl text-[#f9e4bf]">

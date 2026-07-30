@@ -48,29 +48,7 @@ const PremiumSlider = () => {
             {/* Content */}
             <div className="absolute inset-0 flex items-center">
 
-              {/* <div className="max-w-7xl mx-auto px-6 lg:px-14 w-full">
-
-                <div className="max-w-xl">
-
-                  <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif font-semibold text-gray-800 leading-tight">
-                    {slide.title}
-                  </h2>
-
-                  <h3 className="text-xl md:text-4xl font-serif mt-2 text-gray-800">
-                    {slide.subtitle}
-                  </h3>
-
-                  <p className="mt-3 text-pink-700 text-lg md:text-2xl">
-                    {slide.description}
-                  </p>
-
-                  <button className="mt-8 bg-pink-600 hover:bg-pink-700 transition px-8 py-3 rounded-md text-white font-medium">
-                    {slide.button}
-                  </button>
-
-                </div>
-
-              </div> */}
+           
               {/* Content */}
 <div className="absolute inset-0 flex items-center justify-center z-20">
   <div className="text-center max-w-3xl px-6">

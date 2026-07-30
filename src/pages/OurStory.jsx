@@ -14,7 +14,7 @@ export default function OurStory() {
       {/* HERO */}
       {/* ===================================================== */}
 
-      <section className="relative min-h-screen flex items-center bg-[#08376c] overflow-hidden">
+      <section className="relative min-h-screen flex items-center bg-[#552b12] overflow-hidden">
 
         {/* Background Decorations */}
 
@@ -87,7 +87,7 @@ export default function OurStory() {
               <div className="overflow-hidden rounded-[40px] shadow-2xl">
 
                 <img
-                  src="/ourStory1.webp"
+                  src="/ourStory/ourStoryPage1.png"
                   alt="Our Story"
                   className="h-[650px] w-full object-cover transition duration-700 hover:scale-110"
                 />
@@ -139,7 +139,7 @@ export default function OurStory() {
               <div className="relative overflow-hidden rounded-[35px] shadow-2xl">
 
                 <img
-                  src="/ourStory2.webp"
+                  src="/ourStory/ourStoryPage2.png"
                   alt=""
                   className="h-[650px] w-full object-cover transition duration-700 hover:scale-110"
                 />
