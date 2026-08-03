@@ -50,11 +50,11 @@ const PremiumSlider = () => {
                   {slide.title}
                 </h2>
 
-                <h3 className="mt-2 text-xl md:text-4xl font-serif text-[#603917]">
+                <h3 className="mt-2  sm:text-xl md:text-4xl font-serif text-[#603917]">
                   {slide.subtitle}
                 </h3>
 
-                <p className="mt-4 text-[#3e5a2c] text-lg md:text-2xl">
+                <p className="mt-4 text-[#3e5a2c] text-[12px] sm:text-lg  md:text-2xl">
                   {slide.description}
                 </p>
 
