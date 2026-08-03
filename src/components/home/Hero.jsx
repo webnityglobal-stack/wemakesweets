@@ -21,7 +21,7 @@ const features = [
   {
     icon: <Sparkles size={22} />,
     title: "Made with",
-    subtitle: "Premium Ingredients",
+    subtitle: "Love",
   },
   {
     icon: <Heart size={22} />,
@@ -50,25 +50,28 @@ function Hero() {
         {/* Overlay */}
         <div className="absolute inset-0 flex items-start lg:items-center">
           <div className="w-full lg:w-1/2 px-5 sm:px-7 lg:px-20 pt-24 sm:pt-28 lg:pt-0">
-            <div className="max-w-[205px] sm:max-w-[240px] lg:max-w-xl">
+            <div className=" flex flex-col gap-24 sm:gap-0 max-w-[205px] sm:max-w-[240px]  lg:max-w-xl">
 
-              {/* Heading */}
-              <h1 className="font-bold leading-[1.08] text-[2rem] sm:text-[2.3rem] lg:text-6xl text-[#f9e4bf]">
+              <div>
+                {/* Heading */}
+              <h1 className="font-bold leading-[1.08] text-[1.60rem] sm:text-[2.3rem] lg:text-6xl text-[#f9e4bf]">
                 Delight
                 <br />
                 in
                 <br />
-                Nature's Finest
+                Nature's <br className="block sm:hidden" /> Finest
               </h1>
 
               {/* Paragraph */}
-              <p className="mt-4 max-w-[190px] sm:max-w-[230px] lg:max-w-xl text-white/90 text-[14px] sm:text-[15px] lg:text-lg leading-7 lg:leading-8">
-                Premium Date & Nut Cubes made from the finest ingredients for a
+              <p className="mt-4 max-w-[190px] sm:max-w-[230px] lg:max-w-xl text-white/90 text-[10px] sm:text-[15px] lg:text-lg leading-7 lg:leading-8">
+                Premium Date & Nut Cubes made <br className="block sm:hidden"/> from  the finest ingredients for a
                 healthy lifestyle.
               </p>
 
+              </div>
               {/* Standard Project Button */}
-              {/* <button
+              {/* 
+              <button
                 className="
                   mt-6
                   flex

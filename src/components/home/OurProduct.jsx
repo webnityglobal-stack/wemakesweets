@@ -89,16 +89,17 @@ export default function OurProduct() {
               className="mx-auto h-24 object-contain lg:h-28 rounded-2xl"
             />
 
-            {/* <h3 className="mt-3 text-center font-serif text-sm text-[#f9e4bf]">
+            <h3 className="mt-3 text-center font-serif text-sm text-[#f9e4bf]">
               {item.name}
-            </h3> */}
+            </h3>
             <h3 className="mt-3 text-center font-serif text-sm leading-6 text-[#f9e4bf]">
-  {item.name.replace(" Cubes", "\nCubes").split("\n").map((line, index) => (
+  {/* {item.name.replace(" Cubes", "\nCubes").split("\n").map((line, index) => ( */}
+    {/* {item.name.replace(" Cubes", "\nCubes").split("\n").map((line, index) => (
     <span key={index}>
       {line}
       <br />
     </span>
-  ))}
+  ))} */}
 </h3>
 
            <Link to='/products'>
