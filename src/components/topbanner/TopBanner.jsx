@@ -33,12 +33,35 @@ const TopBanner = () => {
         </span>
 
         {/* Call Button */}
-        <a
+     
+         {/* <a
           href="tel:18002032007"
-          className="rounded-full bg-[#8b183d] px-4 py-1.5 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-[#164984]"
+          className="rounded-full !bg-pink-600 !hover:bg-[#572340] px-4 py-1.5 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:scale-105 "
         >
           Call 1800 203 2007
-        </a>
+        </a> */}
+        <a
+  href="tel:18002032007"
+  className="
+    inline-flex
+    items-center
+    rounded-full
+    bg-pink-600
+    px-4
+    py-1.5
+    text-sm
+    font-semibold
+    text-white
+    shadow-md
+    transition-all
+    duration-300
+    hover:bg-[#572340]
+    hover:scale-105
+  "
+>
+  Call 1800 203 2007
+</a>
+       
 
         {/* Right Decorative Line */}
         <span className="hidden h-px w-10 bg-[#f9e4bf]/50 md:block" />
