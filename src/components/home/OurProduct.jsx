@@ -6,32 +6,31 @@ import "swiper/css";
 
 const products = [
   {
-    name: "Multi Seed & Nut Cubes",
-    image: "/MultiSeed&NutCubesFrontView.webp",
-    bg: "#08376c",
-  },
-  {
-    name: "Rice Crispy & Nut Cubes",
-    image: "/RiceCrispy&NutCubesFrontView.webp",
-    bg: "#810c26",
-  },
-  {
     name: "Date & Nut Cubes",
     image: "/Date&NutCubesFrontView.webp",
-    bg: "#2a4d25",
+    bg: "#572340", // Date Bite
   },
   {
     name: "Anjeer & Nut Cubes",
     image: "/Anjeer&NutCubesFrontView.webp",
-    bg: "#552b12",
+    bg: "#603917", // Anjeer
   },
   {
     name: "Date Elaichi Cubes",
     image: "/DateElaichi&NutCubesFrontView.webp",
-    bg: "#254a21",
+    bg: "#3e5a2c", // Date Elaichi
+  },
+  {
+    name: "Multi Seed & Nut Cubes",
+    image: "/MultiSeed&NutCubesFrontView.webp",
+    bg: "#164984", // Multi Seed
+  },
+  {
+    name: "Rice Crispy & Nut Cubes",
+    image: "/RiceCrispy&NutCubesFrontView.webp",
+    bg: "#8b183d", // Rice Crispy
   },
 ];
-
 export default function OurProduct() {
   return (
 <section className="relative overflow-hidden px-12 py-16 sm:px-2 sm:py-8 lg:px-20 lg:py-28 xl:px-24">
@@ -45,15 +44,16 @@ export default function OurProduct() {
  
 
   {/* Optional Overlay */}
-  <div className="absolute inset-0 bg-[#f9e4bf]/10"></div>
+  {/* <div className="absolute inset-0 bg-[#f9e4bf]/10"></div> */}
+  <div className="absolute inset-0 bg-[#f9e4bf]/15"></div>
 <div className="relative z-10 mb-6 lg:mb-10 flex items-center justify-center gap-3">
-  <div className="h-px w-8 sm:w-12 lg:w-20 bg-[#b88a32]" />
+  <div className="h-px w-8 sm:w-12 lg:w-20 bg-[#603917]" />
 
-  <h2 className="font-serif text-xl sm:text-2xl lg:text-4xl font-bold tracking-wide text-[#552b12]">
+  <h2 className="font-serif text-xl sm:text-2xl lg:text-4xl font-bold tracking-wide text-[#572340]">
     Our Collection
   </h2>
 
-  <div className="h-px w-8 sm:w-12 lg:w-20 bg-[#b88a32]" />
+  <div className="h-px w-8 sm:w-12 lg:w-20 bg-[#603917]" />
 </div>
   <div className="relative z-10">
     <Swiper
@@ -79,7 +79,7 @@ export default function OurProduct() {
       {products.map((item) => (
         <SwiperSlide key={item.name}>
           <div
-            className="rounded-2xl border border-[#d9b15d]/30 p-3 shadow-lg"
+            className="rounded-2xl border border-[#f9e4bf]/20 p-3 shadow-lg"
             style={{ background: item.bg }}
           >
             <img
@@ -100,7 +100,26 @@ export default function OurProduct() {
   ))}
 </h3>
 
-            <button className="mx-auto mt-4 flex rounded-full border border-[#d9b15d] px-4 py-2 text-xs text-[#f9e4bf] hover:bg-[#f9e4bf] hover:text-[#552b12]">
+           <button
+  className="
+    mx-auto
+    mt-4
+    flex
+    rounded-full
+    bg-pink-600
+    px-5
+    py-2
+    text-xs
+    font-semibold
+    text-white
+    shadow-md
+    transition-all
+    duration-300
+    hover:bg-[#572340]
+    hover:scale-105
+    hover:shadow-lg
+  "
+>
               SHOP NOW
             </button>
           </div>

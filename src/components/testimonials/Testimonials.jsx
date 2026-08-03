@@ -9,7 +9,7 @@ const testimonials = [
     image: "/customers/customer.png",
     review:
       "Absolutely loved the Date & Nut sweets. Fresh, healthy and beautifully packed. Will definitely order again!",
-    color: "#810c26",
+    color: "#8b183d",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const testimonials = [
     image: "/customers/customer.png",
     review:
       "The quality is amazing. Every sweet tastes premium and you can actually feel the natural ingredients.",
-    color: "#552b12",
+    color: "#603917",
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const testimonials = [
     image: "/customers/customer.png",
     review:
       "Perfect gifting option. Everyone in my family loved it. Beautiful packaging with incredible taste.",
-    color: "#2a4d25",
+    color: "#3e5a2c",
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ const testimonials = [
     image: "/customers/customer.png",
     review:
       "Healthy snacks finally that actually taste delicious. Worth every rupee.",
-    color: "#08376c",
+    color: "#164984",
   },
 ];
 
@@ -47,19 +47,19 @@ const data = [...testimonials, ...testimonials];
 
 export default function Testimonials() {
   return (
-    <section className="bg-[#f9e4bf] py-20 overflow-hidden">
+    <section className="overflow-hidden bg-[#f9e4bf] py-20">
 
-      <div className="text-center mb-14">
+      <div className="mb-14 text-center">
 
-        <p className="uppercase tracking-[6px] text-[#810c26] text-sm font-semibold">
+        <p className="text-sm font-semibold uppercase tracking-[6px] text-[#E35A7E]">
           Testimonials
         </p>
 
-        <h2 className="text-4xl md:text-5xl font-bold text-[#552b12] cinzel">
+        <h2 className="cinzel text-4xl font-bold text-[#603917] md:text-5xl">
           Happy Customers
         </h2>
 
-        <div className="mx-auto mt-5 h-1 w-28 rounded-full bg-[#d47a1f]" />
+        <div className="mx-auto mt-5 h-1 w-28 rounded-full bg-[#DE6239]" />
 
       </div>
 
@@ -71,11 +71,12 @@ export default function Testimonials() {
 
             <div
               key={index}
-              className="group relative flex h-[390px] w-[330px] md:w-[380px] flex-col rounded-[28px] p-8 shadow-xl transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl"
+              className="group relative flex h-[390px] w-[330px] flex-col rounded-[28px] p-8 shadow-xl transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl md:w-[380px]"
               style={{
                 background: item.color,
               }}
             >
+
               <Quote
                 className="absolute left-7 top-7 text-white/20"
                 size={60}
@@ -87,13 +88,13 @@ export default function Testimonials() {
                   <Star
                     key={i}
                     size={18}
-                    className="fill-yellow-400 text-yellow-400"
+                    className="fill-[#F4C02D] text-[#F4C02D]"
                   />
                 ))}
 
               </div>
 
-              <p className="mt-10 flex-1 text-center text-xl leading-9 text-[#f9e4bf] font-semibold">
+              <p className="mt-10 flex-1 text-center text-xl font-semibold leading-9 text-[#f9e4bf]">
                 "{item.review}"
               </p>
 
@@ -104,7 +105,7 @@ export default function Testimonials() {
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="h-14 w-14 rounded-full object-cover border-2 border-[#f9e4bf]"
+                    className="h-14 w-14 rounded-full border-2 border-[#66BC9E] object-cover"
                   />
 
                   <div>
@@ -113,7 +114,7 @@ export default function Testimonials() {
                       {item.name}
                     </h4>
 
-                    <p className="text-sm text-white/70">
+                    <p className="text-sm text-[#f9e4bf]/75">
                       {item.city}
                     </p>
 

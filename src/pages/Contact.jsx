@@ -15,7 +15,7 @@ export default function Contact() {
       {/* HERO */}
       {/* ================================================= */}
 
-      <section className="relative overflow-hidden bg-[#08376c]">
+      <section className="relative overflow-hidden bg-[#3e5a2c]">
 
         <div className="absolute -left-32 top-0 h-96 w-96 rounded-full bg-[#810c26]/20 blur-3xl" />
         <div className="absolute right-0 bottom-0 h-[450px] w-[450px] rounded-full bg-[#2a4d25]/20 blur-3xl" />
@@ -65,7 +65,7 @@ export default function Contact() {
             {/* CONTACT FORM */}
             {/* ======================================= */}
 
-            <div className="rounded-[35px] bg-[#810c26] p-8 shadow-2xl lg:p-10">
+            <div className="rounded-[35px] bg-[#603917] p-8 shadow-2xl lg:p-10">
 
               <span className="uppercase tracking-[5px] text-[#f9e4bf] font-semibold">
                 Send Us A Message
@@ -173,138 +173,136 @@ export default function Contact() {
             {/* CONTACT INFO */}
             {/* ======================================= */}
 
-            <div>
+          <div>
 
-              <span className="uppercase tracking-[5px] text-[#08376c] font-semibold">
-                Contact Information
-              </span>
+  <span className="uppercase tracking-[5px] text-[#164984] font-semibold">
+    Contact Information
+  </span>
 
-              <h2 className="mt-4 text-5xl font-black text-[#810c26]">
-                We're Always
-                <br />
-                Here To Help
-              </h2>
+  <h2 className="mt-4 text-5xl font-black text-[#8b183d]">
+    We're Always
+    <br />
+    Here To Help
+  </h2>
 
-              <p className="mt-6 leading-8 text-gray-700">
+  <p className="mt-6 leading-8 text-[#3e5a2c]">
+    Have questions about our sweets,
+    bulk orders or corporate gifting?
+    Reach out to us anytime.
+  </p>
 
-                Have questions about our sweets,
-                bulk orders or corporate gifting?
-                Reach out to us anytime.
+  <div className="mt-12 space-y-6">
 
-              </p>
+    {/* Address */}
 
-              <div className="mt-12 space-y-6">
+    <div className="flex gap-5 rounded-[28px] bg-[#3e5a2c] p-6 shadow-lg">
 
-                {/* Address */}
+      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#164984] text-white">
 
-                <div className="flex gap-5 rounded-[28px] bg-[#254a21] p-6 shadow-lg">
+        <MapPin />
 
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#08376c] text-white">
+      </div>
 
-                    <MapPin />
+      <div>
 
-                  </div>
+        <h3 className="text-xl font-bold text-[#f9e4bf]">
+          Visit Our Facility
+        </h3>
 
-                  <div>
+        <p className="mt-2 leading-8 text-[#f9e4bf]">
 
-                    <h3 className="text-xl font-bold text-[#f9e4bf]">
-                      Visit Our Facility
-                    </h3>
+          Ground Floor, Block No.159,
+          <br />
+          Plot No.51,
+          Shakti Industries,
+          <br />
+          Bhada,
+          Surat,
+          Gujarat - 395006
 
-                    <p className="mt-2 leading-8 text-[#f9e4bf]">
+        </p>
 
-                      Ground Floor, Block No.159,
-                      <br />
-                      Plot No.51,
-                      Shakti Industries,
-                      <br />
-                      Bhada,
-                      Surat,
-                      Gujarat - 395006
+      </div>
 
-                    </p>
+    </div>
 
-                  </div>
+    {/* Phone */}
 
-                </div>
+    <div className="flex gap-5 rounded-[28px] bg-[#164984] p-6 shadow-lg">
 
-                {/* Phone */}
+      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E35A7E] text-white">
 
-                <div className="flex gap-5 rounded-[28px] bg-[#08376c] p-6 shadow-lg">
+        <Phone />
 
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#810c26] text-white">
+      </div>
 
-                    <Phone />
+      <div>
 
-                  </div>
+        <h3 className="text-xl font-bold text-[#f9e4bf]">
+          Call Us
+        </h3>
 
-                  <div>
+        <p className="mt-2 text-lg font-semibold text-[#f9e4bf]">
+          18002032007
+        </p>
 
-                    <h3 className="text-xl font-bold text-[#f9e4bf]">
-                      Call Us
-                    </h3>
+      </div>
 
-                    <p className="mt-2 text-lg font-semibold text-[#f9e4bf] ">
-                      18002032007
-                    </p>
+    </div>
 
-                  </div>
+    {/* Email */}
 
-                </div>
+    <div className="flex gap-5 rounded-[28px] bg-[#603917] p-6 shadow-lg">
 
-                {/* Email */}
+      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#DE6239] text-white">
 
-                <div className="flex gap-5 rounded-[28px] bg-[#552b12] p-6 shadow-lg">
+        <Mail />
 
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#2a4d25] text-white">
+      </div>
 
-                    <Mail />
+      <div>
 
-                  </div>
+        <h3 className="text-xl font-bold text-[#f9e4bf]">
+          Email Address
+        </h3>
 
-                  <div>
+        <p className="mt-2 text-lg font-semibold break-all text-[#f9e4bf]">
+          cs@wemakesweets.com
+        </p>
 
-                    <h3 className="text-xl font-bold text-[#f9e4bf]">
-                      Email Address
-                    </h3>
+      </div>
 
-                    <p className="mt-2 text-lg font-semibold break-all text-[#f9e4bf]">
-                      cs@wemakesweets.com
-                    </p>
+    </div>
 
-                  </div>
+    {/* Timing */}
 
-                </div>
+    <div className="flex gap-5 rounded-[28px] bg-[#572340] p-6 shadow-lg">
 
-                {/* Timing */}
+      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F4C02D] text-[#572340]">
 
-                <div className="flex gap-5 rounded-[28px] bg-[#254a21] p-6 shadow-lg">
+        <Clock3 />
 
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#08376c] text-white">
+      </div>
 
-                    <Clock3 />
+      <div>
 
-                  </div>
+        <h3 className="text-xl font-bold text-[#f9e4bf]">
+          Working Hours
+        </h3>
 
-                  <div>
+        <p className="mt-2 leading-8 text-[#f9e4bf]">
+          Monday - Saturday
+          <br />
+          9:00 AM - 7:00 PM
+        </p>
 
-                    <h3 className="text-xl font-bold text-[#f9e4bf]">
-                      Working Hours
-                    </h3>
+      </div>
 
-                    <p className="mt-2 leading-8 text-[#f9e4bf]">
-                      Monday - Saturday
-                      <br />
-                      9:00 AM - 7:00 PM
-                    </p>
+    </div>
 
-                  </div>
+  </div>
 
-                </div>
-
-              </div>
-
-            </div>
+</div>
 
           </div>
 
@@ -315,7 +313,7 @@ export default function Contact() {
       {/* LOCATION & MAP */}
       {/* ================================================= */}
 
-      <section className="bg-[#552b12] py-24">
+      <section className="bg-[#572340] py-24">
 
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
 
@@ -356,99 +354,107 @@ export default function Contact() {
       {/* WHY CONNECT WITH US */}
       {/* ================================================= */}
 
-      <section className="bg-[#f9e4bf] py-24">
+   <section className="bg-[#f9e4bf] py-24">
 
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+  <div className="mx-auto max-w-7xl px-6 lg:px-10">
 
-          <div className="text-center">
+    <div className="text-center">
 
-            <span className="uppercase tracking-[5px] text-[#08376c] font-semibold">
-              WHY CHOOSE US
-            </span>
+      <span className="uppercase tracking-[5px] text-[#164984] font-semibold">
+        WHY CHOOSE US
+      </span>
 
-            <h2 className="mt-4 text-5xl font-black text-[#810c26]">
-              We Love Hearing From You
-            </h2>
+      <h2 className="mt-4 text-5xl font-black text-[#8b183d]">
+        We Love Hearing From You
+      </h2>
 
-          </div>
+    </div>
 
-          <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+    <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
 
-            <div className="rounded-[30px] bg-[#254a21] p-8 shadow-xl transition hover:-translate-y-3">
+      {/* Card 1 */}
 
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#08376c] text-3xl text-white">
-                💬
-              </div>
+      <div className="rounded-[30px] bg-[#3e5a2c] p-8 shadow-xl transition hover:-translate-y-3">
 
-              <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
-                Quick Support
-              </h3>
-
-              <p className="mt-4 leading-8 text-[#f9e4bf]">
-                Our team responds quickly to all your enquiries.
-              </p>
-
-            </div>
-
-            <div className="rounded-[30px] bg-[#08376c] p-8 shadow-xl transition hover:-translate-y-3">
-
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#810c26] text-3xl text-white">
-                🎁
-              </div>
-
-              <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
-                Bulk Orders
-              </h3>
-
-              <p className="mt-4 leading-8 text-[#f9e4bf]">
-                Weddings, festivals and corporate gifting made easy.
-              </p>
-
-            </div>
-
-            <div className="rounded-[30px] bg-[#552b12] p-8 shadow-xl transition hover:-translate-y-3">
-
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#2a4d25] text-3xl text-white">
-                🚚
-              </div>
-
-              <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
-                Safe Delivery
-              </h3>
-
-              <p className="mt-4 leading-8 text-[#f9e4bf]">
-                Hygienic packaging and reliable delivery for every order.
-              </p>
-
-            </div>
-
-            <div className="rounded-[30px] bg-[#254a21] p-8 shadow-xl transition hover:-translate-y-3">
-
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#552b12] text-3xl text-white">
-                ⭐
-              </div>
-
-              <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
-                Trusted Quality
-              </h3>
-
-              <p className="mt-4 leading-8 text-[#f9e4bf]">
-                Premium ingredients with authentic handcrafted taste.
-              </p>
-
-            </div>
-
-          </div>
-
+        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#164984] text-3xl text-white">
+          💬
         </div>
 
-      </section>
+        <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
+          Quick Support
+        </h3>
+
+        <p className="mt-4 leading-8 text-[#f9e4bf]">
+          Our team responds quickly to all your enquiries.
+        </p>
+
+      </div>
+
+      {/* Card 2 */}
+
+      <div className="rounded-[30px] bg-[#164984] p-8 shadow-xl transition hover:-translate-y-3">
+
+        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E35A7E] text-3xl text-white">
+          🎁
+        </div>
+
+        <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
+          Bulk Orders
+        </h3>
+
+        <p className="mt-4 leading-8 text-[#f9e4bf]">
+          Weddings, festivals and corporate gifting made easy.
+        </p>
+
+      </div>
+
+      {/* Card 3 */}
+
+      <div className="rounded-[30px] bg-[#603917] p-8 shadow-xl transition hover:-translate-y-3">
+
+        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#66BC9E] text-3xl text-white">
+          🚚
+        </div>
+
+        <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
+          Safe Delivery
+        </h3>
+
+        <p className="mt-4 leading-8 text-[#f9e4bf]">
+          Hygienic packaging and reliable delivery for every order.
+        </p>
+
+      </div>
+
+      {/* Card 4 */}
+
+      <div className="rounded-[30px] bg-[#572340] p-8 shadow-xl transition hover:-translate-y-3">
+
+        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F4C02D] text-3xl text-[#572340]">
+          ⭐
+        </div>
+
+        <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
+          Trusted Quality
+        </h3>
+
+        <p className="mt-4 leading-8 text-[#f9e4bf]">
+          Premium ingredients with authentic handcrafted taste.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
       {/* ================================================= */}
       {/* QUICK STATS */}
       {/* ================================================= */}
 
-      <section className="bg-[#08376c] py-24">
+      <section className="bg-[#164984] py-24">
 
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
 
@@ -511,172 +517,186 @@ export default function Contact() {
       {/* FAQ */}
       {/* ================================================= */}
 
-      <section className="bg-[#f9e4bf] py-24">
+     <section className="bg-[#f9e4bf] py-24">
 
-        <div className="mx-auto max-w-6xl px-6 lg:px-10">
+  <div className="mx-auto max-w-6xl px-6 lg:px-10">
 
-          <div className="text-center">
+    <div className="text-center">
 
-            <span className="uppercase tracking-[5px] text-[#08376c] font-semibold">
-              FAQ
-            </span>
+      <span className="uppercase tracking-[5px] text-[#164984] font-semibold">
+        FAQ
+      </span>
 
-            <h2 className="mt-4 text-5xl font-black text-[#810c26]">
-              Frequently Asked Questions
-            </h2>
+      <h2 className="mt-4 text-5xl font-black text-[#8b183d]">
+        Frequently Asked Questions
+      </h2>
 
-            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-600">
-              Here are some common questions about our sweets, ordering process
-              and customer support.
-            </p>
+      <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-[#3e5a2c]">
+        Here are some common questions about our sweets, ordering process
+        and customer support.
+      </p>
 
-          </div>
+    </div>
 
-          <div className="mt-16 space-y-6">
+    <div className="mt-16 space-y-6">
 
-            <div className="rounded-[28px] border border-[#f9e4bf] bg-[#254a21] p-8 shadow-sm transition hover:shadow-lg">
-              <h3 className="text-xl font-bold text-[#f9e4bf]">
-                Do you accept bulk orders?
-              </h3>
+      {/* FAQ 1 */}
 
-              <p className="mt-4 leading-8 text-[#f9e4bf]">
-                Yes. We specialize in weddings, festivals, corporate gifting,
-                birthdays and other large celebrations.
-              </p>
-            </div>
+      <div className="rounded-[28px] border border-[#66BC9E] bg-[#3e5a2c] p-8 shadow-sm transition hover:shadow-lg">
 
-            <div className="rounded-[28px] border border-[#f9e4bf] bg-[#08376c] p-8 shadow-sm transition hover:shadow-lg">
-              <h3 className="text-xl font-bold text-[#f9e4bf]">
-                How fresh are your sweets?
-              </h3>
+        <h3 className="text-xl font-bold text-[#f9e4bf]">
+          Do you accept bulk orders?
+        </h3>
 
-              <p className="mt-4 leading-8 text-[#f9e4bf]">
-                Every batch is freshly prepared using premium ingredients while
-                maintaining the highest hygiene standards.
-              </p>
-            </div>
+        <p className="mt-4 leading-8 text-[#f9e4bf]">
+          Yes. We specialize in weddings, festivals, corporate gifting,
+          birthdays and other large celebrations.
+        </p>
 
-            <div className="rounded-[28px] border border-[#552b12] bg-[#552b12] p-8 shadow-sm transition hover:shadow-lg">
-              <h3 className="text-xl font-bold text-[#f9e4bf]">
-                Can I customize gift boxes?
-              </h3>
+      </div>
 
-              <p className="mt-4 leading-8 text-[#f9e4bf]">
-                Absolutely. We offer customized sweet boxes and gifting options
-                for festivals, weddings and corporate events.
-              </p>
-            </div>
+      {/* FAQ 2 */}
 
-            <div className="rounded-[28px] border border-[#f9e4bf] bg-[#254a21] p-8 shadow-sm transition hover:shadow-lg">
-              <h3 className="text-xl font-bold text-[#f9e4bf]">
-                How can I contact customer support?
-              </h3>
+      <div className="rounded-[28px] border border-[#F4C02D] bg-[#164984] p-8 shadow-sm transition hover:shadow-lg">
 
-              <p className="mt-4 leading-8 text-[#f9e4bf]">
-                You can reach us via phone, email or by submitting the contact
-                form. Our team will respond as quickly as possible.
-              </p>
-            </div>
+        <h3 className="text-xl font-bold text-[#f9e4bf]">
+          How fresh are your sweets?
+        </h3>
 
-          </div>
+        <p className="mt-4 leading-8 text-[#f9e4bf]">
+          Every batch is freshly prepared using premium ingredients while
+          maintaining the highest hygiene standards.
+        </p>
 
-        </div>
+      </div>
 
-      </section>
+      {/* FAQ 3 */}
+
+      <div className="rounded-[28px] border border-[#DE6239] bg-[#603917] p-8 shadow-sm transition hover:shadow-lg">
+
+        <h3 className="text-xl font-bold text-[#f9e4bf]">
+          Can I customize gift boxes?
+        </h3>
+
+        <p className="mt-4 leading-8 text-[#f9e4bf]">
+          Absolutely. We offer customized sweet boxes and gifting options
+          for festivals, weddings and corporate events.
+        </p>
+
+      </div>
+
+      {/* FAQ 4 */}
+
+      <div className="rounded-[28px] border border-[#E35A7E] bg-[#572340] p-8 shadow-sm transition hover:shadow-lg">
+
+        <h3 className="text-xl font-bold text-[#f9e4bf]">
+          How can I contact customer support?
+        </h3>
+
+        <p className="mt-4 leading-8 text-[#f9e4bf]">
+          You can reach us via phone, email or by submitting the contact
+          form. Our team will respond as quickly as possible.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
       {/* ================================================= */}
       {/* CTA */}
       {/* ================================================= */}
 
-      <section className="relative overflow-hidden bg-gradient-to-r from-[#08376c] via-[#810c26] to-[#552b12] py-28">
+  <section className="relative overflow-hidden bg-gradient-to-r from-[#164984] via-[#8b183d] to-[#603917] py-28">
 
-        <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-white/10 blur-3xl"></div>
+  <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-[#66BC9E]/20 blur-3xl"></div>
 
-        <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-[#2a4d25]/20 blur-3xl"></div>
+  <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-[#E35A7E]/20 blur-3xl"></div>
 
-        <div className="relative mx-auto max-w-6xl px-6 text-center">
+  <div className="relative mx-auto max-w-6xl px-6 text-center">
 
-          <span className="uppercase tracking-[5px] text-[#f9e4bf] font-semibold">
-            LET'S CONNECT
-          </span>
+    <span className="uppercase tracking-[5px] text-[#F4C02D] font-semibold">
+      LET'S CONNECT
+    </span>
 
-          <h2 className="mt-6 text-5xl md:text-6xl font-black text-white leading-tight">
-            Let's Make Every
-            <br />
-            Celebration Sweeter
-          </h2>
+    <h2 className="mt-6 text-5xl md:text-6xl font-black text-white leading-tight">
+      Let's Make Every
+      <br />
+      Celebration Sweeter
+    </h2>
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-white/80">
-            Whether you're looking for premium sweets, festive gift boxes or
-            corporate orders, our team is always ready to help you create
-            unforgettable moments.
-          </p>
+    <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-[#f9e4bf]/90">
+      Whether you're looking for premium sweets, festive gift boxes or
+      corporate orders, our team is always ready to help you create
+      unforgettable moments.
+    </p>
 
-          <div className="mt-12 flex flex-wrap justify-center gap-5">
+    <div className="mt-12 flex flex-wrap justify-center gap-5">
 
-            <a
-              href="tel:18002032007"
-              className="rounded-full bg-[#f9e4bf] px-8 py-4 font-semibold text-[#08376c] transition hover:scale-105"
-            >
-              📞 Call Now
-            </a>
+      <a
+        href="tel:18002032007"
+        className="rounded-full bg-[#E35A7E] px-8 py-4 font-semibold text-white transition hover:scale-105 hover:bg-[#572340]"
+      >
+        📞 Call Now
+      </a>
 
-            <a
-              href="mailto:cs@wemakesweets.com"
-              className="rounded-full border border-white/30 px-8 py-4 font-semibold text-white transition hover:bg-white/10"
-            >
-              ✉ Email Us
-            </a>
+      <a
+        href="mailto:cs@wemakesweets.com"
+        className="rounded-full border border-[#f9e4bf]/40 px-8 py-4 font-semibold text-[#f9e4bf] transition hover:bg-[#f9e4bf]/10"
+      >
+        ✉ Email Us
+      </a>
 
-          </div>
+    </div>
 
-        </div>
+  </div>
 
-      </section>
-
+</section>
       {/* ================================================= */}
       {/* FINAL MESSAGE */}
       {/* ================================================= */}
+<section className="bg-[#f9e4bf] py-20">
 
-      <section className="bg-[#f9e4bf] py-20">
+  <div className="mx-auto max-w-5xl px-6 text-center">
 
-        <div className="mx-auto max-w-5xl px-6 text-center">
+    <h2 className="text-4xl font-black text-[#8b183d]">
+      Thank You For Visiting
+    </h2>
 
-          <h2 className="text-4xl font-black text-[#810c26]">
-            Thank You For Visiting
-          </h2>
+    <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-[#66BC9E]" />
 
-          <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-[#2a4d25]" />
+    <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-[#3e5a2c]">
+      We appreciate your interest in <strong>We Make Sweets</strong>.
+      Every enquiry, every order and every celebration inspires us to
+      craft sweets that bring happiness to your family and loved ones.
+    </p>
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-700">
-            We appreciate your interest in <strong>We Make Sweets</strong>.
-            Every enquiry, every order and every celebration inspires us to
-            craft sweets that bring happiness to your family and loved ones.
-          </p>
+    <div className="mt-12 flex flex-wrap justify-center gap-4">
 
-          <div className="mt-12 flex flex-wrap justify-center gap-4">
+      <span className="rounded-full bg-[#164984] px-6 py-3 text-[#f9e4bf]">
+        Premium Quality
+      </span>
 
-            <span className="rounded-full bg-[#08376c] px-6 py-3 text-[#f9e4bf]">
-              Premium Quality
-            </span>
+      <span className="rounded-full bg-[#8b183d] px-6 py-3 text-[#f9e4bf]">
+        Fresh Ingredients
+      </span>
 
-            <span className="rounded-full bg-[#810c26] px-6 py-3 text-[#f9e4bf]">
-              Fresh Ingredients
-            </span>
+      <span className="rounded-full bg-[#3e5a2c] px-6 py-3 text-[#f9e4bf]">
+        Crafted With Love
+      </span>
 
-            <span className="rounded-full bg-[#2a4d25] px-6 py-3 text-[#f9e4bf]">
-              Crafted With Love
-            </span>
+      <span className="rounded-full bg-[#603917] px-6 py-3 text-[#f9e4bf]">
+        Trusted Since Day One
+      </span>
 
-            <span className="rounded-full bg-[#552b12] px-6 py-3 text-[#f9e4bf]">
-              Trusted Since Day One
-            </span>
+    </div>
 
-          </div>
+  </div>
 
-        </div>
-
-      </section>
+</section>
 
     </main>
   );

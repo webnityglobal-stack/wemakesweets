@@ -100,3 +100,14 @@ body {
     }
 
 }
+
+/* CSS for Reels  */
+/* Hide Scrollbar */
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+}

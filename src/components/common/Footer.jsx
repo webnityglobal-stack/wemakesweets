@@ -24,162 +24,163 @@ const customerCare = [
 
 const Footer = () => {
   return (
-    <footer className="relative pt-12 overflow-hidden ">
-      {/* Background */}
-      <picture className="absolute inset-0 -z-20">
-        <source media="(max-width:768px)" srcSet="/footerMobile.png" />
+  <footer className="relative overflow-hidden pt-12">
+  {/* Background */}
+  <picture className="absolute inset-0 -z-20">
+    <source media="(max-width:768px)" srcSet="/footerMobile.webp" />
+    <img
+      src="/footerDesktop.webp"
+      alt=""
+      className="h-full w-full object-cover"
+    />
+  </picture>
+
+  {/* Optional Overlay */}
+  <div className="absolute inset-0 -z-10 bg-[#572340]/55 backdrop-blur-[1px]" />
+
+  {/* Footer */}
+  <div className="mx-auto max-w-7xl px-5 pb-8">
+
+    <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+
+      {/* Logo */}
+      <div className="text-center md:text-left">
+
         <img
-          src="/footerDesktop.png"
-          alt=""
-          className="h-full w-full object-cover"
+          src="/logo.webp"
+          alt="logo"
+          className="mx-auto mb-5 h-20 md:mx-0"
         />
-      </picture>
 
-      {/* Overlay */}
-      
+        <p className="leading-7 text-[#f9e4bf]/90">
+          Desi soul. Modern snacking.
+          <br />
+          Made with real ingredients,
+          <br />
+          crafted for a better you.
+        </p>
 
-      {/* Footer */}
-      <div className="max-w-7xl mx-auto px-5 pb-8">
+        <div className="mt-6 flex justify-center gap-3 md:justify-start">
 
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.facebook.com/profile.php?id=100076647155144"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E35A7E] transition-all duration-300 hover:scale-110 hover:bg-[#164984]"
+          >
+            <img src="/facebook.svg" alt="Facebook" />
+          </a>
 
-          {/* Logo */}
-
-          <div className="text-center md:text-left">
-
+          <a
+            href="#"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E35A7E] transition-all duration-300 hover:scale-110 hover:bg-[#164984]"
+          >
             <img
-              src="/logo.webp"
-              alt="logo"
-              className="h-20 mx-auto md:mx-0 mb-5"
+              src="/instagram.svg"
+              alt="Instagram"
+              className="h-full w-full object-cover"
             />
+          </a>
 
-            <p className="text-gray-200 leading-7">
-              Desi soul. Modern snacking.
-              <br />
-              Made with real ingredients,
-              <br />
-              crafted for a better you.
-            </p>
-
-            <div className="flex justify-center md:justify-start gap-3 mt-6">
-
-              <a  target="_blank"
-  rel="noopener noreferrer"
-                href="https://www.facebook.com/profile.php?id=100076647155144"
-                className="w-10 h-10 rounded-full bg-[#b98d39] flex items-center justify-center hover:scale-110 duration-300"
-              >
-                <img src='/facebook.svg' size={18}  />
-              </a>
-
-              <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-[#b98d39] flex items-center justify-center hover:scale-110 duration-300"
-              >
-               <img src='/instagram.svg' size={18} className="h-full w-full object-cover" />
-              </a>
-
-              <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-[#b98d39] flex items-center justify-center hover:scale-110 duration-300"
-              >
-                <img src='/whatsapp.svg' size={18}  />
-              </a>
-
-            </div>
-
-          </div>
-
-          {/* Quick Links */}
-
-          <div className="text-center md:text-left">
-
-            <h3 className="text-[#eac067] font-semibold uppercase tracking-wider mb-5">
-              Quick Links
-            </h3>
-
-            <ul className="space-y-3">
-              {quickLinks.map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="text-gray-200 hover:text-[#f5d58a] transition"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-          </div>
-
-          {/* Customer Care */}
-
-          <div className="text-center md:text-left">
-
-            <h3 className="text-[#eac067] font-semibold uppercase tracking-wider mb-5">
-              Customer Care
-            </h3>
-
-            <ul className="space-y-3">
-              {customerCare.map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="text-gray-200 hover:text-[#f5d58a] transition"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-          </div>
-
-          {/* Address */}
-
-          <div className="text-center md:text-left">
-
-            <h3 className="text-[#eac067] font-semibold uppercase tracking-wider mb-5">
-              Our Address
-            </h3>
-
-            <div className="flex justify-center md:justify-start gap-3">
-
-              <MapPin
-                className="text-[#eac067] mt-1 shrink-0"
-                size={22}
-              />
-
-              <p className="text-gray-200 leading-7 text-left">
-                Ground Floor, Block No. 159,
-                <br />
-                Plot No. 51,
-                <br />
-                Shakti Industries,
-                <br />
-                Bhada,
-                <br />
-                Surat - 395006,
-                <br />
-                Gujarat, India
-              </p>
-
-            </div>
-
-          </div>
+          <a
+            href="#"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E35A7E] transition-all duration-300 hover:scale-110 hover:bg-[#164984]"
+          >
+            <img src="/whatsapp.svg" alt="WhatsApp" />
+          </a>
 
         </div>
 
-        {/* Copyright */}
-
-     <div className="mt-10 border-t border-white/15 pt-5 text-center text-sm text-gray-300">
-  © {new Date().getFullYear()} WeMake Sweets & Snacks.
-  <br className="block md:hidden" />
-  <span className="md:ml-1">All Rights Reserved.</span>
-</div>
-          
       </div>
-    </footer>
+
+      {/* Quick Links */}
+      <div className="text-center md:text-left">
+
+        <h3 className="mb-5 font-semibold uppercase tracking-wider text-[#F4C02D]">
+          Quick Links
+        </h3>
+
+        <ul className="space-y-3">
+          {quickLinks.map((item) => (
+            <li key={item}>
+              <a
+                href="#"
+                className="text-[#f9e4bf]/90 transition hover:text-[#66BC9E]"
+              >
+                {item}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+      </div>
+
+      {/* Customer Care */}
+      <div className="text-center md:text-left">
+
+        <h3 className="mb-5 font-semibold uppercase tracking-wider text-[#F4C02D]">
+          Customer Care
+        </h3>
+
+        <ul className="space-y-3">
+          {customerCare.map((item) => (
+            <li key={item}>
+              <a
+                href="#"
+                className="text-[#f9e4bf]/90 transition hover:text-[#66BC9E]"
+              >
+                {item}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+      </div>
+
+      {/* Address */}
+      <div className="text-center md:text-left">
+
+        <h3 className="mb-5 font-semibold uppercase tracking-wider text-[#F4C02D]">
+          Our Address
+        </h3>
+
+        <div className="flex justify-center gap-3 md:justify-start">
+
+          <MapPin
+            className="mt-1 shrink-0 text-[#DE6239]"
+            size={22}
+          />
+
+          <p className="text-left leading-7 text-[#f9e4bf]/90">
+            Ground Floor, Block No. 159,
+            <br />
+            Plot No. 51,
+            <br />
+            Shakti Industries,
+            <br />
+            Bhada,
+            <br />
+            Surat - 395006,
+            <br />
+            Gujarat, India
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    {/* Copyright */}
+
+    <div className="mt-10 border-t border-white/15 pt-5 text-center text-sm text-[#f9e4bf]/75">
+      © {new Date().getFullYear()} WeMake Sweets & Snacks.
+      <br className="block md:hidden" />
+      <span className="md:ml-1">All Rights Reserved.</span>
+    </div>
+
+  </div>
+</footer>
   );
 };
 

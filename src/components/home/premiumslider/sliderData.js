@@ -7,14 +7,14 @@ export const slides = [
     description: "Modern Indian Snacking.",
     button: "Shop Now",
   },
-  {
-    id: 2,
-    image: "/slider2.webp",
-    title: "Healthy Every Day",
-    subtitle: "Crafted With Love",
-    description: "Made Using Finest Ingredients.",
-    button: "Explore",
-  },
+  // {
+  //   id: 2,
+  //   image: "/slider2.webp",
+  //   title: "Healthy Every Day",
+  //   subtitle: "Crafted With Love",
+  //   description: "Made Using Finest Ingredients.",
+  //   button: "Explore",
+  // },
   {
     id: 3,
     image: "/slider3.webp",

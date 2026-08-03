@@ -14,6 +14,7 @@ import products from '../constants/productData'
 import ProductGrid from '../components/products/ProductGrid'
 import { Link } from 'react-router-dom'
 import Testimonials from '../components/testimonials/Testimonials'
+import ReelsSection from '../components/reels/ReelsSection'
 
 const Home = () => {
   return (
@@ -51,7 +52,7 @@ const Home = () => {
       <div className="mt-12 flex justify-center">
         <Link
           to="/products"
-          className="inline-flex items-center justify-center rounded-full bg-[#8b183d] px-8 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-[#164984] hover:shadow-lg"
+          className="inline-flex items-center justify-center rounded-full    bg-pink-600 px-8 py-3 font-semibold text-white transition-all duration-300 hover:scale-105   hover:bg-[#572340] hover:shadow-lg"
         >
           View All Products
         </Link>
@@ -71,6 +72,7 @@ const Home = () => {
         <InspiredByHeritage/>
         
         <OurStory/>
+        <ReelsSection/>
         <Testimonials/>
     </div>
   )

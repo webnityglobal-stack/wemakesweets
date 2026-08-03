@@ -1,4 +1,6 @@
+import ProductCategoryBanner from "../components/products/ProductCategoryBanner";
 import ProductGrid from "../components/products/ProductGrid";
+import ProductHero from "../components/products/ProductHero";
 import products from "../constants/productData";
 
 const AllProducts = () => {
@@ -7,11 +9,8 @@ const AllProducts = () => {
 
     <section className="container mx-auto px-5 py-10 bg-[#f9e4bf]">
 
-      <h1 className="mb-8 text-3xl font-bold">
-
-        All Products
-
-      </h1>
+     <ProductHero/>
+     {/* <ProductCategoryBanner/> */}
 
       <ProductGrid products={products} />
 
