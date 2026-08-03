@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { slides } from "./sliderData";
+import { Link } from "react-router-dom";
 
 const PremiumSlider = () => {
   const [current, setCurrent] = useState(0);
@@ -58,7 +59,9 @@ const PremiumSlider = () => {
                 </p>
 
                 {/* Standard Project Button */}
+              <Link to='/products'>
                 <button
+                
                   className="
                     mt-8
                     rounded-full
@@ -77,6 +80,7 @@ const PremiumSlider = () => {
                 >
                   {slide.button}
                 </button>
+              </Link>
 
               </div>
             </div>

@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
+import { Link } from "react-router-dom";
 
 const products = [
   {
@@ -100,6 +101,7 @@ export default function OurProduct() {
   ))}
 </h3>
 
+           <Link to='/products'>
            <button
   className="
     mx-auto
@@ -122,6 +124,7 @@ export default function OurProduct() {
 >
               SHOP NOW
             </button>
+           </Link>
           </div>
         </SwiperSlide>
       ))}

@@ -4,6 +4,7 @@ import {
   Flower2,
   GiftIcon,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const occasions = [
   {
@@ -113,9 +114,11 @@ const PerfectOccasion = () => {
 
               {/* Button */}
               <div className="mt-8 flex justify-center lg:justify-start">
+               <Link to='/products' >
                 <button className="rounded-full bg-[#E35A7E] px-8 py-3 font-medium text-white transition-all duration-300 hover:bg-[#572340] hover:shadow-lg">
                   Explore Collection
                 </button>
+               </Link>
               </div>
 
             </div>

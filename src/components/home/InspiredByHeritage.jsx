@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const InspiredByHeritage = () => {
   return (
@@ -29,9 +30,11 @@ const InspiredByHeritage = () => {
         modern snacks for a better you.
       </p>
 
+      <Link to='/our-story' >
       <button className="mt-6 rounded-md border border-[#164984] bg-[#E35A7E] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:border-[#572340] hover:bg-[#572340]">
         KNOW OUR STORY
       </button>
+      </Link>
     </div>
   </div>
 </section>
