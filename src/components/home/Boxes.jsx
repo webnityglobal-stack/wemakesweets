@@ -225,7 +225,7 @@ const categories = [
 
 export default function Boxes() {
   return (
-    <section className="relative overflow-hidden py-16 md:py-24">
+    <section className="relative overflow-hidden py-4 md:py-4">
 
       {/* Fireworks */}
       <div className="absolute inset-0 z-0 pointer-events-none">

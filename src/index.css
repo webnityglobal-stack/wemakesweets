@@ -1,14 +1,14 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap");
 
-.cinzel {
-  font-family: "Cinzel", serif;
-}
-
+@import url("https://fonts.googleapis.com/css2?family=Chewy&display=swap");
 
 html,
 body {
-  font-family: "Cinzel", serif;
+  font-family: "Chewy", cursive;
+}
+
+.chewy {
+  font-family: "Chewy", cursive;
 }
 
 @keyframes slider {
