@@ -7,6 +7,7 @@ import {
 import { Link } from "react-router-dom";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
 import { SquigglyText } from "../ui/squiggly-text";
+import { FireworksBackground } from "../animate-ui/components/backgrounds/fireworks";
 
 const occasions = [
   {
@@ -38,13 +39,33 @@ const word1 =
 const word2 = "and authentic taste.";
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#f9e4bf] lg:min-h-[650px]">
+    // <section className="relative w-full overflow-hidden bg-[#f9e4bf] lg:min-h-[650px]">
+  <section className="relative w-full overflow-hidden bg-[#f9e4bf] lg:min-h-[650px]">
+
+  {/* Fireworks */}
+  <div className="absolute inset-0 z-20 pointer-events-none">
+    <FireworksBackground
+      population={1}
+      color={["#E8B357", "#810c26", "#572340"]}
+      fireworkSpeed={{ min: 4, max: 7 }}
+      fireworkSize={{ min: 2, max: 4 }}
+      particleSpeed={{ min: 2, max: 6 }}
+      particleSize={{ min: 1, max: 3 }}
+      className="h-full w-full"
+    />
+  </div>
+
 {/* Desktop Banner */}
-      <img
+      {/* <img
         src="/perfectForOcassion.png"
         alt="Perfect For Every Occasion"
         className="absolute inset-0 hidden h-full w-full object-cover object-right lg:block"
-      />
+      /> */}
+     <img
+    src="/perfectForOcassion.png"
+    alt="Perfect For Every Occasion"
+    className="absolute inset-0 z-10 hidden h-full w-full object-cover object-right lg:block"
+  />
 
       {/* Content */}
       <div className="relative flex items-center py-10 lg:absolute lg:inset-0 lg:py-0">
