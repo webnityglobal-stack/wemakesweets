@@ -253,7 +253,8 @@
 
 // export default ProductConsumption;
 
-import { useState } from "react";
+// import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Building2,
   Dumbbell,
@@ -318,16 +319,193 @@ const occasions = [
   },
 ];
 
+// const OccasionCard = ({ item }) => {
+//   const [isFlipped, setIsFlipped] = useState(false);
+
+//   const Icon = item.icon;
+
+//   return (
+//     <div
+//       className="group [perspective:1200px]"
+//       onClick={() => setIsFlipped((prev) => !prev)}
+//     >
+//       <div
+//         className={`
+//           relative
+//           w-full
+//           transition-transform
+//           duration-700
+//           [transform-style:preserve-3d]
+
+//           md:group-hover:[transform:rotateY(180deg)]
+
+//           ${
+//             isFlipped
+//               ? "[transform:rotateY(180deg)]"
+//               : ""
+//           }
+//         `}
+//       >
+//         {/* ================================================= */}
+//         {/* FRONT - EXACTLY YOUR CURRENT CARD */}
+//         {/* ================================================= */}
+
+//         <div
+//           style={{
+//             backgroundColor: item.bg,
+//             borderColor: item.color + "40",
+//           }}
+//           className="
+//             relative
+//             min-h-[260px]
+//             overflow-hidden
+//             rounded-3xl
+//             border
+//             transition-all
+//             duration-500
+//             hover:shadow-2xl
+//             [backface-visibility:hidden]
+//           "
+//         >
+//           {/* Background Image */}
+//           <img
+//             src={item.image}
+//             alt={item.title}
+//             className="
+//               absolute
+//               inset-0
+//               h-full
+//               w-full
+//               object-cover
+//               opacity-[1]
+//               transition-all
+//               duration-700
+//               group-hover:scale-110
+//               group-hover:opacity-[0.22]
+//             "
+//           />
+
+//           {/* Dark Overlay */}
+//           {/* <div
+//             className="absolute inset-0"
+//             style={{
+//               background: `linear-gradient(
+//                 to bottom,
+//                 ${item.bg}CC,
+//                 ${item.bg}F2
+//               )`,
+//             }}
+//           /> */}
+//           <div
+//   className="absolute inset-0"
+//   style={{
+//     background: `${item.bg}60`,
+//   }}
+// />
+
+
+//           {/* Decorative Glow */}
+//           <div
+//             className="
+//               absolute
+//               right-0
+//               top-0
+//               h-32
+//               w-32
+//               rounded-full
+//               bg-[#E8B357]/10
+//               blur-3xl
+//               transition-all
+//               duration-500
+//               group-hover:scale-150
+//             "
+//           />
+
+//           {/* Content */}
+//           <div className="relative z-10 p-7">
+
+//             {/* Icon */}
+//             <div
+//               className="
+//                 flex
+//                 h-16
+//                 w-16
+//                 items-center
+//                 justify-center
+//                 rounded-2xl
+//                 border
+//                 border-white/20
+//                 bg-[#f9e4bf]/15
+//                 text-[#f9e4bf]
+//                 backdrop-blur-md
+//                 transition-all
+//                 duration-500
+//                 group-hover:rotate-6
+//                 group-hover:scale-110
+//               "
+//             >
+//               <Icon size={30} />
+//             </div>
+
+//             {/* Title */}
+//             <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
+//               {item.title}
+//             </h3>
+
+//             {/* Description */}
+//             <p className="mt-3 leading-7 text-[#f9e4bf]/90">
+//               {item.desc}
+//             </p>
+
+//           </div>
+//         </div>
+
+//         {/* ================================================= */}
+//         {/* BACK - ONLY IMAGE */}
+//         {/* ================================================= */}
+
+//         <div
+//           className="
+//             absolute
+//             inset-0
+//             overflow-hidden
+//             rounded-3xl
+//             [backface-visibility:hidden]
+//             [transform:rotateY(180deg)]
+//           "
+//         >
+//           <img
+//             src={item.image}
+//             alt={item.title}
+//             className="
+//               absolute
+//               inset-0
+//               h-full
+//               w-full
+//               object-cover
+//             "
+//           />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
 const OccasionCard = ({ item }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const Icon = item.icon;
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsFlipped((prev) => !prev);
+    }, 3000); // every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div
-      className="group [perspective:1200px]"
-      onClick={() => setIsFlipped((prev) => !prev)}
-    >
+    <div className="group [perspective:1200px]">
       <div
         className={`
           relative
@@ -335,19 +513,10 @@ const OccasionCard = ({ item }) => {
           transition-transform
           duration-700
           [transform-style:preserve-3d]
-
-          md:group-hover:[transform:rotateY(180deg)]
-
-          ${
-            isFlipped
-              ? "[transform:rotateY(180deg)]"
-              : ""
-          }
+          ${isFlipped ? "[transform:rotateY(180deg)]" : ""}
         `}
       >
-        {/* ================================================= */}
-        {/* FRONT - EXACTLY YOUR CURRENT CARD */}
-        {/* ================================================= */}
+        {/* ================= FRONT ================= */}
 
         <div
           style={{
@@ -384,24 +553,13 @@ const OccasionCard = ({ item }) => {
             "
           />
 
-          {/* Dark Overlay */}
-          {/* <div
+          {/* Overlay */}
+          <div
             className="absolute inset-0"
             style={{
-              background: `linear-gradient(
-                to bottom,
-                ${item.bg}CC,
-                ${item.bg}F2
-              )`,
+              background: `${item.bg}100`,
             }}
-          /> */}
-          <div
-  className="absolute inset-0"
-  style={{
-    background: `${item.bg}60`,
-  }}
-/>
-
+          />
 
           {/* Decorative Glow */}
           <div
@@ -459,9 +617,7 @@ const OccasionCard = ({ item }) => {
           </div>
         </div>
 
-        {/* ================================================= */}
-        {/* BACK - ONLY IMAGE */}
-        {/* ================================================= */}
+        {/* ================= BACK ================= */}
 
         <div
           className="
