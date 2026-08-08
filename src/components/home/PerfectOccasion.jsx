@@ -25,11 +25,11 @@ const occasions = [
     title: "Wedding\nGifting",
     icon: Flower2,
   },
-  // {
-  //   id: 4,
-  //   title: "Personal\nGifting",
-  //   icon: GiftIcon,
-  // },
+  {
+    id: 4,
+    title: "Personal\nGifting",
+    icon: GiftIcon,
+  },
 ];
 
 const PerfectOccasion = () => {
@@ -106,16 +106,16 @@ const word2 = "and authentic taste.";
                     <>
                       <div
                         key={item.id}
-                        className="group flex flex-col items-center transition-all duration-300 hover:-translate-y-2"
+                        className="group md:pr-44  flex flex-col items-center transition-all duration-300 hover:-translate-y-2"
                       >
-                        <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-md transition-all duration-300 group-hover:bg-[#E35A7E] group-hover:scale-110">
+                        <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md transition-all duration-300 group-hover:bg-[#E35A7E] group-hover:scale-110">
                           <Icon
                             size={28}
                             className="text-[#603917] group-hover:text-white"
                           />
                         </div>
 
-                        <p className="whitespace-pre-line text-center text-sm font-medium text-[#603917]">
+                        <p className="whitespace-pre-line text-center text-sm md:text-[14px] font-medium text-[#603917]">
                           {item.title}
                         </p>
                       </div>
