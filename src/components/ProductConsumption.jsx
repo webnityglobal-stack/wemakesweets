@@ -557,7 +557,8 @@ const OccasionCard = ({ item }) => {
           <div
             className="absolute inset-0"
             style={{
-              background: `${item.bg}100`,
+              // background: `${item.bg}40`,
+              background: `${item.bg}B0`,
             }}
           />
 
