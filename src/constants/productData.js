@@ -10,7 +10,7 @@ const products = [
     rating: 4.5,
     stock: 0,
     isBestSeller: true,
-    images: ["/products/product1.webp"],
+    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
   {
     _id: "2",
@@ -23,7 +23,7 @@ const products = [
     rating: 4.2,
     stock: 4,
     isBestSeller: false,
-    images: ["/products/product1.webp"],
+    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
   {
     _id: "3",
@@ -36,7 +36,7 @@ const products = [
     rating: 3.7,
     stock: 18,
     isBestSeller: false,
-    images: ["/products/product1.webp"],
+    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
   {
     _id: "4",
@@ -49,7 +49,7 @@ const products = [
     rating: 4.6,
     stock: 2,
     isBestSeller: false,
-    images: ["/products/product1.webp"],
+    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
   {
     _id: "5",
@@ -62,7 +62,7 @@ const products = [
     rating: 4.3,
     stock: 30,
     isBestSeller: true,
-    images: ["/products/product1.webp"],
+    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
   {
     _id: "6",
@@ -75,7 +75,7 @@ const products = [
     rating: 4.4,
     stock: 15,
     isBestSeller: false,
-    images: ["/products/product1.webp"],
+    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
   {
     _id: "7",
@@ -88,7 +88,7 @@ const products = [
     rating: 4.1,
     stock: 8,
     isBestSeller: false,
-    images: ["/products/product1.webp"],
+    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
   {
     _id: "8",
@@ -101,7 +101,7 @@ const products = [
     rating: 4.8,
     stock: 20,
     isBestSeller: true,
-    images: ["/products/product1.webp"],
+    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
   {
     _id: "9",
@@ -114,7 +114,7 @@ const products = [
     rating: 4.0,
     stock: 1,
     isBestSeller: false,
-    images: ["/products/product1.webp"],
+    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
   {
     _id: "10",
@@ -127,7 +127,7 @@ const products = [
     rating: 4.5,
     stock: 12,
     isBestSeller: false,
-    images: ["/products/product1.webp"],
+    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
   {
     _id: "11",
@@ -140,7 +140,7 @@ const products = [
     rating: 4.7,
     stock: 5,
     isBestSeller: true,
-    images: ["/products/product1.webp"],
+    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
   {
     _id: "12",
@@ -153,7 +153,7 @@ const products = [
     rating: 4.9,
     stock: 25,
     isBestSeller: true,
-    images: ["/products/product1.webp"],
+    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
 ];
 

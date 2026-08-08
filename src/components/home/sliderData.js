@@ -3,7 +3,7 @@
 export const sliderImages = [
   {
     id: 1,
-    image: "/inspiredByTradition.webp",
+    image: "/inspiredByTradition.png",
     title: "Inspired by Tradition",
     subtitle: "Authentic Flavours with Timeless Taste",
   },
@@ -15,19 +15,19 @@ export const sliderImages = [
   },
   {
     id: 3,
-    image: "/perfectForEveryMoment.webp",
+    image: "/perfectForEveryMoment.png",
     title: "Perfect for Every Moment",
     subtitle: "Celebrate Every Occasion",
   },
   {
     id: 4,
-    image: "/wholeSomeGoodness.webp",
+    image: "/wholeSomeGoodness.png",
     title: "Made with Love",
     subtitle: "Premium Quality Products",
   },
     {
     id: 5,
-    image: "/discoverTheTasteOfIndia.webp",
+    image: "/discoverTheTasteOfIndia.png",
     title: "Discover The Taste of India",
     subtitle: "Taste of India",
   }

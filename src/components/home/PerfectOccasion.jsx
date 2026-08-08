@@ -5,6 +5,8 @@ import {
   GiftIcon,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { TextGenerateEffect } from "../ui/text-generate-effect";
+import { SquigglyText } from "../ui/squiggly-text";
 
 const occasions = [
   {
@@ -22,20 +24,24 @@ const occasions = [
     title: "Wedding\nGifting",
     icon: Flower2,
   },
-  {
-    id: 4,
-    title: "Personal\nGifting",
-    icon: GiftIcon,
-  },
+  // {
+  //   id: 4,
+  //   title: "Personal\nGifting",
+  //   icon: GiftIcon,
+  // },
 ];
 
 const PerfectOccasion = () => {
+const word1 =
+ "Delight your loved ones with our handcrafted premium dates and nut gift boxes. Whether it's a festival, wedding, corporate event or a personal celebration, our thoughtfully curated collections make every moment memorable with elegance";
+
+const word2 = "and authentic taste.";
+
   return (
     <section className="relative w-full overflow-hidden bg-[#f9e4bf] lg:min-h-[650px]">
-
-      {/* Desktop Banner */}
+{/* Desktop Banner */}
       <img
-        src="/perfectForOcassion.webp"
+        src="/perfectForOcassion.png"
         alt="Perfect For Every Occasion"
         className="absolute inset-0 hidden h-full w-full object-cover object-right lg:block"
       />
@@ -47,28 +53,27 @@ const PerfectOccasion = () => {
           <div className="relative w-full overflow-hidden rounded-2xl p-6 sm:p-8 lg:w-[52%] lg:p-10">
 
             {/* Background Image */}
-            <img
+            {/* <img
               src="/perfectForOcassion2.webp"
               alt=""
               className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover opacity-10"
-            />
+            /> */}
 
             {/* Cream Overlay */}
-            <div className="absolute inset-0 bg-[#f9e4bf]/85 backdrop-blur-sm" />
+            <div className="absolute inset-0  " />
 
             {/* Content */}
             <div className="relative z-10">
 
               <h2 className="text-center font-serif text-2xl font-bold uppercase text-[#E35A7E] sm:text-3xl lg:text-left lg:text-4xl">
-                Perfect For Every Occasion
+                Perfect For Every <SquigglyText
+                          stepDuration={70}
+                          scale={[6, 9]}
+                          className="text-[#E35A7E]">Occasions</SquigglyText>
               </h2>
 
               <p className="mt-5 max-w-xl text-center text-sm leading-7 text-[#3e5a2c] sm:text-base lg:text-left">
-                Delight your loved ones with our handcrafted premium dates and
-                nut gift boxes. Whether it's a festival, wedding, corporate
-                event or a personal celebration, our thoughtfully curated
-                collections make every moment memorable with elegance and
-                authentic taste.
+                <TextGenerateEffect className="mt-5 max-w-xl text-center text-sm leading-7 text-[#3e5a2c] sm:text-base lg:text-left" words={word1}/>
               </p>
 
               {/* Icons */}
@@ -115,7 +120,7 @@ const PerfectOccasion = () => {
               {/* Button */}
               <div className="mt-8 flex justify-center lg:justify-start">
                <Link to='/products' >
-                <button className="rounded-full bg-[#E35A7E] px-8 py-3 font-medium text-white transition-all duration-300 hover:bg-[#572340] hover:shadow-lg">
+                <button className="rounded-full bg-pink-600 px-8 py-3 font-medium text-white transition-all duration-300 hover:bg-[#572340] hover:shadow-lg">
                   Explore Collection
                 </button>
                </Link>

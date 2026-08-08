@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { slides } from "./sliderData";
 import { Link } from "react-router-dom";
+import { TextRoll } from "@/components/ui/skiper-ui/skiper58";
 
 const PremiumSlider = () => {
   const [current, setCurrent] = useState(0);
@@ -47,7 +48,7 @@ const PremiumSlider = () => {
               <div className="max-w-3xl px-6 text-center">
 
                 <h2 className="text md:text-4xl lg:text-5xl font-serif font-semibold text-[#572340] leading-tight">
-                  {slide.title}
+                {slide.title}
                 </h2>
 
                 <h3 className="mt-2  sm:text-xl md:text-4xl font-serif text-[#603917]">

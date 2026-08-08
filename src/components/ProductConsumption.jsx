@@ -6,57 +6,8 @@ import {
   Plane,
   Sparkles,
 } from "lucide-react";
-
-// const occasions = [
-//   {
-//     icon: HeartHandshake,
-//     title: "Wedding",
-//     desc: "Luxury wedding hampers & return gifts",
-//     color: "#810c26",
-//     bg: "#552b12",
-//     image: "/occasions/wedding.webp",
-//   },
-//   {
-//     icon: Building2,
-//     title: "Corporate",
-//     desc: "Employee & client gifting solutions",
-//     color: "#08376c",
-//     bg: "#08376c",
-//     image: "/occasions/corporate.webp",
-//   },
-//   {
-//     icon: Sparkles,
-//     title: "Festivals",
-//     desc: "Celebrate every festival with sweetness",
-//     color: "#2a4d25",
-//     bg: "#552b12",
-//     image: "/occasions/festivals.webp",
-//   },
-//   {
-//     icon: Dumbbell,
-//     title: "Healthy Snacking",
-//     desc: "Perfect for gym & daily nutrition",
-//     color: "#552b12",
-//     bg: "#2a4d25",
-//     image: "/occasions/gym.webp",
-//   },
-//   {
-//     icon: Plane,
-//     title: "Travel Friendly",
-//     desc: "Easy to carry & enjoy anywhere",
-//     color: "#254a21",
-//     bg: "#810c26",
-//     image: "/occasions/travel.webp",
-//   },
-//   {
-//     icon: Gift,
-//     title: "Family Celebrations",
-//     desc: "Birthdays, parties & family moments",
-//     color: "#E8B357",
-//     bg: "#254a21",
-//     image: "/occasions/family.webp",
-//   },
-// ];
+import { LayoutTextFlip } from "./ui/layout-text-flip";
+import { SquigglyText } from "./ui/squiggly-text";
 
 const occasions = [
   {
@@ -111,7 +62,7 @@ const occasions = [
 
 const ProductConsumption = () => {
   return (
-    <section className="bg-[#f9e4bf] py-14 lg:py-20">
+    <section className="bg-[#f9e4bf] py-8 lg:py-12">
       <div className="mx-auto max-w-7xl px-5">
 
         {/* <div className="text-center">
@@ -132,18 +83,36 @@ const ProductConsumption = () => {
         </div> */}
         <div className="text-center">
 
-  <span className="inline-block rounded-full bg-[#572340]/10 px-5 py-2 text-xs font-semibold uppercase tracking-[4px] text-[#572340]">
+  {/* <span className="inline-block rounded-full bg-[#572340]/10 px-5 py-2 text-xs font-semibold uppercase tracking-[4px] text-[#572340]">
     Perfect For
-  </span>
+  </span> */}
 
-  <h2 className="mt-5 font-serif text-4xl font-bold text-[#603917] lg:text-6xl">
+  {/* <h2 className="mt-5 font-serif text-4xl font-bold text-[#603917] lg:text-6xl">
     Every Occasion
-  </h2>
-
-  <p className="mx-auto mt-6 max-w-2xl leading-8 text-[#3e5a2c]">
-    From weddings to corporate gifting, festivals to healthy
-    snacking—our handcrafted sweets make every moment memorable.
-  </p>
+  </h2> */}
+<h2 className=" font-serif text-4xl font-bold text-[#603917] lg:text-6xl">
+ <LayoutTextFlip
+          text="Perfect For "
+          words={["Weddings", "Corporate", "Festivals", "Healthy Snacking", "Travel Friendly", "Family Celebrations"]}
+        />
+</h2>
+    <p className="mx-auto mt-6 max-w-2xl leading-8 text-[#3e5a2c]">
+      From  <SquigglyText
+          stepDuration={70}
+          scale={[6, 9]}
+          className="text-amber-500"
+        >weddings</SquigglyText> to corporate gifting,  <SquigglyText
+          stepDuration={70}
+          scale={[6, 9]}
+          className="text-amber-500"
+        > festivals</SquigglyText> to
+         healthy snacking
+        —our handcrafted  <SquigglyText
+          stepDuration={70}
+          scale={[6, 9]}
+          className="text-amber-500"
+        >sweets</SquigglyText>  make every moment memorable.
+    </p>
 
 </div>
 
@@ -223,7 +192,11 @@ const ProductConsumption = () => {
         <div className="mt-14 rounded-3xl bg-[#164984] px-8 py-8 text-center shadow-xl">
 
   <h3 className="font-serif text-3xl text-[#f9e4bf]">
-    Crafted For Every Celebration ❤️
+    Crafted For Every  <SquigglyText
+          stepDuration={70}
+          scale={[6, 9]}
+          className="text-amber-500"
+        >Celebration</SquigglyText>  ❤️
   </h3>
 
   <p className="mt-4 text-[#f9e4bf]/90">
@@ -251,7 +224,11 @@ const ProductConsumption = () => {
       hover:shadow-lg
     "
   >
-    📞 Call For Bulk Orders
+    📞  
+        >Call For Bulk <SquigglyText
+          stepDuration={70}
+          scale={[6, 9]}
+          className="text-white">Orders </SquigglyText>
   </a>
 
 </div>

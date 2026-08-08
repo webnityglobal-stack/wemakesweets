@@ -5,6 +5,8 @@ import {
   Sparkles,
   ArrowDown,
 } from "lucide-react";
+import OurStoryVideo from "../components/our-story/OurStoryVideo";
+import IconPage from "../components/our-story/IconPage";
 
 export default function OurStory() {
   return (
@@ -122,6 +124,14 @@ export default function OurStory() {
   </div>
 
 </section>
+
+
+
+{/* video section */}
+<OurStoryVideo/>
+<IconPage/>
+
+
 
       {/* ===================================================== */}
       {/* OUR BEGINNING */}
@@ -297,7 +307,7 @@ export default function OurStory() {
       {/* OUR PHILOSOPHY */}
       {/* ===================================================== */}
 
-     <section className="relative overflow-hidden bg-[#66BC9E] py-28">
+     <section className="relative overflow-hidden bg-gradient-to-r from-[#8b183d] via-[#572340] to-[#164984] py-28">
 
   {/* Background Decorations */}
 
@@ -309,17 +319,17 @@ export default function OurStory() {
 
     <div className="text-center">
 
-      <span className="text-sm font-semibold uppercase tracking-[6px] text-[#164984]">
+      <span className="text-sm font-semibold uppercase tracking-[6px] text-[#f9e4bf]">
         OUR PHILOSOPHY
       </span>
 
-      <h2 className="mt-5 text-5xl font-black text-[#603917]">
+      <h2 className="mt-5 text-5xl font-black text-[#f9e4bf]">
         More Than Just
         <br />
         Sweets
       </h2>
 
-      <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-[#3e5a2c]">
+      <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-[#f9e4bf]">
         Every bite tells a story of craftsmanship, heritage and joy.
         We believe sweets should create memories that stay with people
         long after the celebration ends.

@@ -1,18 +1,28 @@
-import { defineConfig } from 'vite'
-import react, { reactCompilerPreset } from '@vitejs/plugin-react'
-import babel from '@rolldown/plugin-babel'
-import tailwindcss from '@tailwindcss/vite'
-// https://vite.dev/config/
+import { defineConfig } from "vite";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
+import babel from "@rolldown/plugin-babel";
+import tailwindcss from "@tailwindcss/vite";
+import { fileURLToPath, URL } from "node:url";
+
 export default defineConfig({
   plugins: [
     react(),
-    babel({ presets: [reactCompilerPreset()] }),
-    tailwindcss()
+    babel({
+      presets: [reactCompilerPreset()],
+    }),
+    tailwindcss(),
   ],
-    server: {
+
+  server: {
     host: true,
     allowedHosts: [
-      'unlikened-leonarda-noninflectional.ngrok-free.dev',  
+      "unlikened-leonarda-noninflectional.ngrok-free.dev",
     ],
   },
-})
+
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
+});

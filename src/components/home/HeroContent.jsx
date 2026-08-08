@@ -5,7 +5,7 @@ const HeroContent = () => {
   return (
     <>
       {/* Desktop */}
-      <div className="hidden lg:flex">
+      {/* <div className="hidden lg:flex">
         {sliderImages.map((item, index) => (
          <div
   key={item.id}
@@ -19,7 +19,23 @@ const HeroContent = () => {
             />
           </div>
         ))}
-      </div>
+      </div> */}
+ {/* Desktop */}
+<div className="hidden lg:flex w-full">
+  {sliderImages.map((item, index) => (
+    <div
+      key={item.id}
+      className={`flex-1 min-w-0 overflow-hidden reveal reveal-${index + 1}`}
+    >
+      <img
+        src={item.image}
+        alt={item.title}
+        draggable={false}
+        className="w-full h-[220px] object-cover object-center transition-transform duration-500 hover:scale-105"
+      />
+    </div>
+  ))}
+</div>
 
       {/* Mobile */}
       <div className="lg:hidden overflow-hidden w-full">

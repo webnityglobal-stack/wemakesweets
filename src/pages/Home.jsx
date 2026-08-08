@@ -15,17 +15,20 @@ import ProductGrid from '../components/products/ProductGrid'
 import { Link } from 'react-router-dom'
 import Testimonials from '../components/testimonials/Testimonials'
 import ReelsSection from '../components/reels/ReelsSection'
+import FAQPage from '../components/home/FAQ/FAQPage'
+import IconPage from '../components/our-story/IconPage'
+import SplitText from '@/components/SplitText'
+import Boxes from '@/components/home/Boxes'
 
 const Home = () => {
   return (
     <div className='flex flex-col  bg-[#f9e4bf] '>
       <PremiumSlider/>
-      
-        <Hero/>
+      <Boxes/>
+        {/* <Hero/> */}
        
-        {/* <ProductSlider/> */}<OurProduct/>
+        {/* <ProductSlider/><OurProduct/> */}
         <ProductConsumption/>
-        
 
 <div>
   <section className="bg-[#f9e4bf] py-14">
@@ -65,15 +68,16 @@ const Home = () => {
 
 
        
-        <HowrahBridge/>
+        {/* <HowrahBridge/> */}
         <HeroContent/>
-        <GatewayOfIndia/>
+        {/* <GatewayOfIndia/> */}
         <PerfectOccasion/>
-        <InspiredByHeritage/>
-        
+        {/* <InspiredByHeritage/> */}
         <OurStory/>
         <ReelsSection/>
+        <IconPage/>
         <Testimonials/>
+        <FAQPage/>
     </div>
   )
 }
