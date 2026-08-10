@@ -166,7 +166,7 @@ const IconPage = () => {
   {/* Spinning Text */}
   <SpinningText
     reverse
-    className="text-2xl"
+    className=" text-[16px] sm:text-[16px] md:text-[20px]"
     duration={4}
     radius={5}
   >

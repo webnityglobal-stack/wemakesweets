@@ -19,6 +19,7 @@ import FAQPage from '../components/home/FAQ/FAQPage'
 import IconPage from '../components/our-story/IconPage'
 import SplitText from '@/components/SplitText'
 import Boxes from '@/components/home/Boxes'
+import ScrollWavyUnderline from '@/components/common/ScrollWavyUnderline'
 
 const Home = () => {
   return (
@@ -43,9 +44,9 @@ const Home = () => {
         <h2 className="mt-3 text-3xl font-bold text-[#603917] md:text-5xl">
           Best Selling Products
         </h2>
-
+<ScrollWavyUnderline/>
         {/* Decorative Line */}
-        <div className="mx-auto mt-5 h-1 w-28 rounded-full bg-[#3e5a2c]" />
+        {/* <div className="mx-auto mt-5 h-1 w-28 rounded-full bg-[#3e5a2c]" /> */}
       </div>
 
       {/* Products */}

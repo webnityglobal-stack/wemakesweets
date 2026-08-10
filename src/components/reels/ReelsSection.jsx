@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useMemo } from "react";
 import reelsData from "../../constants/reelsData";
 import ReelCard from "./ReelCard";
+import ScrollWavyUnderline from "../common/ScrollWavyUnderline";
 
 const autoplay = Autoplay({
   delay: 4000,
@@ -111,6 +112,7 @@ useEffect(() => {
                 {" "}
                 Snack Stories
               </span>
+              <ScrollWavyUnderline/>
             </h2>
 
             <p className="mt-4 max-w-2xl text-[#6b4b35]">

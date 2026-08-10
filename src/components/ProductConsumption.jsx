@@ -267,6 +267,7 @@ import {
 import { LayoutTextFlip } from "./ui/layout-text-flip";
 import { SquigglyText } from "./ui/squiggly-text";
 import { FireworksBackground } from "./animate-ui/components/backgrounds/fireworks";
+import ScrollWavyUnderline from "./common/ScrollWavyUnderline";
 
 const occasions = [
   {
@@ -708,6 +709,7 @@ const ProductConsumption = () => {
             >
               Every Occasion
             </h2>
+            <ScrollWavyUnderline />
 
           </div>
         </div>

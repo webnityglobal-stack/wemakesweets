@@ -1,4 +1,5 @@
 import { Star, Quote } from "lucide-react";
+import ScrollWavyUnderline from "../common/ScrollWavyUnderline";
 
 const testimonials = [
   {
@@ -59,7 +60,8 @@ export default function Testimonials() {
           Happy Customers
         </h2>
 
-        <div className="mx-auto mt-5 h-1 w-28 rounded-full bg-[#DE6239]" />
+        {/* <div className="mx-auto mt-5 h-1 w-28 rounded-full bg-[#DE6239]" /> */}
+        <ScrollWavyUnderline/>
 
       </div>
 
