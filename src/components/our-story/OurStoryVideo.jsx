@@ -85,7 +85,7 @@ const OurStoryVideo = () => {
                 <div>
 
                   <h4 className="font-bold text-[#572340]">
-                    50,000 Sq.ft.
+                    6,000 Sq.ft.
                   </h4>
 
                   <p className="text-sm text-gray-500">
