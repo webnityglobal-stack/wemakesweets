@@ -1,3 +1,4 @@
+import ScrollWavyUnderline from "@/components/common/ScrollWavyUnderline";
 import {
   Mail,
   Phone,
@@ -36,7 +37,7 @@ export default function Contact() {
               Sweet Moments Together
 
             </h1>
-
+<ScrollWavyUnderline color='#f9e4bf'/>
             <p className="cinzel mx-auto mt-8 max-w-3xl text-lg leading-9 text-[#f9e4bf]/75">
 
               Whether you're planning a wedding, corporate event,
@@ -184,7 +185,7 @@ export default function Contact() {
     <br />
     Here To Help
   </h2>
-
+<ScrollWavyUnderline />
   <p className="mt-6 leading-8 text-[#3e5a2c]">
     Have questions about our sweets,
     bulk orders or corporate gifting?
@@ -322,7 +323,7 @@ export default function Contact() {
             <span className="uppercase tracking-[5px] text-[#f9e4bf] font-semibold">
               FIND US
             </span>
-
+<ScrollWavyUnderline color='#f9e4bf'/>
             <h2 className="mt-4 text-5xl font-black text-[#f9e4bf]">
               Visit Our Manufacturing Facility
             </h2>
@@ -367,7 +368,7 @@ export default function Contact() {
       <h2 className="mt-4 text-5xl font-black text-[#8b183d]">
         We Love Hearing From You
       </h2>
-
+<ScrollWavyUnderline/>
     </div>
 
     <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
@@ -621,7 +622,7 @@ export default function Contact() {
     <span className="uppercase tracking-[5px] text-[#F4C02D] font-semibold">
       LET'S CONNECT
     </span>
-
+<ScrollWavyUnderline color="#F4C02D"/>
     <h2 className="mt-6 text-5xl md:text-6xl font-black text-white leading-tight">
       Let's Make Every
       <br />
@@ -665,8 +666,8 @@ export default function Contact() {
     <h2 className="text-4xl font-black text-[#8b183d]">
       Thank You For Visiting
     </h2>
-
-    <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-[#66BC9E]" />
+<ScrollWavyUnderline/>
+    {/* <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-[#66BC9E]" /> */}
 
     <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-[#3e5a2c]">
       We appreciate your interest in <strong>We Make Sweets</strong>.

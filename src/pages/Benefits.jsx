@@ -1,3 +1,4 @@
+import ScrollWavyUnderline from "@/components/common/ScrollWavyUnderline";
 import {
   ShieldCheck,
   Leaf,
@@ -66,7 +67,7 @@ export default function Benefits() {
       <h2 className="mt-4 text-4xl md:text-5xl font-black text-[#8b183d]">
         Crafted To Delight Every Celebration
       </h2>
-
+<ScrollWavyUnderline />
       <p className="mt-6 text-[#3e5a2c] leading-8">
         We combine traditional recipes with premium ingredients
         and modern quality standards to deliver sweets you'll

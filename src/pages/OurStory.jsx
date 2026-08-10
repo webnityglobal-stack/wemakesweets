@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import OurStoryVideo from "../components/our-story/OurStoryVideo";
 import IconPage from "../components/our-story/IconPage";
+import ScrollWavyUnderline from "@/components/common/ScrollWavyUnderline";
 
 export default function OurStory() {
   return (
@@ -56,10 +57,11 @@ export default function OurStory() {
           <br />
 
           Has A Story.
-
+<ScrollWavyUnderline  color = "#f9e4bf"/>
         </h1>
 
-        <div className="mt-6 h-1 w-32 rounded-full bg-[#E35A7E]" />
+        {/* <div className="mt-6 h-1 w-32 rounded-full bg-[#E35A7E]" /> */}
+        
 
         <p className="mt-8 max-w-xl text-lg leading-9 text-[#f9e4bf]">
 
@@ -178,10 +180,11 @@ export default function OurStory() {
           Tradition,
           <br />
           Perfected With Passion.
-
+          <ScrollWavyUnderline color="#66BC9E"/>
         </h2>
 
-        <div className="mt-8 h-1 w-28 rounded-full bg-[#66BC9E]" />
+        {/* <div className="mt-8 h-1 w-28 rounded-full bg-[#66BC9E]" /> */}
+        
 
         <p className="mt-8 leading-9 text-[#3e5a2c]">
 
@@ -421,7 +424,7 @@ export default function OurStory() {
       <h2 className="mt-4 text-5xl font-black text-[#8b183d]">
         Growing With Every Celebration
       </h2>
-
+<ScrollWavyUnderline />
     </div>
 
     <div className="relative mt-24">
@@ -523,7 +526,7 @@ export default function OurStory() {
       <h2 className="mt-5 text-5xl font-black text-[#f9e4bf]">
         The Values That Define Us
       </h2>
-
+<ScrollWavyUnderline color="#f9e4bf"/>
     </div>
 
     <div className="mt-20 grid gap-8 md:grid-cols-2">
@@ -703,7 +706,8 @@ export default function OurStory() {
       tradition and unforgettable memories.
     </p>
 
-    <div className="mx-auto mt-12 h-1 w-28 rounded-full bg-[#66BC9E]" />
+    {/* <div className="mx-auto mt-12 h-1 w-28 rounded-full bg-[#66BC9E]" /> */}
+    <ScrollWavyUnderline/>
 
     <div className="mt-14 flex flex-wrap justify-center gap-5">
 
