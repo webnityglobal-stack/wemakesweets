@@ -139,7 +139,7 @@ const IconPage = () => {
       <section className="bg-white py-20">
       <div className="mx-auto max-w-7xl px-6">
 
-        <div className="grid grid-cols-2 gap-y-12 md:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-3 gap-y-12 md:grid-cols-3 lg:grid-cols-6">
 
           {features.map((item, index) => (
             <div

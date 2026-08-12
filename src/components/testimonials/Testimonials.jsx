@@ -48,7 +48,7 @@ const data = [...testimonials, ...testimonials];
 
 export default function Testimonials() {
   return (
-    <section className="overflow-hidden bg-[#f9e4bf] py-20">
+    <section className="overflow-hidden bg-[#f7f6f2] py-20">
 
       <div className="mb-14 text-center">
 

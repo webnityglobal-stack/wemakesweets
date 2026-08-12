@@ -21,7 +21,7 @@ const HeroContent = () => {
         ))}
       </div> */}
  {/* Desktop */}
-<div className="hidden lg:flex w-full">
+<div className="hidden lg:flex w-full pt-4">
   {sliderImages.map((item, index) => (
     <div
       key={item.id}
@@ -38,7 +38,7 @@ const HeroContent = () => {
 </div>
 
       {/* Mobile */}
-      <div className="lg:hidden overflow-hidden w-full">
+      <div className="lg:hidden overflow-hidden w-full pt-4">
         <div className="flex animate-slider w-max">
           {[...sliderImages, ...sliderImages].map((item, index) => (
             <div

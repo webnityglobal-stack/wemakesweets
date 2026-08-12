@@ -6,7 +6,6 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
-import { SquigglyText } from "../ui/squiggly-text";
 import { FireworksBackground } from "../animate-ui/components/backgrounds/fireworks";
 
 const occasions = [
@@ -40,7 +39,7 @@ const word2 = "and authentic taste.";
 
   return (
     // <section className="relative w-full overflow-hidden bg-[#f9e4bf] lg:min-h-[650px]">
-  <section className="relative w-full overflow-hidden bg-[#f9e4bf] lg:min-h-[650px]">
+  <section className="relative w-full overflow-hidden bg-[#f2e7d5] lg:min-h-[650px]">
 
   {/* Fireworks */}
   <div className="absolute inset-0 z-20 pointer-events-none">
@@ -69,9 +68,9 @@ const word2 = "and authentic taste.";
 
       {/* Content */}
       <div className="relative flex items-center py-10 lg:absolute lg:inset-0 lg:py-0">
-        <div className="mx-auto w-full max-w-7xl px-5 lg:px-10">
+        <div className="mx-auto w-full max-w-7xl">
 
-          <div className="relative w-full overflow-hidden rounded-2xl p-6 sm:p-8 lg:w-[52%] lg:p-10">
+          <div className="relative w-full overflow-hidden rounded-2xl p- sm:p-8 lg:w-[52%] lg:p-">
 
             {/* Background Image */}
             {/* <img
@@ -87,10 +86,7 @@ const word2 = "and authentic taste.";
             <div className="relative z-10">
 
               <h2 className="text-center font-serif text-2xl font-bold uppercase text-[#E35A7E] sm:text-3xl lg:text-left lg:text-4xl">
-                Perfect For Every <SquigglyText
-                          stepDuration={70}
-                          scale={[6, 9]}
-                          className="text-[#E35A7E]">Occasions</SquigglyText>
+                Perfect For Every Occasions
               </h2>
 
               <p className="mt-5 max-w-xl text-center text-sm leading-7 text-[#3e5a2c] sm:text-base lg:text-left">

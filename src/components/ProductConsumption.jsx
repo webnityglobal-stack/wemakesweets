@@ -263,9 +263,6 @@ import {
   Plane,
   Sparkles,
 } from "lucide-react";
-
-import { LayoutTextFlip } from "./ui/layout-text-flip";
-import { SquigglyText } from "./ui/squiggly-text";
 import { FireworksBackground } from "./animate-ui/components/backgrounds/fireworks";
 import ScrollWavyUnderline from "./common/ScrollWavyUnderline";
 
@@ -650,7 +647,7 @@ const OccasionCard = ({ item }) => {
 
 const ProductConsumption = () => {
   return (
-    <section className="relative overflow-hidden py-16 md:py-24">
+    <section className="relative overflow-hidden py-4 md:py-4">
 
       {/* ================================================= */}
       {/* FIREWORKS BACKGROUND */}
@@ -672,11 +669,11 @@ const ProductConsumption = () => {
       {/* CONTENT */}
       {/* ================================================= */}
 
-      <div className="relative z-10 max-w-[1500px] mx-auto px-4 md:px-6">
+      <div className="relative z-10 max-w-[1500px] mx-auto px-2 md:px-4">
 
         {/* Heading */}
 
-        <div className="relative text-center overflow-hidden mb-12">
+        <div className="relative text-center overflow-hidden mb-4">
 
           <div className="relative z-10">
 
@@ -718,7 +715,7 @@ const ProductConsumption = () => {
         {/* OCCASION CARDS */}
         {/* ================================================= */}
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
           {occasions.map((item) => (
             <OccasionCard
@@ -749,13 +746,8 @@ const ProductConsumption = () => {
 
             Crafted For Every{" "}
 
-            <SquigglyText
-              stepDuration={70}
-              scale={[6, 9]}
-              className="text-amber-500"
-            >
-              Celebration
-            </SquigglyText>
+            Celebration
+          
 
             {" "}❤️
 
@@ -786,15 +778,8 @@ const ProductConsumption = () => {
               hover:shadow-lg
             "
           >
-            📞 Call For Bulk{" "}
-
-            <SquigglyText
-              stepDuration={70}
-              scale={[6, 9]}
-              className="text-white"
-            >
-              Orders
-            </SquigglyText>
+            📞 Call For Bulk{" "} Orders
+          
 
           </a>
 

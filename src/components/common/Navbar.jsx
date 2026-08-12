@@ -124,13 +124,13 @@ function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="w-full bg-[#f9e4bf] px-4 md:px-8 lg:px-10 z-50">
+    <header className="w-full bg-[#f7f6f2] px-4 md:px-8 lg:px-10 z-50">
       <nav className="h-20 flex items-center justify-between">
 
         {/* Logo */}
         <a href="/">
           <img
-            src="/logo2.webp"
+            src="/logo.webp"
             alt="Logo"
             className="h-12 w-auto object-contain"
           />

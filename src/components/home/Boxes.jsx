@@ -152,8 +152,8 @@
 //   );
 // }
 import { ArrowRight } from "lucide-react";
-import { LayoutTextFlip } from "../ui/layout-text-flip";
-import { FireworksBackground } from "../animate-ui/components/backgrounds/fireworks";
+// import { LayoutTextFlip } from "../ui/layout-text-flip";
+// import { FireworksBackground } from "../animate-ui/components/backgrounds/fireworks";
 import FlipCard from "../FlipCard";
 
 const categories = [
@@ -229,7 +229,7 @@ export default function Boxes() {
 
       {/* Fireworks */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <FireworksBackground
+        {/* <FireworksBackground
           population={1}
           color={["#E8B357", "#810c26", "#572340"]}
           fireworkSpeed={{ min: 5, max: 8 }}
@@ -237,7 +237,7 @@ export default function Boxes() {
           particleSpeed={{ min: 2, max: 5 }}
           particleSize={{ min: 1, max: 2 }}
           className="h-full w-full"
-        />
+        /> */}
       </div>
 
       <div className="relative z-10 max-w-[1500px] mx-auto px-4 md:px-6">
@@ -276,7 +276,7 @@ export default function Boxes() {
         </div>
 
         {/* Button */}
-        <div className="flex justify-center mt-10 md:mt-14">
+        <div className="flex justify-center mt-2 md:mt-4">
           <button
             className="
               flex

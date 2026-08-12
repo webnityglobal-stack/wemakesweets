@@ -1,5 +1,5 @@
 import { PhoneCall } from "lucide-react";
-import { SquigglyText } from "../ui/squiggly-text";
+
 
 const TopBanner = () => {
  
@@ -19,11 +19,7 @@ const TopBanner = () => {
 
         {/* Heading */}
         <span className="text-[11px] font-semibold uppercase tracking-[2px] text-[#f9e4bf] md:text-xs">
-          Corporate   <SquigglyText
-                    stepDuration={70}
-                    scale={[6, 9]}
-                    className="text-amber-500"
-                  >Gifting 🎉</SquigglyText>  
+          Corporate Gifting 🎉
         </span>
 
         {/* Icon */}
@@ -35,11 +31,7 @@ const TopBanner = () => {
 
         {/* Text */}
         <span className="text-sm font-medium text-white md:text-base">
-          For Corporate   <SquigglyText
-          stepDuration={70}
-          scale={[6, 9]}
-          className="text-amber-500"
-        >Gift</SquigglyText>  Orders
+          For Corporate Gift Orders
         </span>
 
         {/* Call Button */}

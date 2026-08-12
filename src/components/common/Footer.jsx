@@ -1,192 +1,3 @@
-// import {
-//   Mail,
-//   Phone,
-//   MapPin,
-// } from "lucide-react";
-
-// const quickLinks = [
-//   "Home",
-//   "Our Story",
-//   "Products",
-//   // "Gifting",
-//   // "Recipes",
-//   // "Blogs",
-//   "Contact Us",
-// ];
-
-// const customerCare = [
-//   "FAQs",
-//   "Shipping & Delivery",
-//   "Returns & Refunds",
-//   "Privacy Policy",
-//   "Terms & Conditions",
-// ];
-
-// const Footer = () => {
-//   return (
-//   <footer className="relative overflow-hidden pt-12">
-//   {/* Background */}
-//   <picture className="absolute inset-0 -z-20">
-//     <source media="(max-width:768px)" srcSet="/footerMobile.webp" />
-//     <img
-//       src="/footerDesktop.webp"
-//       alt=""
-//       className="h-full w-full object-cover"
-//     />
-//   </picture>
-
-//   {/* Optional Overlay */}
-//   <div className="absolute inset-0 -z-10 bg-[#572340]/55 backdrop-blur-[1px]" />
-
-//   {/* Footer */}
-//   <div className="mx-auto max-w-7xl px-5 pb-8">
-
-//     <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-
-//       {/* Logo */}
-//       <div className="text-center md:text-left">
-
-//         <img
-//           src="/logo.webp"
-//           alt="logo"
-//           className="mx-auto mb-5 h-20 md:mx-0"
-//         />
-
-//         <p className="leading-7 text-[#f9e4bf]/90">
-//           Desi soul. Modern snacking.
-//           <br />
-//           Made with real ingredients,
-//           <br />
-//           crafted for a better you.
-//         </p>
-
-//         <div className="mt-6 flex justify-center gap-3 md:justify-start">
-
-//           <a
-//             target="_blank"
-//             rel="noopener noreferrer"
-//             href="https://www.facebook.com/profile.php?id=100076647155144"
-//             className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E35A7E] transition-all duration-300 hover:scale-110 hover:bg-[#164984]"
-//           >
-//             <img src="/facebook.svg" alt="Facebook" />
-//           </a>
-
-//           <a
-//             href="#"
-//             className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E35A7E] transition-all duration-300 hover:scale-110 hover:bg-[#164984]"
-//           >
-//             <img
-//               src="/instagram.svg"
-//               alt="Instagram"
-//               className="h-full w-full object-cover"
-//             />
-//           </a>
-
-//           <a
-//             href="#"
-//             className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E35A7E] transition-all duration-300 hover:scale-110 hover:bg-[#164984]"
-//           >
-//             <img src="/whatsapp.svg" alt="WhatsApp" />
-//           </a>
-
-//         </div>
-
-//       </div>
-
-//       {/* Quick Links */}
-//       <div className="text-center md:text-left">
-
-//         <h3 className="mb-5 font-semibold uppercase tracking-wider text-[#F4C02D]">
-//           Quick Links
-//         </h3>
-
-//         <ul className="space-y-3">
-//           {quickLinks.map((item) => (
-//             <li key={item}>
-//               <a
-//                 href="#"
-//                 className="text-[#f9e4bf]/90 transition hover:text-[#66BC9E]"
-//               >
-//                 {item}
-//               </a>
-//             </li>
-//           ))}
-//         </ul>
-
-//       </div>
-
-//       {/* Customer Care */}
-//       <div className="text-center md:text-left">
-
-//         <h3 className="mb-5 font-semibold uppercase tracking-wider text-[#F4C02D]">
-//           Customer Care
-//         </h3>
-
-//         <ul className="space-y-3">
-//           {customerCare.map((item) => (
-//             <li key={item}>
-//               <a
-//                 href="#"
-//                 className="text-[#f9e4bf]/90 transition hover:text-[#66BC9E]"
-//               >
-//                 {item}
-//               </a>
-//             </li>
-//           ))}
-//         </ul>
-
-//       </div>
-
-//       {/* Address */}
-//       <div className="text-center md:text-left">
-
-//         <h3 className="mb-5 font-semibold uppercase tracking-wider text-[#F4C02D]">
-//           Our Address
-//         </h3>
-
-//         <div className="flex justify-center gap-3 md:justify-start">
-
-//           <MapPin
-//             className="mt-1 shrink-0 text-[#DE6239]"
-//             size={22}
-//           />
-
-//           <p className="text-left leading-7 text-[#f9e4bf]/90">
-//             Ground Floor, Block No. 159,
-//             <br />
-//             Plot No. 51,
-//             <br />
-//             Shakti Industries,
-//             <br />
-//             Bhada,
-//             <br />
-//             Surat - 395006,
-//             <br />
-//             Gujarat, India
-//           </p>
-
-//         </div>
-
-//       </div>
-
-//     </div>
-
-//     {/* Copyright */}
-
-//     <div className="mt-10 border-t border-white/15 pt-5 text-center text-sm text-[#f9e4bf]/75">
-//       © {new Date().getFullYear()} WeMake Sweets & Snacks.
-//       <br className="block md:hidden" />
-//       <span className="md:ml-1">All Rights Reserved.</span>
-//     </div>
-
-//   </div>
-// </footer>
-//   );
-// };
-
-// export default Footer;
-
-
 import {
   // Facebook,
   // Instagram,
@@ -194,8 +5,9 @@ import {
   ChevronRight,
   MapPin,
   Mail,
+  ChevronDown,
 } from "lucide-react";
-
+import { useState } from "react";
 const quickLinks = [
   "Home",
   "Our Story",
@@ -212,8 +24,13 @@ const customerCare = [
 ];
 
 const Footer = () => {
+  const [openSection, setOpenSection] = useState(null);
+
+const toggleSection = (section) => {
+  setOpenSection(openSection === section ? null : section);
+};
   return (
-    <footer className="relative overflow-hidden bg-[#6e051b] text-[#f9e4bf]">
+    <footer className="relative overflow-hidden bg-[#5a0115] text-[#f9e4bf]">
 
       {/* Decorative Background */}
       <div className="absolute inset-0 opacity-[0.06]">
@@ -227,16 +44,16 @@ const Footer = () => {
         <svg
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
-          className="relative block h-16 md:h-24 w-full fill-[#f9e4bf]"
+          className="relative block h-16 md:h-24 w-full fill-[#f7f6f2]"
         >
           <path d="M321.39,56.44C196.78,76.35,0,0,0,0V120H1200V0s-178.71,84.35-355.78,69.72C679.3,56.18,601.67,8.26,463.76,8.26,392.42,8.26,363.86,47.91,321.39,56.44Z" />
         </svg>
 
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-28 pb-14">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-26 pb-4">
 
-        <div className="grid gap-14 lg:grid-cols-5">
+        <div className="grid gap-4 md:gap-14 lg:grid-cols-5">
 
           {/* ======================================
                   LOGO SECTION
@@ -245,14 +62,14 @@ const Footer = () => {
           <div className="lg:col-span-2">
 
             <img
-              src="/logo.webp"
+              src="/logo.png"
               alt="We Make"
               className="h-20"
             />
 
             {/* Divider */}
 
-            <div className="mt-8 mb-8 flex items-center gap-3">
+            <div className="mt-2 mb-2 flex items-center gap-4">
 
               <div className="h-px flex-1 bg-[#f4c02d]/30" />
 
@@ -262,7 +79,9 @@ const Footer = () => {
 
             </div>
 
-            <p className="max-w-sm text-lg leading-9 text-[#f9e4bf]/90">
+
+<div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
+            <p className="max-w-sm text-lg leading-6 text-[#f9e4bf]/90">
 
               Desi soul. Modern snacking.
 
@@ -278,11 +97,11 @@ const Footer = () => {
 
             {/* Social */}
 
-            <div className="mt-10 flex gap-4">
+            <div className="mt-2 flex gap-1">
 
               <a
                 href="#"
-                className="group flex h-12 w-12 items-center justify-center rounded-full border border-[#f4c02d]/25 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:bg-[#E35A7E]"
+                className="group flex h-8 w-8 items-center justify-center rounded-full border border-[#f4c02d]/25 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:bg-[#E35A7E]"
               >
                 <img
                   src="/facebook.svg"
@@ -293,7 +112,7 @@ const Footer = () => {
 
               <a
                 href="#"
-                className="group flex h-12 w-12 items-center justify-center rounded-full border border-[#f4c02d]/25 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:bg-[#E35A7E]"
+                className="group flex h-8 w-8 items-center justify-center rounded-full border border-[#f4c02d]/25 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:bg-[#E35A7E]"
               >
                 <img
                   src="/instagram.svg"
@@ -304,7 +123,7 @@ const Footer = () => {
 
               <a
                 href="#"
-                className="group flex h-12 w-12 items-center justify-center rounded-full border border-[#f4c02d]/25 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:bg-[#25D366]"
+                className="group flex h-8 w-8 items-center justify-center rounded-full border border-[#f4c02d]/25 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:bg-[#25D366]"
               >
                 <img
                   src="/whatsapp.svg"
@@ -315,7 +134,7 @@ const Footer = () => {
 
               <a
                 href="#"
-                className="group flex h-12 w-12 items-center justify-center rounded-full border border-[#f4c02d]/25 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:bg-black"
+                className="group flex h-8 w-8 items-center justify-center rounded-full border border-[#f4c02d]/25 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:bg-black"
               >
                 <img
                   src="/x.svg"
@@ -325,64 +144,75 @@ const Footer = () => {
               </a>
 
             </div>
-
+</div>
           </div>
 
           {/* ======================================
                 QUICK LINKS
           ======================================= */}
 
-          <div>
+         <div>
+  {/* Heading */}
+  <button
+    onClick={() => toggleSection("quick")}
+    className="flex w-full items-center justify-between lg:pointer-events-none"
+  >
+    <h3 className="text-xl font-bold uppercase tracking-wider text-[#f4c02d]">
+      Quick Links
+    </h3>
 
-            <h3 className="text-xl font-bold uppercase tracking-wider text-[#f4c02d]">
+    {/* Mobile arrow */}
+    <ChevronDown
+      size={20}
+      className={`text-[#f4c02d] transition-transform duration-300 lg:hidden ${
+        openSection === "quick" ? "rotate-180" : ""
+      }`}
+    />
+  </button>
 
-              Quick Links
+  <div className="mt-1 mb-2 h-[2px] w-20 bg-gradient-to-r from-[#f4c02d] to-transparent" />
 
-            </h3>
+  {/* Content */}
+  <div
+    className={`overflow-hidden transition-all duration-300 lg:max-h-none lg:opacity-100 ${
+      openSection === "quick"
+        ? "max-h-60 opacity-100"
+        : "max-h-0 opacity-0 lg:max-h-none"
+    }`}
+  >
+    <ul className="space-y-1 pt-1 lg:pt-0">
+      {quickLinks.map((item) => (
+        <li key={item}>
+          <a
+            href="#"
+            className="group flex items-center gap-3 text-md transition-all duration-300 hover:text-white"
+          >
+            <ChevronRight
+              size={18}
+              className="text-[#f4c02d] transition group-hover:translate-x-1"
+            />
 
-            <div className="mt-4 mb-8 h-[2px] w-20 bg-gradient-to-r from-[#f4c02d] to-transparent" />
-
-            <ul className="space-y-5">
-
-              {quickLinks.map((item) => (
-
-                <li key={item}>
-
-                  <a
-                    href="#"
-                    className="group flex items-center gap-3 text-lg transition-all duration-300 hover:text-white"
-                  >
-
-                    <ChevronRight
-                      size={18}
-                      className="text-[#f4c02d] transition group-hover:translate-x-1"
-                    />
-
-                    <span>{item}</span>
-
-                  </a>
-
-                </li>
-
-              ))}
-
-            </ul>
-
-          </div>
+            <span>{item}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
 
           {/* ======================================
                 CUSTOMER CARE
           ======================================= */}
 
-          <div>
+          {/* <div>
 
             <h3 className="text-xl font-bold uppercase tracking-wider text-[#f4c02d]">
               Customer Care
             </h3>
 
-            <div className="mt-4 mb-8 h-[2px] w-20 bg-gradient-to-r from-[#f4c02d] to-transparent" />
+            <div className="mt-1 mb-2 h-[2px] w-20 bg-gradient-to-r from-[#f4c02d] to-transparent" />
 
-            <ul className="space-y-5">
+            <ul className="space-y-2">
 
               {customerCare.map((item) => (
 
@@ -390,7 +220,7 @@ const Footer = () => {
 
                   <a
                     href="#"
-                    className="group flex items-center gap-3 text-lg transition hover:text-white"
+                    className="group flex items-center gap-3 text-md transition hover:text-white"
                   >
 
                     <ChevronRight
@@ -408,19 +238,64 @@ const Footer = () => {
 
             </ul>
 
-          </div>
+          </div> */}
+          <div>
+  <button
+    onClick={() => toggleSection("care")}
+    className="flex w-full items-center justify-between lg:pointer-events-none"
+  >
+    <h3 className="text-xl font-bold uppercase tracking-wider text-[#f4c02d]">
+      Customer Care
+    </h3>
+
+    <ChevronDown
+      size={18}
+      className={`text-[#f4c02d] transition-transform duration-300 lg:hidden ${
+        openSection === "care" ? "rotate-180" : ""
+      }`}
+    />
+  </button>
+
+  <div className="mt-1 mb-2 h-[2px] w-20 bg-gradient-to-r from-[#f4c02d] to-transparent" />
+
+  <div
+    className={`overflow-hidden transition-all duration-300 ${
+      openSection === "care"
+        ? "max-h-60 opacity-100"
+        : "max-h-0 opacity-0"
+    } lg:max-h-none lg:opacity-100`}
+  >
+    <ul className="space-y-2 pt-1">
+      {customerCare.map((item) => (
+        <li key={item}>
+          <a
+            href="#"
+            className="group flex items-center gap-3 text-md transition hover:text-white"
+          >
+            <ChevronRight
+              size={18}
+              className="text-[#f4c02d] transition group-hover:translate-x-1"
+            />
+
+            {item}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
 
           {/* ======================================
                 ADDRESS
           ======================================= */}
 
-          <div>
+          {/* <div>
 
             <h3 className="text-xl font-bold uppercase tracking-wider text-[#f4c02d]">
               Our Address
             </h3>
 
-            <div className="mt-4 mb-8 h-[2px] w-20 bg-gradient-to-r from-[#f4c02d] to-transparent" />
+            <div className="mt-1 mb-3 h-[2px] w-20 bg-gradient-to-r from-[#f4c02d] to-transparent" />
 
             <div className="flex gap-4">
 
@@ -433,7 +308,7 @@ const Footer = () => {
 
               </div>
 
-              <p className="leading-9 text-[#f9e4bf]/90">
+              <p className="leading-6 text-[#f9e4bf]/90 text-md">
 
                 Ground Floor, Block No. 159,
                 <br />
@@ -451,7 +326,61 @@ const Footer = () => {
 
             </div>
 
-          </div>
+          </div> */}
+<div>
+  <button
+    onClick={() => toggleSection("address")}
+    className="flex w-full items-center justify-between lg:pointer-events-none"
+  >
+    <h3 className="text-xl font-bold uppercase tracking-wider text-[#f4c02d]">
+      Our Address
+    </h3>
+
+    <ChevronDown
+      size={18}
+      className={`text-[#f4c02d] transition-transform duration-300 lg:hidden ${
+        openSection === "address" ? "rotate-180" : ""
+      }`}
+    />
+  </button>
+
+  <div className="mt-1 mb-3 h-[2px] w-20 bg-gradient-to-r from-[#f4c02d] to-transparent" />
+
+  <div
+    className={`overflow-hidden transition-all duration-300 ${
+      openSection === "address"
+        ? "max-h-80 opacity-100"
+        : "max-h-0 opacity-0"
+    } lg:max-h-none lg:opacity-100`}
+  >
+    <div className="flex gap-4 pt-1">
+
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#E35A7E]/30 bg-[#E35A7E]/15">
+        <MapPin
+          size={22}
+          className="text-[#E35A7E]"
+        />
+      </div>
+
+      <p className="text-md leading-6 text-[#f9e4bf]/90">
+        Ground Floor, Block No. 159,
+        <br />
+        Plot No. 51,
+        <br />
+        Shakti Industries,
+        <br />
+        Bhada,
+        <br />
+        Surat - 395006,
+        <br />
+        Gujarat, India
+      </p>
+
+    </div>
+  </div>
+</div>
+
+
 
         </div>
 
@@ -520,7 +449,7 @@ const Footer = () => {
             Divider
         ================================ */}
 
-        <div className="my-14 flex items-center justify-center gap-5">
+        <div className="my-1 flex items-center justify-center gap-5">
 
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#f4c02d]/40 to-transparent" />
 
@@ -541,7 +470,7 @@ const Footer = () => {
         ================================ */}
 
         {/* <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between"> */}
-        <div className="flex flex-col items-center justify-center text-center gap-3">
+        <div className="flex flex-col items-center justify-center text-center gap-2">
 
           {/* Left */}
 
@@ -565,7 +494,7 @@ const Footer = () => {
             </p>
 
           </div> */}
-          <div className="flex flex-col items-center justify-center text-center gap-3">
+          <div className="flex flex-col items-center justify-center text-center gap-1">
 
             <p className="text-[#f9e4bf]/80">
               © {new Date().getFullYear()}{" "}

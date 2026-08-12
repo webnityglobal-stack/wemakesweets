@@ -168,7 +168,7 @@ const FlipCard = ({ data }) => {
               text-center
               text-xl
               sm:text-2xl
-              lg:text-[28px]
+              lg:text-[24px]
               font-semibold
               text-[#552b12]
             "

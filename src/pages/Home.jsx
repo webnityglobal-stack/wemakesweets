@@ -23,7 +23,7 @@ import ScrollWavyUnderline from '@/components/common/ScrollWavyUnderline'
 
 const Home = () => {
   return (
-    <div className='flex flex-col  bg-[#f9e4bf] '>
+    <div className='flex flex-col  bg-[#f7f6f2] '>
       <PremiumSlider/>
       <Boxes/>
         {/* <Hero/> */}
@@ -32,8 +32,8 @@ const Home = () => {
         <ProductConsumption/>
 
 <div>
-  <section className="bg-[#f9e4bf] py-14">
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+  <section className="bg-[#f7f6f2] py-4">
+    <div className="container mx-auto px-4 sm:px-4 lg:px-4">
 
       {/* Heading */}
       <div className="mb-10 text-center">
@@ -41,7 +41,7 @@ const Home = () => {
           Our Collection
         </p>
 
-        <h2 className="mt-3 text-3xl font-bold text-[#603917] md:text-5xl">
+        <h2 className="mt-4 text-3xl font-bold text-[#603917] md:text-5xl">
           Best Selling Products
         </h2>
 <ScrollWavyUnderline/>
@@ -53,7 +53,7 @@ const Home = () => {
       <ProductGrid products={products.slice(0, 4)} />
 
       {/* Button */}
-      <div className="mt-12 flex justify-center">
+      <div className="mt-4 flex justify-center">
         <Link
           to="/products"
           className="inline-flex items-center justify-center rounded-full    bg-pink-600 px-8 py-3 font-semibold text-white transition-all duration-300 hover:scale-105   hover:bg-[#572340] hover:shadow-lg"

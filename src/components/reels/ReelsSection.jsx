@@ -85,7 +85,7 @@ useEffect(() => {
  return (
    <section
   ref={sectionRef}
-  className="relative overflow-hidden bg-[#f9e4bf] py-20"
+  className="relative overflow-hidden bg-[#f7f6f2] py-4"
 >
 
       {/* Decorative Background */}
@@ -94,11 +94,11 @@ useEffect(() => {
 
       <div className="absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-[#08376c]/10 blur-[130px]" />
 
-      <div className="relative mx-auto max-w-[1500px] px-5">
+      <div className="relative mx-auto max-w-[1500px] px-4">
 
         {/* Heading */}
 
-        <div className="mb-12 flex items-center justify-between">
+        <div className="mb-8 flex items-center justify-between">
 
           <div>
 
