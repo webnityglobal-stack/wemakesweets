@@ -207,25 +207,34 @@ const OurStoryVideo = () => {
     ];
 
     return (
+      
       <div
         key={item.title}
-        className={`group relative overflow-hidden rounded-3xl ${themes[index].bg} p-6 text-white shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl`}
+        className={`group relative flex h-36 w-36 flex-col items-center justify-center overflow-hidden rounded-full ${themes[index].bg} p-4 text-center text-white shadow-lg ring-1 ring-white/10 transition-all duration-500 hover:-translate-y-2 hover:scale-105 hover:shadow-2xl`}
       >
-        {/* Background Circle */}
-        <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/10 blur-xl" />
+        {/* Top Right Glow */}
+        <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/20 blur-2xl transition-transform duration-700 group-hover:scale-125" />
 
-        {/* Icon */}
-        <div
-          className={`relative mb-5 flex h-14 w-14 items-center justify-center rounded-2xl ${themes[index].icon}`}
-        >
-          {item.icon}
+        {/* Bottom Left Glow */}
+        <div className="absolute -bottom-8 -left-8 h-20 w-20 rounded-full bg-white/10 blur-2xl transition-transform duration-700 group-hover:scale-125" />
+
+        {/* Shine */}
+        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center">
+          {/* Icon */}
+          <div
+            className={`mb-2 flex h-11 w-11 items-center justify-center rounded-full ${themes[index].icon} shadow-md ring-1 ring-white/20 transition-all duration-500 group-hover:rotate-6 group-hover:scale-110`}
+          >
+            {item.icon}
+          </div>
+
+          {/* Title */}
+          <h3 className="text-sm font-bold leading-tight">
+            {item.title}
+          </h3>
         </div>
-
-        {/* Title */}
-        <h3 className="relative text-lg font-bold">
-          {item.title}
-        </h3>
-
       </div>
     );
   })}
