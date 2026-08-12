@@ -127,11 +127,10 @@ const ProductCard = ({ product }) => {
           src={product.images?.[0]}
           alt={product.name}
           className={`absolute inset-0 h-full w-full object-cover transition-all duration-700
-          ${
-            product.images?.[1]
+          ${product.images?.[1]
               ? "group-hover:scale-105 group-hover:opacity-0"
               : "group-hover:scale-105"
-          }`}
+            }`}
         />
 
         {/* Second Image */}
@@ -246,14 +245,13 @@ const ProductCard = ({ product }) => {
         <button
           disabled={!inStock}
           onClick={(e) => e.preventDefault()}
-          className={`h-14 w-full rounded-2xl text-base font-bold uppercase tracking-wide transition-all duration-300
-            ${
-              inStock
-                ? "bg-pink-600 text-white hover:bg-[#572340]"
-                : "cursor-not-allowed bg-gray-300 text-white"
+          className={`h-14 w-full rounded-xl border border-black text-base font-bold uppercase tracking-normal
+    ${inStock
+              ? "bg-pink-600 text-white shadow-[2px_3px_0px_#000] transition-all duration-200 hover:bg-[#572340] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_4px_0px_#000] active:translate-x-[1px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#000]"
+              : "cursor-not-allowed bg-gray-300 text-white border-black shadow-[2px_3px_0px_#000]"
             }`}
         >
-          {inStock ? "Quick Add" : "Sold Out"}
+          {inStock ? "QUICK ADD" : "SOLD OUT"}
         </button>
 
       </div>
