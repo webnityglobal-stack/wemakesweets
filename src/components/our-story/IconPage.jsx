@@ -164,21 +164,35 @@ const IconPage = () => {
               <div className="relative flex h-32 w-32 items-center justify-center">
 
   {/* Spinning Text */}
-  <SpinningText
+  {/* <SpinningText
     reverse
     className=" text-[16px] sm:text-[16px] md:text-[20px]"
     duration={4}
     radius={5}
   >
     {item.title}
-  </SpinningText>
+  </SpinningText> */}
 
   {/* Center Image */}
-  <img
+  {/* <img
     src={item.image}
     alt={item.title}
     className="absolute h-16 w-16 object-contain transition duration-300 group-hover:scale-110"
-  />
+  /> */}
+
+<img
+  src={item.image}
+  alt={item.title}
+  className="
+    absolute h-24 w-24 object-contain
+    transition-all duration-500 ease-out
+    animate-[floatPulse_3s_ease-in-out_infinite]
+    group-hover:scale-125
+    group-hover:-translate-y-4
+    group-hover:rotate-6
+    group-hover:drop-shadow-[0_10px_15px_rgba(0,0,0,0.35)]
+  "
+/>
 
 </div>
 

@@ -25,22 +25,22 @@ import OurStoryVideo from '@/components/our-story/OurStoryVideo'
 const Home = () => {
   return (
     <div className='flex flex-col  bg-[#f9e4bf] '>
-      <PremiumSlider/>
-      <Boxes/>
-        {/* <Hero/> */}
-       
-        {/* <ProductSlider/><OurProduct/> */}
-        <ProductConsumption/>
+      <PremiumSlider />
+      <Boxes />
+      {/* <Hero/> */}
+
+      {/* <ProductSlider/><OurProduct/> */}
+      <ProductConsumption />
 
 <div>
   <section className="bg-[#f7f6f2] py-4">
     <div className="container mx-auto px-4 sm:px-4 lg:px-4">
 
-      {/* Heading */}
-      <div className="mb-10 text-center">
-        <p className="font-semibold uppercase tracking-[0.25em] text-[#572340]">
-          Our Collection
-        </p>
+            {/* Heading */}
+            <div className="mb-10 text-center">
+              <p className="font-semibold uppercase tracking-[0.25em] text-[#572340]">
+                Our Collection
+              </p>
 
         <h2 className="mt-4 text-3xl font-bold text-[#603917] md:text-5xl">
           Best Selling Products
@@ -50,22 +50,21 @@ const Home = () => {
         {/* <div className="mx-auto mt-5 h-1 w-28 rounded-full bg-[#3e5a2c]" /> */}
       </div>
 
-      {/* Products */}
-      <ProductGrid products={products.slice(0, 4)} />
+            {/* Products */}
+            <ProductGrid products={products.slice(0, 4)} />
 
-      {/* Button */}
-      <div className="mt-4 flex justify-center">
-        <Link
-          to="/products"
-          className="inline-flex items-center justify-center rounded-full    bg-pink-600 px-8 py-3 font-semibold text-white transition-all duration-300 hover:scale-105   hover:bg-[#572340] hover:shadow-lg"
-        >
-          View All Products
-        </Link>
+            {/* Button */}
+            <div className="mt-12 flex justify-center">
+              <Link
+                to="/products"
+                className="inline-flex items-center justify-center rounded-full bg-pink-600 px-8 py-3 font-semibold text-white border-[0.5px] border-black shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] transition-all duration-300 hover:scale-105 hover:bg-[#572340] hover:shadow-[3px_4px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_3px_0px_#000]">
+                View All Products
+              </Link>
+            </div>
+
+          </div>
+        </section>
       </div>
-
-    </div>
-  </section>
-</div>
 
 
 

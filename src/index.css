@@ -111,3 +111,14 @@ body {
 .scrollbar-hide {
   scrollbar-width: none;
 }
+
+@keyframes floatPulse {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-6px) scale(1.08);
+  }
+}

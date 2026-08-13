@@ -209,33 +209,55 @@ const OurStoryVideo = () => {
     return (
       
       <div
-        key={item.title}
-        className={`group relative flex h-36 w-36 flex-col items-center justify-center overflow-hidden rounded-full ${themes[index].bg} p-4 text-center text-white shadow-lg ring-1 ring-white/10 transition-all duration-500 hover:-translate-y-2 hover:scale-105 hover:shadow-2xl`}
-      >
-        {/* Top Right Glow */}
-        <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/20 blur-2xl transition-transform duration-700 group-hover:scale-125" />
+  key={item.title}
+  className={`group relative flex h-36 w-36 flex-col items-center justify-center overflow-hidden rounded-full ${themes[index].bg} p-4 text-center text-white shadow-lg ring-1 ring-white/10 transition-all duration-500 ease-out hover:-translate-y-3 hover:scale-110 hover:shadow-2xl`}
+>
+  {/* Animated Outer Ring */}
+  <div className="absolute inset-[-4px] rounded-full border border-white/20 opacity-60 transition-all duration-700 group-hover:rotate-180 group-hover:border-white/50" />
 
-        {/* Bottom Left Glow */}
-        <div className="absolute -bottom-8 -left-8 h-20 w-20 rounded-full bg-white/10 blur-2xl transition-transform duration-700 group-hover:scale-125" />
+  {/* Pulsing Glow */}
+  <div className="absolute inset-2 rounded-full bg-white/10 blur-xl opacity-0 transition-all duration-500 group-hover:scale-110 group-hover:opacity-100" />
 
-        {/* Shine */}
-        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
+  {/* Top Right Glow */}
+  <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/20 blur-2xl transition-all duration-700 group-hover:scale-150 group-hover:opacity-80" />
 
-        {/* Content */}
-        <div className="relative z-10 flex flex-col items-center">
-          {/* Icon */}
-          <div
-            className={`mb-2 flex h-11 w-11 items-center justify-center rounded-full ${themes[index].icon} shadow-md ring-1 ring-white/20 transition-all duration-500 group-hover:rotate-6 group-hover:scale-110`}
-          >
-            {item.icon}
-          </div>
+  {/* Bottom Left Glow */}
+  <div className="absolute -bottom-8 -left-8 h-20 w-20 rounded-full bg-white/10 blur-2xl transition-all duration-700 group-hover:scale-150" />
 
-          {/* Title */}
-          <h3 className="text-sm font-bold leading-tight">
-            {item.title}
-          </h3>
-        </div>
+  {/* Shine Sweep */}
+  <div className="absolute inset-0 -translate-x-[150%] skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-1000 group-hover:translate-x-[150%]" />
+
+  {/* Hover Ripple */}
+  <div className="absolute inset-5 rounded-full border border-white/0 transition-all duration-500 group-hover:scale-125 group-hover:border-white/20" />
+
+  {/* Content */}
+  <div className="relative z-10 flex flex-col items-center">
+
+    {/* Icon */}
+    <div
+      className={`mb-2 flex h-11 w-11 items-center justify-center rounded-full ${themes[index].icon} shadow-lg ring-1 ring-white/30 transition-all duration-500 ease-out
+      group-hover:scale-125
+      group-hover:rotate-12
+      group-hover:shadow-[0_0_25px_rgba(255,255,255,0.6)]
+      group-hover:-translate-y-1`}
+    >
+      {/* Icon Glow */}
+      <div className="absolute h-10 w-10 rounded-full bg-white/20 blur-md opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+      <div className="relative transition-transform duration-700 group-hover:scale-110">
+        {item.icon}
       </div>
+    </div>
+
+    {/* Title */}
+    <h3 className="text-sm font-bold leading-tight transition-all duration-500 group-hover:scale-105 group-hover:tracking-wide">
+      {item.title}
+    </h3>
+  </div>
+
+  {/* Bottom Highlight */}
+  <div className="absolute bottom-2 left-1/2 h-1 w-10 -translate-x-1/2 rounded-full bg-white/20 blur-sm transition-all duration-500 group-hover:w-16 group-hover:bg-white/50" />
+</div>
     );
   })}
 </div>
