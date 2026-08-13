@@ -51,7 +51,7 @@ export default function OurStory() {
 
         </span>
 
-        <h1 className="mt-8 text-5xl font-black leading-tight text-[#f9e4bf] md:text-7xl">
+        <h1 className="mt-8 text-5xl font-black leading-tight text-[#f9e4bf] md:text-6xl">
 
           Every Sweet
           <br />
@@ -72,7 +72,7 @@ export default function OurStory() {
 
         </p>
 
-        <button className="group mt-10 flex items-center gap-3 rounded-full bg-[#E35A7E] px-8 py-4 text-white transition-all duration-300 hover:scale-105 hover:bg-[#572340] hover:shadow-xl">
+        <button className="group mt-10 flex items-center gap-3 rounded-full bg-[#E35A7E] px-8 py-4 text-white transition-all duration-300 hover:scale-105 hover:bg-[#572340] hover:shadow-xl shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
 
           Explore Our Journey
 
@@ -109,7 +109,7 @@ export default function OurStory() {
 
           </p>
 
-          <h3 className="mt-2 text-3xl font-bold text-[#E35A7E]">
+          <h3 className="mt-2 text-xl font-bold text-[#E35A7E]">
 
             100%
             <br />
@@ -630,7 +630,7 @@ export default function OurStory() {
 
         <div className="mt-10 flex flex-wrap gap-4">
 
-          <button className="rounded-full bg-[#E35A7E] px-8 py-4 font-semibold text-white transition hover:scale-105">
+          <button className="rounded-full bg-[#E35A7E] px-8 py-4 font-semibold text-white transition hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
             Explore Collection
           </button>
 

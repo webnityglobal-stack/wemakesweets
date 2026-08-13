@@ -118,7 +118,7 @@ export default function ProductHero() {
             delay: .2,
             duration: .6,
           }}
-          className="mt-8 text-center text-5xl font-black tracking-tight text-[#552b12] md:text-7xl"
+          className="mt-8 text-center text-4xl font-black tracking-tight text-[#552b12] md:text-5xl"
         >
           SHOP OUR
           <br />

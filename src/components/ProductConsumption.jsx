@@ -351,6 +351,7 @@ const ProductConsumption = () => {
               hover:bg-[#572340]
               hover:scale-105
               hover:shadow-lg
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
             "
           >
             📞 Call For Bulk{" "} Orders

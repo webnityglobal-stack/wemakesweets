@@ -161,7 +161,7 @@ const FAQPage = () => {
   </p>
 
  <Link to='/contact'>
-  <button className="mt-8 rounded-full bg-pink-600 hover:bg-[#572340] px-8 py-4 font-semibold  transition hover:scale-105">
+  <button className="mt-8 rounded-full bg-pink-600 hover:bg-[#572340] px-8 py-4 font-semibold  transition hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
     Contact Us
   </button>
  </Link>

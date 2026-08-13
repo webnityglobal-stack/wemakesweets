@@ -137,7 +137,7 @@ const word2 = "and authentic taste.";
               {/* Button */}
               <div className="mt-8 md:pl-34 flex justify-center lg:justify-start">
                <Link to='/products' >
-                <button className="rounded-full bg-pink-600 px-8 py-3 font-medium text-white transition-all duration-300 hover:bg-[#572340] hover:shadow-lg">
+                <button className="rounded-full bg-pink-600 px-8 py-3 font-medium text-white transition-all duration-300 hover:bg-[#572340] hover:shadow-lg shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
                   Explore Collection
                 </button>
                </Link>
