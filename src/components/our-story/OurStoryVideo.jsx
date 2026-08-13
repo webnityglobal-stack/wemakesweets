@@ -133,7 +133,7 @@ const OurStoryVideo = () => {
 
             </span>
 
-            <h2 className="mt-6 text-4xl font-black leading-tight text-[#2d2d2d] lg:text-6xl">
+            <h2 className="mt-6 text-4xl font-black leading-tight text-[#2d2d2d] lg:text-5xl">
 
               Crafted with
               <span className="block text-[#8b183d]">
