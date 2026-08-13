@@ -67,7 +67,7 @@ const word2 = "and authentic taste.";
   />
 
       {/* Content */}
-      <div className="relative flex items-center py-10 lg:absolute lg:inset-0 lg:py-0">
+      <div className="relative flex items-center py-10 md:pr-24 lg:absolute lg:inset-0 lg:py-0">
         <div className="mx-auto w-full max-w-7xl">
 
           <div className="relative w-full overflow-hidden rounded-2xl p- sm:p-8 lg:w-[52%] lg:p-">
@@ -135,7 +135,7 @@ const word2 = "and authentic taste.";
               </div>
 
               {/* Button */}
-              <div className="mt-8 flex justify-center lg:justify-start">
+              <div className="mt-8 md:pl-34 flex justify-center lg:justify-start">
                <Link to='/products' >
                 <button className="rounded-full bg-pink-600 px-8 py-3 font-medium text-white transition-all duration-300 hover:bg-[#572340] hover:shadow-lg">
                   Explore Collection

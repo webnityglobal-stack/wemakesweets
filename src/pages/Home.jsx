@@ -20,10 +20,11 @@ import IconPage from '../components/our-story/IconPage'
 import SplitText from '@/components/SplitText'
 import Boxes from '@/components/home/Boxes'
 import ScrollWavyUnderline from '@/components/common/ScrollWavyUnderline'
+import OurStoryVideo from '@/components/our-story/OurStoryVideo'
 
 const Home = () => {
   return (
-    <div className='flex flex-col  bg-[#f7f6f2] '>
+    <div className='flex flex-col  bg-[#f9e4bf] '>
       <PremiumSlider/>
       <Boxes/>
         {/* <Hero/> */}
@@ -77,6 +78,7 @@ const Home = () => {
         <OurStory/>
         <ReelsSection/>
         <IconPage/>
+        <OurStoryVideo/>
         <Testimonials/>
         <FAQPage/>
     </div>
