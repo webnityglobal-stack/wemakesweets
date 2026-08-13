@@ -33,7 +33,7 @@ const Home = () => {
       <ProductConsumption />
 
 <div>
-  <section className="bg-[#f7f6f2] py-4">
+  <section className="bg-[#f7f6f2] py-4 md:px-[24px]">
     <div className="container mx-auto px-4 sm:px-4 lg:px-4">
 
             {/* Heading */}
@@ -42,7 +42,7 @@ const Home = () => {
                 Our Collection
               </p>
 
-        <h2 className="mt-4 text-3xl font-bold text-[#603917] md:text-5xl">
+        <h2 className="mt-4 text-3xl font-bold text-[#603917] md:text-4xl">
           Best Selling Products
         </h2>
 <ScrollWavyUnderline/>

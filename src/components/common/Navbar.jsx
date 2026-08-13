@@ -156,11 +156,11 @@ function Navbar() {
         {/* Desktop Icons */}
         <div className="hidden lg:flex items-center gap-6">
 
-          <Search
+          {/* <Search
             size={23}
             className="cursor-pointer transition hover:scale-110"
             color="#572340"
-          />
+          /> */}
 
           <User
             size={23}

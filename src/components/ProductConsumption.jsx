@@ -177,12 +177,12 @@ const OccasionCard = ({ item }) => {
             </div>
 
             {/* Title */}
-            <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
+            <h3 className="mt-6 md:text-xl text-2xl font-bold text-[#f9e4bf]">
               {item.title}
             </h3>
 
             {/* Description */}
-            <p className="mt-3 leading-7 text-[#f9e4bf]/90">
+            <p className="mt-3 leading-7 md:text-[18px] text-[#f9e4bf]/90">
               {item.desc}
             </p>
 
@@ -220,7 +220,7 @@ const OccasionCard = ({ item }) => {
 
 const ProductConsumption = () => {
   return (
-    <section className="relative overflow-hidden py-4 md:py-4">
+    <section className="relative overflow-hidden md:px-8 px-4 py-4 md:py-4">
 
       {/* ================================================= */}
       {/* FIREWORKS BACKGROUND */}
@@ -312,6 +312,8 @@ const ProductConsumption = () => {
             py-8
             text-center
             shadow-xl
+            
+            
           "
         >
 

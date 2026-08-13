@@ -217,9 +217,13 @@ function FireworksBackground({
         const firework = fireworks[i];
         if (!firework?.update()) {
           fireworks.splice(i, 1);
-        } else {
-          firework.draw(ctx);
         }
+        //  else {
+        //   firework.draw(ctx);
+        // }
+        if (!firework?.update()) {
+  fireworks.splice(i, 1);
+}
       }
 
       for (let i = explosions.length - 1; i >= 0; i--) {
