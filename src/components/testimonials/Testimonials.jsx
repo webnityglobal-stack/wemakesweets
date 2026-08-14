@@ -48,15 +48,15 @@ const data = [...testimonials, ...testimonials];
 
 export default function Testimonials() {
   return (
-    <section className="overflow-hidden bg-gradient-to-b from-[#f9e4bf] via-[#f2ede1] to-[#f9e4bf] py-20">
+    <section className="overflow-hidden bg-gradient-to-b from-[#f9e4bf] via-[#f2ede1] to-[#f9e4bf] py-8">
 
-      <div className="mb-14 text-center">
+      <div className="mb-7 text-center">
 
         <p className="text-sm font-semibold uppercase tracking-[6px] text-[#E35A7E]">
           Testimonials
         </p>
 
-        <h2 className="cinzel text-2xl font-bold text-[#603917] md:text-3xl">
+        <h2 className="cinzel sm:text-2xl lg:text-4xl  font-bold text-[#603917] md:text-3xl">
           Happy Customers
         </h2>
 

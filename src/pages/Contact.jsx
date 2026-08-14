@@ -10,13 +10,14 @@ import {
 
 export default function Contact() {
   return (
+    <div className="chewy">
     <main className="overflow-hidden bg-[#f9e4bf] ">
 
       {/* ================================================= */}
       {/* HERO */}
       {/* ================================================= */}
 
-      <section className="relative overflow-hidden bg-[#3e5a2c]">
+      <section className="relative overflow-hidden bg-[#3e5a2c] ">
 
         <div className="absolute -left-32 top-0 h-96 w-96 rounded-full bg-[#810c26]/20 blur-3xl" />
         <div className="absolute right-0 bottom-0 h-[450px] w-[450px] rounded-full bg-[#2a4d25]/20 blur-3xl" />
@@ -29,7 +30,7 @@ export default function Contact() {
               Contact Us
             </span>
 
-              <h1 className="mt-6 text-5xl md:text-7xl font-black leading-tight text-[#f9e4bf]  ">
+              <h1 className="mt-6 text-3xl md:text-5xl font-black leading-tight text-[#f9e4bf]  ">
 
               Let's Create
               <br />
@@ -56,7 +57,7 @@ export default function Contact() {
       {/* CONTACT SECTION */}
       {/* ================================================= */}
 
-      <section className="py-24">
+      <section className="py-18">
 
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
 
@@ -76,14 +77,14 @@ export default function Contact() {
                 We'd Love To Hear From You
               </h2>
 
-              <p className="mt-5 leading-8 text-[#f9e4bf]">
+              <p className="mt-5 text-[#f9e4bf]">
 
                 Fill out the form below and our team will get
                 back to you as soon as possible.
 
               </p>
 
-              <form className="mt-10 space-y-6 text-[#f9e4bf]">
+              <form className="mt-8 space-y-2 text-[#f9e4bf]">
 
                 <div className="grid gap-6 md:grid-cols-2">
 
@@ -180,7 +181,7 @@ export default function Contact() {
     Contact Information
   </span>
 
-  <h2 className="mt-4 text-5xl font-black text-[#8b183d]">
+  <h2 className="mt-4 text-4xl md:text-5xl font-black text-[#8b183d]">
     We're Always
     <br />
     Here To Help
@@ -291,7 +292,7 @@ export default function Contact() {
           Working Hours
         </h3>
 
-        <p className="mt-2 leading-8 text-[#f9e4bf]">
+        <p className="mt-2  text-[#f9e4bf]">
           Monday - Saturday
           <br />
           9:00 AM - 7:00 PM
@@ -314,7 +315,7 @@ export default function Contact() {
       {/* LOCATION & MAP */}
       {/* ================================================= */}
 
-      <section className="bg-[#572340] py-24">
+      <section className="bg-[#572340] py-12">
 
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
 
@@ -324,7 +325,7 @@ export default function Contact() {
               FIND US
             </span>
 <ScrollWavyUnderline color='#f9e4bf'/>
-            <h2 className="mt-4 text-5xl font-black text-[#f9e4bf]">
+            <h2 className="mt-4 md:text-4xl text-2xl font-black text-[#f9e4bf]">
               Visit Our Manufacturing Facility
             </h2>
 
@@ -341,7 +342,7 @@ export default function Contact() {
             <iframe
               title="location"
               src="https://maps.google.com/maps?q=Ground%20Floor%20Block%20No%20159%20Plot%20No%2051%20Shakti%20Industries%20Bhada%20Surat&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              className="h-[500px] w-full"
+              className="h-[400px] w-full"
               loading="lazy"
             />
 
@@ -365,13 +366,13 @@ export default function Contact() {
         WHY CHOOSE US
       </span>
 
-      <h2 className="mt-4 text-5xl font-black text-[#8b183d]">
+      <h2 className="mt-4 text-3xl md:text-4xl font-black text-[#8b183d]">
         We Love Hearing From You
       </h2>
 <ScrollWavyUnderline/>
     </div>
 
-    <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+    <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-4 p-6">
 
       {/* Card 1 */}
 
@@ -381,7 +382,7 @@ export default function Contact() {
           💬
         </div>
 
-        <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
+        <h3 className="mt-6 text-xl font-bold text-[#f9e4bf]">
           Quick Support
         </h3>
 
@@ -399,7 +400,7 @@ export default function Contact() {
           🎁
         </div>
 
-        <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
+        <h3 className="mt-6 text-xl font-bold text-[#f9e4bf]">
           Bulk Orders
         </h3>
 
@@ -417,7 +418,7 @@ export default function Contact() {
           🚚
         </div>
 
-        <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
+        <h3 className="mt-6 text-xl font-bold text-[#f9e4bf]">
           Safe Delivery
         </h3>
 
@@ -435,7 +436,7 @@ export default function Contact() {
           ⭐
         </div>
 
-        <h3 className="mt-6 text-2xl font-bold text-[#f9e4bf]">
+        <h3 className="mt-6 text-xl font-bold text-[#f9e4bf]">
           Trusted Quality
         </h3>
 
@@ -463,7 +464,7 @@ export default function Contact() {
 
             <div className="text-center">
 
-              <h2 className="text-5xl font-black text-[#f9e4bf]">
+              <h2 className="text-3xl font-black text-[#f9e4bf]">
                 100%
               </h2>
 
@@ -475,7 +476,7 @@ export default function Contact() {
 
             <div className="text-center">
 
-              <h2 className="text-5xl font-black text-[#f9e4bf]">
+              <h2 className="text-3xl font-black text-[#f9e4bf]">
                 500+
               </h2>
 
@@ -487,7 +488,7 @@ export default function Contact() {
 
             <div className="text-center">
 
-              <h2 className="text-5xl font-black text-[#f9e4bf]">
+              <h2 className="text-3xl font-black text-[#f9e4bf]">
                 24×7
               </h2>
 
@@ -499,7 +500,7 @@ export default function Contact() {
 
             <div className="text-center">
 
-              <h2 className="text-5xl font-black text-[#f9e4bf]">
+              <h2 className="text-3xl font-black text-[#f9e4bf]">
                 Premium
               </h2>
 
@@ -518,28 +519,28 @@ export default function Contact() {
       {/* FAQ */}
       {/* ================================================= */}
 
-     <section className="bg-[#f9e4bf] py-24">
+     <section className="bg-[#f9e4bf] py-12">
 
   <div className="mx-auto max-w-6xl px-6 lg:px-10">
 
     <div className="text-center">
 
-      <span className="uppercase tracking-[5px] text-[#164984] font-semibold">
+      <span className="uppercase tracking-[5px] text-[#164984] ">
         FAQ
       </span>
 
-      <h2 className="mt-4 text-5xl font-black text-[#8b183d]">
+      <h2 className="mt-4 text-2xl md:text-4xl font-black text-[#8b183d]">
         Frequently Asked Questions
       </h2>
 
-      <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-[#3e5a2c]">
+      <p className="mx-auto mt-6 text-xl md:text-2xl max-w-3xl text-lg leading-8 text-[#3e5a2c]">
         Here are some common questions about our sweets, ordering process
         and customer support.
       </p>
 
     </div>
 
-    <div className="mt-16 space-y-6">
+    <div className="mt-8 space-y-6">
 
       {/* FAQ 1 */}
 
@@ -623,7 +624,7 @@ export default function Contact() {
       LET'S CONNECT
     </span>
 <ScrollWavyUnderline color="#F4C02D"/>
-    <h2 className="mt-6 text-5xl md:text-6xl font-black text-white leading-tight">
+    <h2 className="mt-6 text-2xl md:text-4xl font-black text-white leading-tight">
       Let's Make Every
       <br />
       Celebration Sweeter
@@ -700,5 +701,6 @@ export default function Contact() {
 </section>
 
     </main>
+    </div>
   );
 }

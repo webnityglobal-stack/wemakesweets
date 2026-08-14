@@ -7,10 +7,13 @@ import Benefits from '../pages/Benefits'
 import Contact from '../pages/Contact'
 import AllProducts from '../pages/AllProducts'
 import ProductDetailsPage from '../pages/ProductDetailsPage'
+import ScrollToTop from '@/components/ScrollToTop'
 
 const AppRoutes = () => {
   return (
-    <Routes>
+    <> 
+      <ScrollToTop/> 
+      <Routes>
         <Route path='/' element={<MainLayout/>}>
              <Route index element={<Home/>}/>
              <Route path='our-story' element={<OurStory/>}/>
@@ -21,6 +24,8 @@ const AppRoutes = () => {
         </Route>
        
     </Routes>
+    </>
+
   )
 }
 

@@ -115,17 +115,18 @@ const features = [
     image: "/icons/customers.webp",
     title: "Happy Customers",
   },
-  {
-    image: "/icons/fssai.webp",
-    title: "FSSAI Certified",
+   {
+    image: "/icons/labTested.webp",
+    title: "Lab Tested",
   },
+  
   {
     image: "/icons/quality.webp",
     title: "Quality Check",
   },
-  {
-    image: "/icons/labTested.webp",
-    title: "Lab Tested",
+ {
+    image: "/icons/fssai.webp",
+    title: "FSSAI Certified",
   },
   {
     image: "/icons/palmTree.webp", // agar hai

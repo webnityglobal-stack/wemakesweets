@@ -57,7 +57,7 @@ const FAQPage = () => {
   );
 
   return (
-    <section className="relative overflow-hidden bg-[#f9e4bf] py-24">
+    <section className="relative overflow-hidden bg-[#f9e4bf] py-4">
 
       {/* Background Blur */}
 

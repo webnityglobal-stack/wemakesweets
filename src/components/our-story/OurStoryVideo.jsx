@@ -25,7 +25,7 @@ const features = [
 
 const OurStoryVideo = () => {
   return (
-    <section className="relative overflow-hidden bg-[#f9e4bf] py-24">
+    <section className="relative overflow-hidden bg-[#f9e4bf] py-2">
 
       {/* background blur */}
       <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-[#8b183d]/10 blur-[120px]" />
@@ -82,13 +82,13 @@ const OurStoryVideo = () => {
                   <Factory size={26} />
                 </div>
 
-                <div>
+                <div className="sm:w-[180px]" >
 
                   <h4 className="font-bold text-[#572340]">
                     6,000 Sq.ft.
                   </h4>
 
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500"> 
                     Manufacturing Facility
                   </p>
 
