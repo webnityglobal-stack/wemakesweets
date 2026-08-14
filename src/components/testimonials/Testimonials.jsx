@@ -48,7 +48,7 @@ const data = [...testimonials, ...testimonials];
 
 export default function Testimonials() {
   return (
-    <section className="overflow-hidden bg-[#f7f6f2] py-20">
+    <section className="overflow-hidden bg-gradient-to-b from-[#f9e4bf] via-[#f2ede1] to-[#f9e4bf] py-20">
 
       <div className="mb-14 text-center">
 
@@ -56,7 +56,7 @@ export default function Testimonials() {
           Testimonials
         </p>
 
-        <h2 className="cinzel text-4xl font-bold text-[#603917] md:text-5xl">
+        <h2 className="cinzel text-2xl font-bold text-[#603917] md:text-3xl">
           Happy Customers
         </h2>
 
@@ -73,7 +73,7 @@ export default function Testimonials() {
 
             <div
               key={index}
-              className="group relative flex h-[390px] w-[330px] flex-col rounded-[28px] p-8 shadow-xl transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl md:w-[380px]"
+              className="group relative flex h-[310px] w-[330px] md:h-[320px] md:w-[290px] flex-col rounded-[28px] p-8 shadow-xl transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl md:w-[380px]"
               style={{
                 background: item.color,
               }}
@@ -96,7 +96,7 @@ export default function Testimonials() {
 
               </div>
 
-              <p className="mt-10 flex-1 text-center text-xl font-semibold leading-9 text-[#f9e4bf]">
+              <p className="mt-10 flex-1 text-center text-[14px] md:text-[15px] font-semibold leading-9 text-[#f9e4bf]">
                 "{item.review}"
               </p>
 

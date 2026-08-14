@@ -136,7 +136,7 @@ const features = [
 const IconPage = () => {
   return (
     // <section className="bg-[#fff8f3] py-20">
-      <section className="bg-white py-20">
+      <section className=" bg-gradient-to-b from-[#f9e4bf] via-[#f2ede1] to-[#f9e4bf] py-20 ">
       <div className="mx-auto max-w-7xl px-6">
 
         <div className="grid grid-cols-3 gap-y-12 md:grid-cols-3 lg:grid-cols-6">
@@ -161,25 +161,11 @@ const IconPage = () => {
                 />
 
               </div> */}
+
+
               <div className="relative flex h-32 w-32 items-center justify-center">
 
-  {/* Spinning Text */}
-  {/* <SpinningText
-    reverse
-    className=" text-[16px] sm:text-[16px] md:text-[20px]"
-    duration={4}
-    radius={5}
-  >
-    {item.title}
-  </SpinningText> */}
-
-  {/* Center Image */}
-  {/* <img
-    src={item.image}
-    alt={item.title}
-    className="absolute h-16 w-16 object-contain transition duration-300 group-hover:scale-110"
-  /> */}
-
+  
 <img
   src={item.image}
   alt={item.title}
@@ -191,6 +177,7 @@ const IconPage = () => {
     group-hover:-translate-y-4
     group-hover:rotate-6
     group-hover:drop-shadow-[0_10px_15px_rgba(0,0,0,0.35)]
+    rounded-full
   "
 />
 

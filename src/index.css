@@ -1,4 +1,4 @@
-@import "tailwindcss";
+/* @import "tailwindcss";
 
 @import url("https://fonts.googleapis.com/css2?family=Chewy&display=swap");
 
@@ -9,7 +9,46 @@ body {
 
 .chewy {
   font-family: "Chewy", cursive;
+} */
+
+@import url("https://fonts.googleapis.com/css2?family=Chewy&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Vidaloka&display=swap");
+
+@import "tailwindcss";
+
+html,
+body {
+  font-family: "Vidaloka", serif;
 }
+
+.vidaloka {
+  font-family: "Vidaloka", serif;
+}
+
+.chewy {
+  font-family: "Chewy", cursive;
+  font-weight: 400;
+}
+
+
+
+/* @import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Chewy&display=swap");
+
+html,
+body {
+  font-family: "Berkshire Swash", cursive;
+}
+
+.berkshire {
+  font-family: "Berkshire Swash", cursive;
+}
+
+.chewy {
+  font-family: "Chewy", cursive;
+} */
+
 
 @keyframes slider {
   0% {

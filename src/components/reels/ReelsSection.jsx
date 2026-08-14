@@ -85,7 +85,7 @@ useEffect(() => {
  return (
    <section
   ref={sectionRef}
-  className="relative overflow-hidden bg-[#f7f6f2] py-4"
+  className="relative overflow-hidden bg-[#f9e4bf] py-4"
 >
 
       {/* Decorative Background */}

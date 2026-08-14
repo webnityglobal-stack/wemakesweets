@@ -9,15 +9,15 @@ const FAQItem = ({ question, answer }) => {
     <motion.div
       layout
       transition={{ duration: 0.35 }}
-      className="overflow-hidden rounded-3xl border border-[#8b183d]/15 bg-white shadow-sm transition-all duration-300 hover:border-[#8b183d]/30 hover:shadow-xl"
+      className="overflow-hidden rounded-3xl border border-[#8b183d]/15 bg-[#f2ede1] shadow-sm transition-all duration-300 hover:border-[#8b183d]/30 hover:shadow-xl"
     >
       {/* Question */}
       <button
         onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between gap-5 p-6 text-left md:p-7"
+        className="flex w-full items-center justify-between gap-5 p-2 text-left md:p-3"
       >
         <h3
-          className={`text-lg font-bold transition-colors duration-300 md:text-xl ${
+          className={`text-[16px] font-bold transition-colors duration-300 md:text-[16px] ${
             open ? "text-[#8b183d]" : "text-[#2d2d2d]"
           }`}
         >
@@ -63,7 +63,7 @@ const FAQItem = ({ question, answer }) => {
             }}
             className="overflow-hidden"
           >
-            <div className="border-t border-[#8b183d]/10 bg-[#fff8f3] px-6 py-6 md:px-7">
+            <div className="border-t border-[#8b183d]/10 bg-[#fff8f3] px-2 py-3 md:px-3">
               <p className="leading-8 text-gray-600">
                 {answer}
               </p>

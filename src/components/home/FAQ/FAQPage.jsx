@@ -57,7 +57,7 @@ const FAQPage = () => {
   );
 
   return (
-    <section className="relative overflow-hidden bg-[#f7f6f2] py-24">
+    <section className="relative overflow-hidden bg-[#f9e4bf] py-24">
 
       {/* Background Blur */}
 
@@ -79,7 +79,7 @@ const FAQPage = () => {
           <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#8b183d]/10">
 
             <MessageCircleQuestion
-              size={42}
+              size={28}
               className="text-[#8b183d]"
             />
 
@@ -89,14 +89,14 @@ const FAQPage = () => {
             Frequently Asked Questions
           </span>
 
-          <h2 className="mt-6 text-4xl font-black text-[#2d2d2d] md:text-6xl">
+          <h2 className="mt-6 text-2xl font-black text-[#2d2d2d] md:text-3xl">
             Got Questions?
             <span className="block text-[#8b183d]">
               We've Got Answers
             </span>
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600">
+          <p className="mx-auto mt-6 max-w-2xl text-[14px] md:text-[16px] leading-8 text-gray-600">
             Find answers to the most commonly asked questions about our
             healthy snacks, ingredients, shipping, storage and more.
           </p>
@@ -135,7 +135,7 @@ const FAQPage = () => {
               />
             ))
           ) : (
-            <div className="rounded-3xl bg-white p-10 text-center shadow">
+            <div className="rounded-3xl bg-[white] p-10 text-center shadow">
 
               <h3 className="text-2xl font-bold text-[#8b183d]">
                 No Question Found
@@ -151,7 +151,7 @@ const FAQPage = () => {
         </div>
 <div className="mt-20 rounded-[32px] bg-gradient-to-r from-[#8b183d] via-[#572340] to-[#164984] p-10 text-center text-white">
 
-  <h2 className="text-3xl font-bold">
+  <h2 className="md:text-xl  font-bold">
     Still Have Questions?
   </h2>
 
@@ -161,7 +161,7 @@ const FAQPage = () => {
   </p>
 
  <Link to='/contact'>
-  <button className="mt-8 rounded-full bg-pink-600 hover:bg-[#572340] px-8 py-4 font-semibold  transition hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
+  <button className="mt-8 rounded-full bg-pink-600 hover:bg-[#572340] px-6 py-2 font-semibold  transition hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
     Contact Us
   </button>
  </Link>

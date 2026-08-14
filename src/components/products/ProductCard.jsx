@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
     <Link
       to={`/products/${product.slug}`}
       className="
-        group block overflow-hidden rounded-lg border border-[#60391720] bg-white
+        group block overflow-hidden rounded-lg border border-[#60391720] bg-[#f2ede1]
         transition-all duration-300
         hover:-translate-y-1 hover:shadow-xl
         sm:rounded-[28px]

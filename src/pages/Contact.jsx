@@ -10,7 +10,7 @@ import {
 
 export default function Contact() {
   return (
-    <main className="overflow-hidden bg-[#f9e4bf]">
+    <main className="overflow-hidden bg-[#f9e4bf] ">
 
       {/* ================================================= */}
       {/* HERO */}

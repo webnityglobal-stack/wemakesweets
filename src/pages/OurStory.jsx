@@ -8,7 +8,7 @@ import {
 import OurStoryVideo from "../components/our-story/OurStoryVideo";
 import IconPage from "../components/our-story/IconPage";
 import ScrollWavyUnderline from "@/components/common/ScrollWavyUnderline";
-
+ 
 export default function OurStory() {
   return (
     <main className="overflow-hidden bg-[#f9e4bf]">

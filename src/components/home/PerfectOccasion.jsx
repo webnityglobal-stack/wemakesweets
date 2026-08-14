@@ -104,7 +104,7 @@ const word2 = "and authentic taste.";
                         key={item.id}
                         className="group md:pr-44  flex flex-col items-center transition-all duration-300 hover:-translate-y-2"
                       >
-                        <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md transition-all duration-300 group-hover:bg-[#E35A7E] group-hover:scale-110">
+                        <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#f2ede1] shadow-md transition-all duration-300 group-hover:bg-[#E35A7E] group-hover:scale-110">
                           <Icon
                             size={28}
                             className="text-[#603917] group-hover:text-white"

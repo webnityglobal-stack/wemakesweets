@@ -7,7 +7,7 @@ import {
   Factory,
   Play,
 } from "lucide-react";
-
+ 
 const features = [
   {
     icon: <Leaf size={20} />,
@@ -189,7 +189,7 @@ const OurStoryVideo = () => {
               ))}
 
             </div> */}
-            <div className="mt-10 grid gap-5 sm:grid-cols-3">
+            <div className="mt-10 grid gap-5 justify-center  sm:grid-cols-3">
   {features.map((item, index) => {
     const themes = [
       {
@@ -210,7 +210,7 @@ const OurStoryVideo = () => {
       
       <div
   key={item.title}
-  className={`group relative flex h-36 w-36 flex-col items-center justify-center overflow-hidden rounded-full ${themes[index].bg} p-4 text-center text-white shadow-lg ring-1 ring-white/10 transition-all duration-500 ease-out hover:-translate-y-3 hover:scale-110 hover:shadow-2xl`}
+  className={` group relative flex h-34 w-34   md:h-36 md:w-36 flex-col items-center justify-center overflow-hidden rounded-full ${themes[index].bg} p-4 text-center text-white shadow-lg ring-1 ring-white/10 transition-all duration-500 ease-out hover:-translate-y-3 hover:scale-110 hover:shadow-2xl`}
 >
   {/* Animated Outer Ring */}
   <div className="absolute inset-[-4px] rounded-full border border-white/20 opacity-60 transition-all duration-700 group-hover:rotate-180 group-hover:border-white/50" />

@@ -32,9 +32,9 @@ const Home = () => {
       {/* <ProductSlider/><OurProduct/> */}
       <ProductConsumption />
 
-<div>
-  <section className="bg-[#f7f6f2] py-4 md:px-[24px]">
-    <div className="container mx-auto px-4 sm:px-4 lg:px-4">
+      <div>
+        <section className="bg-[#f9e4bf] py-4 md:px-[24px]">
+          <div className="container mx-auto px-4 sm:px-4 lg:px-4">
 
             {/* Heading */}
             <div className="mb-10 text-center">
@@ -42,13 +42,13 @@ const Home = () => {
                 Our Collection
               </p>
 
-        <h2 className="mt-4 text-3xl font-bold text-[#603917] md:text-4xl">
-          Best Selling Products
-        </h2>
-<ScrollWavyUnderline/>
-        {/* Decorative Line */}
-        {/* <div className="mx-auto mt-5 h-1 w-28 rounded-full bg-[#3e5a2c]" /> */}
-      </div>
+              <h2 className="mt-4 text-3xl font-bold text-[#603917] md:text-4xl">
+                Best Selling Products
+              </h2>
+              <ScrollWavyUnderline />
+              {/* Decorative Line */}
+              {/* <div className="mx-auto mt-5 h-1 w-28 rounded-full bg-[#3e5a2c]" /> */}
+            </div>
 
             {/* Products */}
             <ProductGrid products={products.slice(0, 4)} />
@@ -68,18 +68,18 @@ const Home = () => {
 
 
 
-       
-        {/* <HowrahBridge/> */}
-        <HeroContent/>
-        {/* <GatewayOfIndia/> */}
-        <PerfectOccasion/>
-        {/* <InspiredByHeritage/> */}
-        <OurStory/>
-        <ReelsSection/>
-        <IconPage/>
-        <OurStoryVideo/>
-        <Testimonials/>
-        <FAQPage/>
+
+      {/* <HowrahBridge/> */}
+      <HeroContent />
+      {/* <GatewayOfIndia/> */}
+      <PerfectOccasion />
+      {/* <InspiredByHeritage/> */}
+      {/* <OurStory /> */}
+      <ReelsSection />
+      <IconPage />
+      <OurStoryVideo />
+      <Testimonials />
+      <FAQPage />
     </div>
   )
 }

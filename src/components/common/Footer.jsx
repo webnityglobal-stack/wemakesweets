@@ -44,7 +44,7 @@ const toggleSection = (section) => {
         <svg
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
-          className="relative block h-16 md:h-24 w-full fill-[#f7f6f2]"
+          className="relative block h-16 md:h-24 w-full fill-[#f9e4bf]"
         >
           <path d="M321.39,56.44C196.78,76.35,0,0,0,0V120H1200V0s-178.71,84.35-355.78,69.72C679.3,56.18,601.67,8.26,463.76,8.26,392.42,8.26,363.86,47.91,321.39,56.44Z" />
         </svg>
@@ -474,26 +474,6 @@ const toggleSection = (section) => {
 
           {/* Left */}
 
-          {/* <div>
-
-            <p className="text-[#f9e4bf]/80 text-center lg:text-left">
-
-              © {new Date().getFullYear()}{" "}
-              <span className="font-semibold text-[#f4c02d]">
-                WeMake Sweets & Snacks
-              </span>
-
-              . All Rights Reserved.
-
-            </p>
-
-            <p className="mt-2 text-sm text-[#f9e4bf]/60 text-center lg:text-left">
-
-              Crafted with ❤️ in India
-
-            </p>
-
-          </div> */}
           <div className="flex flex-col items-center justify-center text-center gap-1">
 
             <p className="text-[#f9e4bf]/80">
@@ -567,7 +547,7 @@ const toggleSection = (section) => {
 
       </div>
 
-      <div className="pointer-events-none absolute right-0 top-0 h-60 w-60 rotate-180 opacity-10">
+      <div className="pointer-events-none absolute right-0 top-20 h-60 w-60 rotate-180 opacity-10">
 
         <svg
           viewBox="0 0 200 200"
