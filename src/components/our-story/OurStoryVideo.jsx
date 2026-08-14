@@ -72,23 +72,23 @@ const OurStoryVideo = () => {
                 duration: 4,
               }}
 
-              className="absolute -bottom-8 left-8 rounded-2xl bg-white p-5 shadow-xl"
+              className="absolute md:-bottom-8 md:left-8 -bottom-16 left-4 rounded-2xl bg-white md:p-5 p-2 shadow-xl"
 
             >
 
               <div className="flex items-center gap-3">
 
-                <div className="rounded-full bg-[#8b183d]/10 p-3 text-[#8b183d]">
-                  <Factory size={26} />
+                <div className="rounded-full bg-[#8b183d]/10 p-3  text-[#8b183d]">
+                  <Factory size={26}  />
                 </div>
 
-                <div className="sm:w-[180px]" >
+                <div className="w-[120px] sm:w-[180px] " >
 
-                  <h4 className="font-bold text-[#572340]">
+                  <h4 className="text-[#572340]">
                     6,000 Sq.ft.
                   </h4>
 
-                  <p className="text-sm text-gray-500"> 
+                  <p className="md:text-sm text-[9px] text-gray-500"> 
                     Manufacturing Facility
                   </p>
 
