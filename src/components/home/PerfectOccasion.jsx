@@ -39,7 +39,7 @@ const word2 = "and authentic taste.";
 
   return (
     // <section className="relative w-full overflow-hidden bg-[#f9e4bf] lg:min-h-[650px]">
-  <section className="relative w-full overflow-hidden bg-[#f2e7d5] lg:min-h-[650px]">
+  <section className="relative w-full overflow-hidden bg-[#f2e7d5] lg:min-h-[500px]">
 
   {/* Fireworks */}
   <div className="absolute inset-0 z-20 pointer-events-none">
@@ -54,20 +54,45 @@ const word2 = "and authentic taste.";
     />
   </div>
 
-{/* Desktop Banner */}
-      {/* <img
-        src="/perfectForOcassion.png"
-        alt="Perfect For Every Occasion"
-        className="absolute inset-0 hidden h-full w-full object-cover object-right lg:block"
-      /> */}
-     <img
-    src="/perfectForOcassion.png"
-    alt="Perfect For Every Occasion"
-    className="absolute inset-0 z-10 hidden h-full w-full object-cover object-right lg:block"
-  />
+ {/* Left Background Image */}
+<img
+  src="/perfectForOcassionBackground.png"
+  alt=""
+  className="
+    absolute
+    left-0
+    top-0
+    z-0
+    hidden
+    h-full
+    w-1/2
+    object-cover
+    object-left
+    lg:block
+  "
+/>
+
+{/* Right Main Image */}
+<img
+  src="/perfectForOcassion.png"
+  alt="Perfect For Every Occasion"
+  className="
+    absolute
+    right-0
+    top-0
+    z-10
+    hidden
+    h-full
+    w-1/2
+    object-cover
+    object-right
+    lg:block
+  "
+/>
 
       {/* Content */}
-      <div className="relative flex items-center py-10 md:pr-24 lg:absolute lg:inset-0 lg:py-0">
+      {/* <div className="relative flex items-center py-10 md:pr-24 lg:absolute lg:inset-0 lg:py-0"> */}
+      <div className="relative flex items-center py-10 pb-16 md:pr-24 lg:absolute lg:inset-0 lg:py-0">
         <div className="mx-auto w-full max-w-7xl">
 
           <div className="relative w-full overflow-hidden rounded-2xl p- sm:p-8 lg:w-[52%] lg:p-">
@@ -83,14 +108,14 @@ const word2 = "and authentic taste.";
             <div className="absolute inset-0  " />
 
             {/* Content */}
-            <div className="relative z-10">
+            <div className="relative  md:pl-12 z-10">
 
-              <h2 className="text-center font-serif text-2xl font-bold uppercase text-[#E35A7E] sm:text-3xl lg:text-left lg:text-4xl">
+              <h2 className="text-center  font-serif text-2xl font-bold uppercase text-[#603917] sm:text-3xl lg:text-left lg:text-2xl">
                 Perfect For Every Occasions
               </h2>
 
               <p className="mt-5 max-w-xl text-center text-sm leading-7 text-[#3e5a2c] sm:text-base lg:text-left">
-                <TextGenerateEffect className="mt-5 max-w-xl text-center text-sm leading-7 text-[#3e5a2c] sm:text-base lg:text-left" words={word1}/>
+                <TextGenerateEffect className="mt-5 max-w-xl text-center text-sm leading-7  text-[#3e5a2c] sm:text-base lg:text-left" words={word1}/>
               </p>
 
               {/* Icons */}
@@ -135,9 +160,10 @@ const word2 = "and authentic taste.";
               </div>
 
               {/* Button */}
-              <div className="mt-8 md:pl-34 flex justify-center lg:justify-start">
+              {/* <div className="mt-8 md:pl-34 flex justify-center lg:justify-start"> */}
+              <div className="mt-8 mb-2 md:pl-34 flex justify-center lg:justify-start">
                <Link to='/products' >
-                <button className="rounded-full bg-pink-600 px-8 py-3 font-medium text-white transition-all duration-300 hover:bg-[#572340] hover:shadow-lg shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
+                <button className="rounded-full bg-pink-600 px-4 py-2 md:px-8  md:py-3 font-medium text-white transition-all duration-300 hover:bg-[#60b396] hover:shadow-lg shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
                   Explore Collection
                 </button>
                </Link>

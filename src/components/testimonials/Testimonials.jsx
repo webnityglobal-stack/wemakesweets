@@ -81,7 +81,7 @@ export default function Testimonials() {
 
               <Quote
                 className="absolute left-7 top-7 text-white/20"
-                size={60}
+                size={40}
               />
 
               <div className="flex justify-center gap-1">

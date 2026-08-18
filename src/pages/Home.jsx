@@ -21,10 +21,11 @@ import SplitText from '@/components/SplitText'
 import Boxes from '@/components/home/Boxes'
 import ScrollWavyUnderline from '@/components/common/ScrollWavyUnderline'
 import OurStoryVideo from '@/components/our-story/OurStoryVideo'
+import ProductCard from '@/components/products/ProductCard'
 
 const Home = () => {
   return (
-    <div className='flex flex-col  bg-[#f9e4bf] '>
+    <div className='flex flex-col  bg-[#]'>
       <PremiumSlider />
       <Boxes />
       {/* <Hero/> */}
@@ -51,13 +52,84 @@ const Home = () => {
             </div>
 
             {/* Products */}
-            <ProductGrid products={products.slice(0, 4)} />
+            {/* <ProductGrid products={products.slice(0, 4)} /> */}
+
+
+
+{/* Products */}
+{/* Products */}
+<div className="relative">
+
+  {/* Desktop Slider */}
+  <div
+    id="best-selling-slider"
+    className="hidden lg:block overflow-hidden"
+  >
+    <div
+      id="best-selling-track"
+      className="flex gap-5 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    >
+      {products.map((product) => (
+        <div
+          key={product._id}
+          className="shrink-0 w-[calc((100%-60px)/4)]"
+        >
+          <ProductCard product={product} />
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Mobile */}
+  <div className="lg:hidden">
+    <ProductGrid products={products.slice(0, 4)} />
+  </div>
+
+  {/* Desktop Buttons */}
+  <div className="hidden lg:flex absolute -top-16 right-0 gap-2">
+
+    <button
+      type="button"
+      onClick={() =>
+        document
+          .getElementById("best-selling-track")
+          ?.scrollBy({
+            left: -350,
+            behavior: "smooth",
+          })
+      }
+      className="flex h-10 w-10 items-center justify-center rounded-full bg-[#572340] text-white shadow-md transition hover:scale-105"
+    >
+      ←
+    </button>
+
+    <button
+      type="button"
+      onClick={() =>
+        document
+          .getElementById("best-selling-track")
+          ?.scrollBy({
+            left: 350,
+            behavior: "smooth",
+          })
+      }
+      className="flex h-10 w-10 items-center justify-center rounded-full bg-[#572340] text-white shadow-md transition hover:scale-105"
+    >
+      →
+    </button>
+
+  </div>
+
+</div>
+
+
+
 
             {/* Button */}
             <div className="mt-12 flex justify-center">
               <Link
                 to="/products"
-                className="inline-flex items-center justify-center rounded-full bg-pink-600 px-8 py-3 font-semibold text-white border-[0.5px] border-black shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] transition-all duration-300 hover:scale-105 hover:bg-[#572340] hover:shadow-[3px_4px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_3px_0px_#000]">
+                className="inline-flex items-center justify-center rounded-full bg-pink-600 md:px-8 px-4 py-2 md:py-3 font-semibold text-white border-[0.5px] border-black shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] transition-all duration-300 hover:scale-105 hover:bg-[#60b396] hover:shadow-[3px_4px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_3px_0px_#000]">
                 View All Products
               </Link>
             </div>

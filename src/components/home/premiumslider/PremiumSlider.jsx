@@ -67,16 +67,18 @@ const PremiumSlider = () => {
                     mt-8
                     rounded-full
                     bg-pink-600
-                    px-8
-                    py-3
+                    px-4
+                    py-1
+                    md:px-8
+                    md:py-3
                     text-white
                     font-semibold
                     shadow-md
                     transition-all
                     duration-300
-                    hover:bg-[#572340]
+                    hover:bg-[#60b396]
                     hover:scale-105
-                    hover:shadow-lg shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
+                    shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000] 
                   "
                 >
                   {slide.button}
@@ -91,7 +93,7 @@ const PremiumSlider = () => {
         {/* Left Arrow */}
         <button
           onClick={prevSlide}
-          className="absolute left-5 top-1/2 -translate-y-1/2 z-30 rounded-full bg-[#f9e4bf] p-2 shadow-lg transition-all duration-300 hover:bg-[#572340] hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
+          className="absolute left-5 top-1/2 -translate-y-1/2 z-30 rounded-full bg-[#f9e4bf] p-2 shadow-lg transition-all duration-300 hover:bg-[#60b396] hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
         >
           <ChevronLeft size={22} />
         </button>
@@ -99,7 +101,7 @@ const PremiumSlider = () => {
         {/* Right Arrow */}
         <button
           onClick={nextSlide}
-          className="absolute right-5 top-1/2 -translate-y-1/2 z-30 rounded-full bg-[#f9e4bf] p-2 shadow-lg transition-all duration-300 hover:bg-[#572340] hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
+          className="absolute right-5 top-1/2 -translate-y-1/2 z-30 rounded-full bg-[#f9e4bf] p-2 shadow-lg transition-all duration-300 hover:bg-[#60b396] hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
         >
           <ChevronRight size={22} />
         </button>

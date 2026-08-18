@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
       "
     >
       {/* ================= IMAGE ================= */}
-      <div className="relative aspect-square overflow-hidden bg-[#f9e4bf]/20">
+      <div className="relative aspect-square overflow-hidden bg-[#f9e4bf]/20 ">
         {/* First Image */}
         <img
           src={product.images?.[0]}
@@ -127,7 +127,8 @@ const ProductCard = ({ product }) => {
       <div
         className="
           space-y-1 p-1.5
-          sm:space-y-4 sm:p-5
+          sm:space-y-2 sm:p-5
+          
         "
       >
         {/* Category */}
@@ -135,7 +136,7 @@ const ProductCard = ({ product }) => {
           className="
             inline-flex max-w-full truncate rounded-sm
             bg-[#572340] px-1.5 py-0.5
-            text-[6px] font-medium text-white
+            text-[8px] font-medium text-white
             sm:rounded-md sm:px-3 sm:py-1 sm:text-xs
           "
         >
@@ -146,11 +147,11 @@ const ProductCard = ({ product }) => {
         <h2
           className="
             line-clamp-2 min-h-[26px]
-            text-[8px] font-bold uppercase leading-[1.15] 
+            text-[10px] font-bold uppercase leading-[1.15] 
             text-[#2d2d2d] transition duration-300
             group-hover:text-[#8b183d]
             sm:min-h-[60px] sm:text-xl sm:leading-tight
-            lg:text-[18px] lg:min-h-[8px]
+            lg:text-[18px] lg:min-h-[4px]
           "
         >
           {product.name}
@@ -160,7 +161,7 @@ const ProductCard = ({ product }) => {
         <p
           className="
             line-clamp- min-h-[24px]
-            text-[8px] leading-[1.3] text-gray-500
+            text-[10px] leading-[1.3] text-gray-500
             sm:min-h-[48px] sm:text-[15px] sm:leading-6
             lg:min-h-[8px]
           "
@@ -232,12 +233,12 @@ const ProductCard = ({ product }) => {
             ${
               inStock
                 ? `
-                  bg-[#ff5a00] text-white
+                  bg-pink-600 text-white
                   shadow-[1px_2px_0px_#000]
                   transition-all duration-200
                   hover:translate-x-[-1px]
                   hover:translate-y-[-1px]
-                  hover:bg-[#572340]
+                  hover:bg-[#60b396]
                   hover:shadow-[3px_4px_0px_#000]
                   active:translate-x-[1px]
                   active:translate-y-[2px]

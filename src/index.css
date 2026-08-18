@@ -60,7 +60,7 @@ body {
 }
 
 .animate-slider {
-  animation: slider 15s linear infinite;
+  animation: slider 40s linear infinite;
 }
 
 .animate-slider:hover {
@@ -160,4 +160,19 @@ body {
   50% {
     transform: translateY(-6px) scale(1.08);
   }
+}
+
+
+@keyframes topBannerMarquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.top-banner-marquee {
+  animation: topBannerMarquee 12s linear infinite;
 }

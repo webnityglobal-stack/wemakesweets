@@ -62,7 +62,7 @@ useEffect(() => {
         //     ? "scale-100 shadow-[0_30px_60px_rgba(129,12,38,0.35)] ring-2 ring-[#810c26]"
         //     : "scale-95 opacity-80"
         active
-  ? "scale-100 -translate-y-3 shadow-[0_35px_70px_rgba(129,12,38,0.35)] ring-2 ring-[#810c26]"
+  ? "scale-100 translate-y-2 ring-2 ring-[#810c26]"
   : "scale-[0.92] opacity-70"
         }
       `}

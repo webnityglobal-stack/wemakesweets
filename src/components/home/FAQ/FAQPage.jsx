@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Search, MessageCircleQuestion } from "lucide-react";
+import { MessageCircleQuestion } from "lucide-react";
 import { motion } from "framer-motion";
 import FAQItem from "./FAQItem";
-import { Link } from "react-router-dom";
 
 const faqs = [
   {
@@ -49,6 +48,7 @@ const faqs = [
 
 const FAQPage = () => {
   const [search, setSearch] = useState("");
+  const [showFAQs, setShowFAQs] = useState(false);
 
   const filteredFAQs = faqs.filter(
     (faq) =>
@@ -57,7 +57,7 @@ const FAQPage = () => {
   );
 
   return (
-    <section className="relative overflow-hidden bg-[#f9e4bf] py-4">
+    <section className="relative overflow-hidden bg-[#f5ebda] py-4">
 
       {/* Background Blur */}
 
@@ -76,7 +76,7 @@ const FAQPage = () => {
           className="text-center"
         >
 
-          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#8b183d]/10">
+          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#8b183d]/10">
 
             <MessageCircleQuestion
               size={28}
@@ -103,28 +103,9 @@ const FAQPage = () => {
 
         </motion.div>
 
-        {/* Search */}
-{/* 
-        <div className="relative mx-auto mt-14 max-w-2xl">
-
-          <Search
-            size={22}
-            className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
-          />
-
-          <input
-            type="text"
-            placeholder="Search your question..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="h-16 w-full rounded-2xl border border-[#8b183d]/20 bg-white pl-14 pr-6 text-lg outline-none transition focus:border-[#8b183d] focus:ring-4 focus:ring-[#8b183d]/10"
-          />
-
-        </div> */}
-
         {/* FAQ List */}
 
-        <div className="mt-14 space-y-5">
+        {/* <div className="mt-14 space-y-5">
 
           {filteredFAQs.length > 0 ? (
             filteredFAQs.map((faq, index) => (
@@ -148,25 +129,71 @@ const FAQPage = () => {
             </div>
           )}
 
-        </div>
-<div className="mt-20 rounded-[32px] bg-gradient-to-r from-[#8b183d] via-[#572340] to-[#164984] p-10 text-center text-white">
+        </div> */}
 
-  <h2 className="md:text-xl  font-bold">
-    Still Have Questions?
-  </h2>
+        {/* FAQ Trigger */}
 
-  <p className="mx-auto mt-4 max-w-2xl text-white/80">
-    Our team is always ready to help you with orders,
-    ingredients, delivery and product recommendations.
-  </p>
+<div className="mt-14 flex justify-center">
+  <button
+    type="button"
+    onClick={() => setShowFAQs((prev) => !prev)}
+    className="
+      group
+      rounded-full
+      border border-[#8b183d]/20
+      bg-[#f2ede1]
+      px-6 py-3
+      text-center
+      shadow-sm
+      transition-all
+      duration-300
+      hover:border-[#8b183d]/40
+      hover:shadow-lg
+      active:scale-95
+    "
+  >
+    <span className="block text-[15px] font-semibold text-[#8b183d]">
+      Have a question?
+    </span>
 
- <Link to='/contact'>
-  <button className="mt-8 rounded-full bg-pink-600 hover:bg-[#572340] px-6 py-2 font-semibold  transition hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
-    Contact Us
+    <span className="block text-[18px] font-bold text-[#2d2d2d] transition-colors duration-300 group-hover:text-[#8b183d]">
+      Get your answer
+    </span>
   </button>
- </Link>
-
 </div>
+
+
+{/* FAQ List */}
+
+{showFAQs && (
+  <motion.div
+    initial={{ opacity: 0, y: -15 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.35 }}
+    className="mt-10 space-y-5"
+  >
+    {filteredFAQs.length > 0 ? (
+      filteredFAQs.map((faq, index) => (
+        <FAQItem
+          key={index}
+          question={faq.question}
+          answer={faq.answer}
+        />
+      ))
+    ) : (
+      <div className="rounded-3xl bg-white p-10 text-center shadow">
+        <h3 className="text-2xl font-bold text-[#8b183d]">
+          No Question Found
+        </h3>
+
+        <p className="mt-3 text-gray-500">
+          Try searching with another keyword.
+        </p>
+      </div>
+    )}
+  </motion.div>
+)}
+
       </div>
     </section>
   );

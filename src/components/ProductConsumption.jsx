@@ -220,7 +220,7 @@ const OccasionCard = ({ item }) => {
 
 const ProductConsumption = () => {
   return (
-    <section className="relative overflow-hidden md:px-8 px-4 py-4 md:py-4">
+    <section className="relative overflow-hidden md:px-8 px-4 py-4 md:py-4 bg-[#f5ebda]">
 
       {/* ================================================= */}
       {/* FIREWORKS BACKGROUND */}
@@ -274,7 +274,7 @@ const ProductConsumption = () => {
                 text-4xl
                 font-bold
                 text-[#603917]
-                lg:text-5xl
+                lg:text-4xl
               "
             >
               Every Occasion
@@ -288,7 +288,7 @@ const ProductConsumption = () => {
         {/* OCCASION CARDS */}
         {/* ================================================= */}
 
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3  max-w-[1200px] items-center  mx-auto">
 
           {occasions.map((item) => (
             <OccasionCard
@@ -312,8 +312,8 @@ const ProductConsumption = () => {
             py-8
             text-center
             shadow-xl
-            
-            
+            max-w-[1000px] 
+            mx-auto
           "
         >
 
@@ -341,14 +341,16 @@ const ProductConsumption = () => {
               inline-flex
               rounded-full
               bg-pink-600
-              px-8
-              py-3
+              px-4 
+              py-2
+              md:px-8
+              md:py-3
               font-semibold
               text-white
               shadow-md
               transition-all
               duration-300
-              hover:bg-[#572340]
+              hover:bg-[#60b396]
               hover:scale-105
               hover:shadow-lg
               shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]

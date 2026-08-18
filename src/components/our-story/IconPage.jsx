@@ -1,111 +1,3 @@
-// import {
-//   MapPinned,
-//   Users,
-//   ShieldCheck,
-//   BadgeCheck,
-//   FlaskConical,
-//   Leaf,
-// } from "lucide-react";
-
-import { SpinningText } from "../ui/spinning-text";
-
-// const features = [
-//   {
-//     icon: MapPinned,
-//     title: "Made in India",
-//     color: "#8b183d",
-//   },
-//   {
-//     icon: Users,
-//     title: "10L+ Happy Customers",
-//     color: "#164984",
-//   },
-//   {
-//     icon: ShieldCheck,
-//     title: "FSSAI Certified",
-//     color: "#3e5a2c",
-//   },
-//   {
-//     icon: BadgeCheck,
-//     title: "6 Step Quality Check",
-//     color: "#603917",
-//   },
-//   {
-//     icon: FlaskConical,
-//     title: "Lab Tested",
-//     color: "#572340",
-//   },
-//   {
-//     icon: Leaf,
-//     title: "No Palm Oil",
-//     color: "#8b183d",
-//   },
-// ];
-// const IconPage = () => {
-//   return (
-// <section className="py-20 bg-[#fff8f3]">
-
-// <div className="mx-auto max-w-7xl px-6">
-
-// <div className="grid grid-cols-2 gap-y-12 md:grid-cols-3 lg:grid-cols-6">
-
-// {features.map((item,index)=>{
-
-// const Icon=item.icon;
-
-// return(
-
-// <div
-// key={index}
-// className="group flex flex-col items-center text-center"
-// >
-
-// <div
-// className="flex h-24 w-24 items-center justify-center rounded-full border-2 transition-all duration-500 group-hover:-translate-y-2 group-hover:scale-110"
-// style={{
-// borderColor:item.color,
-// background:`${item.color}10`,
-// }}
-// >
-
-// <Icon
-// size={42}
-// style={{
-// color:item.color,
-// }}
-// />
-
-// </div>
-
-// <div
-// className="mt-6 h-1 w-10 rounded-full transition-all duration-500 group-hover:w-16"
-// style={{
-// background:item.color,
-// }}
-// ></div>
-
-// <h3 className="mt-5 text-lg font-bold uppercase leading-7 text-[#2d2d2d]">
-
-// {item.title}
-
-// </h3>
-
-// </div>
-
-// )
-
-// })}
-
-// </div>
-
-// </div>
-
-// </section>
-//   )
-// }
-
-// export default IconPage
-
 const features = [
   {
     image: "/icons/MadeInIndia.webp",
@@ -137,7 +29,7 @@ const features = [
 const IconPage = () => {
   return (
     // <section className="bg-[#fff8f3] py-20">
-      <section className=" bg-gradient-to-b from-[#f9e4bf] via-[#f2ede1] to-[#f9e4bf] py-20 ">
+      <section className=" bg-gradient-to-b from-[#FF9933] via-white to-[#138808] py-20 ">
       <div className="mx-auto max-w-7xl px-6">
 
         <div className="grid grid-cols-3 gap-y-12 md:grid-cols-3 lg:grid-cols-6">
@@ -190,7 +82,7 @@ const IconPage = () => {
 
               {/* Title */}
 
-              <h3 className="mt-5 text-lg font-bold uppercase leading-7 text-[#2d2d2d]">
+              <h3 className="mt-5 text-[12px] md:text-lg font-bold uppercase leading-7 text-[#2d2d2d]">
                 {item.title}
               </h3>
 

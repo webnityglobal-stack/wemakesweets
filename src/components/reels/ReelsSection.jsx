@@ -106,7 +106,7 @@ useEffect(() => {
               Watch Our Reels
             </span>
 
-            <h2 className="mt-4 text-4xl font-black text-[#552b12] lg:text-5xl">
+            <h2 className="mt-4 text-2xl font-black text-[#552b12] lg:text-3xl">
               Discover Healthy
               <span className="text-[#810c26]">
                 {" "}
@@ -158,7 +158,8 @@ useEffect(() => {
             {reelsData.map((reel, index) => (
               <div
                 key={reel.id}
-                className="min-w-0 flex-[0_0_85%] px-3 sm:flex-[0_0_55%] lg:flex-[0_0_28%] xl:flex-[0_0_24%]"
+                // className="min-w-0 flex-[0_0_78%] px-3 sm:flex-[0_0_50%] lg:flex-[0_0_24%] xl:flex-[0_0_20%]"
+                className="min-w-0 flex-[0_0_72%] px-3 sm:flex-[0_0_48%] lg:flex-[0_0_24%] xl:flex-[0_0_20%]"
               >
                 {/* <ReelCard
   reel={reel}

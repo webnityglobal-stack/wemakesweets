@@ -225,7 +225,7 @@ const categories = [
 
 export default function Boxes() {
   return (
-    <section className="relative overflow-hidden py-4 md:py-4">
+    <section className="relative overflow-hidden py-4 md:py-4 bg-[#f9e4bf]">
 
       {/* Fireworks */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -283,11 +283,11 @@ export default function Boxes() {
               items-center
               gap-2
               bg-pink-600
-              hover:bg-[#810c26]
+              hover:bg-[#60b396]
               text-white
-              px-8
+              px-4
               md:px-10
-              py-3
+              py-2
               md:py-4
               rounded-full
               font-semibold

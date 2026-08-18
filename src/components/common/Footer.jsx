@@ -39,7 +39,7 @@ const toggleSection = (section) => {
       </div>
 
       {/* Wave */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
+      {/* <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
 
         <svg
           viewBox="0 0 1200 120"
@@ -49,7 +49,17 @@ const toggleSection = (section) => {
           <path d="M321.39,56.44C196.78,76.35,0,0,0,0V120H1200V0s-178.71,84.35-355.78,69.72C679.3,56.18,601.67,8.26,463.76,8.26,392.42,8.26,363.86,47.91,321.39,56.44Z" />
         </svg>
 
-      </div>
+      </div> */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
+  <svg
+    viewBox="0 0 1200 120"
+    preserveAspectRatio="none"
+    className="relative block h-16 md:h-24 w-full fill-[#f5ebda]"
+  >
+    {/* <path d="M0,30 C220,65 420,68 600,40 C780,12 980,10 1200,30 V120 H0 Z" /> */}
+    <path d="M0,28 C220,68 420,72 600,40 C780,8 980,6 1200,28 V120 H0 Z" />
+  </svg>
+</div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-26 pb-4">
 
@@ -203,42 +213,6 @@ const toggleSection = (section) => {
           {/* ======================================
                 CUSTOMER CARE
           ======================================= */}
-
-          {/* <div>
-
-            <h3 className="text-xl font-bold uppercase tracking-wider text-[#f4c02d]">
-              Customer Care
-            </h3>
-
-            <div className="mt-1 mb-2 h-[2px] w-20 bg-gradient-to-r from-[#f4c02d] to-transparent" />
-
-            <ul className="space-y-2">
-
-              {customerCare.map((item) => (
-
-                <li key={item}>
-
-                  <a
-                    href="#"
-                    className="group flex items-center gap-3 text-md transition hover:text-white"
-                  >
-
-                    <ChevronRight
-                      size={18}
-                      className="text-[#f4c02d] transition group-hover:translate-x-1"
-                    />
-
-                    {item}
-
-                  </a>
-
-                </li>
-
-              ))}
-
-            </ul>
-
-          </div> */}
           <div>
   <button
     onClick={() => toggleSection("care")}
@@ -288,45 +262,6 @@ const toggleSection = (section) => {
           {/* ======================================
                 ADDRESS
           ======================================= */}
-
-          {/* <div>
-
-            <h3 className="text-xl font-bold uppercase tracking-wider text-[#f4c02d]">
-              Our Address
-            </h3>
-
-            <div className="mt-1 mb-3 h-[2px] w-20 bg-gradient-to-r from-[#f4c02d] to-transparent" />
-
-            <div className="flex gap-4">
-
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E35A7E]/15 border border-[#E35A7E]/30">
-
-                <MapPin
-                  size={22}
-                  className="text-[#E35A7E]"
-                />
-
-              </div>
-
-              <p className="leading-6 text-[#f9e4bf]/90 text-md">
-
-                Ground Floor, Block No. 159,
-                <br />
-                Plot No. 51,
-                <br />
-                Shakti Industries,
-                <br />
-                Bhada,
-                <br />
-                Surat - 395006,
-                <br />
-                Gujarat, India
-
-              </p>
-
-            </div>
-
-          </div> */}
 <div>
   <button
     onClick={() => toggleSection("address")}
