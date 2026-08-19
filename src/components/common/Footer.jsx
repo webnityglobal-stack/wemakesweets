@@ -39,17 +39,6 @@ const toggleSection = (section) => {
       </div>
 
       {/* Wave */}
-      {/* <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
-
-        <svg
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-          className="relative block h-16 md:h-24 w-full fill-[#f9e4bf]"
-        >
-          <path d="M321.39,56.44C196.78,76.35,0,0,0,0V120H1200V0s-178.71,84.35-355.78,69.72C679.3,56.18,601.67,8.26,463.76,8.26,392.42,8.26,363.86,47.91,321.39,56.44Z" />
-        </svg>
-
-      </div> */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
   <svg
     viewBox="0 0 1200 120"

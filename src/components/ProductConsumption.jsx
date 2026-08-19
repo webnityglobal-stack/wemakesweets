@@ -220,7 +220,31 @@ const OccasionCard = ({ item }) => {
 
 const ProductConsumption = () => {
   return (
-    <section className="relative overflow-hidden md:px-8 px-4 py-4 md:py-4 bg-[#f5ebda]">
+    <section className="relative overflow-hidden md:px-8 px-4 py-4 md:py-24 bg-[#f9e4bf]">
+
+
+  {/* ================= TOP WAVE ================= */}
+  <div className="absolute top-0 left-0 z-0 w-full overflow-hidden leading-none rotate-180">
+    <svg
+      viewBox="0 0 1200 120"
+      preserveAspectRatio="none"
+      className="block h-16 w-full md:h-24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0,28 C220,68 420,72 600,40 C780,8 980,6 1200,28 V120 H0 Z"
+        fill="#f5ebda"
+      />
+    </svg>
+  </div>
+
+  {/* ================= CONTENT ================= */}
+  <div className="relative z-10 max-w-[1500px] mx-auto px-4 md:px-8">
+
+    {/* Your existing content */}
+
+  </div>
+
 
       {/* ================================================= */}
       {/* FIREWORKS BACKGROUND */}
@@ -288,16 +312,33 @@ const ProductConsumption = () => {
         {/* OCCASION CARDS */}
         {/* ================================================= */}
 
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3  max-w-[1200px] items-center  mx-auto">
+{/* ================================================= */}
+{/* OCCASION CARDS */}
+{/* ================================================= */}
 
-          {occasions.map((item) => (
-            <OccasionCard
-              key={item.title}
-              item={item}
-            />
-          ))}
+{/* ================= MOBILE AUTO SLIDER ================= */}
+<div className="mt-8 overflow-hidden md:hidden">
+  <div className="flex animate-occasion-slider">
+    {[...occasions, ...occasions].map((item, index) => (
+      <div
+        key={`${item.title}-${index}`}
+        className="w-full flex-shrink-0 px-2"
+      >
+        <OccasionCard item={item} />
+      </div>
+    ))}
+  </div>
+</div>
 
-        </div>
+{/* ================= DESKTOP GRID ================= */}
+<div className="mt-8 hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1200px] items-center mx-auto">
+  {occasions.map((item) => (
+    <OccasionCard
+      key={item.title}
+      item={item}
+    />
+  ))}
+</div> 
 
         {/* ================================================= */}
         {/* BULK ORDER CTA */}
@@ -364,6 +405,24 @@ const ProductConsumption = () => {
         </div>
 
       </div>
+
+
+{/* ================= BOTTOM WAVE ================= */}
+<div className="absolute bottom-0 left-0 z-0 w-full overflow-hidden leading-none">
+  <svg
+    viewBox="0 0 1200 120"
+    preserveAspectRatio="none"
+    className="block h-16 w-full md:h-24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M0,85 C220,45 420,42 600,72 C780,102 980,104 1200,85 V120 H0 Z"
+      fill="#f5ebda"
+    />
+  </svg>
+</div>
+
+
     </section>
   );
 };

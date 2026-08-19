@@ -29,7 +29,8 @@ const features = [
 const IconPage = () => {
   return (
     // <section className="bg-[#fff8f3] py-20">
-      <section className=" bg-gradient-to-b from-[#FF9933] via-white to-[#138808] py-20 ">
+      <section className=" bg-[#f9e4bf] py-10 ">
+        
       <div className="mx-auto max-w-7xl px-6">
 
         <div className="grid grid-cols-3 gap-y-12 md:grid-cols-3 lg:grid-cols-6">
@@ -41,20 +42,6 @@ const IconPage = () => {
             >
 
               {/* Image */}
-{/* 
-              <div className="flex h-30 w-30 items-center justify-center transition duration-300 group-hover:scale-110">
-
-  <SpinningText reverse className="text-2xl" duration={4} radius={5}>
-   {item.title}
-    </SpinningText>
-       <img
-                  src={item.image}
-                  alt={item.title}
-                  className="h-30 w-30  object-contain transition duration-300 group-hover:scale-110"
-                />
-
-              </div> */}
-
 
               <div className="relative flex h-32 w-32 items-center justify-center">
 

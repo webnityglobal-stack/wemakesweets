@@ -34,7 +34,7 @@ const Home = () => {
       <ProductConsumption />
 
       <div>
-        <section className="bg-[#f9e4bf] py-4 md:px-[24px]">
+        <section className="bg-[#f5ebda] py-4 md:px-[24px]">
           <div className="container mx-auto px-4 sm:px-4 lg:px-4">
 
             {/* Heading */}

@@ -4,24 +4,10 @@ import { sliderImages } from "./sliderData";
 const HeroContent = () => {
   return (
     <>
-      {/* Desktop */}
-      {/* <div className="hidden lg:flex">
-        {sliderImages.map((item, index) => (
-         <div
-  key={item.id}
-  className={`w-1/5 flex-shrink-0 overflow-hidden floating reveal reveal-${index + 1}`}
->
-            <img
-              src={item.image}
-              alt={item.title}
-              className="block w-full h-[220px] object-cover"
-              draggable={false}
-            />
-          </div>
-        ))}
-      </div> */}
+
  {/* Desktop */}
-<div className="hidden lg:flex w-full pt-4 bg-[#f9e4bf] ">
+ 
+<div className="hidden lg:flex w-full pt-4 bg-[#f5ebda] ">
   {sliderImages.map((item, index) => (
     <div
       key={item.id}
