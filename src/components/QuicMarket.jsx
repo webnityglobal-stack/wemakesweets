@@ -1,247 +1,4 @@
-// import Wave from "../Wave";
-
-// const features = [
-//   {
-//     image: "/icons/MadeInIndia.webp",
-//     title: "Made in India",
-//   },
-//   {
-//     image: "/icons/customers.webp",
-//     title: "Happy Customers",
-//   },
-//    {
-//     image: "/icons/labTested.webp",
-//     title: "Lab Tested",
-//   },
-  
-//   {
-//     image: "/icons/quality.webp",
-//     title: "Quality Check",
-//   },
-//  {
-//     image: "/icons/fssai.webp",
-//     title: "FSSAI Certified",
-//   },
-//   {
-//     image: "/icons/palmTree.webp", // agar hai
-//     title: "No Palm Oil",
-//   },
-// ];
-
-// const IconPage = () => {
-//   return (
-//     // <section className="bg-[#fff8f3] py-20">
-//       <section className="relative bg-[#f5ebda] py-24 ">
-//          <Wave
-//     position="bottom"
-//     fill="#f5ebda"
-//   />
-
-//      <Wave
-//     position="top"
-//     fill="#f5ebda"
-//   />
-
-//       <div className="mx-auto max-w-7xl px-6">
-
-//         <div className="grid grid-cols-3 gap-y-12 md:grid-cols-3 lg:grid-cols-6">
-
-//           {features.map((item, index) => (
-//             <div
-//               key={index}
-//               className="group flex flex-col items-center text-center"
-//             >
-
-//               {/* Image */}
-
-//               <div className="relative flex h-32 w-32 items-center justify-center">
-
-  
-// <img
-//   src={item.image}
-//   alt={item.title}
-//   className="
-//     absolute h-24 w-24 object-contain
-//     transition-all duration-500 ease-out
-//     animate-[floatPulse_3s_ease-in-out_infinite]
-//     group-hover:scale-125
-//     group-hover:-translate-y-4
-//     group-hover:rotate-6
-//     group-hover:drop-shadow-[0_10px_15px_rgba(0,0,0,0.35)]
-//     rounded-full
-//   "
-// />
-
-// </div>
-
-//               {/* underline */}
-
-//               <div className="mt-4 h-1 w-10 rounded-full bg-[#8b183d] transition-all duration-300 group-hover:w-16"></div>
-
-//               {/* Title */}
-
-//               <h3 className="mt-5 text-[12px] md:text-lg font-bold uppercase leading-7 text-[#2d2d2d]">
-//                 {item.title}
-//               </h3>
-
-//             </div>
-//           ))}
-
-//         </div>
-
-//       </div>
-
-  
-
-//     </section>
-//   );
-// };
-
-// export default IconPage;
-
-
-// import { useEffect, useState } from "react";
-// import Wave from "../Wave";
-
-// const features = [
-//   {
-//     image: "/icons/MadeInIndia.webp",
-//     title: "Made in India",
-//   },
-//   {
-//     image: "/icons/customers.webp",
-//     title: "Happy Customers",
-//   },
-//   {
-//     image: "/icons/labTested.webp",
-//     title: "Lab Tested",
-//   },
-//   {
-//     image: "/icons/quality.webp",
-//     title: "Quality Check",
-//   },
-//   {
-//     image: "/icons/fssai.webp",
-//     title: "FSSAI Certified",
-//   },
-//   {
-//     image: "/icons/palmTree.webp",
-//     title: "No Palm Oil",
-//   },
-// ];
-
-// const IconPage = () => {
-//   const [currentSlide, setCurrentSlide] = useState(0);
-
-//   // Mobile slider
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       setCurrentSlide((prev) => (prev + 1) % features.length);
-//     }, 2500);
-
-//     return () => clearInterval(interval);
-//   }, []);
-
-//   return (
-//     <section className="relative bg-[#f5ebda] py-24">
-//       <Wave position="bottom" fill="#f5ebda" />
-//       <Wave position="top" fill="#f5ebda" />
-
-//       <div className="mx-auto max-w-7xl px-6">
-
-//         {/* ================= DESKTOP ================= */}
-//         <div className="hidden lg:grid grid-cols-6 gap-y-12">
-//           {features.map((item, index) => (
-//             <div
-//               key={index}
-//               className="group flex flex-col items-center text-center"
-//             >
-//               <div className="relative flex h-32 w-32 items-center justify-center">
-//                 <img
-//                   src={item.image}
-//                   alt={item.title}
-//                   className="
-//                     absolute h-24 w-24 object-contain
-//                     transition-all duration-500 ease-out
-//                     animate-[floatPulse_3s_ease-in-out_infinite]
-//                     group-hover:scale-125
-//                     group-hover:-translate-y-4
-//                     group-hover:rotate-6
-//                     group-hover:drop-shadow-[0_10px_15px_rgba(0,0,0,0.35)]
-//                     rounded-full
-//                   "
-//                 />
-//               </div>
-
-//               <div className="mt-4 h-1 w-10 rounded-full bg-[#8b183d] transition-all duration-300 group-hover:w-16" />
-
-//               <h3 className="mt-5 text-[12px] md:text-lg font-bold uppercase leading-7 text-[#2d2d2d]">
-//                 {item.title}
-//               </h3>
-//             </div>
-//           ))}
-//         </div>
-
-//         {/* ================= MOBILE SLIDER ================= */}
-//         <div className="lg:hidden overflow-hidden">
-//           <div
-//             className="mobile-feature-slider"
-//             style={{
-//               transform: `translateX(-${currentSlide * 100}%)`,
-//             }}
-//           >
-//             {features.map((item, index) => (
-//               <div
-//                 key={index}
-//                 className="mobile-feature-slide flex flex-col items-center text-center"
-//               >
-//                 <div className="relative flex h-32 w-32 items-center justify-center">
-//                   <img
-//                     src={item.image}
-//                     alt={item.title}
-//                     className="
-//                       sm:h-28 sm:w-28 h-24 w-24 object-contain
-//                       animate-[floatPulse_3s_ease-in-out_infinite]
-//                       rounded-full
-//                     "
-//                   />
-//                 </div>
-
-//                 <div className="mt-4 h-1 w-10 rounded-full bg-[#8b183d]" />
-
-//                 <h3 className="mt-5 text-[12px] font-bold uppercase leading-7 text-[#2d2d2d]">
-//                   {item.title}
-//                 </h3>
-//               </div>
-//             ))}
-//           </div>
-
-//           {/* Slider dots */}
-//           <div className="mt-8 flex justify-center gap-2">
-//             {features.map((_, index) => (
-//               <button
-//                 key={index}
-//                 onClick={() => setCurrentSlide(index)}
-//                 className={`mobile-slider-dot ${
-//                   currentSlide === index ? "active" : ""
-//                 }`}
-//                 aria-label={`Go to slide ${index + 1}`}
-//               />
-//             ))}
-//           </div>
-//         </div>
-
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default IconPage;
-
-
 import { useEffect, useState } from "react";
-import Wave from "./Wave";
-
 
 const features = [
   {
@@ -314,14 +71,42 @@ const QucikMarket = () => {
   }, [currentSlide]);
 
   return (
-    <section className="relative bg-[#f5ebda] py-6">
-      <Wave position="bottom" fill="#f5ebda" />
-      <Wave position="top" fill="#f5ebda" />
+    <section className=" text-center  relative bg-[#f5ebda] py-6 ">
 
-      <div className="mx-auto max-w-7xl px-6">
+{/* <div className=" font-bold text-[#603917] text-center text-2xl p-4">
+    Available On
+</div> */}
 
+
+            <div
+              className="
+              text-center
+
+                inline-block
+                rounded-full
+                px-5
+                py-4
+                text-xs
+                font-semibold
+                uppercase
+                tracking-[4px]
+                text-white
+                  bg-pink-600
+              hover:bg-[#66BC9E]
+              hover:scale-105
+                  hover:text-black
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
+              "
+            >
+              Available On
+            </div>
+
+      {/* <div className="mx-auto max-w-7xl px-6"> */}
+
+<div className="mx-auto mt-10 max-w-7xl px-6">
         {/* ================= DESKTOP ================= */}
         <div className="hidden lg:grid grid-cols-6 gap-y-12">
+             
           {features.map((item, index) => (
             <div
               key={index}
@@ -332,7 +117,7 @@ const QucikMarket = () => {
                   src={item.image}
                   alt={item.title}
                   className="
-                    absolute h-24 w-24 object-contain
+                    absolute h-18 w-18 object-contain
                     transition-all duration-500 ease-out
                     animate-[floatPulse_3s_ease-in-out_infinite]
                     group-hover:scale-125

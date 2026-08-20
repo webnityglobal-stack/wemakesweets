@@ -269,7 +269,8 @@ const FAQPage = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#f5ebda] py-4">
+    // <section className="relative overflow-hidden bg-[#f5ebda] py-4">
+    <section className="relative z-10 -mb-[1px] overflow-hidden bg-[#f5ebda] py-4 border-0 outline-none">
       {/* Background Blur */}
       <div className="absolute -top-24 left-0 h-72 w-72 rounded-full bg-[#8b183d]/10 blur-[120px]" />
       <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-[#164984]/10 blur-[120px]" />
@@ -284,20 +285,25 @@ const FAQPage = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#8b183d]/10">
+          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#8b183d]/10   text-white
+                  bg-pink-600
+              hover:bg-[#66BC9E]
+              hover:scale-105
+                  hover:text-black
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
             <MessageCircleQuestion
               size={28}
-              className="text-[#8b183d]"
+              className="text-white"
             />
           </div>
-
+          {/* 
           <span className="rounded-full bg-[#8b183d]/10 px-5 py-2 text-sm font-semibold uppercase tracking-wider text-[#8b183d]">
             Frequently Asked Questions
-          </span>
+          </span> */}
         </motion.div>
 
         {/* FAQ Trigger */}
-        <div className="mt-14 flex justify-center">
+        <div className="flex justify-center">
           <button
             type="button"
             onClick={() => {
@@ -311,23 +317,30 @@ const FAQPage = () => {
             className="
               group
               rounded-full
-              border border-[#8b183d]/20
-              bg-[#f2ede1]
+          
+            
               px-6 py-3
               text-center
-              shadow-sm
+            
               transition-all
               duration-300
               hover:border-[#8b183d]/40
-              hover:shadow-lg
+            
               active:scale-95
+                text-white
+                  bg-pink-600
+              hover:bg-[#66BC9E]
+              hover:scale-105
+                  hover:text-black
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
+
             "
           >
-            <span className="block text-[15px] font-semibold text-[#8b183d]">
-              Have a question?
+            <span className="block text-[15px] font-semibold">
+              Frequently Asked Questions
             </span>
 
-            <span className="block text-[18px] font-bold text-[#2d2d2d] transition-colors duration-300 group-hover:text-[#8b183d]">
+            <span className="block text-[18px] font-bold  transition-colors duration-300 ">
               {showFAQs ? "Close FAQs" : "Click Here"}
             </span>
           </button>
@@ -341,6 +354,8 @@ const FAQPage = () => {
             transition={{ duration: 0.35 }}
             className="mt-10 space-y-5"
           >
+
+
             {filteredFAQs.length > 0 ? (
               filteredFAQs.map((faq, index) => (
                 <FAQItem
@@ -362,30 +377,27 @@ const FAQPage = () => {
                 </p>
               </div>
             )}
-          </motion.div>
-        )}
 
 
 
-{/* send us quesiton  */}
-{/* Ask Your Question */}
-<div className="mt-12 rounded-3xl border border-[#8b183d]/10 bg-[#f2ede1] p-6 shadow-sm md:p-8">
-  <div className="text-center">
-    <h3 className="text-xl font-bold text-[#2d2d2d] md:text-2xl">
-      Still have a question?
-    </h3>
+        {/* Ask Your Question */}
+        <div className="mt-12 rounded-3xl border border-[#8b183d]/10 bg-[#f2ede1] p-6 shadow-sm md:p-8">
+          <div className="text-center">
+            <h3 className="text-xl font-bold text-[#2d2d2d] md:text-2xl">
+              Still have a question?
+            </h3>
 
-    <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-gray-600">
-      Didn't find what you're looking for? Ask us your question and
-      we'll be happy to help.
-    </p>
-  </div>
+            <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-gray-600">
+              Didn't find what you're looking for? Ask us your question and
+              we'll be happy to help.
+            </p>
+          </div>
 
-  <div className="mx-auto mt-6 flex max-w-2xl flex-col gap-3 sm:flex-row">
-    <input
-      type="text"
-      placeholder="Ask your question..."
-      className="
+          <div className="mx-auto mt-6 flex max-w-2xl flex-col gap-3 sm:flex-row">
+            <input
+              type="text"
+              placeholder="Ask your question..."
+              className="
         flex-1
         rounded-full
         border border-[#8b183d]/20
@@ -400,28 +412,39 @@ const FAQPage = () => {
         focus:ring-2
         focus:ring-[#8b183d]/10
       "
-    />
+            />
 
-    <button
-      type="button"
-      className="
+            <button
+              type="button"
+              className="
         rounded-full
-        bg-[#8b183d]
         px-7 py-3
         text-sm
         font-semibold
-        text-white
         transition-all
         duration-300
-        hover:bg-[#721530]
-        hover:shadow-lg
         active:scale-95
+         text-white
+                  bg-pink-600
+              hover:bg-[#66BC9E]
+              hover:scale-105
+                  hover:text-black
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
       "
-    >
-      Ask Question
-    </button>
-  </div>
-</div>
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+
+
+          </motion.div>
+        )}
+
+
+
+        {/* send us quesiton  */}
+
 
       </div>
     </section>

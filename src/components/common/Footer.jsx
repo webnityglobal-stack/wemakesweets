@@ -8,6 +8,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { useState } from "react";
+import Wave from "../Wave";
 const quickLinks = [
   "Home",
   "Our Story",
@@ -30,7 +31,8 @@ const toggleSection = (section) => {
   setOpenSection(openSection === section ? null : section);
 };
   return (
-    <footer className="relative overflow-hidden bg-[#5a0115] text-[#f9e4bf]">
+    // <footer className="relative overflow-hidden bg-[#5a0115] text-[#f9e4bf]">
+    <footer className="relative z-0 -mt-[1px] overflow-hidden bg-[#5a0115] text-[#f9e4bf]">
 
       {/* Decorative Background */}
       <div className="absolute inset-0 opacity-[0.06]">
@@ -39,16 +41,19 @@ const toggleSection = (section) => {
       </div>
 
       {/* Wave */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
+      {/* <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180"> */}
+      <div className="absolute -top-[3px] left-0 w-full overflow-hidden leading-none rotate-180">
   <svg
     viewBox="0 0 1200 120"
     preserveAspectRatio="none"
     className="relative block h-16 md:h-24 w-full fill-[#f5ebda]"
   >
-    {/* <path d="M0,30 C220,65 420,68 600,40 C780,12 980,10 1200,30 V120 H0 Z" /> */}
+   \
     <path d="M0,28 C220,68 420,72 600,40 C780,8 980,6 1200,28 V120 H0 Z" />
   </svg>
 </div>
+ 
+
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-26 pb-4">
 

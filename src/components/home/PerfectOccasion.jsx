@@ -658,165 +658,329 @@ const PerfectOccasion = () => {
 
             {/* =================================================OCCASION CARDS================================================= */}
 
-            <div
-              className="mt-4 grid grid-cols-2 gap-2 sm:mt-6 sm:gap-3">
-              {occasions.map((occasion) => {
-                const Icon = occasion.icon;
+        
 
-                return (
-                  <Link
-                    key={occasion.id}
-                    to={`/occasion/${occasion.id}`}
-                    className="
-          group
-          relative
-          overflow-hidden
-          rounded-lg
-          border
-          border-[#d9bd8b]/45
-          bg-white/60
-          px-2
-          py-2
-          transition-all
-          duration-300
-          hover:-translate-y-1
-          hover:border-[#c99b48]
-          hover:bg-white/90
-          hover:shadow-[0_6px_15px_rgba(90,55,20,0.10)]
-          sm:rounded-xl
-          sm:px-3
-          sm:py-2.5
-          
+
+{/* =================================================
+    SURAT SWEET HERITAGE
+================================================= */}
+
+<div className="mt-5 sm:mt-7">
+
+  {/* Main Story */}
+  <div
+    className="
+      rounded-2xl
+      border border-[#d9bd8b]/45
+      bg-white/45
+      px-4
+      py-4
+      sm:rounded-3xl
+      sm:px-6
+      sm:py-5
+    "
+  >
+    <div className="flex items-start gap-3">
+
+      {/* Icon */}
+      <div
+        className="
+          flex
+          h-9
+          w-9
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+          bg-pink-600
+          text-white
+          sm:h-11
+          sm:w-11
         "
-                  >
+      >
+        <Landmark
+          size={17}
+          strokeWidth={1.5}
+          className="sm:h-5 sm:w-5"
+        />
+      </div>
 
-                    {/* Decorative background */}
+      {/* Content */}
+      <div className="min-w-0">
 
-                    {/* <div
-                      className="
-            pointer-events-none
-            absolute
-            -right-3
-            -top-3
-            h-10
-            w-10
-            rounded-full
-            bg-[#f0dcae]/30
-            transition-transform
-            duration-500
-            group-hover:scale-[2]
+        <h3
+          className="
+            font-serif
+            text-sm
+            font-semibold
+            text-[#603917]
+            sm:text-lg
           "
-                    /> */}
+        >
+          Born in Surat, Crafted with Tradition
+        </h3>
 
-                    {/* CONTENT */}
-
-                    <div
-                      className="
-            relative
-            z-10
-            flex
-            items-center
-            gap-2
-            
+        <p
+          className="
+            mt-1.5
+            text-[10px]
+            leading-5
+            text-[#70533a]
+            sm:text-sm
+            sm:leading-6
           "
-                    >
+        >
+          Our sweet journey began in Surat — a city known for its
+          rich food culture, warmth and love for traditional flavours.
+          We bring that heritage into every bite we create.
+        </p>
 
-                      {/* ICON */}
+      </div>
+    </div>
+  </div>
 
-                      <div
-                        className="
-              flex
-              h-7
-              w-7
-              shrink-0
-              items-center
-              justify-center
-              rounded-full
-              bg-pink-600
-              transition-all
-              duration-300
-              group-hover:scale-105
-              sm:h-9
-              sm:w-9
-              hover:bg-[#60b396]
-              
-            "
-                      >
-                        <Icon
-                          size={13}
-                          strokeWidth={1.5}
-                          className=" hover:text-black text-white sm:h-4 sm:w-4"
-                        />
-                      </div>
 
-                      {/* TEXT ON RIGHT */}
+  {/* Heritage Highlights */}
+  {/* <div
+    className="
+      mt-3
+      grid
+      grid-cols-1
+      gap-2.5
+      sm:mt-4
+      sm:grid-cols-3
+      sm:gap-3
+    "
+  > */}
+<div
+  className="
+    mt-3
+    flex
+    flex-col
+    items-center
+    gap-2.5
+    sm:mt-4
+    sm:grid
+    sm:grid-cols-3
+    sm:gap-3
+  "
+>
 
-                      <div className="min-w-0 flex-1">
 
-                        <h3
-                          className="
-                font-serif
-                text-[10px]
-                font-semibold
-                leading-tight
-                text-[#603917]
-                sm:text-sm
-              "
-                        >
-                          {occasion.title}
-                        </h3>
+    {/* Highlight 1 */}
+    <div
+      className="
+        flex
+        justify-center
+        items-center
+        gap-2.5
+        rounded-xl
+        border
+        border-[#d9bd8b]/35
+        bg-white/35
+        px-3
+        py-2.5
+        sm:flex-col
+        sm:items-start
+        sm:gap-2
+        sm:px-3.5
+        sm:py-3
+      "
+    >
+      <div
+        className="
+          flex
+          h-7
+          w-7
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+          bg-[#603917]/10
+          text-[#9a7134]
+        "
+      >
+        <Landmark size={14} />
+      </div>
 
-                        {/* Description hidden on mobile */}
+      <div>
+        <h4
+          className="
+            font-serif
+            text-[10px]
+            font-semibold
+            text-[#603917]
+            sm:text-xs
+          "
+        >
+          Surat Heritage
+        </h4>
 
-                        <p
-                          className="
-                mt-0.5
-                hidden
-                text-[10px]
-                leading-4
-                text-[#594532]
-                sm:block
-              "
-                        >
-                          {occasion.description}
-                        </p>
+        <p className="mt-0.5 text-[9px] leading-4 text-[#765b42] sm:text-[10px]">
+          Inspired by the city we call home.
+        </p>
+      </div>
+    </div>
 
-                        {/* Explore */}
 
-                        <div
-                          className="
-                mt-0.5
-                flex
-                items-center
-                gap-0.5
-                text-[6px]
-                font-bold
-                uppercase
-                tracking-[0.06em]
-                text-[#9a7134]
-                sm:text-[9px]
-              "
-                        >
-                          Explore
+    {/* Highlight 2 */}
+    <div
+      className="
+        flex
+        items-center
+        justify-center
+        gap-2.5
+        rounded-xl
+        border
+        border-[#d9bd8b]/35
+        bg-white/35
+        px-3
+        py-2.5
+        sm:flex-col
+        sm:items-start
+        sm:gap-2
+        sm:px-3.5
+        sm:py-3
+      "
+    >
+      <div
+        className="
+          flex
+          h-7
+          w-7
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+          bg-[#603917]/10
+          text-[#9a7134]
+        "
+      >
+        <Gift size={14} />
+      </div>
 
-                          <ArrowRight
-                            size={8}
-                            className="
-                  transition-transform
-                  duration-300
-                  group-hover:translate-x-1
-                "
-                          />
-                        </div>
+      <div>
+        <h4
+          className="
+            font-serif
+            text-[10px]
+            font-semibold
+            text-[#603917]
+            sm:text-xs
+          "
+        >
+          Our Sweet Legacy
+        </h4>
 
-                      </div>
+        <p className="mt-0.5 text-[9px] leading-4 text-[#765b42] sm:text-[10px]">
+          Journey of flavours rooted in Surat.
+        </p>
+      </div>
+    </div>
 
-                    </div>
 
-                  </Link>
-                );
-              })}
-            </div>
+    {/* Highlight 3 */}
+    <div
+      className="
+        flex
+        justify-center
+        items-center
+        gap-2.5
+        rounded-xl
+        border
+        border-[#d9bd8b]/35
+        bg-white/35
+        px-3
+        py-2.5
+        sm:flex-col
+        sm:items-start
+        sm:gap-2
+        sm:px-3.5
+        sm:py-3
+      "
+    >
+      <div
+        className="
+          flex
+          h-7
+          w-7
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+          bg-[#603917]/10
+          text-[#9a7134]
+        "
+      >
+        <Ship size={14} />
+      </div>
+
+      <div>
+        <h4
+          className="
+            font-serif
+            text-[10px]
+            font-semibold
+            text-[#603917]
+            sm:text-xs
+          "
+        >
+          From Surat to You
+        </h4>
+
+        <p className="mt-0.5 text-[9px] leading-4 text-[#765b42] sm:text-[10px]">
+          Carry our flavours beyond the city.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+
+  {/* Bottom Quote */}
+  <div
+    className="
+      mt-4
+      flex
+      items-center
+      justify-center
+      gap-2
+      rounded-xl
+      border
+      border-[#c99b48]/25
+      bg-[#f5ead7]/60
+      px-3
+      py-3
+      sm:mt-5
+      sm:py-3.5
+      
+    "
+  >
+    <span className="h-px w-5 bg-[#c99b48] sm:w-8" />
+
+    <p
+      className="
+        text-center
+        font-serif
+        text-[10px]
+        italic
+        text-[#603917]
+        sm:text-xs
+      "
+    >
+      A little piece of Surat in every sweet.
+    </p>
+
+    <span className="h-px w-5 bg-[#c99b48] sm:w-8" />
+  </div>
+
+</div>
+
+
+
+
+
+
 
 
             {/* BOTTOM STATEMENT */}
@@ -834,43 +998,6 @@ const PerfectOccasion = () => {
               "
             >
 
-              <div
-                className="
-                  flex
-                  h-7
-                  w-7
-                  shrink-0
-                  items-center
-                  justify-center
-                  rounded-full
-                  bg-pink-600
-                  hover:bg-[#60b396]
-                  hover:text-black
-                  sm:h-9
-                  sm:w-9
-                "
-              >
-
-                <Gift
-                  size={13}
-                  className="text-white hover:text-black "
-                />
-
-              </div>
-
-
-              <p
-                className="
-                  font-serif
-                  text-[10px]
-                  italic
-                  text-[#603917]
-                  sm:text-sm
-                "
-              >
-                Where every bite tells a story.
-              </p>
-
             </div>
 
 
@@ -882,7 +1009,7 @@ const PerfectOccasion = () => {
                 flex
                 justify-center
                 sm:mt-6
-                lg:justify-start
+                
               "
             >
 
