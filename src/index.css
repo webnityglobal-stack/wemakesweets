@@ -208,3 +208,129 @@ body {
 .animate-occasion-slider {
   animation: occasion-slider 30s infinite ease-in-out;
 }
+
+
+
+/* =========================================
+   ICON PAGE MOBILE HORIZONTAL SLIDER
+========================================= */
+
+.iconpage-slider-wrapper {
+  width: 100%;
+  overflow: hidden;
+  padding-top: 16px;
+  background: #f5ebda;
+}
+
+.iconpage-slider-track {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: max-content;
+  animation: iconpageSliderMove 18s linear infinite;
+  will-change: transform;
+}
+
+.iconpage-slider-item {
+  flex: 0 0 160px;
+  width: 160px;
+  height: 140px;
+  overflow: hidden;
+}
+
+.iconpage-slider-item img {
+  display: block;
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Continuous horizontal movement */
+@keyframes iconpageSliderMove {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Mobile only */
+@media (max-width: 1023px) {
+  .iconpage-slider-wrapper {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .iconpage-slider-track {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+  }
+
+  .iconpage-slider-item {
+    flex: 0 0 160px;
+    min-width: 160px;
+    max-width: 160px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .iconpage-slider-item {
+    flex: 0 0 150px;
+    min-width: 150px;
+    max-width: 150px;
+  }
+}
+
+/* =====================================
+   ICON PAGE MOBILE SLIDER
+===================================== */
+/* =========================================
+   MOBILE FEATURE SLIDER
+========================================= */
+
+.mobile-feature-slider {
+  display: flex;
+  width: 100%;
+  transition: transform 0.6s ease-in-out;
+}
+
+.mobile-feature-slide {
+  min-width: 100%;
+  flex-shrink: 0;
+}
+
+.mobile-slider-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: #d7aebc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mobile-slider-dot.active {
+  width: 24px;
+  background: #8b183d;
+}
+
+
+/* =========================================
+   DESKTOP - KEEP ORIGINAL GRID
+========================================= */
+
+@media (min-width: 1024px) {
+  .mobile-feature-slider,
+  .mobile-slider-dot {
+    display: none;
+  }
+}

@@ -460,7 +460,7 @@ const toggleSection = (section) => {
           Decorative Corner
       ================================ */}
 
-      <div className="pointer-events-none absolute left-0 bottom-0 h-60 w-60 opacity-10">
+      {/* <div className="pointer-events-none absolute left-0 bottom-0 h-60 w-60 opacity-10">
 
         <svg
           viewBox="0 0 200 200"
@@ -469,9 +469,9 @@ const toggleSection = (section) => {
           <path d="M100 0C80 40 40 80 0 100c40 20 80 60 100 100 20-40 60-80 100-100-40-20-80-60-100-100z" />
         </svg>
 
-      </div>
+      </div> */}
 
-      <div className="pointer-events-none absolute right-0 top-20 h-60 w-60 rotate-180 opacity-10">
+      {/* <div className="pointer-events-none absolute right-0 top-20 h-60 w-60 rotate-180 opacity-10">
 
         <svg
           viewBox="0 0 200 200"
@@ -480,7 +480,7 @@ const toggleSection = (section) => {
           <path d="M100 0C80 40 40 80 0 100c40 20 80 60 100 100 20-40 60-80 100-100-40-20-80-60-100-100z" />
         </svg>
 
-      </div>
+      </div> */}
 
     </footer>
   );

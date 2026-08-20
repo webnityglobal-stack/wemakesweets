@@ -74,15 +74,6 @@ export default function Boxes() {
 
       {/* Fireworks */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* <FireworksBackground
-          population={1}
-          color={["#E8B357", "#810c26", "#572340"]}
-          fireworkSpeed={{ min: 5, max: 8 }}
-          fireworkSize={{ min: 2, max: 3 }}
-          particleSpeed={{ min: 2, max: 5 }}
-          particleSize={{ min: 1, max: 2 }}
-          className="h-full w-full"
-        /> */}
       </div>
 
       <div className="relative z-10 max-w-[1500px] mx-auto px-4 md:px-6">

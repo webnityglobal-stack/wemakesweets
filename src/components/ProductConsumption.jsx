@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { FireworksBackground } from "./animate-ui/components/backgrounds/fireworks";
 import ScrollWavyUnderline from "./common/ScrollWavyUnderline";
+import Wave from "./Wave";
 
 const occasions = [
   {
@@ -220,23 +221,12 @@ const OccasionCard = ({ item }) => {
 
 const ProductConsumption = () => {
   return (
-    <section className="relative overflow-hidden md:px-8 px-4 py-4 md:py-24 bg-[#f9e4bf]">
+    <section className="relative overflow-hidden md:px-8 px-4 py-18 md:py-24 bg-[#f9e4bf]">
 
-
-  {/* ================= TOP WAVE ================= */}
-  <div className="absolute top-0 left-0 z-0 w-full overflow-hidden leading-none rotate-180">
-    <svg
-      viewBox="0 0 1200 120"
-      preserveAspectRatio="none"
-      className="block h-16 w-full md:h-24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M0,28 C220,68 420,72 600,40 C780,8 980,6 1200,28 V120 H0 Z"
-        fill="#f5ebda"
-      />
-    </svg>
-  </div>
+     <Wave
+    position="top"
+    fill="#f5ebda"
+  />
 
   {/* ================= CONTENT ================= */}
   <div className="relative z-10 max-w-[1500px] mx-auto px-4 md:px-8">

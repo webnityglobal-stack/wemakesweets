@@ -194,58 +194,62 @@ function Navbar() {
       </nav>
 
       {/* Mobile Menu */}
-      {open && (
-        <div className="lg:hidden rounded-3xl bg-[#f9e4bf] shadow-xl p-6 mb-4">
+    {/* Mobile Menu */}
+{open && (
+  <div className="lg:hidden rounded-3xl bg-[#f9e4bf] shadow-xl p-6 mb-4">
 
-          <ul className="space-y-4">
-            {navLinks.map((item) => (
-              <li key={item.name}>
-                <a
-                  href={item.path}
-                  onClick={() => setOpen(false)}
-                  className="block text-center py-3 rounded-full text-white font-medium transition"
-                  style={{
-                    backgroundColor: item.color,
-                  }}
-                >
-                  {item.name}
-                </a>
-              </li>
-            ))}
-          </ul>
+    {/* Mobile Icons - TOP */}
+    <div className="flex justify-center gap-8 mb-6">
 
-    <div className="flex justify-center gap-8 mt-8">
+      {/* Search */}
+      {/* <Search
+        size={23}
+        className="cursor-pointer text-[#572340] transition-all duration-300 hover:text-[#603917] hover:scale-110"
+      /> */}
 
-  {/* Search */}
-  <Search
-    size={23}
-    className="cursor-pointer text-[#572340] transition-all duration-300 hover:text-[#603917] hover:scale-110"
-  />
+      {/* User */}
+      <User
+        size={23}
+        className="cursor-pointer text-[#603917] transition-all duration-300 hover:text-[#3e5a2c] hover:scale-110"
+      />
 
-  {/* User */}
-  <User
-    size={23}
-    className="cursor-pointer text-[#603917] transition-all duration-300 hover:text-[#3e5a2c] hover:scale-110"
-  />
+      {/* Cart */}
+      <div className="relative cursor-pointer group">
+        <ShoppingCart
+          size={24}
+          className="text-[#3e5a2c] transition-all duration-300 group-hover:text-[#164984] group-hover:scale-110"
+        />
 
-  {/* Cart */}
-  <div className="relative cursor-pointer group">
-    <ShoppingCart
-      size={24}
-      className="text-[#3e5a2c] transition-all duration-300 group-hover:text-[#164984] group-hover:scale-110"
-    />
+        <span
+          className="absolute -top-2 -right-2 h-5 w-5 rounded-full text-[10px] text-white flex items-center justify-center transition-all duration-300 group-hover:bg-[#572340]"
+          style={{ backgroundColor: "#8b183d" }}
+        >
+          0
+        </span>
+      </div>
 
-    <span
-      className="absolute -top-2 -right-2 h-5 w-5 rounded-full text-[10px] text-white flex items-center justify-center transition-all duration-300 group-hover:bg-[#572340]"
-      style={{ backgroundColor: "#8b183d" }}
-    >
-      0
-    </span>
+    </div>
+
+    {/* Mobile Navigation */}
+    <ul className="space-y-4">
+      {navLinks.map((item) => (
+        <li key={item.name}>
+          <a
+            href={item.path}
+            onClick={() => setOpen(false)}
+            className="block text-center py-3 rounded-full text-white font-medium transition"
+            style={{
+              backgroundColor: item.color,
+            }}
+          >
+            {item.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+
   </div>
-
-</div>
-        </div>
-      )}
+)}
     </header>
   );
 }

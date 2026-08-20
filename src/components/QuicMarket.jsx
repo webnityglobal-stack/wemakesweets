@@ -240,32 +240,33 @@
 
 
 import { useEffect, useState } from "react";
-import Wave from "../Wave";
+import Wave from "./Wave";
+
 
 const features = [
   {
-    image: "/icons/MadeInIndia.webp",
-    title: "Made in India",
+    image: "/quickMarket/amazon.png",
+    title: "Amazon",
   },
   {
-    image: "/icons/customers.webp",
-    title: "Happy Customers",
+    image: "/quickMarket/blinkit.png",
+    title: "Blinkit",
   },
   {
-    image: "/icons/labTested.webp",
-    title: "Lab Tested",
+    image: "/quickMarket/flipkart.webp",
+    title: "Flipkart",
   },
   {
-    image: "/icons/quality.webp",
-    title: "Quality Check",
+    image: "/quickMarket/instamart.png",
+    title: "Instamart",
   },
   {
-    image: "/icons/fssai.webp",
-    title: "FSSAI Certified",
+    image: "/quickMarket/zepto.png",
+    title: "Zepto",
   },
   {
-    image: "/icons/palmTree.webp",
-    title: "No Palm Oil",
+    image: "/quickMarket/jioMart.png",
+    title: "Jio Mart",
   },
 ];
 
@@ -280,7 +281,7 @@ for (let i = 0; i < features.length; i += 2) {
 // 1+2 -> 3+4 -> 5+6 -> 1+2
 mobileSlides.push(mobileSlides[0]);
 
-const IconPage = () => {
+const QucikMarket = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [enableTransition, setEnableTransition] = useState(true);
 
@@ -421,4 +422,4 @@ const IconPage = () => {
   );
 };
 
-export default IconPage;
+export default QucikMarket;

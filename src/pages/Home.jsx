@@ -1,14 +1,7 @@
 import React from 'react'
-import Hero from '../components/home/Hero'
 import HeroContent from '../components/home/HeroContent'
-import OurStory from '../components/home/OurStory'
 import PerfectOccasion from '../components/home/PerfectOccasion'
 import PremiumSlider from '../components/home/premiumslider/PremiumSlider'
-import ProductSlider from '../components/home/productSlider/ProductSlider'
-import InspiredByHeritage from '../components/home/InspiredByHeritage'
-import OurProduct from '../components/home/OurProduct'
-import GatewayOfIndia from '../components/home/GatewayOfIndia'
-import HowrahBridge from '../components/home/HowrahBridge'
 import ProductConsumption from '../components/ProductConsumption'
 import products from '../constants/productData'
 import ProductGrid from '../components/products/ProductGrid'
@@ -17,11 +10,11 @@ import Testimonials from '../components/testimonials/Testimonials'
 import ReelsSection from '../components/reels/ReelsSection'
 import FAQPage from '../components/home/FAQ/FAQPage'
 import IconPage from '../components/our-story/IconPage'
-import SplitText from '@/components/SplitText'
 import Boxes from '@/components/home/Boxes'
 import ScrollWavyUnderline from '@/components/common/ScrollWavyUnderline'
 import OurStoryVideo from '@/components/our-story/OurStoryVideo'
 import ProductCard from '@/components/products/ProductCard'
+import QucikMarket from '@/components/QuicMarket'
 
 const Home = () => {
   return (
@@ -34,7 +27,12 @@ const Home = () => {
       <ProductConsumption />
 
       <div>
-        <section className="bg-[#f5ebda] py-4 md:px-[24px]">
+        <section className="relative bg-[#f5ebda] py-4 md:px-[24px]">
+     {/* <Wave
+    position="bottom"
+    fill="#f9e4bf"
+  /> */}
+
           <div className="container mx-auto px-4 sm:px-4 lg:px-4">
 
             {/* Heading */}
@@ -56,71 +54,71 @@ const Home = () => {
 
 
 
-{/* Products */}
-{/* Products */}
-<div className="relative">
+            {/* Products */}
+            {/* Products */}
+            <div className="relative">
 
-  {/* Desktop Slider */}
-  <div
-    id="best-selling-slider"
-    className="hidden lg:block overflow-hidden"
-  >
-    <div
-      id="best-selling-track"
-      className="flex gap-5 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-    >
-      {products.map((product) => (
-        <div
-          key={product._id}
-          className="shrink-0 w-[calc((100%-60px)/4)]"
-        >
-          <ProductCard product={product} />
-        </div>
-      ))}
-    </div>
-  </div>
+              {/* Desktop Slider */}
+              <div
+                id="best-selling-slider"
+                className="hidden lg:block overflow-hidden"
+              >
+                <div
+                  id="best-selling-track"
+                  className="flex gap-5 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                >
+                  {products.map((product) => (
+                    <div
+                      key={product._id}
+                      className="shrink-0 w-[calc((100%-60px)/4)]"
+                    >
+                      <ProductCard product={product} />
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-  {/* Mobile */}
-  <div className="lg:hidden">
-    <ProductGrid products={products.slice(0, 4)} />
-  </div>
+              {/* Mobile */}
+              <div className="lg:hidden">
+                <ProductGrid products={products.slice(0, 4)} />
+              </div>
 
-  {/* Desktop Buttons */}
-  <div className="hidden lg:flex absolute -top-16 right-0 gap-2">
+              {/* Desktop Buttons */}
+              <div className="hidden lg:flex absolute -top-16 right-0 gap-2">
 
-    <button
-      type="button"
-      onClick={() =>
-        document
-          .getElementById("best-selling-track")
-          ?.scrollBy({
-            left: -350,
-            behavior: "smooth",
-          })
-      }
-      className="flex h-10 w-10 items-center justify-center rounded-full bg-[#572340] text-white shadow-md transition hover:scale-105"
-    >
-      ←
-    </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    document
+                      .getElementById("best-selling-track")
+                      ?.scrollBy({
+                        left: -350,
+                        behavior: "smooth",
+                      })
+                  }
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#572340] text-white shadow-md transition hover:scale-105"
+                >
+                  ←
+                </button>
 
-    <button
-      type="button"
-      onClick={() =>
-        document
-          .getElementById("best-selling-track")
-          ?.scrollBy({
-            left: 350,
-            behavior: "smooth",
-          })
-      }
-      className="flex h-10 w-10 items-center justify-center rounded-full bg-[#572340] text-white shadow-md transition hover:scale-105"
-    >
-      →
-    </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    document
+                      .getElementById("best-selling-track")
+                      ?.scrollBy({
+                        left: 350,
+                        behavior: "smooth",
+                      })
+                  }
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#572340] text-white shadow-md transition hover:scale-105"
+                >
+                  →
+                </button>
 
-  </div>
+              </div>
 
-</div>
+            </div>
 
 
 
@@ -150,6 +148,7 @@ const Home = () => {
       <ReelsSection />
       <IconPage />
       <OurStoryVideo />
+      <QucikMarket/>
       <Testimonials />
       <FAQPage />
     </div>
