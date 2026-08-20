@@ -240,7 +240,6 @@
 
 
 import { useEffect, useState } from "react";
-import Wave from "../Wave";
 
 const features = [
   {
@@ -313,9 +312,7 @@ const IconPage = () => {
   }, [currentSlide]);
 
   return (
-    <section className="relative bg-[#f5ebda] py-24">
-      <Wave position="bottom" fill="#f5ebda" />
-      <Wave position="top" fill="#f5ebda" />
+    <section className="relative bg-[#f5ebda] py-6">
 
       <div className="mx-auto max-w-7xl px-6">
 

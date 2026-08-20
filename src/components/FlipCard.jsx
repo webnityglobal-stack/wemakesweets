@@ -118,14 +118,17 @@ const FlipCard = ({ data }) => {
               mt-6
               self-start
               rounded-full
-              bg-[#f9e4bf]
               px-5
               py-2
               text-sm
               font-semibold
               text-[#552b12]
               transition
+               bg-pink-600
+              hover:bg-[#66BC9E]
               hover:scale-105
+                  hover:text-black
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
             "
           >
             View Product

@@ -1,196 +1,3 @@
-// import {
-//   Gift,
-//   BriefcaseBusiness,
-//   Flower2,
-//   GiftIcon,
-// } from "lucide-react";
-// import { Link } from "react-router-dom";
-// import { TextGenerateEffect } from "../ui/text-generate-effect";
-// import { FireworksBackground } from "../animate-ui/components/backgrounds/fireworks";
-
-// const occasions = [
-//   {
-//     id: 1,
-//     title: "Festive\nGifting",
-//     icon: Gift,
-//   },
-//   {
-//     id: 2,
-//     title: "Corporate\nGifting",
-//     icon: BriefcaseBusiness,
-//   },
-//   {
-//     id: 3,
-//     title: "Wedding\nGifting",
-//     icon: Flower2,
-//   },
-//   {
-//     id: 4,
-//     title: "Personal\nGifting",
-//     icon: GiftIcon,
-//   },
-// ];
-
-// const PerfectOccasion = () => {
-// const word1 =
-//  "Delight your loved ones with our handcrafted premium dates and nut gift boxes. Whether it's a festival, wedding, corporate event or a personal celebration, our thoughtfully curated collections make every moment memorable with elegance";
-
-// const word2 = "and authentic taste.";
-
-//   return (
-//     // <section className="relative w-full overflow-hidden bg-[#f9e4bf] lg:min-h-[650px]">
-//   <section className="relative w-full overflow-hidden bg-[#f2e7d5] lg:min-h-[500px]">
-
-//   {/* Fireworks */}
-//   <div className="absolute inset-0 z-20 pointer-events-none">
-//     <FireworksBackground
-//       population={1}
-//       color={["#E8B357", "#810c26", "#572340"]}
-//       fireworkSpeed={{ min: 4, max: 7 }}
-//       fireworkSize={{ min: 2, max: 4 }}
-//       particleSpeed={{ min: 2, max: 6 }}
-//       particleSize={{ min: 1, max: 3 }}
-//       className="h-full w-full"
-//     />
-//   </div>
-
-//  {/* Left Background Image */}
-// <img
-//   src="/perfectForOcassionBackground.png"
-//   alt=""
-//   className="
-//     absolute
-//     left-0
-//     top-0
-//     z-0
-//     hidden
-//     h-full
-//     w-1/2
-//     object-cover
-//     object-left
-//     lg:block
-//   "
-// />
-
-// {/* Right Main Image */}
-// <img
-//   src="/perfectForOcassion.png"
-//   alt="Perfect For Every Occasion"
-//   className="
-//     absolute
-//     right-0
-//     top-0
-//     z-10
-//     hiddenmport {
-//   Landmark,
-//   Ship,
-//   Crown,
-//   Globe2,
-//   Gem,
-//   ArrowRight,
-// } from "lucide-react";
-
-//     h-full
-//     w-1/2
-//     object-cover
-//     object-right
-//     lg:block
-//   "
-// />
-
-//       {/* Content */}
-//       {/* <div className="relative flex items-center py-10 md:pr-24 lg:absolute lg:inset-0 lg:py-0"> */}
-//       <div className="relative flex items-center py-10 pb-16 md:pr-24 lg:absolute lg:inset-0 lg:py-0">
-//         <div className="mx-auto w-full max-w-7xl">
-
-//           <div className="relative w-full overflow-hidden rounded-2xl p- sm:p-8 lg:w-[52%] lg:p-">
-
-//             {/* Background Image */}
-//             {/* <img
-//               src="/perfectForOcassion2.webp"
-//               alt=""
-//               className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover opacity-10"
-//             /> */}
-
-//             {/* Cream Overlay */}
-//             <div className="absolute inset-0  " />
-
-//             {/* Content */}
-//             <div className="relative  md:pl-12 z-10">
-
-//               <h2 className="text-center  font-serif text-2xl font-bold uppercase text-[#603917] sm:text-3xl lg:text-left lg:text-2xl">
-//                 Perfect For Every Occasions
-//               </h2>
-
-//               <p className="mt-5 max-w-xl text-center text-sm leading-7 text-[#3e5a2c] sm:text-base lg:text-left">
-//                 <TextGenerateEffect className="mt-5 max-w-xl text-center text-sm leading-7  text-[#3e5a2c] sm:text-base lg:text-left" words={word1}/>
-//               </p>
-
-//               {/* Icons */}
-//               <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-4">
-//                 {occasions.map((item, idx) => {
-//                   const Icon = item.icon;
-
-//                   return (
-//                     <>
-//                       <div
-//                         key={item.id}
-//                         className="group md:pr-44  flex flex-col items-center transition-all duration-300 hover:-translate-y-2"
-//                       >
-//                         <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#f2ede1] shadow-md transition-all duration-300 group-hover:bg-[#E35A7E] group-hover:scale-110">
-//                           <Icon
-//                             size={28}
-//                             className="text-[#603917] group-hover:text-white"
-//                           />
-//                         </div>
-
-//                         <p className="whitespace-pre-line text-center text-sm md:text-[14px] font-medium text-[#603917]">
-//                           {item.title}
-//                         </p>
-//                       </div>
-
-//                       {/* Mobile-only image between the two icon rows */}
-//                       {idx === 1 && (
-//                         <div
-//                           key="mobile-boxes-image"
-//                           className="col-span-2 flex justify-center py-2 sm:hidden"
-//                         >
-//                           <img
-//                             src="/perfectForOcassionMobile.webp"
-//                             alt="Date and Anjeer Nut Cubes Gift Boxes"
-//                             className="w-full max-w-[280px]"
-//                           />
-//                         </div>
-//                       )}
-//                     </>
-//                   );
-//                 })}
-//               </div>
-
-//               {/* Button */}
-//               {/* <div className="mt-8 md:pl-34 flex justify-center lg:justify-start"> */}
-//               <div className="mt-8 mb-2 md:pl-34 flex justify-center lg:justify-start">
-//                <Link to='/products' >
-//                 <button className="rounded-full bg-pink-600 px-4 py-2 md:px-8  md:py-3 font-medium text-white transition-all duration-300 hover:bg-[#60b396] hover:shadow-lg shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
-//                   Explore Collection
-//                 </button>
-//                </Link>
-//               </div>
-
-//             </div>
-
-//           </div>
-
-//         </div>
-//       </div>
-
-//     </section>
-//   );
-// };
-
-// export default PerfectOccasion;
-
-
 import {
   Gift,
   BriefcaseBusiness,
@@ -336,9 +143,6 @@ const PerfectOccasion = () => {
                   pointer-events-none
                   absolute
                   inset-2
-                  rounded-[16px]
-                  border
-                  border-[#e5b85c]/60
                   sm:inset-4
                   sm:rounded-[22px]
                   lg:inset-5
@@ -353,7 +157,7 @@ const PerfectOccasion = () => {
                 RIGHT OF IMAGE ON MOBILE
             ================================================= */}
 
-            <div
+            {/* <div
               className="
                 relative
                 z-10
@@ -371,7 +175,27 @@ const PerfectOccasion = () => {
                 lg:px-5
                 xl:px-7
               "
-            >
+            > */}
+            <div
+  className="
+    relative
+    z-10
+    flex
+    min-w-0
+    flex-1
+    flex-col
+    justify-center
+    bg-[#f5ead7]
+    pl-8
+    pr-3
+    py-4
+    sm:px-5
+    sm:py-6
+    lg:-ml-3
+    lg:px-5
+    xl:px-7
+  "
+>
 
               {/* Small heading */}
 
@@ -380,7 +204,7 @@ const PerfectOccasion = () => {
                   flex
                   items-center
                   gap-1.5
-                  text-[7px]
+                  text-[9px]
                   font-semibold
                   uppercase
                   tracking-[0.12em]
@@ -392,7 +216,7 @@ const PerfectOccasion = () => {
               >
 
                 <Landmark
-                  size={10}
+                  size={12}
                   className="sm:h-3.5 sm:w-3.5"
                 />
 
@@ -407,7 +231,7 @@ const PerfectOccasion = () => {
                 className="
                   mt-1
                   font-serif
-                  text-2xl
+                  text-3xl
                   font-medium
                   tracking-wide
                   text-[#603917]
@@ -440,7 +264,7 @@ const PerfectOccasion = () => {
                 className="
                   mt-2
                   font-serif
-                  text-[9px]
+                  text-[13px]
                   leading-4
                   text-[#70533a]
                   sm:mt-4
@@ -628,18 +452,18 @@ const PerfectOccasion = () => {
               >
 
                 <Ship
-                  size={12}
+                  size={13}
                   className="text-[#9a7134] sm:h-4 sm:w-4"
                 />
 
                 <span
                   className="
-                    text-[6px]
+                    text-[8px]
                     font-medium
                     uppercase
                     tracking-[0.1em]
                     text-[#806044]
-                    sm:text-[8px]
+                    sm:text-[12px]
                     sm:tracking-[0.13em]
                   "
                 >
@@ -673,8 +497,8 @@ const PerfectOccasion = () => {
 
           {/* Decorative circle */}
 
-          <div
-            className="
+          {/* <div
+              className="
               pointer-events-none
               absolute
               -right-16
@@ -691,7 +515,7 @@ const PerfectOccasion = () => {
               lg:h-80
               lg:w-80
             "
-          />
+          /> */}
 
 
           {/* RIGHT CONTENT */}
@@ -739,7 +563,7 @@ const PerfectOccasion = () => {
                     sm:tracking-[0.25em]
                   "
                 >
-                  Made For Every Moment
+                  CRAFTED WITH HERITAGE
                 </span>
 
                 <span
@@ -769,14 +593,16 @@ const PerfectOccasion = () => {
                   sm:text-4xl
                   md:text-5xl
                   lg:text-4xl
-                  xl:text-5xl
+                  xl:text-4xl
                 "
               >
-                The Perfect Gift
+                Timeless Flavours,
+
+                {/* Timeless Flavours, Beautifully Crafted */}
                 <br />
 
                 <span className="text-[#9b1839]">
-                  For Every Occasion
+                  Beautifully Crafted
                 </span>
               </h2>
 
@@ -823,8 +649,8 @@ const PerfectOccasion = () => {
                   lg:text-left
                 "
               >
-                Thoughtfully crafted gifts for every celebration,
-                from joyful festivals to cherished personal moments.
+                {/* From time-honoured recipes to carefully selected ingredients, every sweet is crafted to bring you an authentic taste of Indian tradition. */}
+                Authentic Indian flavours, crafted with love and care
               </p>
 
             </div>
@@ -860,12 +686,13 @@ const PerfectOccasion = () => {
           sm:rounded-xl
           sm:px-3
           sm:py-2.5
+          
         "
                   >
 
                     {/* Decorative background */}
 
-                    <div
+                    {/* <div
                       className="
             pointer-events-none
             absolute
@@ -879,7 +706,7 @@ const PerfectOccasion = () => {
             duration-500
             group-hover:scale-[2]
           "
-                    />
+                    /> */}
 
                     {/* CONTENT */}
 
@@ -890,6 +717,7 @@ const PerfectOccasion = () => {
             flex
             items-center
             gap-2
+            
           "
                     >
 
@@ -904,21 +732,20 @@ const PerfectOccasion = () => {
               items-center
               justify-center
               rounded-full
-              border
-              border-[#c99b48]
-              bg-[#8e1837]
+              bg-pink-600
               transition-all
               duration-300
               group-hover:scale-105
-              group-hover:bg-[#603917]
               sm:h-9
               sm:w-9
+              hover:bg-[#60b396]
+              
             "
                       >
                         <Icon
                           size={13}
                           strokeWidth={1.5}
-                          className="text-[#f4d38a] sm:h-4 sm:w-4"
+                          className=" hover:text-black text-white sm:h-4 sm:w-4"
                         />
                       </div>
 
@@ -967,7 +794,7 @@ const PerfectOccasion = () => {
                 uppercase
                 tracking-[0.06em]
                 text-[#9a7134]
-                sm:text-[8px]
+                sm:text-[9px]
               "
                         >
                           Explore
@@ -1016,7 +843,9 @@ const PerfectOccasion = () => {
                   items-center
                   justify-center
                   rounded-full
-                  bg-[#8e1837]
+                  bg-pink-600
+                  hover:bg-[#60b396]
+                  hover:text-black
                   sm:h-9
                   sm:w-9
                 "
@@ -1024,7 +853,7 @@ const PerfectOccasion = () => {
 
                 <Gift
                   size={13}
-                  className="text-[#f4d38a]"
+                  className="text-white hover:text-black "
                 />
 
               </div>
@@ -1039,7 +868,7 @@ const PerfectOccasion = () => {
                   sm:text-sm
                 "
               >
-                Every occasion deserves a little sweetness.
+                Where every bite tells a story.
               </p>
 
             </div>
@@ -1067,8 +896,8 @@ const PerfectOccasion = () => {
                     gap-2
                     rounded-full
                     border
-                    border-[#7e1230]
-                    bg-[#8e1837]
+                    border-black
+                    bg-pink-600
                     px-4
                     py-2
                     text-[9px]
@@ -1079,7 +908,8 @@ const PerfectOccasion = () => {
                     shadow-[2px_3px_0px_#3d2418]
                     transition-all
                     duration-300
-                    hover:bg-[#a32145]
+                    hover:bg-[#60b396]
+                    hover:text-black
                     hover:shadow-[4px_5px_0px_#3d2418]
                     sm:px-7
                     sm:py-3

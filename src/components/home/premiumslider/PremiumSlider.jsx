@@ -73,11 +73,11 @@ const PremiumSlider = () => {
                     md:py-3
                     text-white
                     font-semibold
-                    shadow-md
                     transition-all
                     duration-300
                     hover:bg-[#60b396]
                     hover:scale-105
+                    hover:text-black
                     shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000] 
                   "
                 >
@@ -95,7 +95,7 @@ const PremiumSlider = () => {
           onClick={prevSlide}
           className="absolute left-5 top-1/2 -translate-y-1/2 z-30 rounded-full bg-[#f9e4bf] p-2 shadow-lg transition-all duration-300 hover:bg-[#60b396] hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
         >
-          <ChevronLeft size={22} />
+          <ChevronLeft size={22}  className="hover:text-black"/>
         </button>
 
         {/* Right Arrow */}
@@ -103,7 +103,7 @@ const PremiumSlider = () => {
           onClick={nextSlide}
           className="absolute right-5 top-1/2 -translate-y-1/2 z-30 rounded-full bg-[#f9e4bf] p-2 shadow-lg transition-all duration-300 hover:bg-[#60b396] hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
         >
-          <ChevronRight size={22} />
+          <ChevronRight size={22} className="hover:text-black" />
         </button>
 
         {/* Dots */}

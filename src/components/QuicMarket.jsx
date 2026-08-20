@@ -314,7 +314,7 @@ const QucikMarket = () => {
   }, [currentSlide]);
 
   return (
-    <section className="relative bg-[#f5ebda] py-24">
+    <section className="relative bg-[#f5ebda] py-6">
       <Wave position="bottom" fill="#f5ebda" />
       <Wave position="top" fill="#f5ebda" />
 

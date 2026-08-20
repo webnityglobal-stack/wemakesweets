@@ -364,6 +364,65 @@ const FAQPage = () => {
             )}
           </motion.div>
         )}
+
+
+
+{/* send us quesiton  */}
+{/* Ask Your Question */}
+<div className="mt-12 rounded-3xl border border-[#8b183d]/10 bg-[#f2ede1] p-6 shadow-sm md:p-8">
+  <div className="text-center">
+    <h3 className="text-xl font-bold text-[#2d2d2d] md:text-2xl">
+      Still have a question?
+    </h3>
+
+    <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-gray-600">
+      Didn't find what you're looking for? Ask us your question and
+      we'll be happy to help.
+    </p>
+  </div>
+
+  <div className="mx-auto mt-6 flex max-w-2xl flex-col gap-3 sm:flex-row">
+    <input
+      type="text"
+      placeholder="Ask your question..."
+      className="
+        flex-1
+        rounded-full
+        border border-[#8b183d]/20
+        bg-white
+        px-5 py-3
+        text-sm
+        text-[#2d2d2d]
+        outline-none
+        transition-all
+        placeholder:text-gray-400
+        focus:border-[#8b183d]/50
+        focus:ring-2
+        focus:ring-[#8b183d]/10
+      "
+    />
+
+    <button
+      type="button"
+      className="
+        rounded-full
+        bg-[#8b183d]
+        px-7 py-3
+        text-sm
+        font-semibold
+        text-white
+        transition-all
+        duration-300
+        hover:bg-[#721530]
+        hover:shadow-lg
+        active:scale-95
+      "
+    >
+      Ask Question
+    </button>
+  </div>
+</div>
+
       </div>
     </section>
   );

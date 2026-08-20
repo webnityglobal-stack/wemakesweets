@@ -42,11 +42,11 @@ const TopBanner = () => {
       text-sm
       font-semibold
       text-white
-      shadow-md
       transition-all
       duration-300
       hover:scale-105
       hover:bg-[#60b396]
+      hover:text-black
       shadow-[1px_2px_0px_#000]
       sm:shadow-[2px_3px_0px_#000]
       border-black

@@ -268,14 +268,18 @@ const ProductConsumption = () => {
               className="
                 inline-block
                 rounded-full
-                bg-[#572340]/10
                 px-5
                 py-2
                 text-xs
                 font-semibold
                 uppercase
                 tracking-[4px]
-                text-[#572340]
+                text-white
+                  bg-pink-600
+              hover:bg-[#66BC9E]
+              hover:scale-105
+                  hover:text-black
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
               "
             >
               Perfect For
@@ -378,6 +382,7 @@ const ProductConsumption = () => {
               md:py-3
               font-semibold
               text-white
+              hover:text-black
               shadow-md
               transition-all
               duration-300

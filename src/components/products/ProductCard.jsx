@@ -158,7 +158,7 @@ const ProductCard = ({ product }) => {
         </h2>
 
         {/* Description */}
-        <p
+        {/* <p
           className="
             line-clamp- min-h-[24px]
             text-[10px] leading-[1.3] text-gray-500
@@ -167,7 +167,7 @@ const ProductCard = ({ product }) => {
           "
         >
           {product.shortDescription}
-        </p>
+        </p> */}
 
         {/* Stock */}
         <div className="hidden text-[10px] font-semibold sm:block sm:text-sm">
@@ -226,6 +226,7 @@ const ProductCard = ({ product }) => {
           disabled={!inStock}
           onClick={(e) => e.preventDefault()}
           className={`
+            hover:text-black
             h-7 w-full rounded-md border border-black
             text-[8px] font-bold uppercase tracking-normal
             sm:h-14 sm:rounded-xl sm:text-base
@@ -252,6 +253,7 @@ const ProductCard = ({ product }) => {
                   border-black
                   bg-gray-300
                   text-white
+                  hover:text-black
                   shadow-[1px_2px_0px_#000]
 
                   sm:shadow-[2px_3px_0px_#000]
