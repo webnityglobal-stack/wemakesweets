@@ -16,7 +16,7 @@ export default defineConfig({
   server: {
     host: true,
     allowedHosts: [
-      "unlikened-leonarda-noninflectional.ngrok-free.dev",
+      "nappy-scraggly-startup.ngrok-free.dev",
     ],
   },
 
