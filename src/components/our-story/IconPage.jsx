@@ -71,7 +71,7 @@ const IconPage = () => {
   }, [currentSlide]);
 
   return (
-    <section className="relative bg-[#f5ebda] py-6">
+    <section className="relative bg-[#f5ebda] py-1">
 
       <div className="mx-auto max-w-7xl px-6">
 
@@ -90,7 +90,7 @@ const IconPage = () => {
                     absolute h-18 w-18 object-contain
                     transition-all duration-500 ease-out
                     animate-[floatPulse_3s_ease-in-out_infinite]
-                    group-hover:scale-125
+                    group-hover:scale-100
                     group-hover:-translate-y-4
                     group-hover:rotate-6
                     group-hover:drop-shadow-[0_10px_15px_rgba(0,0,0,0.35)]
@@ -135,7 +135,7 @@ const IconPage = () => {
                           src={item.image}
                           alt={item.title}
                           className="
-                            h-24 w-24 object-contain
+                            h-18 w-18 object-contain
                             animate-[floatPulse_3s_ease-in-out_infinite]
                             rounded-full
                           "

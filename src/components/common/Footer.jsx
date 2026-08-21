@@ -66,11 +66,10 @@ const toggleSection = (section) => {
           <div className="lg:col-span-2">
 
             <img
-              src="/logo.png"
+              src="/withoutBackground.png"
               alt="We Make"
               className="h-20"
             />
-
             {/* Divider */}
 
             <div className="mt-2 mb-2 flex items-center gap-4">

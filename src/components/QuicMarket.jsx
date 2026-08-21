@@ -21,10 +21,10 @@ const features = [
     image: "/quickMarket/zepto.png",
     title: "Zepto",
   },
-  {
-    image: "/quickMarket/jioMart.png",
-    title: "Jio Mart",
-  },
+  // {
+  //   image: "/quickMarket/jioMart.png",
+  //   title: "Jio Mart",
+  // },
 ];
 
 // Mobile mein 2-2 icons
@@ -71,7 +71,7 @@ const QucikMarket = () => {
   }, [currentSlide]);
 
   return (
-    <section className=" text-center  relative bg-[#f5ebda] py-6 ">
+    <section className=" text-center  relative bg-[#f5ebda] py-2 ">
 
 {/* <div className=" font-bold text-[#603917] text-center text-2xl p-4">
     Available On
@@ -103,9 +103,10 @@ const QucikMarket = () => {
 
       {/* <div className="mx-auto max-w-7xl px-6"> */}
 
-<div className="mx-auto mt-10 max-w-7xl px-6">
+<div className="mx-auto mt-5 max-w-7xl px-6 py-2">
         {/* ================= DESKTOP ================= */}
-        <div className="hidden lg:grid grid-cols-6 gap-y-12">
+        {/* <div className="hidden lg:grid grid-cols-6 gap-y-12"> */}
+        <div className="hidden lg:flex flex-wrap justify-center gap-x-16 gap-y-12">
              
           {features.map((item, index) => (
             <div
@@ -120,7 +121,7 @@ const QucikMarket = () => {
                     absolute h-18 w-18 object-contain
                     transition-all duration-500 ease-out
                     animate-[floatPulse_3s_ease-in-out_infinite]
-                    group-hover:scale-125
+                    group-hover:scale-100
                     group-hover:-translate-y-4
                     group-hover:rotate-6
                     group-hover:drop-shadow-[0_10px_15px_rgba(0,0,0,0.35)]
@@ -131,7 +132,7 @@ const QucikMarket = () => {
 
               <div className="mt-4 h-1 w-10 rounded-full bg-[#8b183d] transition-all duration-300 group-hover:w-16" />
 
-              <h3 className="mt-5 text-[12px] md:text-lg font-bold uppercase leading-7 text-[#2d2d2d]">
+              <h3 className="mt-1 text-[12px] md:text-lg font-bold uppercase leading-7 text-[#2d2d2d]">
                 {item.title}
               </h3>
             </div>
@@ -156,16 +157,22 @@ const QucikMarket = () => {
               >
                 <div className="grid grid-cols-2 gap-4">
                   {slide.map((item, index) => (
+                    // <div
+                    //   key={index}
+                    //   className="flex flex-col items-center text-center"
+                    // >
                     <div
-                      key={index}
-                      className="flex flex-col items-center text-center"
-                    >
+  key={index}
+  className={`flex flex-col items-center text-center ${
+    slide.length === 1 ? "col-span-2" : ""
+  }`}
+>
                       <div className="relative flex h-28 w-28 items-center justify-center">
                         <img
                           src={item.image}
                           alt={item.title}
                           className="
-                            h-24 w-24 object-contain
+                            h-18 w-18 object-contain
                             animate-[floatPulse_3s_ease-in-out_infinite]
                             rounded-full
                           "
