@@ -196,13 +196,15 @@ function Navbar() {
 <div className="flex lg:hidden items-center gap-5">
 
   {/* User */}
-  <User
-    size={23}
-    className="cursor-pointer text-[#603917] transition-all duration-300 hover:text-[#3e5a2c] hover:scale-110"
-  />
+<User
+  size={23}
+  className={`cursor-pointer text-[#603917] transition-all duration-300 hover:text-[#3e5a2c] hover:scale-110 ${
+    open ? "hidden" : "block"
+  }`}
+/>
 
   {/* Cart */}
-  <div className="relative cursor-pointer group">
+  <div className={`relative cursor-pointer group ${open ? "hidden" : "block"}`}>
     <ShoppingCart
       size={24}
       className="text-[#3e5a2c] transition-all duration-300 group-hover:text-[#164984] group-hover:scale-110"
