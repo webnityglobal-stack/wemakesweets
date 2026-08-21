@@ -125,6 +125,8 @@ function Navbar() {
 
   return (
     <header className="w-full bg-[#f9e4bf] px-4 md:px-8 lg:px-10 z-50">
+      
+      
       <nav className="h-20 flex items-center justify-between">
 
         {/* Logo */}
@@ -184,51 +186,69 @@ function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="lg:hidden text-[#572340]"
-        >
-          {open ? <X size={30} /> : <Menu size={30} />}
-        </button>
+
+
+
+
+
+
+ {/* Mobile Icons + Menu */}
+<div className="flex lg:hidden items-center gap-5">
+
+  {/* User */}
+  <User
+    size={23}
+    className="cursor-pointer text-[#603917] transition-all duration-300 hover:text-[#3e5a2c] hover:scale-110"
+  />
+
+  {/* Cart */}
+  <div className="relative cursor-pointer group">
+    <ShoppingCart
+      size={24}
+      className="text-[#3e5a2c] transition-all duration-300 group-hover:text-[#164984] group-hover:scale-110"
+    />
+
+    <span
+      className="absolute -top-2 -right-2 h-5 w-5 rounded-full text-[10px] text-white flex items-center justify-center transition-all duration-300 group-hover:bg-[#572340]"
+      style={{ backgroundColor: "#8b183d" }}
+    >
+      0
+    </span>
+  </div>
+
+  {/* Hamburger */}
+  <button
+    onClick={() => setOpen(!open)}
+    className="text-[#572340]"
+  >
+    {open ? <X size={30} /> : <Menu size={30} />}
+  </button>
+
+</div>
+
+
+
+
+
+
       </nav>
+
+
+
+
+
+
+
+
+
+
 
       {/* Mobile Menu */}
     {/* Mobile Menu */}
 {open && (
   <div className="lg:hidden rounded-3xl bg-[#f9e4bf] shadow-xl p-6 mb-4">
 
-    {/* Mobile Icons - TOP */}
-    <div className="flex justify-center gap-8 mb-6">
-
-      {/* Search */}
-      {/* <Search
-        size={23}
-        className="cursor-pointer text-[#572340] transition-all duration-300 hover:text-[#603917] hover:scale-110"
-      /> */}
-
-      {/* User */}
-      <User
-        size={23}
-        className="cursor-pointer text-[#603917] transition-all duration-300 hover:text-[#3e5a2c] hover:scale-110"
-      />
-
-      {/* Cart */}
-      <div className="relative cursor-pointer group">
-        <ShoppingCart
-          size={24}
-          className="text-[#3e5a2c] transition-all duration-300 group-hover:text-[#164984] group-hover:scale-110"
-        />
-
-        <span
-          className="absolute -top-2 -right-2 h-5 w-5 rounded-full text-[10px] text-white flex items-center justify-center transition-all duration-300 group-hover:bg-[#572340]"
-          style={{ backgroundColor: "#8b183d" }}
-        >
-          0
-        </span>
-      </div>
-
-    </div>
+  
 
     {/* Mobile Navigation */}
     <ul className="space-y-4">
