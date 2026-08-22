@@ -208,7 +208,7 @@ const OurStoryVideo = () => {
             </div>
 
             {/* Floating badge */}
-            <motion.div
+            {/* <motion.div
               animate={{
                 y: [-6, 6, -6],
               }}
@@ -237,7 +237,7 @@ const OurStoryVideo = () => {
 
               </div>
 
-            </motion.div>
+            </motion.div> */}
 
           </motion.div>
 
