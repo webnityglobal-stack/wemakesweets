@@ -16,11 +16,11 @@ const TopBanner = () => {
   <span className="hidden h-px w-10 bg-[#f9e4bf]/50 lg:block" />
 
   {/* Icon */}
-  <PhoneCall
+  {/* <PhoneCall
     size={16}
     className="-ml-1 shrink-0 text-[#164984]"
     strokeWidth={2.5}
-  />
+  /> */}
 
   {/* Text */}
   <span className="-ml-1 whitespace-nowrap text-sm font-medium text-white md:text-base">
@@ -70,11 +70,11 @@ const TopBanner = () => {
           {/* First Content */}
           <div className="flex shrink-0 items-center gap-3 ">
 
-            <PhoneCall
+            {/* <PhoneCall
               size={14}
               className="shrink-0 text-[#f9e4bf]"
               strokeWidth={2.5}
-            />
+            /> */}
 
             <span className="whitespace-nowrap text-[11px] font-medium text-white">
               For Corporate Gift Orders
@@ -105,11 +105,11 @@ const TopBanner = () => {
 
           {/* Duplicate Content */}
           <div className="flex shrink-0 items-center gap-3 px-4">
-            <PhoneCall
+            {/* <PhoneCall
               size={14}
               className="shrink-0 text-[#f9e4bf]"
               strokeWidth={2.5}
-            />
+            /> */}
 
             <span className="whitespace-nowrap text-[11px] font-medium text-white">
               For Corporate Gift Orders
