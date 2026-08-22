@@ -4,7 +4,7 @@ import FlipCard from "../FlipCard";
 const categories = [
   {
     title: "Date Cubes",
-    image: "/boxes/Date&NutCubesFrontViewbox1.png",
+    image: "/boxes/Date&NutCubesFrontViewbox1.jpg",
     color: "#572340",
     ingredients: [
       "Premium Dates",

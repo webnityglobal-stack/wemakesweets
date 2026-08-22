@@ -40,6 +40,7 @@ const occasions = [
 ];
 
 const PerfectOccasion = () => {
+  
   return (
     <section className="relative w-full overflow-hidden bg-[#f5ead7]">
 {/* decorative shape left */}
@@ -373,6 +374,7 @@ const PerfectOccasion = () => {
                   sm:leading-6
                   lg:text-sm
                   lg:leading-7
+                  md:pl-18
                 "
               >
                Where rich traditions
@@ -396,6 +398,7 @@ const PerfectOccasion = () => {
                   sm:block
                   lg:mt-7
                   lg:space-y-4
+                  md:pl-18
                 "
               >
 
@@ -549,6 +552,7 @@ const PerfectOccasion = () => {
                   sm:mt-6
                   sm:gap-2
                   sm:pt-4
+                  md:pl-18
                 "
               >
 
@@ -714,6 +718,7 @@ lg:hidden
 lg:mt-24
       lg:text-sm
       lg:leading-7
+      md:pl-18
     "
   >
     A city shaped by rivers,
@@ -738,6 +743,7 @@ lg:mt-24
 
       lg:mt-7
       lg:space-y-4
+      md:pl-16
     "
   >
 
@@ -767,7 +773,7 @@ lg:mt-24
             lg:text-sm
           "
         >
-         Heritage — A Legacy of Traditions
+         Heritage 
         </p>
 
         <p
@@ -811,7 +817,7 @@ lg:mt-24
             lg:text-sm
           "
         >
-          Commerce — Global taste
+          Commerce
         </p>
 
         <p
@@ -854,7 +860,7 @@ lg:mt-24
             lg:text-sm
           "
         >
-          Diamonds — Centre of diamond  
+          Diamonds 
         </p>
 
         <p
@@ -884,7 +890,7 @@ lg:mt-24
       border-t
       border-[#c99b48]/30
       pt-3
-
+md:pl-18
       sm:mt-6
       sm:gap-2
       sm:pt-4
