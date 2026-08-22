@@ -102,7 +102,7 @@ const PerfectOccasion = () => {
       text-[#9a7134]
     "
   >
-    The Products of 
+    The Product of 
   </span>
   
    <h2
