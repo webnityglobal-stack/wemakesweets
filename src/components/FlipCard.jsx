@@ -52,6 +52,7 @@ const FlipCard = ({ data }) => {
               mt-4
               pb-1
               text-center
+              font-manrope
               text-xl
               sm:text-2xl
               lg:text-[24px]
@@ -91,11 +92,11 @@ const FlipCard = ({ data }) => {
             backgroundColor: data.color,
           }}
         >
-          <h3 className="text-2xl font-bold mb-5">
+          <h3 className="text-2xl font-manrope font-medium mb-5">
             Ingredients
           </h3>
 
-          <ul className="space-y-2">
+          <ul className="space-y-2 font-manrope ">
             {data.ingredients.map((ingredient) => (
               <li
                 key={ingredient}
@@ -128,6 +129,7 @@ const FlipCard = ({ data }) => {
               hover:bg-[#66BC9E]
               hover:scale-105
                   hover:text-black
+                  font-manrope
               shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
             "
           >

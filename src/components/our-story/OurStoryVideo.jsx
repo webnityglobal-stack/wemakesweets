@@ -249,18 +249,18 @@ const OurStoryVideo = () => {
             viewport={{ once: true }}
           >
 
-            <span className="rounded-full bg-[#8b183d]/10 px-5 py-2 text-sm font-semibold text-[#8b183d]">
+            <span className="rounded-full font-manrope bg-[#8b183d]/10 px-5 py-2 text-sm font-semibold text-[#8b183d]">
               OUR STORY
             </span>
 
-            <h2 className="mt-6 text-4xl font-black leading-tight text-[#2d2d2d] lg:text-4xl">
+            <h2 className="mt-6 text-4xl font-cormorant font-black leading-tight text-[#2d2d2d] lg:text-4xl">
               Crafted with
               <span className="block text-[#8b183d]">
                 Passion & Tradition
               </span>
             </h2>
 
-            <p className="mt-8 text-[14px] leading-8 text-gray-600">
+            <p className="mt-8 text-[14px] font-manrope leading-8 text-gray-600">
               Every bite tells a story.
 
               What started from a small home kitchen with

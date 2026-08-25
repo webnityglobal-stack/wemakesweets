@@ -11,12 +11,33 @@ body {
   font-family: "Chewy", cursive;
 } */
 
+
+
+
 @import url("https://fonts.googleapis.com/css2?family=Chewy&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Vidaloka&display=swap");
 
 @import "tailwindcss";
 
-html,
+
+
+/* new fonts for by client*/
+/* 1. Sabse pehle Google Fonts load karo */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700&family=Noto+Sans+Gujarati:wght@400;500;600&display=swap');
+
+/* 2. Tailwind ko import karo (v4) */
+@import "tailwindcss";
+
+/* 3. (MAIN FIX) Tailwind v4 me fonts ko theme ki tarah define karo */
+@theme {
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-manrope: "Manrope", sans-serif;
+  --font-gujarati: "Noto Sans Gujarati", sans-serif;
+  --font-cinzel: "Cinzel", serif; /* Agar cinzel bhi chahiye toh */
+}
+
+
+/* html,
 body {
   font-family: "Vidaloka", serif;
 }
@@ -27,8 +48,8 @@ body {
 
 .chewy {
   font-family: "Chewy", cursive;
-  /* font-weight: 400; */
-}
+  
+} */
 
 
 

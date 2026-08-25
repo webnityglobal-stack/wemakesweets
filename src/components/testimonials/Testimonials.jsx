@@ -52,11 +52,11 @@ export default function Testimonials() {
 
       <div className="mb-7 text-center">
 
-        <p className="text-sm font-semibold uppercase tracking-[6px] text-[#E35A7E]">
+        <p className="text-sm font-manrope font-medium uppercase tracking-[6px] text-[#E35A7E]">
           Testimonials
         </p>
 
-        <h2 className="cinzel sm:text-2xl lg:text-4xl  font-bold text-[#603917] md:text-3xl">
+        <h2 className="font-cormorant sm:text-2xl lg:text-4xl  font-bold text-[#603917] md:text-3xl">
           Happy Customers
         </h2>
 
@@ -96,7 +96,7 @@ export default function Testimonials() {
 
               </div>
 
-              <p className="mt-10 flex-1 text-center text-[14px] md:text-[15px] font-semibold leading-9 text-[#f9e4bf]">
+              <p className="mt-10 font-manrope flex-1 text-center text-[14px] md:text-[15px] font-normal leading-9 text-[#f9e4bf]">
                 "{item.review}"
               </p>
 

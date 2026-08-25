@@ -90,6 +90,7 @@ const QucikMarket = () => {
                 font-semibold
                 uppercase
                 tracking-[4px]
+                font-manrope
                 text-white
                   bg-pink-600
               hover:bg-[#66BC9E]
@@ -132,7 +133,7 @@ const QucikMarket = () => {
 
               <div className="mt-4 h-1 w-10 rounded-full bg-[#8b183d] transition-all duration-300 group-hover:w-16" />
 
-              <h3 className="mt-1 text-[12px] md:text-lg font-bold uppercase leading-7 text-[#2d2d2d]">
+              <h3 className="mt-1 text-[12px] md:text-[14px] font-cormorant font-semibold uppercase leading-7 text-[#2d2d2d]">
                 {item.title}
               </h3>
             </div>

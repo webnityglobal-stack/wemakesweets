@@ -1,7 +1,7 @@
 const Wave = ({
   position = "bottom",
   fill = "#ffffff",
-  height = "h-16 md:h-24",
+  height = "h-8 md:h-16",
 }) => {
   return (
     <div

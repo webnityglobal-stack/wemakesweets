@@ -63,7 +63,7 @@ export default function ProductHero() {
         }}
         className="absolute right-0 bottom-0 h-80 w-80 rounded-full bg-[#08376c10] blur-3xl"
       />
-
+ 
       {/* Floating Leaves */}
 
       <motion.div
@@ -88,7 +88,7 @@ export default function ProductHero() {
         <Leaf size={70} />
       </motion.div>
 
-      <div className="relative mx-auto max-w-7xl px-6 py-24">
+      <div className="relative mx-auto max-w-7xl px-6 py-8 md:py-8 ">
         {/* Small Label */}
 
         <motion.div
@@ -118,7 +118,7 @@ export default function ProductHero() {
             delay: .2,
             duration: .6,
           }}
-          className="mt-8 text-center text-4xl font-black tracking-tight text-[#552b12] md:text-5xl"
+          className="mt-4 md:mt-8 text-center text-3xl font-black tracking-tight text-[#552b12] md:text-5xl"
         >
           SHOP OUR
           <br />
@@ -136,7 +136,7 @@ export default function ProductHero() {
           transition={{
             delay: .4,
           }}
-          className="mx-auto mt-8 max-w-3xl text-center text-lg leading-8 text-[#552b12]/80"
+          className="mx-auto mt-4 md:mt-8 max-w-3xl text-center text-[15px] md:text-lg leading-8 text-[#552b12]/80"
         >
           Crafted with premium ingredients and inspired by Indian traditions,
           explore our delicious sweets, healthy snacks and gifting hampers.
@@ -150,7 +150,7 @@ export default function ProductHero() {
           transition={{
             delay: .6,
           }}
-          className="mt-10 flex flex-wrap justify-center gap-4"
+          className="mt-5 flex flex-wrap justify-center gap-4"
         >
           {[
             "Made In India",
@@ -177,7 +177,8 @@ export default function ProductHero() {
           transition={{
             delay: .8,
           }}
-          className="mt-16 flex flex-wrap justify-center gap-5"
+          // className="mt-4 flex flex-wrap justify-center gap-3 md:gap-5"
+          className="mt-4 grid grid-cols-2 justify-items-center gap-3 sm:flex sm:flex-wrap sm:justify-center sm:gap-5"
         >
           {categories.map((item) => {
             const Icon = item.icon;
@@ -192,15 +193,15 @@ export default function ProductHero() {
                   scale: .95,
                 }}
                 key={item.name}
-                className="group flex items-center gap-3 rounded-full bg-white px-7 py-4 shadow-xl transition"
+                className="group flex w-full max-w-[180px]  items-center gap-3 rounded-full bg-white px-4 md:px-7 py-4 shadow-xl transition"
               >
                 <div
-                  className="rounded-full p-3 text-white transition group-hover:rotate-12"
+                  className="rounded-full p-1 md:p-3 text-white transition group-hover:rotate-12"
                   style={{
                     background: item.color,
                   }}
                 >
-                  <Icon size={20} />
+                  <Icon size={20} className=""/>
                 </div>
 
                 <span className="font-bold text-[#552b12]">

@@ -13,9 +13,9 @@ const ProductDetailsPage = () => {
 const product = prod;
 
   return (
-    <section className="container mx-auto px-5 py-12 bg-[#f9e4bf]">
+    <section className="container mx-auto px-5 pt-12 bg-[#f5ebda]">
 
-      <div className="grid gap-12 lg:grid-cols-2">
+      <div className="grid gap-10 lg:grid-cols-2">
 
         <ProductGallery
           images={product.images}

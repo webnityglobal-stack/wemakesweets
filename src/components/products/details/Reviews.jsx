@@ -4,7 +4,7 @@ const Reviews = ({ product }) => {
   const totalReviews = product.reviews.length;
 
   return (
-    <section className="mt-24">
+    <section className="">
 
       {/* Heading */}
 
@@ -27,11 +27,11 @@ const Reviews = ({ product }) => {
 
       {/* Rating Summary */}
 
-      <div className="mt-14 grid gap-8 lg:grid-cols-[350px_1fr]">
+      <div className=" mt-5 grid gap-8 lg:grid-cols-[350px_1fr]">
 
         <div className="rounded-3xl bg-[#810c26] p-10 text-center text-white">
 
-          <h2 className="text-6xl font-bold">
+          <h2 className="text-2xl font-bold">
             {product.rating}
           </h2>
 
@@ -40,7 +40,7 @@ const Reviews = ({ product }) => {
             {[1,2,3,4,5].map((star)=>(
               <Star
                 key={star}
-                size={22}
+                size={18}
                 fill="white"
                 color="white"
               />
@@ -48,7 +48,7 @@ const Reviews = ({ product }) => {
 
           </div>
 
-          <p className="mt-5 text-lg">
+          <p className="mt-5 text-[14px]">
             Based on {totalReviews} Reviews
           </p>
 
@@ -56,7 +56,7 @@ const Reviews = ({ product }) => {
 
         {/* Rating Breakdown */}
 
-        <div className="rounded-3xl border border-[#810c2610] bg-white p-8 shadow-sm">
+        <div className="h-fit rounded-3xl border border-[#810c2610] bg-white p-4 shadow-sm">
 
           {[
             { star: 5, value: 90 },
@@ -68,7 +68,7 @@ const Reviews = ({ product }) => {
 
             <div
               key={item.star}
-              className="mb-6 flex items-center gap-4"
+              className="mb-2 flex items-center gap-1"
             >
 
               <span className="w-12 font-semibold text-[#08376c]">
@@ -98,7 +98,7 @@ const Reviews = ({ product }) => {
 
       {/* Reviews */}
 
-      <div className="mt-16 grid gap-8 lg:grid-cols-3">
+      <div className="mt-8 grid gap-8 lg:grid-cols-3">
 
         {product.reviews.map((review) => (
 
@@ -145,9 +145,12 @@ const Reviews = ({ product }) => {
 
             </div>
 
-            <p className="leading-8 text-gray-600">
+            {/* <p className="leading-8 text-gray-600">
               {review.comment}
-            </p>
+            </p> */}
+            <p className="md:max-h-32 md:overflow-y-auto md:pr-1 leading-8 text-gray-600">
+  {review.comment}
+</p>
 
           </div>
 

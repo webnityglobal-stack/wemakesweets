@@ -98,7 +98,7 @@ const FAQPage = () => {
         </motion.div>
 
         {/* FAQ Trigger */}
-        <div className="flex justify-center">
+        <div className="flex justify-center pt-4 md:pt-9">
           <button
             type="button"
             onClick={() => {
@@ -131,11 +131,11 @@ const FAQPage = () => {
 
             "
           >
-            <span className="block text-[15px] font-semibold">
+            <span className="block font-manrope text-[15px] font-semibold">
               Frequently Asked Questions
             </span>
 
-            <span className="block text-[18px] font-bold  transition-colors duration-300 ">
+            <span className="block text-[18px] font-bold  font-manrope transition-colors duration-300 ">
               {showFAQs ? "Close FAQs" : "Click Here"}
             </span>
           </button>

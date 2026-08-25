@@ -50,8 +50,8 @@ const ProductCard = ({ product }) => {
           <span
             className="
               absolute left-1 top-1 rounded-sm bg-[#FFD633]
-              px-1 py-0.5 text-[6px] font-bold uppercase text-black shadow
-              sm:left-4 sm:top-4 sm:rounded-md sm:px-3 sm:py-1 sm:text-xs
+              px-1 py-0.5 text-[6px] uppercase text-black shadow
+              sm:left-4 sm:top-4 sm:rounded-md sm:px-3 sm:py-1 sm:text-xs font-manrope font-medium
             "
           >
             Bestseller
@@ -63,7 +63,7 @@ const ProductCard = ({ product }) => {
           <span
             className="
               absolute right-1 top-1 rounded-sm bg-[#8b183d]
-              px-1.5 py-0.5 text-[6px] font-bold text-white shadow
+              px-1.5 py-0.5 text-[6px] font-semibold font-manrope text-white shadow
               sm:right-4 sm:top-4 sm:rounded-md sm:px-3 sm:py-1 sm:text-xs
             "
           >
@@ -79,7 +79,7 @@ const ProductCard = ({ product }) => {
             absolute bottom-1 right-1 hidden h-7 w-7 items-center justify-center
             rounded-full bg-white shadow-md transition-all duration-300
             hover:scale-110
-            sm:flex sm:bottom-4 sm:right-4 sm:h-11 sm:w-11 sm:shadow-lg
+            sm:flex sm:bottom-4 sm:right-4 sm:h-11 sm:w-11 sm:shadow-lg font-manrope font-semibold
           "
         >
           <Heart
@@ -94,7 +94,7 @@ const ProductCard = ({ product }) => {
           className="
             absolute bottom-1 left-1 flex items-center gap-0.5
             rounded-sm bg-white px-1.5 py-0.5 shadow-md
-            sm:bottom-4 sm:left-4 sm:gap-1 sm:rounded-md sm:px-3 sm:py-2
+            sm:bottom-4 sm:left-4 sm:gap-1 sm:rounded-md sm:px-3 sm:py-2 font-manrope font-medium
           "
         >
           <Star
@@ -104,7 +104,7 @@ const ProductCard = ({ product }) => {
             className="sm:h-4 sm:w-4"
           />
 
-          <span className="text-[7px] font-semibold sm:text-sm">
+          <span className="text-[7px] font-semibold font-manrope sm:text-sm">
             {product.rating}
           </span>
         </div>
@@ -114,7 +114,7 @@ const ProductCard = ({ product }) => {
           <span
             className="
               absolute inset-0 flex items-center justify-center
-              bg-black/50 text-[10px] font-bold text-white backdrop-blur-sm
+              bg-black/50 text-[10px] fontmanope font-bold text-white backdrop-blur-sm
               sm:text-xl
             "
           >
@@ -134,9 +134,10 @@ const ProductCard = ({ product }) => {
         {/* Category */}
         <span
           className="
-            inline-flex max-w-full truncate rounded-sm
+            inline-flex max-w-full truncate whitespace-nowrap rounded-sm
             bg-[#572340] px-1.5 py-0.5
             text-[8px] font-medium text-white
+            font-manrope
             sm:rounded-md sm:px-3 sm:py-1 sm:text-xs
           "
         >
@@ -146,11 +147,12 @@ const ProductCard = ({ product }) => {
         {/* Name */}
         <h2
           className="
-            line-clamp-2 min-h-[26px]
-            text-[10px] font-bold uppercase leading-[1.15] 
+            truncate whitespace-nowrap
+            text-[10px] uppercase leading-[1.15] 
             text-[#2d2d2d] transition duration-300
             group-hover:text-[#8b183d]
             sm:min-h-[60px] sm:text-xl sm:leading-tight
+            font-cormorant  font-semibold
             lg:text-[18px] lg:min-h-[4px]
           "
         >
@@ -170,7 +172,7 @@ const ProductCard = ({ product }) => {
         </p> */}
 
         {/* Stock */}
-        <div className="hidden text-[10px] font-semibold sm:block sm:text-sm">
+        <div className="hidden text-[10px] font-semibold font-manrope sm:block sm:text-sm">
           {product.stock === 0 ? (
             <span className="text-[#8b183d]">Sold Out</span>
           ) : product.stock <= 10 ? (
@@ -191,7 +193,7 @@ const ProductCard = ({ product }) => {
         >
           <span
             className="
-              text-[15px] font-bold text-[#572340]
+              text-[15px] font-bold font-manrope text-[#572340]
               sm:text-3xl md:text-xl
             "
           >
@@ -201,7 +203,7 @@ const ProductCard = ({ product }) => {
           <span
             className="
               text-[8px] text-gray-400 line-through
-              sm:text-lg
+              sm:text-lg font-manrope
             "
           >
             ₹{product.mrp}
@@ -211,7 +213,7 @@ const ProductCard = ({ product }) => {
             <span
               className="
                 rounded-sm bg-[#FFD633]
-                px-1 py-0.5 text-[6px] font-bold text-black
+                px-1 py-0.5 text-[6px] font-bold text-black font-manrope
                 sm:rounded sm:px-2 sm:py-1 sm:text-xs
               "
             >
@@ -230,7 +232,7 @@ const ProductCard = ({ product }) => {
             h-7 w-full rounded-md border border-black
             text-[8px] font-bold uppercase tracking-normal
             sm:h-14 sm:rounded-xl sm:text-base
-
+font-manrope 
             ${
               inStock
                 ? `
@@ -244,7 +246,7 @@ const ProductCard = ({ product }) => {
                   active:translate-x-[1px]
                   active:translate-y-[2px]
                   active:shadow-[1px_1px_0px_#000]
-
+font-manrope
                   sm:bg-pink-600
                   sm:shadow-[2px_3px_0px_#000]
                 `

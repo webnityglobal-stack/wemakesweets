@@ -8,37 +8,6 @@ import {
   Ship,
 } from "lucide-react";
 
-const occasions = [
-  {
-    id: 1,
-    title: "Festive Gifting",
-    description:
-      "Thoughtful gifts for every festival and celebration.",
-    icon: Gift,
-  },
-  {
-    id: 2,
-    title: "Corporate Gifting",
-    description:
-      "Premium gifts for clients, teams and business partners.",
-    icon: BriefcaseBusiness,
-  },
-  {
-    id: 3,
-    title: "Wedding Gifting",
-    description:
-      "Elegant gifts for beautiful wedding celebrations.",
-    icon: Flower2,
-  },
-  {
-    id: 4,
-    title: "Personal Gifting",
-    description:
-      "Special gifts for the people who matter most.",
-    icon: GiftIcon,
-  },
-];
-
 const PerfectOccasion = () => {
   
   return (
@@ -784,7 +753,7 @@ lg:mt-24
             lg:text-[11px]
           "
         >
-          Centuries of culture &amp; craftsmanship
+          Centuries of culture
         </p>
       </div>
 
@@ -828,7 +797,7 @@ lg:mt-24
             lg:text-[11px]
           "
         >
-          A legacy built on trade &amp; enterprise
+          A legacy built on trade 
         </p>
       </div>
 
@@ -871,7 +840,7 @@ lg:mt-24
             lg:text-[11px]
           "
         >
-          Textiles, diamonds &amp; timeless artistry
+        Diamonds, Textiles  &amp; artistry
         </p>
       </div>
 

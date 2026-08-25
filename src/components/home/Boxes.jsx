@@ -112,7 +112,7 @@ export default function Boxes() {
         </div>
 
         {/* Button */}
-        <div className="flex justify-center mt-2 md:mt-4">
+        <div className="flex justify-center mt-4 md:mt-7">
           <button
             className="
               flex
@@ -127,6 +127,7 @@ export default function Boxes() {
               md:py-4
               rounded-full
               font-semibold
+              font-manrope
               text-sm
               md:text-base
               transition-all

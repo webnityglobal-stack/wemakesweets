@@ -18,7 +18,7 @@ const icons = [
 
 const ProductHighlights = ({ product }) => {
   return (
-    <section className="mt-20">
+    <section className="px-1 md:px-5">
 
       <div className="text-center">
 
@@ -37,29 +37,34 @@ const ProductHighlights = ({ product }) => {
 
       </div>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-6 md:mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
         {product.highlights.map((item, index) => (
 
           <div
             key={index}
-            className="group rounded-3xl border border-[#810c2615] bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-[#810c26] hover:shadow-xl"
+            className="group rounded-3xl border border-[#810c2615] bg-white p-4 text-center md:p-8 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-[#810c26] hover:shadow-xl"
           >
 
-            <div className="mb-5 inline-flex rounded-2xl bg-[#f9e4bf] p-4 text-[#810c26] transition group-hover:bg-[#810c26] group-hover:text-white">
+            {/* <div className="mb-5 inline-flex rounded-2xl bg-[#f9e4bf] p-4 text-[#810c26] transition group-hover:bg-[#810c26] group-hover:text-white">
 
               {icons[index]}
 
-            </div>
+            </div> */}
+            <div className="mb-3 inline-flex rounded-xl bg-[#f9e4bf] p-2.5 text-[#810c26] transition group-hover:bg-[#810c26] group-hover:text-white md:mb-5 md:rounded-2xl md:p-4">
+  <span className="[&>svg]:h-5 [&>svg]:w-5 md:[&>svg]:h-6 md:[&>svg]:w-6">
+    {icons[index]}
+  </span>
+</div>
 
-            <h3 className="text-xl font-semibold text-[#08376c]">
+            <h3 className="md:text-xl text-[18px]  font-semibold text-[#08376c]">
               {item}
             </h3>
 
-            <p className="mt-3 text-gray-600">
+            {/* <p className="mt-3 text-gray-600">
               Carefully selected premium ingredients that make every bite
               healthier, tastier and naturally satisfying.
-            </p>
+            </p> */}
 
           </div>
 

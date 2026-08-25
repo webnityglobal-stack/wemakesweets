@@ -9,19 +9,20 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import Wave from "../Wave";
+import { Link } from "react-router-dom";
 const quickLinks = [
-  "Home",
-  "Our Story",
-  "Products",
-  "Contact Us",
+  { name: "Home", path: "/" },
+  { name: "Our Story", path: "/our-story" },
+  { name: "Products", path: "/products" },
+  { name: "Contact Us", path: "/contact" },
 ];
 
 const customerCare = [
-  "FAQs",
-  "Shipping & Delivery",
-  "Returns & Refunds",
-  "Privacy Policy",
-  "Terms & Conditions",
+  // { name: "FAQs", path: "/" },
+  // { name: "Shipping & Delivery", path: "/" },
+  // { name: "Returns & Refunds", path: "/" },
+  { name: "Privacy Policy", path: "/" },
+  { name: "Terms & Conditions", path: "/" },
 ];
 
 const Footer = () => {
@@ -46,9 +47,9 @@ const toggleSection = (section) => {
   <svg
     viewBox="0 0 1200 120"
     preserveAspectRatio="none"
-    className="relative block h-16 md:h-24 w-full fill-[#f5ebda]"
+    className="relative block h-16 md:h-18 w-full fill-[#f5ebda]"
   >
-   \
+   
     <path d="M0,28 C220,68 420,72 600,40 C780,8 980,6 1200,28 V120 H0 Z" />
   </svg>
 </div>
@@ -186,17 +187,17 @@ const toggleSection = (section) => {
     <ul className="space-y-1 pt-1 lg:pt-0">
       {quickLinks.map((item) => (
         <li key={item}>
-          <a
-            href="#"
-            className="group flex items-center gap-3 text-md transition-all duration-300 hover:text-white"
-          >
-            <ChevronRight
-              size={18}
-              className="text-[#f4c02d] transition group-hover:translate-x-1"
-            />
+         <Link
+  to={item.path}
+  className="group flex items-center gap-3 text-md transition-all duration-300 hover:text-white"
+>
+  <ChevronRight
+    size={18}
+    className="text-[#f4c02d] transition group-hover:translate-x-1"
+  />
 
-            <span>{item}</span>
-          </a>
+  <span>{item.name}</span>
+</Link>
         </li>
       ))}
     </ul>
@@ -235,17 +236,17 @@ const toggleSection = (section) => {
     <ul className="space-y-2 pt-1">
       {customerCare.map((item) => (
         <li key={item}>
-          <a
-            href="#"
-            className="group flex items-center gap-3 text-md transition hover:text-white"
-          >
-            <ChevronRight
-              size={18}
-              className="text-[#f4c02d] transition group-hover:translate-x-1"
-            />
+        <Link
+  to={item.path}
+  className="group flex items-center gap-3 text-md transition hover:text-white"
+>
+  <ChevronRight
+    size={18}
+    className="text-[#f4c02d] transition group-hover:translate-x-1"
+  />
 
-            {item}
-          </a>
+  {item.name}
+</Link>
         </li>
       ))}
     </ul>

@@ -7,13 +7,13 @@ const AllProducts = () => {
 
   return (
 
-    <section className="container mx-auto px-5 py-10 bg-[#f9e4bf]">
+    <section className="container mx-auto bg-[#f9e4bf]">
 
      <ProductHero/>
      {/* <ProductCategoryBanner/> */}
-
-      <ProductGrid products={products} />
-
+<div className="md:p-4 p-3">
+      <ProductGrid products={products}  />
+</div>
     </section>
 
   );

@@ -16,7 +16,7 @@ const ProductInfo = ({ product }) => {
   const inStock = selectedVariant.stock > 0;
 
   return (
-    <div className="space-y-7">
+    <div className="md:space-y-7 space-y-3">
       {/* Badge */}
 
       {product.isBestSeller && (
@@ -28,11 +28,11 @@ const ProductInfo = ({ product }) => {
       {/* Product Name */}
 
       <div>
-        <h1 className="text-4xl font-bold text-[#08376c]">
+        <h1 className="md:text-4xl text-2xl font-bold text-[#08376c]">
           {product.name}
         </h1>
 
-        <p className="mt-3 text-lg leading-8 text-gray-600">
+        <p className="mt-3 md:text-lg text-[15px] text-gray-600">
           {product.shortDescription}
         </p>
       </div>
@@ -40,7 +40,7 @@ const ProductInfo = ({ product }) => {
       {/* Rating */}
 
       <div className="flex items-center gap-3">
-        <div className="flex items-center rounded-full bg-[#2a4d25] px-4 py-2 text-white">
+        <div className="flex items-center rounded-full bg-[#2a4d25] pl-3 py-1 md:px-4 md:py-2 text-white">
           ⭐ {product.rating}
         </div>
 
@@ -51,12 +51,12 @@ const ProductInfo = ({ product }) => {
 
       {/* Price */}
 
-      <div className="rounded-3xl border border-[#810c2620] bg-[#f9e4bf]/20 p-6">
+      <div className=" w-fit rounded-3xl border border-[#810c2620] bg-[#f9e4bf]/20 p-3 md:p-6">
 
         <div className="flex flex-wrap items-center gap-4">
 
           <span className="text-4xl font-bold text-[#810c26]">
-            ₹{selectedVariant.price }
+            ₹{selectedVariant.price } 
           </span>
 
           <span className="text-2xl text-gray-400 line-through">
@@ -180,7 +180,7 @@ const ProductInfo = ({ product }) => {
 
       {/* Delivery */}
 
-      <div className="space-y-4 rounded-3xl bg-[#f9e4bf]/20 p-6">
+      <div className="space-y-2 md:space-y-4 rounded-3xl bg-[#f9e4bf]/20 p-2 md:p-6">
 
         <div className="flex items-center gap-3 text-[#552b12]">
           <Truck size={22} />

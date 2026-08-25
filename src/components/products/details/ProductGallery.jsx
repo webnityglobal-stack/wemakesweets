@@ -13,7 +13,7 @@ const ProductGallery = ({ images = [] }) => {
         <img
           src={selectedImage}
           alt="Product"
-          className="aspect-square w-full object-cover transition duration-500 hover:scale-105"
+          className="aspect-square w-full  object-cover transition duration-500 hover:scale-105"
         />
       </div>
 

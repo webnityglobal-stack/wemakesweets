@@ -15,15 +15,7 @@ const TopBanner = () => {
   {/* Left Decorative Line */}
   <span className="hidden h-px w-10 bg-[#f9e4bf]/50 lg:block" />
 
-  {/* Icon */}
-  {/* <PhoneCall
-    size={16}
-    className="-ml-1 shrink-0 text-[#164984]"
-    strokeWidth={2.5}
-  /> */}
-
-  {/* Text */}
-  <span className="-ml-1 whitespace-nowrap text-sm font-medium text-white md:text-base">
+  <span className="font-manrope whitespace-nowrap text-sm font-semibold text-white md:text-base">
     For Corporate Gift Orders
   </span>
 
@@ -76,7 +68,7 @@ const TopBanner = () => {
               strokeWidth={2.5}
             /> */}
 
-            <span className="whitespace-nowrap text-[11px] font-medium text-white">
+            <span className="whitespace-nowrap text-[11px] font-semibold font-manrope text-white">
               For Corporate Gift Orders
             </span>
 
@@ -95,6 +87,7 @@ const TopBanner = () => {
                 font-semibold
                 text-white
                 shadow-[1px_2px_0px_#000]
+                font-cormorant font-semibold 
               "
             >
               Call 1800 203 2007
@@ -111,7 +104,7 @@ const TopBanner = () => {
               strokeWidth={2.5}
             /> */}
 
-            <span className="whitespace-nowrap text-[11px] font-medium text-white">
+            <span className="whitespace-nowrap text-[11px] font-semibold font-manrope text-white">
               For Corporate Gift Orders
             </span>
 
@@ -130,6 +123,7 @@ const TopBanner = () => {
                 font-semibold
                 text-white
                 shadow-[1px_2px_0px_#000]
+                
               "
             >
               Call 1800 203 2007

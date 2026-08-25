@@ -54,7 +54,7 @@ const nutritionItems = [
 
 const NutritionFacts = ({ product }) => {
   return (
-    <section className="mt-24">
+    <section className="">
 
       <div className="text-center">
 
@@ -62,50 +62,96 @@ const NutritionFacts = ({ product }) => {
           Nutrition Facts
         </span>
 
-        <h2 className="mt-4 text-4xl font-bold text-[#08376c]">
+        <h2 className="mt-2 text-4xl font-bold text-[#08376c]">
           Goodness In Every Bite
         </h2>
 
-        <p className="mx-auto mt-5 max-w-2xl leading-8 text-gray-600">
+        <p className="mx-auto mt-2 max-w-2xl leading-8 text-gray-600">
           Made using carefully selected ingredients to deliver
           wholesome nutrition without compromising on taste.
         </p>
 
       </div>
 
-      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
         {nutritionItems.map((item) => {
           const Icon = item.icon;
 
           return (
+            // <div
+            //   key={item.key}
+            //   className="group rounded-3xl border border-[#810c2610] bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl"
+            // >
+            //   <div
+            //     className="mb-6 inline-flex rounded-2xl p-4"
+            //     style={{ background: item.bg }}
+            //   >
+            //     <Icon
+            //       size={24}
+            //       style={{ color: item.color }}
+            //     />
+            //   </div>
+
+            //   <h3 className="text-lg font-semibold text-[#08376c]">
+            //     {item.label}
+            //   </h3>
+
+            //   <p
+            //     className="mt-3 text-2xl font-bold"
+            //     style={{ color: item.color }}
+            //   >
+            //     {product.nutrition[item.key]}
+            //   </p>
+
+            //   <div className="mt-5 h-2 overflow-hidden rounded-full bg-gray-100">
+
+            //     <div
+            //       className="h-full rounded-full"
+            //       style={{
+            //         width: `${40 + Math.random() * 50}%`,
+            //         background: item.color,
+            //       }}
+            //     />
+
+            //   </div>
+
+            // </div>
             <div
               key={item.key}
-              className="group rounded-3xl border border-[#810c2610] bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl"
+              className="group rounded-3xl border border-[#810c2610] bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl sm:p-7"
             >
-              <div
-                className="mb-6 inline-flex rounded-2xl p-4"
-                style={{ background: item.bg }}
-              >
-                <Icon
-                  size={30}
-                  style={{ color: item.color }}
-                />
+              <div className="flex items-center gap-4 sm:block">
+                {/* <div className="flex items-center justify-between sm:block"> */}
+                {/* Icon */}
+                <div
+                  className="inline-flex shrink-0 rounded-2xl p-4 sm:mb-6"
+                  style={{ background: item.bg }}
+                >
+                  <Icon
+                    size={24}
+                    style={{ color: item.color }}
+                  />
+                </div>
+
+                {/* Label + Value */}
+                <div className="">
+                  <h3 className="text-base font-semibold text-[#08376c] sm:text-lg">
+                    {item.label}
+                  </h3>
+
+                  <p
+                    className="mt-1 text-xl font-bold sm:mt-3 sm:text-2xl"
+                    style={{ color: item.color }}
+                  >
+                    {product.nutrition[item.key]}
+                  </p>
+                </div>
+
               </div>
 
-              <h3 className="text-lg font-semibold text-[#08376c]">
-                {item.label}
-              </h3>
-
-              <p
-                className="mt-3 text-3xl font-bold"
-                style={{ color: item.color }}
-              >
-                {product.nutrition[item.key]}
-              </p>
-
-              <div className="mt-5 h-2 overflow-hidden rounded-full bg-gray-100">
-
+              {/* Progress */}
+              <div className="mt-4 h-2 overflow-hidden rounded-full bg-gray-100 sm:mt-5">
                 <div
                   className="h-full rounded-full"
                   style={{
@@ -113,20 +159,19 @@ const NutritionFacts = ({ product }) => {
                     background: item.color,
                   }}
                 />
-
               </div>
-
             </div>
           );
         })}
 
       </div>
+{/* 
+      <div className="">
+       <div className="mt-12 rounded-3xl bg-[#f9e4bf]/25 p-8 ">
 
-      <div className="mt-12 rounded-3xl bg-[#f9e4bf]/25 p-8">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-center item-center lg:justify-between">
 
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-
-          <div>
+          <div className="">
 
             <h3 className="text-2xl font-bold text-[#08376c]">
               Healthy Snacking Starts Here
@@ -156,6 +201,7 @@ const NutritionFacts = ({ product }) => {
         </div>
 
       </div>
+     </div> */}
 
     </section>
   );

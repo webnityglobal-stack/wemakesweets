@@ -8,6 +8,9 @@ export default {
     extend: {
       fontFamily: {
         cinzel: ["Cinzel", "serif"],
+         'cormorant': ['Cormorant Garamond', 'serif'],
+        'manrope': ['Manrope', 'sans-serif'],
+        'gujarati': ['Noto Sans Gujarati', 'sans-serif'],
       },
     },
   },

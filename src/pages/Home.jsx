@@ -124,10 +124,10 @@ const Home = () => {
 
 
             {/* Button */}
-            <div className="mt-12 flex justify-center">
+            <div className="mt-8 mb- md:mb-5 flex  justify-center">
               <Link
                 to="/products"
-                className="inline-flex hover:text-black items-center justify-center rounded-full bg-pink-600 md:px-8 px-4 py-2 md:py-3 font-semibold text-white border-[0.5px] border-black shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] transition-all duration-300 hover:scale-105 hover:bg-[#60b396] hover:shadow-[3px_4px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_3px_0px_#000]">
+                className="inline-flex font-manrope font-semibold hover:text-black items-center justify-center rounded-full bg-pink-600 md:px-8 px-4 py-2 md:py-3  text-white border-[0.5px] border-black shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] transition-all duration-300 hover:scale-105 hover:bg-[#60b396] hover:shadow-[3px_4px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_3px_0px_#000]">
                 View All Products
               </Link>
             </div>

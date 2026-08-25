@@ -103,11 +103,11 @@ useEffect(() => {
 
           <div>
 
-            <span className="rounded-full bg-[#810c26]/10 px-5 py-2 text-sm font-semibold text-[#810c26]">
+            <span className="rounded-full font-manrope font-medium bg-[#810c26]/10 px-5 py-2 text-sm font-semibold text-[#810c26]">
               Watch Our Reels
             </span>
 
-            <h2 className="mt-4 text-2xl font-black text-[#552b12] lg:text-3xl">
+            <h2 className="mt-4 text-2xl font-cormorant font-bold font-black text-[#552b12] lg:text-3xl">
               Discover Healthy
               <span className="text-[#810c26]">
                 {" "}
@@ -116,7 +116,7 @@ useEffect(() => {
               <ScrollWavyUnderline/>
             </h2>
 
-            <p className="mt-4 max-w-2xl text-[#6b4b35]">
+            <p className="mt-4 font-manrope font-normal max-w-2xl text-[#6b4b35]">
               Explore delicious moments, customer experiences and behind the
               scenes from We Make Sweets.
             </p>

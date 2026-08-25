@@ -8,6 +8,7 @@ import Contact from '../pages/Contact'
 import AllProducts from '../pages/AllProducts'
 import ProductDetailsPage from '../pages/ProductDetailsPage'
 import ScrollToTop from '@/components/ScrollToTop'
+import { Link } from "react-router-dom";
 
 const AppRoutes = () => {
   return (

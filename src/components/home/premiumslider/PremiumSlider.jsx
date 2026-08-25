@@ -47,15 +47,15 @@ const PremiumSlider = () => {
             <div className="absolute inset-0 flex items-center justify-center z-20">
               <div className="max-w-3xl px-6 text-center">
 
-                <h2 className="text md:text-4xl lg:text-5xl font-serif font-semibold text-[#572340] leading-tight">
+                <h2 className="text font-cormorant font-bold md:text-4xl lg:text-5xl  text-[#572340] leading-tight">
                 {slide.title}
                 </h2>
 
-                <h3 className="mt-2  sm:text-xl md:text-4xl font-serif text-[#603917]">
+                <h3 className="mt-2 font--manrope font-semibold sm:text-xl md:text-4xl text-[#603917]">
                   {slide.subtitle}
                 </h3>
 
-                <p className="mt-4 text-[#3e5a2c] text-[12px] sm:text-lg  md:text-2xl">
+                <p className="mt-4 font-manrope font-normal text-[#3e5a2c] text-[12px] sm:text-lg  md:text-2xl">
                   {slide.description}
                 </p>
 
@@ -72,6 +72,7 @@ const PremiumSlider = () => {
                     md:px-8
                     md:py-3
                     text-white
+                    font-manrope
                     font-semibold
                     transition-all
                     duration-300

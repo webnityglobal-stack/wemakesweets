@@ -178,12 +178,12 @@ const OccasionCard = ({ item }) => {
             </div>
 
             {/* Title */}
-            <h3 className="mt-6 md:text-xl text-2xl font-bold text-[#f9e4bf]">
+            <h3 className="mt-6 md:text-xl font-cormorant font-semibold text-2xl  text-[#f9e4bf]">
               {item.title}
             </h3>
 
             {/* Description */}
-            <p className="mt-3 leading-7 md:text-[18px] text-[#f9e4bf]/90">
+            <p className="mt-3 leading-7 md:text-[18px] font-manrope font-normal text-[#f9e4bf]/90">
               {item.desc}
             </p>
 
@@ -221,11 +221,12 @@ const OccasionCard = ({ item }) => {
 
 const ProductConsumption = () => {
   return (
-    <section className="relative overflow-hidden md:px-8 px-4 py-18 md:py-24 bg-[#f9e4bf]">
+    <section className="relative overflow-hidden md:px-8 px-4 py-14 md:py-24 bg-[#f9e4bf]">
 
      <Wave
     position="top"
     fill="#f5ebda"
+    // fill='pink-600'
   />
 
   {/* ================= CONTENT ================= */}
@@ -271,7 +272,8 @@ const ProductConsumption = () => {
                 px-5
                 py-2
                 text-xs
-                font-semibold
+                font-manrope
+                font-medium
                 uppercase
                 tracking-[4px]
                 text-white
@@ -288,11 +290,12 @@ const ProductConsumption = () => {
             <h2
               className="
                 mt-5
-                font-serif
+                font-cormorant
                 text-4xl
                 font-bold
                 text-[#603917]
                 lg:text-4xl
+                
               "
             >
               Every Occasion
@@ -302,9 +305,6 @@ const ProductConsumption = () => {
           </div>
         </div>
 
-        {/* ================================================= */}
-        {/* OCCASION CARDS */}
-        {/* ================================================= */}
 
 {/* ================================================= */}
 {/* OCCASION CARDS */}
@@ -352,7 +352,7 @@ const ProductConsumption = () => {
           "
         >
 
-          <h3 className="font-serif text-3xl text-[#f9e4bf]">
+          <h3 className="font-cormorant font-semibold text-3xl text-[#f9e4bf]">
 
             Crafted For Every{" "}
 
@@ -363,7 +363,7 @@ const ProductConsumption = () => {
 
           </h3>
 
-          <p className="mt-4 text-[#f9e4bf]/90">
+          <p className="mt-4 font-manrope font-normal text-[#f9e4bf]/90">
             Whether it's a wedding, corporate event, festival, birthday,
             fitness journey or family gathering — our premium handcrafted
             sweets are made to make every occasion unforgettable.
@@ -381,6 +381,7 @@ const ProductConsumption = () => {
               md:px-8
               md:py-3
               font-semibold
+              font-manrope
               text-white
               hover:text-black
               shadow-md
@@ -392,7 +393,7 @@ const ProductConsumption = () => {
               shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
             "
           >
-            📞 Call For Bulk{" "} Orders
+             📞 Call For Bulk{" "} Orders
           
 
           </a>
