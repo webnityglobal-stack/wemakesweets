@@ -78,7 +78,7 @@ const PremiumSlider = () => {
                     duration-300
                     hover:bg-[#60b396]
                     hover:scale-105
-                    hover:text-black
+                    hover:text-white
                     shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000] 
                   "
                 >

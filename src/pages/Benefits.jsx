@@ -55,7 +55,7 @@ const benefits = [
 
 export default function Benefits() {
   return (
-    <section className="bg-[#f9e4bf] py-24">
+    <section className="bg-[#f5ebda] py-24">
   <div className="max-w-7xl mx-auto px-6">
 
     <div className="text-center max-w-3xl mx-auto">

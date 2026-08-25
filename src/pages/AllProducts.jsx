@@ -7,7 +7,7 @@ const AllProducts = () => {
 
   return (
 
-    <section className="container mx-auto bg-[#f9e4bf]">
+    <section className="container mx-auto bg-[#f5ebda]">
 
      <ProductHero/>
      {/* <ProductCategoryBanner/> */}
