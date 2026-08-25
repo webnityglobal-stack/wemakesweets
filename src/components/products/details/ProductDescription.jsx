@@ -173,7 +173,7 @@ const ProductDescription = ({ product }) => {
 
         {/* ================= HEADING ================= */}
 
-        <div className="mb-10 text-center md:mb-12">
+        <div className="mb-5 text-center md:mb-12">
 
           <span className="font-manrope text-xs font-semibold uppercase tracking-[3px] text-[#810c26] sm:text-sm sm:tracking-[4px]">
             Product Details
@@ -195,7 +195,7 @@ const ProductDescription = ({ product }) => {
 
           {/* ================= INGREDIENTS ================= */}
 
-          <div className=" flex flex-col justify-center items-center">
+          <div className=" ">
 
             <div className="mb-6 flex items-center gap-3">
 
@@ -203,7 +203,7 @@ const ProductDescription = ({ product }) => {
                 <Leaf size={22} />
               </div>
 
-              <h3 className="font-cormorant text-2xl font-bold text-[#08376c] sm:text-3xl">
+              <h3 className="font-cormorant text-xl font-bold text-[#08376c] sm:text-3xl">
                 Ingredients
               </h3>
 
@@ -240,14 +240,14 @@ const ProductDescription = ({ product }) => {
                 <Package size={22} />
               </div>
 
-              <h3 className="font-cormorant text-2xl font-bold text-[#08376c] sm:text-3xl">
+              <h3 className="font-cormorant text-xl font-bold text-[#08376c] sm:text-3xl">
                 Product Information
               </h3>
 
             </div>
 
             {/* <div className="space-y-5"> */}
-<div className="space-y-5 lg:max-h-[420px]  lg:overflow-y-auto lg:pr-3">
+<div className="space-y-4 lg:max-h-[420px]  lg:overflow-y-auto lg:pr-3">
               <InfoRow
                 icon={<Archive size={20} />}
                 label="Net Weight"

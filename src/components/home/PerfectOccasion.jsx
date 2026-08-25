@@ -171,7 +171,7 @@ const PerfectOccasion = () => {
             >
 
               <img
-                src="/surar-heri.png"
+                src="/surat1.png"
                 alt="Heritage of Surat"
                 className="
                   absolute
@@ -920,7 +920,7 @@ md:pl-18
     >
 
       <img
-        src="/surat2.png"
+        src="/surat3.png"
         alt="Heritage of Surat"
         className="
           absolute
