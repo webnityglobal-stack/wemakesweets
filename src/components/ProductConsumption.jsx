@@ -365,7 +365,7 @@ const ProductConsumption = () => {
 
           </h3>
 
-          <p className="mt-4 font-manrope font-normal text-[#f9e4bf]/90">
+          <p className="mt-4 text-[12px] md:text-sm font-manrope font-normal text-[#f9e4bf]/90">
             Whether it's a wedding, corporate event, festival, birthday,
             fitness journey or family gathering — our premium handcrafted
             sweets are made to make every occasion unforgettable.
