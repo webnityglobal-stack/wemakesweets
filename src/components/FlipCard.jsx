@@ -70,9 +70,9 @@ const FlipCard = ({ data }) => {
           className="
             absolute
             inset-0
-            h-[300px]
+            h-[350px]
             sm:h-[340px]
-            md:h-[300px]
+            md:h-[350px]
 
             rounded-[22px]
             md:rounded-[26px]
@@ -96,7 +96,15 @@ const FlipCard = ({ data }) => {
             Ingredients
           </h3>
 
-          <ul className="space-y-2 font-manrope ">
+          <ul className="space-y-2 font-manrope  max-h-[150px] sm:max-h-[180px] overflow-y-auto pr-2
+                      [&::-webkit-scrollbar]:w-[2px]
+  [&::-webkit-scrollbar-track]:bg-transparent
+  [&::-webkit-scrollbar-thumb]:bg-white/40
+  [&::-webkit-scrollbar-thumb]:rounded-full
+
+          "
+
+          >
             {data.ingredients.map((ingredient) => (
               <li
                 key={ingredient}
@@ -122,13 +130,14 @@ const FlipCard = ({ data }) => {
               px-5
               py-2
               text-sm
+              font-manrope
               font-semibold
-              text-[#552b12]
+              text-white
               transition
                bg-pink-600
               hover:bg-[#66BC9E]
               hover:scale-105
-                  hover:text-black
+                  hover:text-white
                   font-manrope
               shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
             "

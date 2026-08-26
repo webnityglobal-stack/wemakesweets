@@ -7,11 +7,11 @@ const categories = [
     image: "/boxes/Date&NutCubesFrontViewbox1.jpg",
     color: "#572340",
     ingredients: [
-      "Premium Dates",
+      "Dates",
       "Almonds",
-      "Cashews",
+      "Cashewnuts",
       "Pistachios",
-      "Pumpkin Seeds",
+      "Honey","Pure Cow Ghee"
     ],
   },
 
@@ -20,11 +20,11 @@ const categories = [
     image: "/boxes/Anjeer&NutCubesFrontViewbox2.png",
     color: "#603917",
     ingredients: [
-      "Premium Anjeer",
+      "Anjeer(Fig)",
       "Almonds",
-      "Cashews",
+      "Cashewnuts",
       "Pistachios",
-      "Dates",
+      "Honey", "Pure Cow Ghee"
     ],
   },
 
@@ -33,11 +33,12 @@ const categories = [
     image: "/boxes/DateElaichi&NutCubesFrontViewbox3.png",
     color: "#3e5a2c",
     ingredients: [
-      "Premium Dates",
+      "Dates",
+      "Elaichi",
       "Almonds",
-      "Cashews",
-      "Cardamom",
+      "Cashewnuts",
       "Pistachios",
+      "Honey", "Pure cow Ghee"
     ],
   },
 
@@ -46,11 +47,12 @@ const categories = [
     image: "/boxes/MultiSeed&NutCubesFrontViewbox4.png",
     color: "#164984",
     ingredients: [
-      "Dates",
-      "Pumpkin Seeds",
       "Sunflower Seeds",
+      "Watermelon Seeds",
       "Almonds",
-      "Flax Seeds",
+      "Cashewnuts",
+      "Pistachios", "Hazelnuts", "Raisins", "Cranberry",
+      "Glucose", "Honey", "Pure Cow Ghee"
     ],
   },
 
@@ -59,11 +61,10 @@ const categories = [
     image: "/boxes/RiceCrispy&NutCubesFrontViewbox5.png",
     color: "#8b183d",
     ingredients: [
-      "Rice Crisps",
-      "Dates",
+      "Rice Crisp",
       "Almonds",
-      "Cashews",
-      "Seeds",
+      "Cashewnuts","Pistachios","Hazelnuts",
+      "Cranberry", "Raisins", "Glucose","Honey", "Pure Cow Ghee"
     ],
   },
 ];
