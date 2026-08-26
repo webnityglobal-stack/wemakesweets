@@ -77,7 +77,7 @@ const PerfectOccasion = () => {
    <h2
                 className="
                   mt-1
-                  font-serif
+                  font-cormorant
                   text-3xl
                   pl-8
                   font-medium
@@ -298,7 +298,7 @@ const PerfectOccasion = () => {
               <h2
                 className="
                   mt-1
-                  font-serif
+                  font-cormorant
                   text-3xl
                   font-medium
                   tracking-wide
@@ -334,7 +334,7 @@ const PerfectOccasion = () => {
                 className="
                   mt-2
                   lg:mt-24
-                  font-serif
+                  font-manrope
                   text-[13px]
                   leading-4
                   text-[#70533a]
@@ -641,7 +641,7 @@ lg:hidden
     className="
       mt-1
       lg:hidden
-      font-serif
+      font-cormorant
       text-3xl
       font-medium
       tracking-wide
@@ -676,7 +676,7 @@ lg:hidden
   <p
     className="
       mt-2
-      font-serif
+      font-manrope
       text-[13px]
       leading-4
       text-[#70533a]

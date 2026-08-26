@@ -67,7 +67,7 @@ const toggleSection = (section) => {
           <div className="lg:col-span-2">
 
             <img
-              src="/withoutBackground1.png"
+              src="/withoutBackground111.png"
               alt="We Make"
               className="h-20"
             />

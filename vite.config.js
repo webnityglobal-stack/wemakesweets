@@ -18,7 +18,7 @@ export default defineConfig({
     allowedHosts: [
       "nappy-scraggly-startup.ngrok-free.dev",
       "unlikened-leonarda-noninflectional.ngrok-free.dev",
-      "coalition-nicole-sound-recordings.trycloudflare.com"
+      "typical-phentermine-macro-motivated.trycloudflare.com"
     ],
   },
 

@@ -21,7 +21,7 @@ function Navbar() {
         {/* Logo */}
         <a href="/">
           <img
-            src="/withoutBackground1.png"
+            src="/withoutBackground111.png"
             alt="Logo"
             className="h-12 w-auto object-contain"
           />
