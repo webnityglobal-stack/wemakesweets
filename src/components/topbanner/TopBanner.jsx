@@ -30,7 +30,7 @@ const TopBanner = () => {
       rounded-full
       bg-pink-600
       px-4
-      py-1.5
+      py-1
       text-sm
       font-semibold
       text-white
@@ -38,6 +38,7 @@ const TopBanner = () => {
       duration-300
       hover:scale-105
       hover:bg-[#60b396]
+      hover:text-white
       hover:text-black
       shadow-[1px_2px_0px_#000]
       sm:shadow-[2px_3px_0px_#000]
@@ -84,8 +85,8 @@ const TopBanner = () => {
                 px-3
                 py-1
                 text-[10px]
-                font-semibold
                 text-white
+                hover:text-white
                 shadow-[1px_2px_0px_#000]
                 font-cormorant font-semibold 
               "

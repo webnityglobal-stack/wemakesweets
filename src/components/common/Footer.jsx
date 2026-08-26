@@ -85,7 +85,7 @@ const toggleSection = (section) => {
 
 
 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
-            <p className="max-w-sm text-lg leading-6 text-[#f9e4bf]/90">
+            <p className="max-w-sm  md:text-lg leading-6 text-[#f9e4bf]/90">
 
               Desi soul. Modern snacking.
 
@@ -161,7 +161,7 @@ const toggleSection = (section) => {
     onClick={() => toggleSection("quick")}
     className="flex w-full items-center justify-between lg:pointer-events-none"
   >
-    <h3 className="text-xl font-bold uppercase tracking-wider text-[#f4c02d]">
+    <h3 className="md:text-xl font-bold uppercase tracking-wider text-[#f4c02d]">
       Quick Links
     </h3>
 
@@ -212,7 +212,7 @@ const toggleSection = (section) => {
     onClick={() => toggleSection("care")}
     className="flex w-full items-center justify-between lg:pointer-events-none"
   >
-    <h3 className="text-xl font-bold uppercase tracking-wider text-[#f4c02d]">
+    <h3 className="md:text-xl font-bold uppercase tracking-wider text-[#f4c02d]">
       Customer Care
     </h3>
 
@@ -261,7 +261,7 @@ const toggleSection = (section) => {
     onClick={() => toggleSection("address")}
     className="flex w-full items-center justify-between lg:pointer-events-none"
   >
-    <h3 className="text-xl font-bold uppercase tracking-wider text-[#f4c02d]">
+    <h3 className="md:text-xl font-bold uppercase tracking-wider text-[#f4c02d]">
       Our Address
     </h3>
 

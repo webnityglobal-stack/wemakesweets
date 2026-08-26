@@ -122,9 +122,9 @@ export default function Boxes() {
               hover:bg-[#60b396]
               text-white
               px-4
-              md:px-10
+              md:px-8
               py-2
-              md:py-4
+              md:py-3
               rounded-full
               font-semibold
               font-manrope
@@ -133,7 +133,7 @@ export default function Boxes() {
               transition-all
               duration-300
               hover:scale-105
-              hover:text-black
+              hover:text-white
               shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000] 
             "
           >

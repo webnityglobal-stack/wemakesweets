@@ -32,7 +32,7 @@ export default function OurStory() {
     <div className="absolute bottom-32 right-20 h-52 w-52 rounded-full border border-[#F4C02D]/20" />
   </div>
 
-  <div className="relative z-10 mx-auto max-w-7xl px-6 py-28 lg:px-10">
+  <div className="relative z-10 mx-auto max-w-7xl px-6 py-14 md:py-18 lg:px-10">
 
     <div className="grid items-center gap-16 lg:grid-cols-2">
 
@@ -40,7 +40,7 @@ export default function OurStory() {
 
       <div>
 
-        <span className="inline-flex items-center gap-2 rounded-full bg-[#66BC9E]/15 px-5 py-2 text-sm uppercase tracking-[4px] text-[#f9e4bf] backdrop-blur">
+        <span className="inline-flex items-center gap-2 rounded-full bg-[#66BC9E]/15 px-5 py-2 md:text-sm text-[10px] uppercase tracking-[4px] text-[#f9e4bf] backdrop-blur">
 
           <Sparkles
             size={16}
@@ -51,19 +51,19 @@ export default function OurStory() {
 
         </span>
 
-        <h1 className="mt-8 text-5xl font-black leading-tight text-[#f9e4bf] md:text-6xl">
+        <h1 className="md:mt-8 mt-4 font-cormorant text-4xl font-black leading-tight text-[#f9e4bf] md:text-5xl">
 
           Every Sweet
           <br />
 
-          Has A Story.
-<ScrollWavyUnderline  color = "#f9e4bf"/>
+          Has A Story
+<ScrollWavyUnderline  color="#f9e4bf"/>
         </h1>
 
         {/* <div className="mt-6 h-1 w-32 rounded-full bg-[#E35A7E]" /> */}
         
 
-        <p className="mt-8 max-w-xl text-lg leading-9 text-[#f9e4bf]">
+        <p className="md:mt-8 mt-4 max-w-xl md:text-lg  leading-9 text-[#f9e4bf]">
 
           At <span className="font-semibold text-[#F4C02D]">We Make Sweets</span>,
           every handcrafted delicacy is more than a dessert.
@@ -72,7 +72,7 @@ export default function OurStory() {
 
         </p>
 
-        <button className="group mt-10 flex items-center gap-3 rounded-full bg-[#E35A7E] px-8 py-4 text-white transition-all duration-300 hover:scale-105 hover:bg-[#572340] hover:shadow-xl shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
+        <button className="group md:mt-10 mt-5 flex items-center gap-3 rounded-full bg-pink-600 px-8 py-4 text-white font-manrope font-semibold transition-all duration-300 hover:scale-105 hover:bg-[#60b396] hover:shadow-xl shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
 
           Explore Our Journey
 
@@ -101,15 +101,15 @@ export default function OurStory() {
 
         </div>
 
-        <div className="absolute -bottom-8 left-8 rounded-3xl bg-[#f9e4bf] p-6 shadow-xl">
+        <div className="absolute md:mb-0 mb-2 -bottom-2 md:-bottom-8 left-8 rounded-3xl bg-[#f9e4bf] px-3 py-2 md:p-6 shadow-xl">
 
-          <p className="text-sm uppercase tracking-[3px] text-[#603917]">
+          <p className="md:text-sm text-[10px] uppercase tracking-[3px] text-[#603917]">
 
             Crafted With Love
 
           </p>
 
-          <h3 className="mt-2 text-xl font-bold text-[#E35A7E]">
+          <h3 className="mt-2  md:text-xl text-[14px] font-bold text-[#E35A7E]">
 
             100%
             <br />
@@ -139,7 +139,7 @@ export default function OurStory() {
       {/* OUR BEGINNING */}
       {/* ===================================================== */}
 
-     <section className="py-28">
+     <section className="md:py-16 py-14">
 
   <div className="mx-auto max-w-7xl px-6 lg:px-10">
 
@@ -149,7 +149,7 @@ export default function OurStory() {
 
       <div className="relative">
 
-        <div className="absolute -bottom-5 -right-5 h-full w-full rounded-[35px] bg-[#E35A7E]" />
+        <div className="absolute -bottom-5 -right-5 h-full w-full rounded-[35px] bg-[#603917]" />
 
         <div className="relative overflow-hidden rounded-[35px] shadow-2xl">
 
@@ -173,7 +173,7 @@ export default function OurStory() {
 
         </span>
 
-        <h2 className="mt-5 text-5xl font-black leading-tight text-[#8b183d]">
+        <h2 className="md:mt-5 mt-2 md:text-5xl text-3xl font-cormorant font-black leading-tight text-[#8b183d]">
 
           Inspired By
           <br />
@@ -186,7 +186,7 @@ export default function OurStory() {
         {/* <div className="mt-8 h-1 w-28 rounded-full bg-[#66BC9E]" /> */}
         
 
-        <p className="mt-8 leading-9 text-[#3e5a2c]">
+        <p className="md:mt-8 mt-4 leading-9 text-[#3e5a2c]">
 
           Our journey began with a simple belief—
           that every celebration deserves sweets crafted
@@ -194,7 +194,7 @@ export default function OurStory() {
 
         </p>
 
-        <p className="mt-6 leading-9 text-[#3e5a2c]">
+        <p className="md:mt-6 mt-2 leading-9 text-[#3e5a2c]">
 
           From sourcing premium ingredients to preserving
           traditional recipes, every detail reflects our
@@ -213,7 +213,7 @@ export default function OurStory() {
               size={34}
             />
 
-            <h4 className="mt-5 text-xl font-bold">
+            <h4 className="mt-5  text-xl font-bold">
 
               Made With Love
 
@@ -310,7 +310,7 @@ export default function OurStory() {
       {/* OUR PHILOSOPHY */}
       {/* ===================================================== */}
 
-     <section className="relative overflow-hidden bg-gradient-to-r from-[#8b183d] via-[#572340] to-[#164984] py-28">
+     <section className="relative overflow-hidden bg-gradient-to-r from-[#8b183d] via-[#572340] to-[#164984] py-14 md:py-12">
 
   {/* Background Decorations */}
 
@@ -326,7 +326,7 @@ export default function OurStory() {
         OUR PHILOSOPHY
       </span>
 
-      <h2 className="mt-5 text-5xl font-black text-[#f9e4bf]">
+      <h2 className="mt-5 text-3xl font-cormorant md:text-5xl font-black text-[#f9e4bf]">
         More Than Just
         <br />
         Sweets
@@ -411,7 +411,7 @@ export default function OurStory() {
       {/* JOURNEY TIMELINE */}
       {/* ===================================================== */}
 
-   <section className="bg-[#f9e4bf] py-28">
+   <section className="bg-[#f9e4bf] py-14 md:pt-10 md:py-0">
 
   <div className="mx-auto max-w-6xl px-6">
 
@@ -421,13 +421,13 @@ export default function OurStory() {
         OUR JOURNEY
       </span>
 
-      <h2 className="mt-4 text-5xl font-black text-[#8b183d]">
+      <h2 className="mt-4 md:text-5xl font-cormorant text-3xl font-black text-[#8b183d]">
         Growing With Every Celebration
       </h2>
 <ScrollWavyUnderline />
     </div>
 
-    <div className="relative mt-24">
+    <div className="relative md:mt-24 mt-12">
 
       {/* Timeline */}
       <div className="absolute left-1/2 top-0 hidden h-full w-1 -translate-x-1/2 rounded-full bg-[#603917] lg:block" />
@@ -461,9 +461,9 @@ export default function OurStory() {
 
         <div
           key={index}
-          className={`relative mb-16 flex ${
+          className={`relative mb-8 md:mb-16 flex ${
             index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-          } items-center gap-10`}
+          } items-center gap-4 md:gap-10`}
         >
 
           <div className="hidden w-1/2 lg:block" />
@@ -476,7 +476,7 @@ export default function OurStory() {
           <div className="w-full lg:w-1/2">
 
             <div
-              className="rounded-[30px] p-10 shadow-xl transition-all duration-300 hover:-translate-y-2"
+              className="rounded-[30px] px-5 py-5 md:p-10 shadow-xl transition-all duration-300 hover:-translate-y-2"
               style={{ background: item.card }}
             >
 
@@ -487,7 +487,7 @@ export default function OurStory() {
                 {item.year}
               </span>
 
-              <h3 className="mt-6 text-3xl font-bold text-[#f9e4bf]">
+              <h3 className="mt-6 text-xl md:text-3xl font-bold text-[#f9e4bf]">
                 {item.title}
               </h3>
 
@@ -513,7 +513,7 @@ export default function OurStory() {
       {/* VALUES */}
       {/* ===================================================== */}
 
-  <section className="bg-[#164984] py-28">
+  <section className="bg-[#164984] py-14 md:py-12">
 
   <div className="mx-auto max-w-7xl px-6 lg:px-10">
 
@@ -523,18 +523,18 @@ export default function OurStory() {
         OUR VALUES
       </span>
 
-      <h2 className="mt-5 text-5xl font-black text-[#f9e4bf]">
+      <h2 className="mt-5 md:text-5xl text-3xl font-cormorant font-black text-[#f9e4bf]">
         The Values That Define Us
       </h2>
 <ScrollWavyUnderline color="#f9e4bf"/>
     </div>
 
-    <div className="mt-20 grid gap-8 md:grid-cols-2">
+    <div className="mt-10 md:mt-20 grid gap-8 md:grid-cols-2">
 
       {/* Tradition */}
       <div className="rounded-[35px] border-l-[8px] border-[#66BC9E] bg-[#572340] p-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
 
-        <h3 className="text-3xl font-bold text-[#F4C02D]">
+        <h3 className="text-2xl md:text-3xl font-bold text-[#F4C02D]">
           Tradition
         </h3>
 
@@ -548,7 +548,7 @@ export default function OurStory() {
       {/* Quality */}
       <div className="rounded-[35px] border-l-[8px] border-[#E35A7E] bg-[#8b183d] p-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
 
-        <h3 className="text-3xl font-bold text-[#F4C02D]">
+        <h3 className="text-2xl md:text-3xl font-bold text-[#F4C02D]">
           Quality
         </h3>
 
@@ -562,7 +562,7 @@ export default function OurStory() {
       {/* Freshness */}
       <div className="rounded-[35px] border-l-[8px] border-[#66BC9E] bg-[#3e5a2c] p-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
 
-        <h3 className="text-3xl font-bold text-[#F4C02D]">
+        <h3 className="text-2xl md:text-3xl font-bold text-[#F4C02D]">
           Freshness
         </h3>
 
@@ -576,7 +576,7 @@ export default function OurStory() {
       {/* Relationships */}
       <div className="rounded-[35px] border-l-[8px] border-[#DE6239] bg-[#603917] p-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
 
-        <h3 className="text-3xl font-bold text-[#F4C02D]">
+        <h3 className="text-2xl md:text-3xl font-bold text-[#F4C02D]">
           Relationships
         </h3>
 
@@ -597,7 +597,7 @@ export default function OurStory() {
       {/* EXPERIENCE / CTA */}
       {/* ===================================================== */}
 
-     <section className="relative overflow-hidden py-28 bg-gradient-to-r from-[#164984] via-[#8b183d] to-[#603917]">
+     <section className="relative overflow-hidden py-14 md:py-14 bg-gradient-to-r from-[#164984] via-[#8b183d] to-[#603917]">
 
   <div className="absolute -top-24 -left-20 h-72 w-72 rounded-full bg-[#66BC9E]/15 blur-3xl" />
   <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-[#3e5a2c]/20 blur-3xl" />
@@ -614,7 +614,7 @@ export default function OurStory() {
           EXPERIENCE THE DIFFERENCE
         </span>
 
-        <h2 className="mt-6 text-5xl lg:text-6xl font-black leading-tight text-[#f9e4bf]">
+        <h2 className="mt-6 font-cormorant md:text-5xl text-3xl lg:text-5xl font-black leading-tight text-[#f9e4bf]">
           Every Celebration
           <br />
           Deserves
@@ -630,7 +630,7 @@ export default function OurStory() {
 
         <div className="mt-10 flex flex-wrap gap-4">
 
-          <button className="rounded-full bg-[#E35A7E] px-8 py-4 font-semibold text-white transition hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
+          <button className="rounded-full bg-pink-600 hover:bg-[#60b396] px-8 py-4 font-semibold text-white transition hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
             Explore Collection
           </button>
 
@@ -647,28 +647,28 @@ export default function OurStory() {
       <div className="grid grid-cols-2 gap-6">
 
         <div className="rounded-[30px] bg-white/10 p-8 backdrop-blur">
-          <h3 className="text-5xl font-black text-[#F4C02D]">100%</h3>
+          <h3 className="md:text-5xl text-3xl font-black text-[#F4C02D]">100%</h3>
           <p className="mt-4 text-[#f9e4bf]/80">
             Premium Ingredients
           </p>
         </div>
 
         <div className="rounded-[30px] bg-white/10 p-8 backdrop-blur">
-          <h3 className="text-5xl font-black text-[#66BC9E]">Fresh</h3>
+          <h3 className="md:text-5xl text-3xl font-black text-[#66BC9E]">Fresh</h3>
           <p className="mt-4 text-[#f9e4bf]/80">
             Handcrafted Daily
           </p>
         </div>
 
         <div className="rounded-[30px] bg-white/10 p-8 backdrop-blur">
-          <h3 className="text-5xl font-black text-[#E35A7E]">Love</h3>
+          <h3 className="md:text-5xl text-3xl font-black text-[#E35A7E]">Love</h3>
           <p className="mt-4 text-[#f9e4bf]/80">
             Crafted Into Every Bite
           </p>
         </div>
 
         <div className="rounded-[30px] bg-white/10 p-8 backdrop-blur">
-          <h3 className="text-5xl font-black text-[#DE6239]">Trust</h3>
+          <h3 className="md:text-5xl text-3xl font-black text-[#DE6239]">Trust</h3>
           <p className="mt-4 text-[#f9e4bf]/80">
             Built With Every Order
           </p>
@@ -686,7 +686,7 @@ export default function OurStory() {
       {/* THANK YOU */}
       {/* ===================================================== */}
 
-   <section className="relative bg-[#f9e4bf] py-24">
+   <section className="relative bg-[#f5ebda] pt-12 pb-4 md:pt-14">
 
   <div className="mx-auto max-w-5xl px-6 text-center">
 
@@ -694,13 +694,13 @@ export default function OurStory() {
       THANK YOU
     </span>
 
-    <h2 className="mt-6 text-5xl font-black leading-tight text-[#8b183d]">
+    <h2 className="mt-6 text-4xl font-cormorant font-semibold font-black leading-tight text-[#8b183d]">
       Thank You For Being
       <br />
       A Part Of Our Story
     </h2>
 
-    <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-[#3e5a2c]">
+    <p className="mx-auto font-manrope mt-8 max-w-3xl text-[16px]  leading-9 text-[#3e5a2c]">
       Every customer who chooses us becomes a part of our journey.
       Your celebrations inspire us to create sweets that carry happiness,
       tradition and unforgettable memories.
@@ -709,21 +709,21 @@ export default function OurStory() {
     {/* <div className="mx-auto mt-12 h-1 w-28 rounded-full bg-[#66BC9E]" /> */}
     <ScrollWavyUnderline/>
 
-    <div className="mt-14 flex flex-wrap justify-center gap-5">
+    <div className="mt-14 flex flex-wrap font-manrope justify-center gap-5">
 
-      <div className="rounded-full bg-[#164984] px-6 py-3 text-[#f9e4bf]">
+      <div className="rounded-full bg-[#164984] px-6 py-3 text-white">
         Authentic Taste
       </div>
 
-      <div className="rounded-full bg-[#8b183d] px-6 py-3 text-[#f9e4bf]">
+      <div className="rounded-full bg-[#8b183d] px-6 py-3 text-white">
         Premium Quality
       </div>
 
-      <div className="rounded-full bg-[#3e5a2c] px-6 py-3 text-[#f9e4bf]">
+      <div className="rounded-full bg-[#3e5a2c] px-6 py-3 text-white">
         Freshly Crafted
       </div>
 
-      <div className="rounded-full bg-[#603917] px-6 py-3 text-[#f9e4bf]">
+      <div className="rounded-full bg-[#603917] px-6 py-3 text-white">
         Made With Love
       </div>
 

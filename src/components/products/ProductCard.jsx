@@ -228,7 +228,6 @@ const ProductCard = ({ product }) => {
           disabled={!inStock}
           onClick={(e) => e.preventDefault()}
           className={`
-            hover:text-black
             h-7 w-full rounded-md border border-black
             text-[8px] font-bold uppercase tracking-normal
             sm:h-14 sm:rounded-xl sm:text-base
@@ -255,9 +254,8 @@ font-manrope
                   border-black
                   bg-gray-300
                   text-white
-                  hover:text-black
+                  hover:text-white
                   shadow-[1px_2px_0px_#000]
-
                   sm:shadow-[2px_3px_0px_#000]
                 `
             }

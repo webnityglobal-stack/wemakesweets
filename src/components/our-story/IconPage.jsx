@@ -27,15 +27,14 @@ const features = [
   },
 ];
 
-// Mobile mein 2-2 icons
+
 const mobileSlides = [];
 
 for (let i = 0; i < features.length; i += 2) {
   mobileSlides.push(features.slice(i, i + 2));
 }
 
-// First slide ko end mein duplicate kar diya
-// 1+2 -> 3+4 -> 5+6 -> 1+2
+
 mobileSlides.push(mobileSlides[0]);
 
 const IconPage = () => {
@@ -51,14 +50,12 @@ const IconPage = () => {
   }, []);
 
   useEffect(() => {
-    // Duplicate slide (1 + 2) par pahunchne ke baad
-    // transition complete hone do, phir silently first slide par reset
     if (currentSlide === mobileSlides.length - 1) {
       const timeout = setTimeout(() => {
         setEnableTransition(false);
         setCurrentSlide(0);
 
-        // Browser ko reset render karne do
+       
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             setEnableTransition(true);
@@ -137,7 +134,7 @@ const IconPage = () => {
                           className="
                             h-18 w-18 object-contain
                             animate-[floatPulse_3s_ease-in-out_infinite]
-                            rounded-full
+                             rounded-full
                           "
                         />
                       </div>

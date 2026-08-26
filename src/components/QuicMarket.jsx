@@ -95,7 +95,7 @@ const QucikMarket = () => {
                   bg-pink-600
               hover:bg-[#66BC9E]
               hover:scale-105
-                  hover:text-black
+                  hover:text-white
               shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
               "
             >

@@ -55,16 +55,16 @@ const benefits = [
 
 export default function Benefits() {
   return (
-    <section className="bg-[#f5ebda] py-24">
+    <section className="bg-[#f5ebda] pt-12 pb-6 md:py-8">
   <div className="max-w-7xl mx-auto px-6">
 
     <div className="text-center max-w-3xl mx-auto">
 
-      <span className="uppercase tracking-[5px] text-[#164984] font-semibold">
+      <span className="uppercase font-manrope tracking-[5px] text-[#164984] font-semibold">
         WHY CHOOSE US
       </span>
 
-      <h2 className="mt-4 text-4xl md:text-5xl font-black text-[#8b183d]">
+      <h2 className="mt-4 font-cormorant text-4xl md:text-5xl font-black text-[#8b183d]">
         Crafted To Delight Every Celebration
       </h2>
 <ScrollWavyUnderline />
@@ -76,7 +76,7 @@ export default function Benefits() {
 
     </div>
 
-    <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="mt-8 md:mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
 
       {benefits.map((item, index) => {
         const Icon = item.icon;

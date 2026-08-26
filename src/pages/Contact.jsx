@@ -10,8 +10,7 @@ import {
 
 export default function Contact() {
   return (
-    <div className="chewy">
-    <main className="overflow-hidden bg-[#f9e4bf] ">
+    <main className="overflow-hidden bg-[#f5ebda] ">
 
       {/* ================================================= */}
       {/* HERO */}
@@ -22,7 +21,7 @@ export default function Contact() {
         <div className="absolute -left-32 top-0 h-96 w-96 rounded-full bg-[#810c26]/20 blur-3xl" />
         <div className="absolute right-0 bottom-0 h-[450px] w-[450px] rounded-full bg-[#2a4d25]/20 blur-3xl" />
 
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10 py-12 md:py-18">
 
           <div className="text-center">
 
@@ -30,7 +29,7 @@ export default function Contact() {
               Contact Us
             </span>
 
-              <h1 className="mt-6 text-3xl md:text-5xl font-black leading-tight text-[#f9e4bf]  ">
+              <h1 className="mt-6 font-cormorant font-bold text-3xl md:text-5xl font-black leading-tight text-[#f9e4bf]  ">
 
               Let's Create
               <br />
@@ -39,7 +38,7 @@ export default function Contact() {
 
             </h1>
 <ScrollWavyUnderline color='#f9e4bf'/>
-            <p className="cinzel mx-auto mt-8 max-w-3xl text-lg leading-9 text-[#f9e4bf]/75">
+            <p className="cinzel mx-auto font-manrope mt-8 max-w-3xl text-lg leading-9 text-[#f9e4bf]/75">
 
               Whether you're planning a wedding, corporate event,
               festival or simply craving premium sweets,
@@ -57,7 +56,7 @@ export default function Contact() {
       {/* CONTACT SECTION */}
       {/* ================================================= */}
 
-      <section className="py-18">
+      <section className="py-9 md:py-18">
 
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
 
@@ -73,7 +72,7 @@ export default function Contact() {
                 Send Us A Message
               </span>
 
-              <h2 className="mt-4 text-4xl font-black text-[#f9e4bf]">
+              <h2 className="mt-4 text-2xl font-cormorant md:text-4xl font-black text-[#f9e4bf]">
                 We'd Love To Hear From You
               </h2>
 
@@ -161,7 +160,7 @@ export default function Contact() {
                 </div>
 
                 <button
-                  className="flex items-center gap-3 rounded-full bg-pink-600 px-8 py-4 font-semibold text-white transition duration-300 hover:scale-105 hover:bg-[#572340] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
+                  className="flex items-center gap-3 rounded-full bg-pink-600 md:px-8 md:py-4 px-4 py-3 font-semibold text-white transition duration-300 hover:scale-105 hover:bg-[#572340] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
                 >
                   <Send size={18} />
                   Send Message
@@ -177,11 +176,11 @@ export default function Contact() {
 
           <div>
 
-  <span className="uppercase tracking-[5px] text-[#164984] font-semibold">
+  <span className="uppercase tracking-[3px] md:tracking-[5px] text-[#164984] font-semibold">
     Contact Information
   </span>
 
-  <h2 className="mt-4 text-4xl md:text-5xl font-black text-[#8b183d]">
+  <h2 className="mt-4  font-cormorant text-3xl md:text-5xl font-black text-[#8b183d]">
     We're Always
     <br />
     Here To Help
@@ -207,11 +206,11 @@ export default function Contact() {
 
       <div>
 
-        <h3 className="text-xl font-bold text-[#f9e4bf]">
+        <h3 className="md:text-xl text-[18px]  font-bold text-[#f9e4bf]">
           Visit Our Facility
         </h3>
 
-        <p className="mt-2 leading-8 text-[#f9e4bf]">
+        <p className="mt-2 md:leading-8 text-[#f9e4bf]">
 
           Ground Floor, Block No.159,
           <br />
@@ -240,11 +239,11 @@ export default function Contact() {
 
       <div>
 
-        <h3 className="text-xl font-bold text-[#f9e4bf]">
+        <h3 className="md:text-xl text-[18px] font-bold text-[#f9e4bf]">
           Call Us
         </h3>
 
-        <p className="mt-2 text-lg font-semibold text-[#f9e4bf]">
+        <p className="mt-2 text-[15px]  md:text-lg font-semibold text-[#f9e4bf]">
           18002032007
         </p>
 
@@ -264,11 +263,11 @@ export default function Contact() {
 
       <div>
 
-        <h3 className="text-xl font-bold text-[#f9e4bf]">
+        <h3 className="md:text-xl text-[18px] font-bold text-[#f9e4bf]">
           Email Address
         </h3>
 
-        <p className="mt-2 text-lg font-semibold break-all text-[#f9e4bf]">
+        <p className="mt-2 text-[15px] md:text-lg font-semibold break-all text-[#f9e4bf]">
           cs@wemakesweets.com
         </p>
 
@@ -288,11 +287,11 @@ export default function Contact() {
 
       <div>
 
-        <h3 className="text-xl font-bold text-[#f9e4bf]">
+        <h3 className="md:text-xl text-[18px] font-bold text-[#f9e4bf]">
           Working Hours
         </h3>
 
-        <p className="mt-2  text-[#f9e4bf]">
+        <p className="mt-2   text-[#f9e4bf]">
           Monday - Saturday
           <br />
           9:00 AM - 7:00 PM
@@ -315,7 +314,7 @@ export default function Contact() {
       {/* LOCATION & MAP */}
       {/* ================================================= */}
 
-      <section className="bg-[#572340] py-12">
+      <section className="bg-[#572340] py-6 md:py-12">
 
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
 
@@ -325,7 +324,7 @@ export default function Contact() {
               FIND US
             </span>
 <ScrollWavyUnderline color='#f9e4bf'/>
-            <h2 className="mt-4 md:text-4xl text-2xl font-black text-[#f9e4bf]">
+            <h2 className="mt-4 font-cormorant md:text-4xl text-2xl font-black text-[#f9e4bf]">
               Visit Our Manufacturing Facility
             </h2>
 
@@ -356,7 +355,7 @@ export default function Contact() {
       {/* WHY CONNECT WITH US */}
       {/* ================================================= */}
 
-   <section className="bg-[#f9e4bf] py-24">
+   <section className="bg-[#f9e4bf] py-12  md:py-18">
 
   <div className="mx-auto max-w-7xl px-6 lg:px-10">
 
@@ -366,13 +365,13 @@ export default function Contact() {
         WHY CHOOSE US
       </span>
 
-      <h2 className="mt-4 text-3xl md:text-4xl font-black text-[#8b183d]">
+      <h2 className="mt-4 text-3xl font-cormorant md:text-4xl font-black text-[#8b183d]">
         We Love Hearing From You
       </h2>
 <ScrollWavyUnderline/>
     </div>
 
-    <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-4 p-6">
+    <div className="mt-4 md:mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-4 p-3 md:p-6">
 
       {/* Card 1 */}
 
@@ -464,7 +463,7 @@ export default function Contact() {
 
             <div className="text-center">
 
-              <h2 className="text-3xl font-black text-[#f9e4bf]">
+              <h2 className="md:text-3xl text-2xl font-black text-[#f9e4bf]">
                 100%
               </h2>
 
@@ -476,7 +475,7 @@ export default function Contact() {
 
             <div className="text-center">
 
-              <h2 className="text-3xl font-black text-[#f9e4bf]">
+              <h2 className="md:text-3xl text-2xl font-black text-[#f9e4bf]">
                 500+
               </h2>
 
@@ -488,7 +487,7 @@ export default function Contact() {
 
             <div className="text-center">
 
-              <h2 className="text-3xl font-black text-[#f9e4bf]">
+              <h2 className="md:text-3xl text-2xl font-black text-[#f9e4bf]">
                 24×7
               </h2>
 
@@ -500,7 +499,7 @@ export default function Contact() {
 
             <div className="text-center">
 
-              <h2 className="text-3xl font-black text-[#f9e4bf]">
+              <h2 className="md:text-3xl text-2xl font-black text-[#f9e4bf]">
                 Premium
               </h2>
 
@@ -525,15 +524,15 @@ export default function Contact() {
 
     <div className="text-center">
 
-      <span className="uppercase tracking-[5px] text-[#164984] ">
+      <span className="uppercase font-manrope font-semibold tracking-[5px] text-[#164984] ">
         FAQ
       </span>
 
-      <h2 className="mt-4 text-2xl md:text-4xl font-black text-[#8b183d]">
+      <h2 className="mt-4 font-cormorant font-bold text-2xl md:text-4xl font-black text-[#8b183d]">
         Frequently Asked Questions
       </h2>
 
-      <p className="mx-auto mt-6 text-xl md:text-2xl max-w-3xl text-lg leading-8 text-[#3e5a2c]">
+      <p className="mx-auto mt-6   md:text-xl md:text-2xl max-w-3xl text-lg leading-8 text-[#3e5a2c]">
         Here are some common questions about our sweets, ordering process
         and customer support.
       </p>
@@ -612,7 +611,7 @@ export default function Contact() {
       {/* CTA */}
       {/* ================================================= */}
 
-  <section className="relative overflow-hidden bg-gradient-to-r from-[#164984] via-[#8b183d] to-[#603917] py-28">
+  <section className="relative overflow-hidden bg-gradient-to-r from-[#164984] via-[#8b183d] to-[#603917] py-14 md:py-16">
 
   <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-[#66BC9E]/20 blur-3xl"></div>
 
@@ -624,19 +623,19 @@ export default function Contact() {
       LET'S CONNECT
     </span>
 <ScrollWavyUnderline color="#F4C02D"/>
-    <h2 className="mt-6 text-2xl md:text-4xl font-black text-white leading-tight">
+    <h2 className="mt-6 font-cormorant text-2xl md:text-4xl font-black text-white leading-tight">
       Let's Make Every
       <br />
       Celebration Sweeter
     </h2>
 
-    <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-[#f9e4bf]/90">
+    <p className="mx-auto mt-4 md:mt-8 max-w-3xl md:text-lg leading-9 text-[#f9e4bf]/90">
       Whether you're looking for premium sweets, festive gift boxes or
       corporate orders, our team is always ready to help you create
       unforgettable moments.
     </p>
 
-    <div className="mt-12 flex flex-wrap justify-center gap-5">
+    <div className= "mt-6 md:mt-12 flex flex-wrap justify-center md:gap-5 gap-2">
 
       <a
         href="tel:18002032007"
@@ -647,7 +646,7 @@ export default function Contact() {
 
       <a
         href="mailto:cs@wemakesweets.com"
-        className="rounded-full border border-[#f9e4bf]/40 px-8 bg-pink-600 py-4 font-semibold text-[#f9e4bf] transition hover:bg-[#572340] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
+        className="rounded-full border border-[#f9e4bf]/40 px-8 bg-pink-600 py-4 font-semibold text-[#f9e4bf] transition hover:bg-[#572340] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000]  hover:shadow-[3px_4px_0px_#000]"
       >
         ✉ Email Us
       </a>
@@ -660,17 +659,17 @@ export default function Contact() {
       {/* ================================================= */}
       {/* FINAL MESSAGE */}
       {/* ================================================= */}
-<section className="bg-[#f9e4bf] py-20">
+<section className="bg-[#f5ebda] py-10 md:py-12">
 
   <div className="mx-auto max-w-5xl px-6 text-center">
 
-    <h2 className="text-4xl font-black text-[#8b183d]">
+    <h2 className="text-2xl md:text-4xl font-cormorant font-black text-[#8b183d]">
       Thank You For Visiting
     </h2>
 <ScrollWavyUnderline/>
     {/* <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-[#66BC9E]" /> */}
 
-    <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-[#3e5a2c]">
+    <p className="mx-auto mt-8 font-manrope max-w-3xl md:text-lg leading-9 text-[#3e5a2c]">
       We appreciate your interest in <strong>We Make Sweets</strong>.
       Every enquiry, every order and every celebration inspires us to
       craft sweets that bring happiness to your family and loved ones.
@@ -701,6 +700,6 @@ export default function Contact() {
 </section>
 
     </main>
-    </div>
+    
   );
 }

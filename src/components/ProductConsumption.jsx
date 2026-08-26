@@ -269,18 +269,20 @@ const ProductConsumption = () => {
               className="
                 inline-block
                 rounded-full
-                px-5
+                md:px-8
+                md:py-3
+                px-4
                 py-2
                 text-xs
                 font-manrope
-                font-medium
+                font-bold
                 uppercase
                 tracking-[4px]
                 text-white
                   bg-pink-600
               hover:bg-[#66BC9E]
               hover:scale-105
-                  hover:text-black
+                  hover:text-white
               shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
               "
             >
@@ -380,20 +382,19 @@ const ProductConsumption = () => {
               py-2
               md:px-8
               md:py-3
-              font-semibold
+              font-bold
               font-manrope
               text-white
-              hover:text-black
+              hover:text-white
               shadow-md
               transition-all
               duration-300
               hover:bg-[#60b396]
               hover:scale-105
-              
               shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
             "
           >
-             📞 Call For Bulk{" "} Orders
+            ☎ Call For Bulk{" "} Orders
           
 
           </a>
