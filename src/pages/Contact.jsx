@@ -641,7 +641,7 @@ export default function Contact() {
         href="tel:18002032007"
         className="rounded-full bg-pink-600 px-8 py-4 font-semibold text-white transition hover:scale-105 hover:bg-[#572340] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
       >
-        📞 Call Now
+         ☎ Call Now
       </a>
 
       <a

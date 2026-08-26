@@ -103,7 +103,7 @@ export default function ProductHero() {
               size={18}
             />
 
-            <span className="font-medium text-[#552b12]">
+            <span className="font-medium font-manrope text-[#552b12]">
               Premium Collection
             </span>
           </div>
@@ -118,7 +118,7 @@ export default function ProductHero() {
             delay: .2,
             duration: .6,
           }}
-          className="mt-4 md:mt-8 text-center text-3xl font-black tracking-tight text-[#552b12] md:text-5xl"
+          className="mt-4 font-cormorant font-bold md:mt-8 text-center text-3xl font-black tracking-tight text-[#552b12] md:text-5xl"
         >
           SHOP OUR
           <br />
@@ -136,7 +136,7 @@ export default function ProductHero() {
           transition={{
             delay: .4,
           }}
-          className="mx-auto mt-4 md:mt-8 max-w-3xl text-center text-[15px] md:text-lg leading-8 text-[#552b12]/80"
+          className="mx-auto mt-4 md:mt-8 max-w-3xl font-manrope text-center text-[15px] md:text-lg leading-8 text-[#552b12]/80"
         >
           Crafted with premium ingredients and inspired by Indian traditions,
           explore our delicious sweets, healthy snacks and gifting hampers.

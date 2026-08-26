@@ -354,7 +354,7 @@ const ProductConsumption = () => {
           "
         >
 
-          <h3 className="font-cormorant font-semibold text-3xl text-[#f9e4bf]">
+          <h3 className="font-cormorant font-semibold text-xl md:text-3xl text-[#f9e4bf]">
 
             Crafted For Every{" "}
 
