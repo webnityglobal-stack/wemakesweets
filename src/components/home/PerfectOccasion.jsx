@@ -158,8 +158,9 @@ const PerfectOccasion = () => {
             <div
               className="
                 relative
-                h-[220px]
+                h-[320px]
                 w-[48%]
+                
                 shrink-0
                 overflow-hidden
                 sm:h-[280px]
@@ -180,6 +181,9 @@ const PerfectOccasion = () => {
                   w-full
                   object-cover
                   object-left
+                    translate-y-[5px]
+  lg:translate-y-0
+
                 "
               />
 
@@ -362,7 +366,7 @@ const PerfectOccasion = () => {
               <div
                 className="
                   mt-4
-                  hidden
+                  
                   space-y-2.5
                   sm:block
                   lg:mt-7
@@ -705,7 +709,7 @@ lg:mt-24
   <div
     className="
       mt-4
-      hidden
+      
       space-y-2.5
 
       sm:block
@@ -904,7 +908,7 @@ md:pl-18
     <div
       className="
         relative
-        h-[220px]
+        h-[320px]
         w-[52%]
         shrink-0
         overflow-hidden
