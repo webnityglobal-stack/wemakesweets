@@ -144,7 +144,7 @@ export default function ProductHero() {
 
         {/* Features */}
 
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{
@@ -167,11 +167,11 @@ export default function ProductHero() {
               </span>
             </div>
           ))}
-        </motion.div>
+        </motion.div> */}
 
         {/* Categories */}
 
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{
@@ -210,7 +210,7 @@ export default function ProductHero() {
               </motion.button>
             );
           })}
-        </motion.div>
+        </motion.div> */}
 
         {/* Scroll */}
 

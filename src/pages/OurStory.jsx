@@ -139,7 +139,7 @@ export default function OurStory() {
       {/* OUR BEGINNING */}
       {/* ===================================================== */}
 
-     <section className="md:py-16 py-14">
+     <section className="md:py-8 py-14">
 
   <div className="mx-auto max-w-7xl px-6 lg:px-10">
 
@@ -147,16 +147,16 @@ export default function OurStory() {
 
       {/* IMAGE */}
 
-      <div className="relative">
+      <div className="relative md:translate-y-14">
 
-        <div className="absolute -bottom-5 -right-5 h-full w-full rounded-[35px] bg-[#603917]" />
+        <div className="absolute -bottom-5 -right-5  h-full w-full rounded-[35px] bg-[#603917]" />
 
-        <div className="relative overflow-hidden rounded-[35px] shadow-2xl">
+        <div className="relative  overflow-hidden rounded-[35px] shadow-2xl">
 
           <img
             src="/ourStory/ourStoryPage2.webp"
             alt=""
-            className="h-[650px] w-full object-cover transition duration-700 hover:scale-110"
+            className="h-[650px] w-full  object-cover transition duration-700 hover:scale-110"
           />
 
         </div>
@@ -173,7 +173,7 @@ export default function OurStory() {
 
         </span>
 
-        <h2 className="md:mt-5 mt-2 md:text-5xl text-3xl font-cormorant font-black leading-tight text-[#8b183d]">
+        <h2 className="md:mt-2 mt-2 md:text-4xl text-3xl font-cormorant font-black leading-tight text-[#8b183d]">
 
           Inspired By
           <br />
@@ -186,7 +186,7 @@ export default function OurStory() {
         {/* <div className="mt-8 h-1 w-28 rounded-full bg-[#66BC9E]" /> */}
         
 
-        <p className="md:mt-8 mt-4 leading-9 text-[#3e5a2c]">
+        <p className="md:mt-4 mt-4  text-[#3e5a2c]">
 
           Our journey began with a simple belief—
           that every celebration deserves sweets crafted
@@ -194,7 +194,7 @@ export default function OurStory() {
 
         </p>
 
-        <p className="md:mt-6 mt-2 leading-9 text-[#3e5a2c]">
+        <p className="md:mt-2 mt-2 leading-9 text-[#3e5a2c]">
 
           From sourcing premium ingredients to preserving
           traditional recipes, every detail reflects our
@@ -203,17 +203,17 @@ export default function OurStory() {
 
         </p>
 
-        <div className="mt-12 grid gap-6 text-[#f9e4bf] sm:grid-cols-2">
+        <div className="mt-6 grid gap-4 text-[#f9e4bf] sm:grid-cols-2">
 
           {/* 1st */}
-          <div className="rounded-3xl bg-[#603917] p-7 shadow-lg transition hover:-translate-y-2 hover:shadow-xl">
+          <div className="rounded-3xl bg-[#603917] p-7 md:px-5 md:p-0 md:py-4 h-fit shadow-lg transition hover:-translate-y-2 hover:shadow-xl">
 
             <Heart
               className="text-[#F4C02D]"
-              size={34}
+              size={28}
             />
 
-            <h4 className="mt-5  text-xl font-bold">
+            <h4 className="mt-5 md:mt-2 text-xl font-bold">
 
               Made With Love
 
@@ -229,14 +229,14 @@ export default function OurStory() {
           </div>
 
           {/* 2nd */}
-          <div className="rounded-3xl bg-[#164984] p-7 shadow-lg transition hover:-translate-y-2 hover:shadow-xl">
+          <div className="rounded-3xl bg-[#164984] p-7 md:px-5 md:p-0 md:py-4 h-fit shadow-lg transition hover:-translate-y-2 hover:shadow-xl">
 
             <Award
               className="text-[#F4C02D]"
-              size={34}
+              size={28}
             />
 
-            <h4 className="mt-5 text-xl font-bold">
+            <h4 className="mt-5 md:mt-2 text-xl font-bold">
 
               Premium Quality
 
@@ -252,14 +252,14 @@ export default function OurStory() {
           </div>
 
           {/* 3rd */}
-          <div className="rounded-3xl bg-[#3e5a2c] p-7 shadow-lg transition hover:-translate-y-2 hover:shadow-xl">
+          <div className="rounded-3xl bg-[#3e5a2c] p-7 md:px-5 md:p-0 md:py-4 h-fit shadow-lg transition hover:-translate-y-2 hover:shadow-xl">
 
             <Leaf
               className="text-[#66BC9E]"
-              size={34}
+              size={28}
             />
 
-            <h4 className="mt-5 text-xl font-bold">
+            <h4 className="mt-5 md:mt-2 text-xl font-bold">
 
               Pure Ingredients
 
@@ -275,14 +275,14 @@ export default function OurStory() {
           </div>
 
           {/* 4th */}
-          <div className="rounded-3xl bg-[#8b183d] p-7 shadow-lg transition hover:-translate-y-2 hover:shadow-xl">
+          <div className="rounded-3xl bg-[#8b183d] p-7 md:px-5 md:p-0 md:py-4 h-fit shadow-lg transition hover:-translate-y-2 hover:shadow-xl">
 
             <Sparkles
               className="text-[#F4C02D]"
-              size={34}
+              size={28}
             />
 
-            <h4 className="mt-5 text-xl font-bold">
+            <h4 className="mt-5 md:mt-2 text-xl font-bold">
 
               Memorable Moments
 
