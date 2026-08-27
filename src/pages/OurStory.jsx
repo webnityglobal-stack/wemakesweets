@@ -634,7 +634,7 @@ export default function OurStory() {
             Explore Collection
           </button>
 
-          <button className="rounded-full bg-pink-600 hover:bg-[#60b396] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]   px-8 py-4 font-semibold text-[#f9e4bf] transition">
+          <button className="rounded-full bg-pink-600 hover:bg-[#60b396] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]   px-8 py-4 font-semibold text-white transition">
             Contact Us
           </button>
 

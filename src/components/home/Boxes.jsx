@@ -114,7 +114,7 @@ export default function Boxes() {
         </div>
 
         {/* Button */}
-        <div className="flex justify-center mt-4 md:mt-7">
+        <a className="flex justify-center mt-4 md:mt-7" href='/products'>
           <button
             className="
               flex
@@ -142,7 +142,7 @@ export default function Boxes() {
             View All
             <ArrowRight size={18} />
           </button>
-        </div>
+        </a>
 
       </div>
     </section>
