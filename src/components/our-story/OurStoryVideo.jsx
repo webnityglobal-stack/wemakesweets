@@ -199,6 +199,7 @@ const OurStoryVideo = () => {
               <video
                 ref={videoRef}
                 src="/ourStory/OurStory.mp4"
+                poster='/ourStory/ourStoryThumbnail.png'
                 loop
                 playsInline
                 controls
