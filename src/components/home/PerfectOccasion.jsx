@@ -632,7 +632,7 @@ lg:hidden
       className="sm:h-3.5 sm:w-3.5"
     />
 
-    ORIGINATED FROM
+    THE PRODUCT
   </p>
 
 
@@ -654,7 +654,7 @@ lg:hidden
       xl:text-5xl
     "
   >
-    GUJARAT
+    SURAT
   </h2>
 
 

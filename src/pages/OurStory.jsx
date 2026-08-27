@@ -72,7 +72,7 @@ export default function OurStory() {
 
         </p>
 
-        <button className="group md:mt-10 mt-5 flex items-center gap-3 rounded-full bg-pink-600 px-8 py-4 text-white font-manrope font-semibold transition-all duration-300 hover:scale-105 hover:bg-[#60b396] hover:shadow-xl shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
+        <button className="group md:mt-10 mt-5 flex items-center gap-3 rounded-full bg-pink-600 px-8 py-4 text-white font-manrope font-semibold transition-all duration-300 hover:scale-105 hover:bg-[#60b396] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
 
           Explore Our Journey
 
@@ -634,7 +634,7 @@ export default function OurStory() {
             Explore Collection
           </button>
 
-          <button className="rounded-full border border-[#f9e4bf]/40 px-8 py-4 font-semibold text-[#f9e4bf] transition hover:bg-[#66BC9E]/15">
+          <button className="rounded-full bg-pink-600 hover:bg-[#60b396] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]   px-8 py-4 font-semibold text-[#f9e4bf] transition">
             Contact Us
           </button>
 

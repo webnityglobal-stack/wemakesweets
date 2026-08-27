@@ -340,7 +340,7 @@ const ProductConsumption = () => {
         {/* BULK ORDER CTA */}
         {/* ================================================= */}
 
-        <div
+        {/* <div
           className="
             mt-14
             rounded-3xl
@@ -352,7 +352,29 @@ const ProductConsumption = () => {
             max-w-[1000px] 
             mx-auto
           "
-        >
+        > */}
+        <div
+  className="
+    mt-14
+    rounded-3xl
+    bg-[#164984]
+    px-2
+    py-8
+    text-center
+    shadow-xl
+
+    w-[90%]
+    max-w-[1000px]
+    min-h-[260px]
+
+    md:w-auto
+    md:min-h-0
+    md:px-8
+    md:py-8
+
+    mx-auto
+  "
+>
 
           <h3 className="font-cormorant font-semibold text-xl md:text-3xl text-[#f9e4bf]">
 

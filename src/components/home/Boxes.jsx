@@ -48,6 +48,7 @@ const categories = [
     color: "#164984",
     ingredients: [
       "Sunflower Seeds",
+      "Pumpkin Seeds",
       "Watermelon Seeds",
       "Almonds",
       "Cashewnuts",

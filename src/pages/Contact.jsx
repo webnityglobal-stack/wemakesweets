@@ -25,7 +25,7 @@ export default function Contact() {
 
           <div className="text-center">
 
-            <span className="inline-flex rounded-full bg-pink-600 px-5 py-2 text-sm uppercase tracking-[4px] text-[#f9e4bf] backdrop-blur shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
+            <span className="inline-flex rounded-full bg-pink-600 hover:bg-[#60b396] px-5 py-2 text-sm uppercase tracking-[4px] text-[#f9e4bf] backdrop-blur shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
               Contact Us
             </span>
 
@@ -68,7 +68,7 @@ export default function Contact() {
 
             <div className="rounded-[35px] bg-[#603917] p-8 shadow-2xl lg:p-10">
 
-              <span className="uppercase tracking-[5px] text-[#f9e4bf] font-semibold ">
+              <span className="uppercase tracking-[5px] text-[#f9e4bf]  font-semibold ">
                 Send Us A Message
               </span>
 
@@ -160,7 +160,7 @@ export default function Contact() {
                 </div>
 
                 <button
-                  className="flex items-center gap-3 rounded-full bg-pink-600 md:px-8 md:py-4 px-4 py-3 font-semibold text-white transition duration-300 hover:scale-105 hover:bg-[#572340] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
+                  className="flex items-center gap-3 hover:bg-[#60b396] rounded-full bg-pink-600 md:px-8 md:py-4 px-4 py-3 font-semibold text-white transition duration-300 hover:scale-105  shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
                 >
                   <Send size={18} />
                   Send Message
@@ -639,14 +639,14 @@ export default function Contact() {
 
       <a
         href="tel:18002032007"
-        className="rounded-full bg-pink-600 px-8 py-4 font-semibold text-white transition hover:scale-105 hover:bg-[#572340] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
+        className="rounded-full bg-pink-600 hover:bg-[#60b396] px-8 py-4 font-semibold text-white transition hover:scale-105  shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
       >
          ☎ Call Now
       </a>
 
       <a
         href="mailto:cs@wemakesweets.com"
-        className="rounded-full border border-[#f9e4bf]/40 px-8 bg-pink-600 py-4 font-semibold text-[#f9e4bf] transition hover:bg-[#572340] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000]  hover:shadow-[3px_4px_0px_#000]"
+        className="rounded-full border border-0 px-8 bg-pink-600 hover:bg-[#60b396] py-4 font-semibold text-[#f9e4bf] transition shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000]  hover:shadow-[3px_4px_0px_#000]"
       >
         ✉ Email Us
       </a>
