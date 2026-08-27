@@ -12,8 +12,9 @@ const PerfectOccasion = () => {
   
   return (
     <section className="relative w-full overflow-hidden bg-[#f5ead7]">
+
 {/* decorative shape left */}
-<div className="pointer-events-none absolute left-140 z-20 top-20 h-12 w-12 rotate-180 opacity-50">
+<div className="pointer-events-none absolute left-165 z-20 top-28 h-12 w-12 rotate-180 opacity-50">
 
         <svg
           viewBox="0 0 200 200"
@@ -25,7 +26,7 @@ const PerfectOccasion = () => {
       </div>
 {/* decorative shape right*/}
 
-<div className="pointer-events-none absolute left-202 z-20 top-20 h-12 w-12 rotate-180 opacity-50">
+<div className="pointer-events-none absolute left-222 z-20 top-28 h-12 w-12 rotate-180 opacity-50">
 
         <svg
           viewBox="0 0 200 200"
@@ -46,7 +47,7 @@ const PerfectOccasion = () => {
     flex-col
     absolute
     top-14
-    left-150
+    left-174
     z-20
     items-center
     gap-2
@@ -119,6 +120,7 @@ const PerfectOccasion = () => {
           flex-col
           lg:min-h-[650px]
           lg:flex-row
+        
         "
       >
 
@@ -129,12 +131,14 @@ const PerfectOccasion = () => {
         <div
           className="
             relative
+            
             flex
             w-full
+            md:w-fit
             overflow-hidden
             bg-[#f5ead7]
             lg:min-h-[650px]
-            lg:w-[45%]
+            lg:w-[50%]
           "
         >
 
@@ -244,6 +248,30 @@ const PerfectOccasion = () => {
     xl:px-4
   "
 > */}
+{/* <div
+   className="
+    relative
+    z-10
+    flex
+    min-w-0
+    flex-1
+    flex-col
+    justify-center
+    bg-[#f5ead7]
+    pl-8
+    lg:pl-0
+    xl:pl-0
+    pr-1
+    py-4
+    sm:px-5
+    sm:py-6
+    lg:-ml-3
+    lg:px-4
+    xl:px-4
+    lg:items-center
+  "
+> */}
+
 <div
   className="
     relative
@@ -265,6 +293,7 @@ const PerfectOccasion = () => {
     lg:px-4
     xl:px-4
     lg:items-center
+    lg:translate-x-9
   "
 >
 
@@ -545,7 +574,7 @@ const PerfectOccasion = () => {
                     sm:tracking-[0.13em]
                   "
                 >
-                  Timeless Traditions
+                  Timeless<br/> Traditions
                 </span>
 
               </div>
@@ -586,7 +615,7 @@ const PerfectOccasion = () => {
         LEFT SIDE OF THIS PANEL
     ================================================= */}
 
-  <div
+  {/* <div
   className="
     relative
     z-10
@@ -610,6 +639,34 @@ const PerfectOccasion = () => {
     lg:py-8
 
     xl:px-9
+  "
+> */}
+
+<div
+  className="
+    relative
+    z-10
+    flex
+    min-w-0
+    flex-1
+    flex-col
+    justify-center
+
+    bg-[#f5ead7]
+
+    pl-8
+    py-4
+
+    sm:px-5
+    sm:py-6
+
+    lg:w-[40%]
+    lg:flex-none
+    lg:px-7
+    lg:py-8
+
+    xl:px-9
+    lg:translate-x-11
   "
 >
 
@@ -713,7 +770,6 @@ lg:mt-24
       space-y-2.5
 
       sm:block
-
       lg:mt-7
       lg:space-y-4
       md:pl-16

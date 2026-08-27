@@ -356,3 +356,19 @@ body {
     display: none;
   }
 }
+
+
+@keyframes iconSlider {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-icon-slider {
+  animation: iconSlider 18s linear infinite;
+}
+
