@@ -67,8 +67,8 @@ const FAQPage = () => {
     // <section className="relative overflow-hidden bg-[#f5ebda] py-4">
     <section className="relative z-10 -mb-[1px] overflow-hidden bg-[#f5ebda] py-4 border-0 outline-none">
       {/* Background Blur */}
-      <div className="absolute -top-24 left-0 h-72 w-72 rounded-full bg-[#8b183d]/10 blur-[120px]" />
-      <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-[#164984]/10 blur-[120px]" />
+      {/* <div className="absolute -top-24 left-0 h-72 w-72 rounded-full bg-[#8b183d]/10 blur-[120px]" />
+      <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-[#164984]/10 blur-[120px]" /> */}
 
       <div className="relative mx-auto max-w-5xl px-6">
 

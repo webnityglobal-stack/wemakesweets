@@ -684,7 +684,7 @@ const PerfectOccasion = () => {
 lg:hidden
       sm:text-[9px]
       sm:tracking-[0.18em]
-
+hidden
       lg:text-[10px]
     "
   >
@@ -702,6 +702,7 @@ lg:hidden
     className="
       mt-1
       lg:hidden
+      hidden
       font-cormorant
       text-3xl
       font-medium
@@ -724,6 +725,7 @@ lg:hidden
     className="
     lg:hidden
       mt-2
+      hidden
       h-[2px]
       w-12
       bg-[#dca94e]
@@ -732,6 +734,16 @@ lg:hidden
     "
   />
 
+<div className="lg:hidden relative pointer-events-none z-20 ml-11 h-10 w-10 rotate-180 opacity-50">
+
+        <svg
+          viewBox="0 0 200 200"
+          className="h-full w-full fill-[#f4c02d]"
+        >
+          <path d="M100 0C80 40 40 80 0 100c40 20 80 60 100 100 20-40 60-80 100-100-40-20-80-60-100-100z" />
+        </svg>
+
+      </div>
 
   {/* Description */}
   <p
