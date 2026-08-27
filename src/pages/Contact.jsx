@@ -185,7 +185,7 @@ export default function Contact() {
     <br />
     Here To Help
   </h2>
-<ScrollWavyUnderline />
+<ScrollWavyUnderline className="pr-70"/>
   <p className="mt-6 leading-8 text-[#3e5a2c]">
     Have questions about our sweets,
     bulk orders or corporate gifting?

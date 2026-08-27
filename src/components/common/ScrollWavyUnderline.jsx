@@ -94,6 +94,7 @@ import { useRef } from "react";
 
 const ScrollWavyUnderline = ({
   color = "#810c26",
+   className = "",
 }) => {
   const ref = useRef(null);
 
@@ -111,7 +112,7 @@ const ScrollWavyUnderline = ({
   return (
     <div
       ref={ref}
-      className="flex justify-center mt-3"
+      className={`flex justify-center mt-3 ${className}`}
     >
       <motion.svg
         viewBox="0 0 300 24"

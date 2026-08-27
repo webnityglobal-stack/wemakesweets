@@ -39,13 +39,13 @@ const PerfectOccasion = () => {
 
 
 {/* Desktop heading */}
-<div
+<div 
   className="
     hidden
     lg:flex
     flex-col
     absolute
-    top-6
+    top-14
     left-150
     z-20
     items-center

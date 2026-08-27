@@ -113,7 +113,7 @@ useEffect(() => {
                 {" "}
                 Snack Stories
               </span>
-              <ScrollWavyUnderline/>
+              <ScrollWavyUnderline className='pr-50'/>
             </h2>
 
             <p className="mt-4 font-manrope font-normal max-w-2xl text-[#6b4b35]">

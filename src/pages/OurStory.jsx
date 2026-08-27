@@ -57,7 +57,7 @@ export default function OurStory() {
           <br />
 
           Has A Story
-<ScrollWavyUnderline  color="#f9e4bf"/>
+<ScrollWavyUnderline  color="#f9e4bf" className="pr-80"/>
         </h1>
 
         {/* <div className="mt-6 h-1 w-32 rounded-full bg-[#E35A7E]" /> */}
@@ -180,7 +180,7 @@ export default function OurStory() {
           Tradition,
           <br />
           Perfected With Passion.
-          <ScrollWavyUnderline color="#66BC9E"/>
+          <ScrollWavyUnderline color="#66BC9E" className="pr-60"/>
         </h2>
 
         {/* <div className="mt-8 h-1 w-28 rounded-full bg-[#66BC9E]" /> */}
