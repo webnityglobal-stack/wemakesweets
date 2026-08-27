@@ -47,7 +47,7 @@ const toggleSection = (section) => {
   <svg
     viewBox="0 0 1200 120"
     preserveAspectRatio="none"
-    className="relative block h-16 md:h-18 w-full fill-[#f5ebda] md:[#f5ebda]"
+    className="relative block h-16 md:h-18 w-full fill-[#f5ebda]"
   >
    
     <path d="M0,28 C220,68 420,72 600,40 C780,8 980,6 1200,28 V120 H0 Z" />
