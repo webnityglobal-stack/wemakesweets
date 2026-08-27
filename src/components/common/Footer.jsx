@@ -57,7 +57,7 @@ const toggleSection = (section) => {
 
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-26 pb-4">
-
+<div className="absolute top-32 left-31 text-[14px]"  >®</div>
         <div className="grid gap-4 md:gap-14 lg:grid-cols-5">
 
           {/* ======================================
@@ -67,7 +67,7 @@ const toggleSection = (section) => {
           <div className="lg:col-span-2">
 
             <img
-              src="/withoutBackground111.png"
+              src="/footerLogo.png"
               alt="We Make"
               className="h-20"
             />

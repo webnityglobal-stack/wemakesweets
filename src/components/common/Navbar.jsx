@@ -16,8 +16,8 @@ function Navbar() {
     <header className="w-full font-manrope bg-[#f9e4bf] px-4 md:px-8 lg:px-10 z-50">
       
       
-      <nav className="h-20 flex items-center justify-between">
-
+      <nav className="h-20 relative flex items-center justify-between">
+<div className="absolute top-6 left-25 text-[11px] text-black"  >®</div>
         {/* Logo */}
         <a href="/">
           <img
