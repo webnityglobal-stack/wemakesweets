@@ -57,7 +57,7 @@ const toggleSection = (section) => {
 
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-26 pb-4">
-<div className="absolute top-32 left-31 text-[14px]"  >®</div>
+<div className="absolute top-40 left-56 text-[18px]"  >®</div>
         <div className="grid gap-4 md:gap-14 lg:grid-cols-5">
 
           {/* ======================================
@@ -69,7 +69,7 @@ const toggleSection = (section) => {
             <img
               src="/footerLogo.png"
               alt="We Make"
-              className="h-20"
+              className="h-40"
             />
             {/* Divider */}
 
@@ -105,7 +105,7 @@ const toggleSection = (section) => {
 
               <a
                 href="#"
-                className="group flex h-8 w-8 items-center justify-center rounded-full border border-[#f4c02d]/25 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:bg-[#E35A7E]"
+                className="group flex h-8 w-8 items-center justify-center rounded-full border border-[#f4c02d]/25 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:bg-[#0866FF]"
               >
                 <img
                   src="/facebook.svg"
@@ -136,7 +136,7 @@ const toggleSection = (section) => {
                 />
               </a>
 
-              <a
+              {/* <a
                 href="#"
                 className="group flex h-8 w-8 items-center justify-center rounded-full border border-[#f4c02d]/25 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:bg-black"
               >
@@ -145,7 +145,7 @@ const toggleSection = (section) => {
                   alt="X"
                   className="h-5 w-5 transition duration-300 group-hover:scale-110"
                 />
-              </a>
+              </a> */}
 
             </div>
 </div>

@@ -52,13 +52,13 @@ function Navbar() {
             className="cursor-pointer transition hover:scale-110"
             color="#572340"
           /> */}
-
+<a href='/login'>
           <User
             size={23}
             className="cursor-pointer transition hover:scale-110"
             color="#603917"
           />
-
+</a>
           <div className="relative cursor-pointer">
             <ShoppingCart
               size={25}

@@ -23,9 +23,9 @@ const product = {
 
   highlights: [
     "100% Natural Ingredients",
-    "Sweetened With Dates",
+    "No Refined Sugar",
     "No Palm Oil",
-    "Rich In Fiber",
+    "Rich in Protein, Iron, Phosphorus",
     "No Artificial Preservatives",
     "Made In India",
   ],
@@ -43,10 +43,10 @@ const product = {
   nutrition: {
     calories: "152 kcal",
     protein: "4.8 g",
-    carbohydrates: "19 g",
-    sugar: "8 g",
-    fiber: "5.2 g",
-    fat: "6.8 g",
+    Iron: "19 g",
+    Phosphorus: "8 g",
+    Sugar: "5.2 g",
+    Fat: "6.8 g",
   },
 
   weight: "400g",

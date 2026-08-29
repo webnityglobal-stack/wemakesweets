@@ -25,9 +25,6 @@ export default function Contact() {
 
           <div className="text-center">
 
-            <span className="inline-flex rounded-full bg-pink-600 hover:bg-[#60b396] px-5 py-2 text-sm uppercase tracking-[4px] text-white backdrop-blur shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
-              Contact Us
-            </span>
 
               <h1 className="mt-6 font-cormorant font-bold text-3xl md:text-5xl font-black leading-tight text-[#f9e4bf]  ">
 
@@ -56,9 +53,9 @@ export default function Contact() {
       {/* CONTACT SECTION */}
       {/* ================================================= */}
 
-      <section className="py-9 md:py-18">
+      <section className="py-9 md:py-18 border-red-500 border-4">
 
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="mx-auto max-w-7xl lg:px-10">
 
           <div className="grid gap-16 lg:grid-cols-2">
 
@@ -66,7 +63,8 @@ export default function Contact() {
             {/* CONTACT FORM */}
             {/* ======================================= */}
 
-            <div className="rounded-[35px] bg-[#603917] p-8 shadow-2xl lg:p-10">
+            <div className="sm:px-4 pl-4">
+              <div className="rounded-[35px] bg-[#603917] p-8 shadow-2xl lg:p-10">
 
               <span className="uppercase tracking-[5px] text-[#f9e4bf]  font-semibold ">
                 Send Us A Message
@@ -168,6 +166,7 @@ export default function Contact() {
 
               </form>
 
+            </div>
             </div>
 
             {/* ======================================= */}
@@ -336,17 +335,36 @@ export default function Contact() {
 
           </div>
 
-          <div className="mt-16 overflow-hidden rounded-[35px] border-8 border-[#f9e4bf] shadow-2xl">
+         {/* <div className="mt-16 overflow-hidden rounded-[35px] border-8 border-[#f9e4bf] shadow-2xl">
+  <iframe
+    title="location"
+    src="https://www.google.com/maps?q=21.255194,72.926028&z=15&output=embed"
+    className="h-[400px] w-full"
+    loading="lazy"
+    allowFullScreen
+  />
+</div> */}
+<div className="mt-16 overflow-hidden rounded-[35px] border-8 border-[#f9e4bf] shadow-2xl">
+  <iframe
+    title="location"
+    src="https://www.google.com/maps?q=21.255194,72.926028&z=17&output=embed"
+    className="h-[400px] w-full"
+    loading="lazy"
+    allowFullScreen
+  />
+</div>
 
-            <iframe
-              title="location"
-              src="https://maps.google.com/maps?q=Ground%20Floor%20Block%20No%20159%20Plot%20No%2051%20Shakti%20Industries%20Bhada%20Surat&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              className="h-[400px] w-full"
-              loading="lazy"
-            />
-
-          </div>
-
+<div className="mt-5 text-center">
+  <a
+    href="https://www.google.com/maps?q=21.255194,72.926028"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-2 rounded-full bg-[#572340] px-6 py-3 font-manrope font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
+  >
+    Open in Google Maps
+    <span>↗</span>
+  </a>
+</div>
         </div>
 
       </section>
@@ -670,7 +688,7 @@ export default function Contact() {
     {/* <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-[#66BC9E]" /> */}
 
     <p className="mx-auto mt-8 font-manrope max-w-3xl md:text-lg leading-9 text-[#3e5a2c]">
-      We appreciate your interest in <strong>We Make Sweets</strong>.
+      We appreciate your interest in <strong>WeMake Sweets</strong>.
       Every enquiry, every order and every celebration inspires us to
       craft sweets that bring happiness to your family and loved ones.
     </p>

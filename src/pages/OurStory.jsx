@@ -65,7 +65,7 @@ export default function OurStory() {
 
         <p className="md:mt-8 mt-4 max-w-xl md:text-lg  leading-9 text-[#f9e4bf]">
 
-          At <span className="font-semibold text-[#F4C02D]">We Make Sweets</span>,
+          At <span className="font-semibold text-[#F4C02D]">WeMake Sweets</span>,
           every handcrafted delicacy is more than a dessert.
           It is a memory, a celebration and a tradition passed
           through generations.
@@ -435,11 +435,11 @@ export default function OurStory() {
       {[
         {
           year: "The Beginning",
-          title: "A Passion Was Born",
+          title: "A Passion Was Born — 2021",
           color: "#164984",
           card: "#603917",
           text:
-            "Started with a dream to create handcrafted sweets inspired by timeless Indian recipes.",
+            "What began in 2021 as a passion for creating wholesome, handcrafted indulgence soon became a vision to make healthy snacking truly delicious.",
         },
         {
           year: "Growing Trust",
@@ -447,15 +447,15 @@ export default function OurStory() {
           color: "#E35A7E",
           card: "#3e5a2c",
           text:
-            "Word of mouth and consistent quality helped us become part of countless celebrations.",
+            "Loved for our premium quality, wholesome ingredients and handcrafted taste, we grew one customer at a time. Today, our healthy snacks are part of countless homes, celebrations and everyday moments.",
         },
         {
           year: "Today",
-          title: "Crafting Happiness",
+          title: "Crafting Better Snacking",
           color: "#F4C02D",
           card: "#164984",
           text:
-            "We continue to innovate while preserving the authentic taste people love.",
+            "Today, we continue to create premium healthy snacks made with dates, nuts, seeds, pure cow ghee and pure honey. With a focus on quality, taste and mindful ingredients, we’re making wholesome snacking delicious, naturally.",
         },
       ].map((item, index) => (
 
@@ -535,12 +535,12 @@ export default function OurStory() {
       <div className="rounded-[35px] border-l-[8px] border-[#66BC9E] bg-[#572340] p-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
 
         <h3 className="text-2xl md:text-3xl font-bold text-[#F4C02D]">
-          Tradition
+          Premium Ingredients
         </h3>
 
         <p className="mt-5 leading-8 text-[#f9e4bf]">
-          Every recipe respects authentic Indian sweet-making traditions
-          passed through generations.
+         We choose premium dates, nuts, seeds, pure cow ghee and pure honey to create wholesome snacks you can trust.
+
         </p>
 
       </div>
@@ -549,12 +549,12 @@ export default function OurStory() {
       <div className="rounded-[35px] border-l-[8px] border-[#E35A7E] bg-[#8b183d] p-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
 
         <h3 className="text-2xl md:text-3xl font-bold text-[#F4C02D]">
-          Quality
+          Honest & Clean
         </h3>
 
         <p className="mt-5 leading-8 text-[#f9e4bf]">
-          Premium ingredients and uncompromising quality standards are at
-          the heart of everything we make.
+          Simple, thoughtfully selected ingredients. No unnecessary compromise—just delicious, wholesome snacking.
+
         </p>
 
       </div>
@@ -563,12 +563,12 @@ export default function OurStory() {
       <div className="rounded-[35px] border-l-[8px] border-[#66BC9E] bg-[#3e5a2c] p-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
 
         <h3 className="text-2xl md:text-3xl font-bold text-[#F4C02D]">
-          Freshness
+          Taste Without Compromise
         </h3>
 
         <p className="mt-5 leading-8 text-[#f9e4bf]">
-          Every order is prepared with freshness and attention to detail,
-          ensuring the finest taste.
+          Healthy should never mean boring. We craft naturally delicious snacks that bring together nutrition and indulgent taste.
+
         </p>
 
       </div>
@@ -577,12 +577,11 @@ export default function OurStory() {
       <div className="rounded-[35px] border-l-[8px] border-[#DE6239] bg-[#603917] p-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
 
         <h3 className="text-2xl md:text-3xl font-bold text-[#F4C02D]">
-          Relationships
+          Crafted With Care
         </h3>
 
         <p className="mt-5 leading-8 text-[#f9e4bf]">
-          We don't just make sweets—we build lasting relationships through
-          trust and memorable celebrations.
+         From sourcing to every finished bite, we focus on quality, freshness and mindful craftsmanship to deliver snacks made with care.
         </p>
 
       </div>
@@ -699,7 +698,7 @@ export default function OurStory() {
       <br />
       A Part Of Our Story
     </h2>
-
+<ScrollWavyUnderline/>
     <p className="mx-auto font-manrope mt-8 max-w-3xl text-[16px]  leading-9 text-[#3e5a2c]">
       Every customer who chooses us becomes a part of our journey.
       Your celebrations inspire us to create sweets that carry happiness,
@@ -707,9 +706,9 @@ export default function OurStory() {
     </p>
 
     {/* <div className="mx-auto mt-12 h-1 w-28 rounded-full bg-[#66BC9E]" /> */}
-    <ScrollWavyUnderline/>
+    
 
-    <div className="mt-14 flex flex-wrap font-manrope justify-center gap-5">
+    {/* <div className="mt-14 flex flex-wrap font-manrope justify-center gap-5">
 
       <div className="rounded-full bg-[#164984] px-6 py-3 text-white">
         Authentic Taste
@@ -727,7 +726,7 @@ export default function OurStory() {
         Made With Love
       </div>
 
-    </div>
+    </div> */}
 
   </div>
 

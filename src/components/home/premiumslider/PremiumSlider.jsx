@@ -60,7 +60,7 @@ const PremiumSlider = () => {
                 </p>
 
                 {/* Standard Project Button */}
-              <Link to='/products'>
+              {/* <Link to='/products'>
                 <button
                 
                   className="
@@ -84,7 +84,7 @@ const PremiumSlider = () => {
                 >
                   {slide.button}
                 </button>
-              </Link>
+              </Link> */}
 
               </div>
             </div>

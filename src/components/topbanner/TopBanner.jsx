@@ -29,6 +29,7 @@ const TopBanner = () => {
       whitespace-nowrap
       rounded-full
       bg-pink-600
+      text-manrope 
       px-4
       py-1
       text-sm

@@ -40,7 +40,7 @@ const benefits = [
   {
     icon: Clock3,
     title: "Made Fresh Daily",
-    description: "Prepared in small batches every day to maintain authentic taste and freshness.",
+    description: "Prepared in multiple batches every day to maintain authentic taste and freshness.",
     color: "#F4C02D",
     bg: "#572340",
   },

@@ -9,6 +9,8 @@ import AllProducts from '../pages/AllProducts'
 import ProductDetailsPage from '../pages/ProductDetailsPage'
 import ScrollToTop from '@/components/ScrollToTop'
 import { Link } from "react-router-dom";
+import Signup from '@/pages/SignUp'
+import Login from '@/layout/Login'
 
 const AppRoutes = () => {
   return (
@@ -22,6 +24,8 @@ const AppRoutes = () => {
              <Route path='contact' element={<Contact/>}/>
              <Route path='products' element={<AllProducts/>}/>
              <Route path="/products/:slug" element={<ProductDetailsPage/>} />
+             <Route path='/sign-up' element={<Signup/>}/>
+             <Route path='/login' element ={<Login/>}/>
         </Route>
        
     </Routes>
