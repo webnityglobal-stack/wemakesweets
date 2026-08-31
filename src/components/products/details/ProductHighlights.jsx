@@ -18,7 +18,7 @@ const icons = [
 
 const ProductHighlights = ({ product }) => {
   return (
-    <section className="px-1 md:px-5">
+    <section className="w-full max-w-full min-w-0 overflow-hidden px-1 md:px-5">
 
       <div className="text-center">
 
@@ -37,39 +37,23 @@ const ProductHighlights = ({ product }) => {
 
       </div>
 
-      <div className="mt-6 md:mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-
+      <div className="mt-6 md:mt-12 flex w-full max-w-full min-w-0 overflow-x-auto gap-4 pb-4 pt-1 px-1 snap-x snap-mandatory scrollbar-hide sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 sm:overflow-visible sm:p-0">
         {product.highlights.map((item, index) => (
-
           <div
             key={index}
-            className="group rounded-3xl border border-[#810c2615] bg-white p-4 text-center md:p-8 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-[#810c26] hover:shadow-xl"
+            className="group flex-shrink-0 w-[68%] xs:w-[60%] sm:w-auto snap-center rounded-3xl border border-[#810c2615] bg-white p-5 text-center md:p-8 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-[#810c26] hover:shadow-xl flex flex-col items-center justify-center"
           >
-
-            {/* <div className="mb-5 inline-flex rounded-2xl bg-[#f9e4bf] p-4 text-[#810c26] transition group-hover:bg-[#810c26] group-hover:text-white">
-
-              {icons[index]}
-
-            </div> */}
             <div className="mb-3 inline-flex rounded-xl bg-[#f9e4bf] p-2.5 text-[#810c26] transition group-hover:bg-[#810c26] group-hover:text-white md:mb-5 md:rounded-2xl md:p-4">
-  <span className="[&>svg]:h-5 [&>svg]:w-5 md:[&>svg]:h-6 md:[&>svg]:w-6">
-    {icons[index]}
-  </span>
-</div>
+              <span className="[&>svg]:h-5 [&>svg]:w-5 md:[&>svg]:h-6 md:[&>svg]:w-6">
+                {icons[index % icons.length]}
+              </span>
+            </div>
 
-            <h3 className="md:text-xl text-[18px]  font-semibold text-[#08376c]">
+            <h3 className="md:text-xl text-[16px] sm:text-[18px] font-semibold text-[#08376c]">
               {item}
             </h3>
-
-            {/* <p className="mt-3 text-gray-600">
-              Carefully selected premium ingredients that make every bite
-              healthier, tastier and naturally satisfying.
-            </p> */}
-
           </div>
-
         ))}
-
       </div>
 
     </section>

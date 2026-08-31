@@ -60,83 +60,78 @@ const TopBanner = () => {
 </div>
 
 
-      {/* ================= MOBILE ================= */}
-      <div className="relative flex h-[48px] w-full items-center overflow-hidden md:hidden">
-
+      {/* ================= MOBILE (CONTINUOUS SEAMLESS MARQUEE) ================= */}
+      <div className="relative flex h-[46px] w-full items-center overflow-hidden md:hidden select-none">
         <div className="top-banner-marquee flex w-max items-center whitespace-nowrap">
+          {/* Primary Set */}
+          <div className="flex shrink-0 items-center">
+            {[1, 2, 3, 4].map((item) => (
+              <div key={`primary-${item}`} className="flex shrink-0 items-center gap-2.5 px-3">
+                <span className="whitespace-nowrap text-[11px] font-semibold font-manrope text-white">
+                  For Corporate Gift Orders
+                </span>
 
-          {/* First Content */}
-          <div className="flex shrink-0 items-center gap-3 ">
+                <a
+                  href="tel:18002032007"
+                  className="
+                    inline-flex
+                    shrink-0
+                    items-center
+                    whitespace-nowrap
+                    rounded-full
+                    bg-pink-600
+                    px-3
+                    py-1
+                    text-[10px]
+                    font-semibold
+                    text-white
+                    shadow-[1px_2px_0px_#000]
+                    font-manrope
+                    active:scale-95
+                  "
+                >
+                  Call 1800 203 2007
+                </a>
 
-            {/* <PhoneCall
-              size={14}
-              className="shrink-0 text-[#f9e4bf]"
-              strokeWidth={2.5}
-            /> */}
-
-            <span className="whitespace-nowrap text-[11px] font-semibold font-manrope text-white">
-              For Corporate Gift Orders
-            </span>
-
-            <a
-              href="tel:18002032007"
-              className="
-                inline-flex
-                shrink-0
-                items-center
-                whitespace-nowrap
-                rounded-full
-                bg-pink-600
-                px-3
-                py-1
-                text-[10px]
-                text-white
-                hover:text-white
-                shadow-[1px_2px_0px_#000]
-                font-cormorant font-semibold 
-              "
-            >
-              Call 1800 203 2007
-            </a>
-
+                <span className="text-[#f9e4bf]/50 text-xs pl-2.5">•</span>
+              </div>
+            ))}
           </div>
 
+          {/* Exact Clone Set (Ensures 0 gap and 100% continuous flow) */}
+          <div className="flex shrink-0 items-center" aria-hidden="true">
+            {[1, 2, 3, 4].map((item) => (
+              <div key={`clone-${item}`} className="flex shrink-0 items-center gap-2.5 px-3">
+                <span className="whitespace-nowrap text-[11px] font-semibold font-manrope text-white">
+                  For Corporate Gift Orders
+                </span>
 
-          {/* Duplicate Content */}
-          <div className="flex shrink-0 items-center gap-3 px-4">
-            {/* <PhoneCall
-              size={14}
-              className="shrink-0 text-[#f9e4bf]"
-              strokeWidth={2.5}
-            /> */}
+                <a
+                  href="tel:18002032007"
+                  className="
+                    inline-flex
+                    shrink-0
+                    items-center
+                    whitespace-nowrap
+                    rounded-full
+                    bg-pink-600
+                    px-3
+                    py-1
+                    text-[10px]
+                    font-semibold
+                    text-white
+                    shadow-[1px_2px_0px_#000]
+                    font-manrope
+                    active:scale-95
+                  "
+                >
+                  Call 1800 203 2007
+                </a>
 
-            <span className="whitespace-nowrap text-[11px] font-semibold font-manrope text-white">
-              For Corporate Gift Orders
-            </span>
-
-            <a
-              href="tel:18002032007"
-              className="
-                inline-flex
-                shrink-0
-                items-center
-                whitespace-nowrap
-                rounded-full
-                bg-pink-600
-                px-3
-                py-1
-                text-[10px]
-                font-semibold
-                text-white
-                shadow-[1px_2px_0px_#000]
-                
-              "
-            >
-              Call 1800 203 2007
-            </a>
-
+                <span className="text-[#f9e4bf]/50 text-xs pl-2.5">•</span>
+              </div>
+            ))}
           </div>
-
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@ export const sliderImages = [
 
   {
     id: 2,
-    image: "/madeWithLoveInIndia.webp",
+    image: "/madeWithLoveInIndia.png",
     title: "Wholesome Goodness",
     subtitle: "Fresh Ingredients Every Day",
     color: "#0D686B",

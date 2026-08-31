@@ -59,31 +59,55 @@ const product = {
   countryOfOrigin: "India",
 
   reviews: [
-  {
-    id: 1,
-    name: "Rahul Sharma",
-    rating: 5,
-    date: "12 July 2026",
-    comment:
-      "Absolutely delicious! Fresh ingredients and naturally sweet. My family loved it.",
-  },
-  {
-    id: 2,
-    name: "Priya Gupta",
-    rating: 5,
-    date: "20 July 2026",
-    comment:
-      "Perfect healthy snack. Packaging was premium and delivery was quick.",
-  },
-  {
-    id: 3,
-    name: "Amit Verma",
-    rating: 4,
-    date: "22 July 2026",
-    comment:
-      "Very tasty and filling. Would definitely order again.",
-  },
-],
+    {
+      id: 1,
+      name: "Rahul Sharma",
+      rating: 5,
+      date: "12 July 2026",
+      comment:
+        "Absolutely delicious! Fresh ingredients and naturally sweet. My family loved it.",
+    },
+    {
+      id: 2,
+      name: "Priya Gupta",
+      rating: 5,
+      date: "20 July 2026",
+      comment:
+        "Perfect healthy snack. Packaging was premium and delivery was quick.",
+    },
+    {
+      id: 3,
+      name: "Amit Verma",
+      rating: 4,
+      date: "22 July 2026",
+      comment:
+        "Very tasty and filling. Would definitely order again.",
+    },
+    {
+      id: 4,
+      name: "Sneha Patel",
+      rating: 5,
+      date: "28 July 2026",
+      comment:
+        "Best quality sweets and snacks! The sweetness is natural from dates and honey, perfect guilt-free treat.",
+    },
+    {
+      id: 5,
+      name: "Vikram Mehta",
+      rating: 5,
+      date: "04 August 2026",
+      comment:
+        "Ordered for corporate gifting and everyone loved the taste and presentation. Highly recommended!",
+    },
+    {
+      id: 6,
+      name: "Ananya Roy",
+      rating: 5,
+      date: "15 August 2026",
+      comment:
+        "Crunchy, flavorful, and wholesome. Really love that there is no palm oil or refined sugar.",
+    },
+  ],
 
 variants: [
     {
