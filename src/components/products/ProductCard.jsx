@@ -49,9 +49,14 @@ const ProductCard = ({ product }) => {
         {product.isBestSeller && (
           <span
             className="
-              absolute left-1 top-1 rounded-sm bg-[#FFD633]
-              px-1 py-0.5 text-[6px] uppercase text-black shadow
-              sm:left-4 sm:top-4 sm:rounded-md sm:px-3 sm:py-1 sm:text-xs font-manrope font-medium
+              absolute left-1 top-1 rounded-sm
+              px-1 py-0.5 text-[6px] uppercase 
+              sm:left-4 sm:top-4 sm:rounded-md sm:px-3 sm:py-1 sm:text-xs font-manrope font-medium   bg-pink-600
+              hover:bg-[#60b396]
+              text-white
+              hover:text-white
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
+              cursor-pointer
             "
           >
             Bestseller
@@ -62,9 +67,14 @@ const ProductCard = ({ product }) => {
         {discount > 0 && (
           <span
             className="
-              absolute right-1 top-1 rounded-sm bg-[#8b183d]
-              px-1.5 py-0.5 text-[6px] font-semibold font-manrope text-white shadow
-              sm:right-4 sm:top-4 sm:rounded-md sm:px-3 sm:py-1 sm:text-xs
+              absolute right-1 top-1 rounded-sm
+              px-1.5 py-0.5 text-[6px] font-semibold font-manrope 
+              sm:right-4 sm:top-4 sm:rounded-md sm:px-3 sm:py-1 sm:text-xs bg-pink-600
+              hover:bg-[#60b396]
+              text-white
+              hover:text-white
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
+              cursor-pointer
             "
           >
             {discount}% OFF
@@ -93,8 +103,13 @@ const ProductCard = ({ product }) => {
         <div
           className="
             absolute bottom-1 left-1 flex items-center gap-0.5
-            rounded-sm bg-white px-1.5 py-0.5 shadow-md
-            sm:bottom-4 sm:left-4 sm:gap-1 sm:rounded-md sm:px-3 sm:py-2 font-manrope font-medium
+            rounded-sm px-1.5 py-0.5
+            sm:bottom-4 sm:left-4 sm:gap-1 sm:rounded-md sm:px-3 sm:py-2 font-manrope font-medium   bg-pink-600
+              hover:bg-[#60b396]
+              text-white
+              hover:text-white
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
+              cursor-pointer
           "
         >
           <Star
@@ -135,10 +150,15 @@ const ProductCard = ({ product }) => {
         <span
           className="
             inline-flex max-w-full truncate whitespace-nowrap rounded-sm
-            bg-[#572340] px-1.5 py-0.5
-            text-[8px] font-medium text-white
+             px-1.5 py-0.5
+            text-[8px] font-medium 
             font-manrope
-            sm:rounded-md sm:px-3 sm:py-1 sm:text-xs
+            sm:rounded-md sm:px-3 sm:py-1 sm:text-xs   bg-pink-600
+              hover:bg-[#60b396]
+              text-white
+              hover:text-white
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
+              cursor-pointer
           "
         >
           {product.category}
@@ -154,6 +174,7 @@ const ProductCard = ({ product }) => {
             sm:min-h-[60px] sm:text-xl sm:leading-tight
             font-cormorant  font-semibold
             lg:text-[18px] lg:min-h-[4px]
+            
           "
         >
           {product.name}
@@ -188,7 +209,7 @@ const ProductCard = ({ product }) => {
         <div
           className="
             flex flex-wrap items-center gap-1
-            sm:gap-2
+            sm:gap-2 
           "
         >
           <span
@@ -214,7 +235,12 @@ const ProductCard = ({ product }) => {
               className="
                 rounded-sm bg-[#FFD633]
                 px-1 py-0.5 text-[6px] font-bold text-black font-manrope
-                sm:rounded sm:px-2 sm:py-1 sm:text-xs
+                sm:rounded sm:px-2 sm:py-1 sm:text-xs    bg-pink-600
+              hover:bg-[#60b396]
+              text-white
+              hover:text-white
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
+              cursor-pointer
               "
             >
               {discount}% OFF
@@ -228,30 +254,30 @@ const ProductCard = ({ product }) => {
           disabled={!inStock}
           onClick={(e) => e.preventDefault()}
           className={`
-            h-7 w-full rounded-md border border-black
+            h-7 w-full rounded-md
             text-[8px] font-bold uppercase tracking-normal
             sm:h-14 sm:rounded-xl sm:text-base
-font-manrope 
+            font-manrope 
             ${
               inStock
                 ? `
                   bg-pink-600 text-white
+                  hover:text-white
                   shadow-[1px_2px_0px_#000]
                   transition-all duration-200
-                  hover:translate-x-[-1px]
-                  hover:translate-y-[-1px]
+                  hover:scale-105
                   hover:bg-[#60b396]
                   hover:shadow-[3px_4px_0px_#000]
                   active:translate-x-[1px]
                   active:translate-y-[2px]
                   active:shadow-[1px_1px_0px_#000]
-font-manrope
+                  font-manrope
                   sm:bg-pink-600
                   sm:shadow-[2px_3px_0px_#000]
+                  cursor-pointer
                 `
                 : `
                   cursor-not-allowed
-                  border-black
                   bg-gray-300
                   text-white
                   hover:text-white

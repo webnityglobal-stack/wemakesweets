@@ -120,9 +120,6 @@ export default function Boxes() {
               flex
               items-center
               gap-2
-              bg-pink-600
-              hover:bg-[#60b396]
-              text-white
               px-4
               md:px-8
               py-2
@@ -135,8 +132,12 @@ export default function Boxes() {
               transition-all
               duration-300
               hover:scale-105
+                bg-pink-600
+              hover:bg-[#60b396]
+              text-white
               hover:text-white
-              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000] 
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
+              cursor-pointer
             "
           >
             View All

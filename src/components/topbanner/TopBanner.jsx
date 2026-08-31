@@ -22,6 +22,11 @@ const TopBanner = () => {
   {/* Call Button */}
   <a
     href="tel:18002032007"
+    onClick={(e) => {
+      if (window.innerWidth >= 768) {
+        e.preventDefault();
+      }
+    }}
     className="
       inline-flex
       shrink-0
@@ -29,22 +34,21 @@ const TopBanner = () => {
       whitespace-nowrap
       rounded-full
       bg-pink-600
-      text-manrope 
+      font-manrope
       px-4
       py-1
       text-sm
       font-semibold
       text-white
+      hover:text-white
       transition-all
       duration-300
       hover:scale-105
       hover:bg-[#60b396]
-      hover:text-white
-      hover:text-black
       shadow-[1px_2px_0px_#000]
       sm:shadow-[2px_3px_0px_#000]
-      border-black
       hover:shadow-[3px_4px_0px_#000]
+      cursor-pointer
     "
   >
     Call 1800 203 2007

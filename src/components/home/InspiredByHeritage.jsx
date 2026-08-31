@@ -31,7 +31,7 @@ const InspiredByHeritage = () => {
       </p>
 
       <Link to='/our-story' >
-      <button className="mt-6 rounded-md border border-[#164984] bg-[#E35A7E] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:border-[#572340] hover:bg-[#572340]">
+      <button className="mt-6 rounded-full text-white hover:text-white bg-pink-600 hover:bg-[#60b396] hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] px-6 py-3 text-sm font-semibold transition-all duration-300 cursor-pointer">
         KNOW OUR STORY
       </button>
       </Link>

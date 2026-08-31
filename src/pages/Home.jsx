@@ -96,7 +96,7 @@ const Home = () => {
                         behavior: "smooth",
                       })
                   }
-                  className="flex h-10 w-10 hover: items-center justify-center rounded-full bg-pink-600 hover:bg-[#60b396] text-white shadow-md transition hover:scale-105"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-pink-600 hover:bg-[#60b396] text-white hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:scale-105 cursor-pointer"
                 >
                   ←
                 </button>
@@ -111,7 +111,7 @@ const Home = () => {
                         behavior: "smooth",
                       })
                   }
-                  className="flex h-10 w-10 hover:bg-[#60b396] items-center justify-center rounded-full bg-pink-600 text-white shadow-md transition hover:scale-105"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-pink-600 hover:bg-[#60b396] text-white hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:scale-105 cursor-pointer"
                 >
                   →
                 </button>
@@ -127,7 +127,7 @@ const Home = () => {
             <div className="mt-8 mb- md:mb-5 flex  justify-center">
               <Link
                 to="/products"
-                className="inline-flex font-manrope font-semibold hover:text-white items-center justify-center rounded-full bg-pink-600 md:px-8 px-4 py-2 md:py-3  text-white border-[0.5px] border-black shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] transition-all duration-300 hover:scale-105 hover:bg-[#60b396] hover:shadow-[3px_4px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_3px_0px_#000]">
+                className="inline-flex font-manrope font-semibold text-white hover:text-white items-center justify-center rounded-full bg-pink-600 md:px-8 px-6 py-3 md:py-3.5 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:scale-105 hover:bg-[#60b396] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_3px_0px_#000] cursor-pointer">
                 View All Products
               </Link>
             </div>

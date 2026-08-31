@@ -94,15 +94,15 @@ const PremiumSlider = () => {
         {/* Left Arrow */}
         <button
           onClick={prevSlide}
-          className="absolute left-5 top-1/2 -translate-y-1/2 z-30  rounded-full bg-pink-600 text-white p-2 shadow-lg transition-all duration-300 hover:bg-[#60b396] hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
+          className="absolute left-5 top-1/2 -translate-y-1/2 z-30 rounded-full bg-pink-600 text-white hover:text-white p-2 shadow-lg transition-all duration-300 hover:bg-[#60b396] hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] cursor-pointer"
         >
-          <ChevronLeft size={22}  className=" hover:text-white"/>
+          <ChevronLeft size={22} className="hover:text-white" />
         </button>
 
         {/* Right Arrow */}
         <button
           onClick={nextSlide}
-          className="absolute right-5 top-1/2 bg-pink-600  text-white -translate-y-1/2 z-30 rounded-full bg-[#f9e4bf] p-2 shadow-lg transition-all duration-300 hover:bg-[#60b396] hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]"
+          className="absolute right-5 top-1/2 -translate-y-1/2 z-30 rounded-full bg-pink-600 text-white hover:text-white p-2 shadow-lg transition-all duration-300 hover:bg-[#60b396] hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] cursor-pointer"
         >
           <ChevronRight size={22} className="hover:text-white" />
         </button>

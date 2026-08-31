@@ -109,18 +109,21 @@ export default function OurProduct() {
     mt-4
     flex
     rounded-full
+    text-white
+    hover:text-white
     bg-pink-600
+    hover:bg-[#60b396]
+    hover:scale-105
+    shadow-[1px_2px_0px_#000]
+    sm:shadow-[2px_3px_0px_#000]
+    hover:shadow-[3px_4px_0px_#000]
     px-5
     py-2
     text-xs
     font-semibold
-    text-white
-    shadow-md
     transition-all
     duration-300
-    hover:bg-[#572340]
-    hover:scale-105
-    hover:shadow-lg
+    cursor-pointer
   "
 >
               SHOP NOW

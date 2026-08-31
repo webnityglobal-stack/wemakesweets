@@ -279,6 +279,12 @@ const ProductConsumption = () => {
                 uppercase
                 tracking-[4px]
                 text-white
+                   text-white
+              hover:text-white
+               bg-pink-600
+              hover:bg-[#60b396]
+              hover:scale-105
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
                 p
               "
             >
@@ -391,30 +397,42 @@ const ProductConsumption = () => {
 
           <a
             href="tel:18002032007"
+            onClick={(e) => {
+              if (window.innerWidth >= 768) {
+                e.preventDefault();
+              }
+            }}
             className="
+              group
               mt-7
               inline-flex
+              items-center
+              justify-center
+              min-w-[190px]
+              md:min-w-[240px]
               rounded-full
-              bg-pink-600
               px-4 
               py-2
               md:px-8
               md:py-3
               font-bold
               font-manrope
-              text-white
-              hover:text-white
-              shadow-md
               transition-all
               duration-300
+              text-white
+              hover:text-white
+              bg-pink-600
               hover:bg-[#60b396]
               hover:scale-105
-              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
+              shadow-[1px_2px_0px_#000]
+              sm:shadow-[2px_3px_0px_#000]
+              hover:shadow-[3px_4px_0px_#000]
+              cursor-pointer
             "
           >
-            ☎ Call For Bulk{" "} Orders
-          
-
+            <span className="md:hidden">☎ Call For Bulk Orders</span>
+            <span className="hidden md:inline md:group-hover:hidden">☎ Call For Bulk Orders</span>
+            <span className="hidden md:group-hover:inline tracking-wider">☎ 18002032007</span>
           </a>
 
         </div>

@@ -20,7 +20,13 @@ const ProductInfo = ({ product }) => {
       {/* Badge */}
 
       {product.isBestSeller && (
-        <span className="inline-flex rounded-full bg-[#810c26] px-4 py-2 text-sm font-semibold text-white shadow-lg">
+        <span className="inline-flex rounded-full  px-4 py-2 text-sm font-semibold hover:scale-105
+                bg-pink-600
+              hover:bg-[#60b396]
+              text-white
+              hover:text-white
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
+              cursor-pointer ">
           Bestseller
         </span>
       )}
@@ -40,7 +46,12 @@ const ProductInfo = ({ product }) => {
       {/* Rating */}
 
       <div className="flex items-center gap-3">
-        <div className="flex items-center rounded-full bg-[#2a4d25] pl-3 py-1 md:px-4 md:py-2 text-white">
+        <div className="flex items-center rounded-full bg-[#2a4d25] pl-3 py-1 md:px-4 lg:px-4 lg:py-2 xl:px-4 xl:py-2 md:py-2 text-white   bg-pink-600
+              hover:bg-[#60b396]
+              text-white
+              hover:text-white
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
+              cursor-pointer">
           ⭐ {product.rating}
         </div>
 
@@ -63,7 +74,12 @@ const ProductInfo = ({ product }) => {
             ₹{selectedVariant.mrp}
           </span>
 
-          <span className="rounded-full bg-[#2a4d25] px-4 py-2 text-sm font-semibold text-white">
+          <span className="rounded-full bg-[#2a4d25] px-4 py-2 text-sm font-semibold text-white   bg-pink-600
+              hover:bg-[#60b396]
+              text-white
+              hover:text-white
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
+              cursor-pointer">
             {discount}% OFF
           </span>
 
@@ -77,14 +93,19 @@ const ProductInfo = ({ product }) => {
     Select Weight
   </h4>
 
-  <div className="flex gap-3 flex-wrap">
+  <div className="flex gap-3 flex-wrap ">
     {product.variants.map((variant) => (
       <button
         key={variant._id}
         onClick={() => setSelectedVariant(variant)}
-        className={`px-5 py-2 rounded-lg border font-medium transition ${
+        className={`px-5 py-2 rounded-lg border font-medium transition   bg-pink-600
+              hover:bg-[#60b396]
+              text-black
+              hover:text-white
+              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
+              cursor-pointer  ${
           selectedVariant._id === variant._id
-            ? "bg-[#810c26] text-white border-[#810c26]"
+            ? "bg-pink-600 hover:bg-[#60b396]  text-white  hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]  cursor-pointer "
             : "bg-white text-[#08376c] border-gray-300"
         }`}
       >
@@ -120,7 +141,11 @@ const ProductInfo = ({ product }) => {
 
             <button
               onClick={() => setQty((prev) => Math.max(1, prev - 1))}
-              className="bg-gray-100 p-3 transition hover:bg-[#810c26] hover:text-white"
+              className="bg-gray-100 p-3 transition hover:text-white bg-pink-600
+              hover:bg-[#60b396]
+              text-white
+              hover:text-white
+              cursor-pointer "
             >
               <Minus size={18} />
             </button>
@@ -135,7 +160,11 @@ const ProductInfo = ({ product }) => {
                   Math.min(selectedVariant.stock, prev + 1)
                 )
               }
-              className="bg-gray-100 p-3 transition hover:bg-[#810c26] hover:text-white"
+              className="bg-gray-100 p-3 transition hover:text-white   bg-pink-600
+              hover:bg-[#60b396]
+              text-white
+              hover:text-white
+              cursor-pointer"
             >
               <Plus size={18} />
             </button>
@@ -151,11 +180,11 @@ const ProductInfo = ({ product }) => {
 
         <button
           disabled={!inStock}
-          className={`flex h-14 items-center justify-center gap-3 rounded-2xl text-lg font-semibold transition
+          className={`flex h-14 items-center justify-center gap-3 rounded-2xl text-lg font-semibold transition-all duration-300
 
           ${
             inStock
-              ? "bg-[#810c26] text-white hover:bg-[#6b0a20]"
+              ? "text-white hover:text-white bg-pink-600 hover:bg-[#60b396] hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] cursor-pointer"
               : "cursor-not-allowed bg-gray-300 text-gray-500"
           }`}
         >
@@ -165,12 +194,12 @@ const ProductInfo = ({ product }) => {
 
         <button
           disabled={!inStock}
-          className={`flex h-14 items-center justify-center rounded-2xl border-2 text-lg font-semibold transition
+          className={`flex h-14 items-center justify-center rounded-2xl text-lg font-semibold transition-all duration-300
 
           ${
             inStock
-              ? "border-[#08376c] text-[#08376c] hover:bg-[#08376c] hover:text-white"
-              : "cursor-not-allowed border-gray-300 text-gray-400"
+              ? "text-white hover:text-white bg-pink-600 hover:bg-[#60b396] hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] cursor-pointer"
+              : "cursor-not-allowed bg-gray-300 text-gray-400"
           }`}
         >
           Buy Now

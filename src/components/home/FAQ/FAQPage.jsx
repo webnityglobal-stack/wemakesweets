@@ -122,13 +122,15 @@ const FAQPage = () => {
               hover:border-[#8b183d]/40
             
               active:scale-95
-                text-white
-                  bg-pink-600
-              hover:bg-[#66BC9E]
+              text-white
+              hover:text-white
+              bg-pink-600
+              hover:bg-[#60b396]
               hover:scale-105
-                  hover:text-white
-              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
-
+              shadow-[1px_2px_0px_#000]
+              sm:shadow-[2px_3px_0px_#000]
+              hover:shadow-[3px_4px_0px_#000]
+              cursor-pointer
             "
           >
             <span className="block font-manrope text-[15px] font-semibold">
@@ -212,20 +214,23 @@ const FAQPage = () => {
             <button
               type="button"
               className="
-        rounded-full
-        px-7 py-3
-        text-sm
-        font-semibold
-        transition-all
-        duration-300
-        active:scale-95
-         text-white
-                  bg-pink-600
-              hover:bg-[#66BC9E]
-              hover:scale-105
-                  hover:text-black
-              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
-      "
+                rounded-full
+                px-7 py-3
+                text-sm
+                font-semibold
+                transition-all
+                duration-300
+                active:scale-95
+                text-white
+                hover:text-white
+                bg-pink-600
+                hover:bg-[#60b396]
+                hover:scale-105
+                shadow-[1px_2px_0px_#000]
+                sm:shadow-[2px_3px_0px_#000]
+                hover:shadow-[3px_4px_0px_#000]
+                cursor-pointer
+              "
             >
               Submit
             </button>

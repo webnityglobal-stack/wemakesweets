@@ -129,14 +129,14 @@ useEffect(() => {
 
             <button
               onClick={scrollPrev}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-[#810c26]/20 bg-pink-600 text-white shadow transition hover:bg-[#60b396] hover:text-white"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-pink-600 text-white hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:bg-[#60b396] hover:scale-105 cursor-pointer"
             >
               <ChevronLeft size={22} />
             </button>
 
             <button
               onClick={scrollNext}
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-pink-600 hover:bg-[#60b396] text-white shadow-lg transition hover:scale-105"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-pink-600 text-white hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:bg-[#60b396] hover:scale-105 cursor-pointer"
             >
               <ChevronRight size={22} />
             </button>

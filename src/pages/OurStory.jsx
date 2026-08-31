@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import { Link } from "react-router-dom";
 import {
   Heart,
   Award,
@@ -10,6 +12,12 @@ import IconPage from "../components/our-story/IconPage";
 import ScrollWavyUnderline from "@/components/common/ScrollWavyUnderline";
  
 export default function OurStory() {
+  const videoSectionRef = useRef(null);
+
+  const scrollToVideo = () => {
+    videoSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <main className="overflow-hidden bg-[#f9e4bf]">
 
@@ -72,7 +80,10 @@ export default function OurStory() {
 
         </p>
 
-        <button className="group md:mt-10 mt-5 flex items-center gap-3 rounded-full bg-pink-600 px-8 py-4 text-white font-manrope font-semibold transition-all duration-300 hover:scale-105 hover:bg-[#60b396] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
+        <button
+          onClick={scrollToVideo}
+          className="group md:mt-10 mt-5 flex items-center gap-3 rounded-full text-white hover:text-white bg-pink-600 px-8 py-4 font-manrope font-semibold transition-all duration-300 hover:scale-105 hover:bg-[#60b396] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] cursor-pointer"
+        >
 
           Explore Our Journey
 
@@ -130,7 +141,9 @@ export default function OurStory() {
 
 
 {/* video section */}
-<OurStoryVideo/>
+<div ref={videoSectionRef} className="scroll-mt-8">
+  <OurStoryVideo />
+</div>
 <IconPage/>
 
 
@@ -629,13 +642,19 @@ export default function OurStory() {
 
         <div className="mt-10 flex flex-wrap gap-4">
 
-          <button className="rounded-full bg-pink-600 hover:bg-[#60b396] px-8 py-4 font-semibold text-white transition hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]">
+          <Link
+            to="/products"
+            className="inline-flex items-center justify-center rounded-full text-white hover:text-white bg-pink-600 hover:bg-[#60b396] px-8 py-4 font-semibold transition-all duration-300 hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] cursor-pointer"
+          >
             Explore Collection
-          </button>
+          </Link>
 
-          <button className="rounded-full bg-pink-600 hover:bg-[#60b396] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]   px-8 py-4 font-semibold text-white transition">
+          <Link
+            to="/contact"
+            className="inline-flex items-center justify-center rounded-full text-white hover:text-white bg-pink-600 hover:bg-[#60b396] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] px-8 py-4 font-semibold transition-all duration-300 hover:scale-105 cursor-pointer"
+          >
             Contact Us
-          </button>
+          </Link>
 
         </div>
 

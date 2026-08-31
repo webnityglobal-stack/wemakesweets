@@ -92,11 +92,15 @@ const QucikMarket = () => {
                 tracking-[4px]
                 font-manrope
                 text-white
-                  bg-pink-600
-              hover:bg-[#66BC9E]
-              hover:scale-105
-                  hover:text-white
-              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] border-black hover:shadow-[3px_4px_0px_#000]
+                hover:text-white
+                bg-pink-600
+                hover:bg-[#60b396]
+                hover:scale-105
+                shadow-[1px_2px_0px_#000]
+                sm:shadow-[2px_3px_0px_#000]
+                hover:shadow-[3px_4px_0px_#000]
+                transition-all
+                duration-300
               "
             >
               Available On

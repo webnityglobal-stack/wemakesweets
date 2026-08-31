@@ -151,7 +151,7 @@ const OurStory = () => {
               delight your taste buds.
             </p>
 
-            <button className="mt-8 w-fit rounded-md bg-[#E35A7E] px-6 py-2 text-sm font-medium text-white transition-all duration-300 hover:bg-[#572340] hover:shadow-lg">
+            <button className="mt-8 w-fit rounded-full text-white hover:text-white bg-pink-600 hover:bg-[#60b396] hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] px-6 py-2.5 text-sm font-semibold transition-all duration-300 cursor-pointer">
               READ MORE
             </button>
           </div>
