@@ -172,7 +172,7 @@ const ProductCard = ({ product }) => {
             text-[#2d2d2d] transition duration-300
             group-hover:text-[#8b183d]
             sm:min-h-[60px] sm:text-xl sm:leading-tight
-            font-cormorant  font-semibold
+            font-cormorant font-bold
             lg:text-[18px] lg:min-h-[4px]
             
           "
