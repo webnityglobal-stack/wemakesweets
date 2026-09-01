@@ -191,7 +191,7 @@ const OurStoryVideo = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="relative"
+            className="relative md:pt-8"
           >
 
             <div className="overflow-hidden rounded-[32px] shadow-2xl">
@@ -269,7 +269,7 @@ We believe that truly good food begins with truly good ingredients. That’s why
 
             </p>
 
-            <p className="mt-5 font-manrope text-[14px] leading-8 text-gray-600">
+            <p className=" font-manrope text-[14px] leading-8 text-gray-600">
              Crafted with care and thoughtfully balanced for both taste and nourishment, every bite is a celebration of nature’s finest ingredients. From our kitchen to your home, we’re redefining everyday snacking with sweets that feel as good as they taste.
             </p>
 

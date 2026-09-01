@@ -54,8 +54,6 @@ const toggleSection = (section) => {
   </svg>
 </div>
  
-
-
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-26 pb-4">
         <div className="grid gap-4 md:gap-14 lg:grid-cols-5">
 
@@ -72,7 +70,7 @@ const toggleSection = (section) => {
                   alt="We Make"
                   className="h-40"
                 />
-                <span className="absolute top-4 -right-1 text-[18px] text-[#f4c02d]">®</span>
+                <span className="absolute top-15 right-2 text-[18px] text-white">®</span>
               </div>
             </div>
             {/* Divider */}
