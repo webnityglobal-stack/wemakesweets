@@ -26,7 +26,7 @@ const product = {
     "No Refined Sugar",
     "No Palm Oil",
     "Rich in Protein, Iron, Phosphorus",
-    "No Artificial Preservatives",
+    "No Preservatives",
     "Made In India",
   ],
 
