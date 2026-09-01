@@ -41,8 +41,8 @@ const product = {
   ],
 
   nutrition: {
-    calories: "152 kcal",
-    protein: "4.8 g",
+    Calories: "152 kcal",
+    Protein: "4.8 g",
     Iron: "19 g",
     Phosphorus: "8 g",
     Sugar: "5.2 g",
