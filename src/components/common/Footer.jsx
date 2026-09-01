@@ -57,7 +57,6 @@ const toggleSection = (section) => {
 
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-26 pb-4">
-<div className="absolute top-40 left-56 text-[18px]"  >®</div>
         <div className="grid gap-4 md:gap-14 lg:grid-cols-5">
 
           {/* ======================================
@@ -66,11 +65,16 @@ const toggleSection = (section) => {
 
           <div className="lg:col-span-2">
 
-            <img
-              src="/footerLogo.png"
-              alt="We Make"
-              className="h-40"
-            />
+            <div className="flex justify-center lg:justify-start">
+              <div className="relative inline-block">
+                <img
+                  src="/footerLogo.png"
+                  alt="We Make"
+                  className="h-40"
+                />
+                <span className="absolute top-4 -right-1 text-[18px] text-[#f4c02d]">®</span>
+              </div>
+            </div>
             {/* Divider */}
 
             <div className="mt-2 mb-2 flex items-center gap-4">

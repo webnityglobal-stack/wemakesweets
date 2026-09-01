@@ -8,10 +8,11 @@ const ProductInfo = ({ product }) => {
   const [qty, setQty] = useState(1);
 
   const discount = useMemo(() => {
+    if (!selectedVariant?.mrp || !selectedVariant?.price) return 0;
     return Math.round(
       ((selectedVariant.mrp - selectedVariant.price) / selectedVariant.mrp) * 100
     );
-  }, [product]);
+  }, [selectedVariant]);
 
   const inStock = selectedVariant.stock > 0;
 
@@ -45,17 +46,12 @@ const ProductInfo = ({ product }) => {
 
       {/* Rating */}
 
-      <div className="flex items-center gap-3">
-        <div className="flex items-center rounded-full bg-[#2a4d25] pl-3 py-1 md:px-4 lg:px-4 lg:py-2 xl:px-4 xl:py-2 md:py-2 text-white   bg-pink-600
-              hover:bg-[#60b396]
-              text-white
-              hover:text-white
-              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
-              cursor-pointer">
+      <div className="flex items-center gap-2.5 sm:gap-3">
+        <div className="shrink-0 whitespace-nowrap inline-flex items-center justify-center gap-1 rounded-full px-3.5 py-1 md:px-4 md:py-2 text-sm md:text-base font-semibold text-white bg-pink-600 hover:bg-[#60b396] hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] cursor-pointer">
           ⭐ {product.rating}
         </div>
 
-        <span className="text-gray-500">
+        <span className="text-xs sm:text-sm md:text-base text-gray-500">
           Trusted by hundreds of happy customers
         </span>
       </div>
