@@ -1,51 +1,51 @@
 import {
   Flame,
   Beef,
-  Wheat,
-  Candy,
   Droplets,
-  Activity,
+  Candy,
+  Sparkles,
+  Zap,
 } from "lucide-react";
 
 const nutritionItems = [
   {
     label: "Calories",
-    key: "calories",
+    key: "Calories",
     icon: Flame,
     color: "#810c26",
     bg: "#810c2610",
   },
   {
     label: "Protein",
-    key: "protein",
+    key: "Protein",
     icon: Beef,
     color: "#08376c",
     bg: "#08376c10",
   },
   {
-    label: "Carbohydrates",
-    key: "carbohydrates",
-    icon: Wheat,
+    label: "Iron",
+    key: "Iron",
+    icon: Sparkles,
     color: "#552b12",
     bg: "#552b1210",
   },
   {
+    label: "Phosphorus",
+    key: "Phosphorus",
+    icon: Zap,
+    color: "#2a4d25",
+    bg: "#2a4d2510",
+  },
+  {
     label: "Sugar",
-    key: "sugar",
+    key: "Sugar",
     icon: Candy,
     color: "#810c26",
     bg: "#810c2610",
   },
   {
-    label: "Fiber",
-    key: "fiber",
-    icon: Activity,
-    color: "#2a4d25",
-    bg: "#2a4d2510",
-  },
-  {
     label: "Fat",
-    key: "fat",
+    key: "Fat",
     icon: Droplets,
     color: "#08376c",
     bg: "#08376c10",
@@ -79,50 +79,11 @@ const NutritionFacts = ({ product }) => {
           const Icon = item.icon;
 
           return (
-            // <div
-            //   key={item.key}
-            //   className="group rounded-3xl border border-[#810c2610] bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl"
-            // >
-            //   <div
-            //     className="mb-6 inline-flex rounded-2xl p-4"
-            //     style={{ background: item.bg }}
-            //   >
-            //     <Icon
-            //       size={24}
-            //       style={{ color: item.color }}
-            //     />
-            //   </div>
-
-            //   <h3 className="text-lg font-semibold text-[#08376c]">
-            //     {item.label}
-            //   </h3>
-
-            //   <p
-            //     className="mt-3 text-2xl font-bold"
-            //     style={{ color: item.color }}
-            //   >
-            //     {product.nutrition[item.key]}
-            //   </p>
-
-            //   <div className="mt-5 h-2 overflow-hidden rounded-full bg-gray-100">
-
-            //     <div
-            //       className="h-full rounded-full"
-            //       style={{
-            //         width: `${40 + Math.random() * 50}%`,
-            //         background: item.color,
-            //       }}
-            //     />
-
-            //   </div>
-
-            // </div>
             <div
               key={item.key}
               className="group rounded-3xl border border-[#810c2610] bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl sm:p-7"
             >
               <div className="flex items-center gap-4 sm:block">
-                {/* <div className="flex items-center justify-between sm:block"> */}
                 {/* Icon */}
                 <div
                   className="inline-flex shrink-0 rounded-2xl p-4 sm:mb-6"
@@ -144,7 +105,7 @@ const NutritionFacts = ({ product }) => {
                     className="mt-1 text-xl font-bold sm:mt-3 sm:text-2xl"
                     style={{ color: item.color }}
                   >
-                    {product.nutrition[item.key]}
+                    {product?.nutrition?.[item.key] || product?.nutrition?.[item.key.toLowerCase()] || product?.nutrition?.[item.label]}
                   </p>
                 </div>
 
