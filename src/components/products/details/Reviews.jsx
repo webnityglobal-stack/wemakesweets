@@ -130,45 +130,84 @@ const Reviews = ({ product }) => {
         </div>
       </div>
 
-      {/* Reviews (Horizontal Slider on Both Desktop and Mobile) */}
+      {/* Reviews (Mobile View: Automatic Continuous Infinite Slider) */}
+      <div className="sm:hidden overflow-hidden w-full py-2">
+        <div className="flex animate-review-slider gap-4 w-max">
+          {[...(product.reviews || []), ...(product.reviews || [])].map((review, index) => (
+            <div
+              key={`mobile-rev-${review.id}-${index}`}
+              className="w-[280px] shrink-0 rounded-3xl border border-[#810c2610] bg-white p-5 shadow-sm transition duration-300 flex flex-col justify-between"
+            >
+              <div>
+                <div className="mb-3 flex items-center justify-between">
+                  <div>
+                    <h3 className="font-bold text-sm text-[#08376c]">
+                      {review.name}
+                    </h3>
+                    <p className="text-xs text-gray-500">
+                      {review.date}
+                    </p>
+                  </div>
 
+                  <Quote
+                    size={28}
+                    className="text-[#810c26]/20"
+                  />
+                </div>
+
+                <div className="mb-3 flex gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star
+                      key={star}
+                      size={15}
+                      fill={
+                        star <= review.rating
+                          ? "#810c26"
+                          : "transparent"
+                      }
+                      color="#810c26"
+                    />
+                  ))}
+                </div>
+
+                <p className="leading-6 text-gray-600 text-xs">
+                  {review.comment}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Reviews (Desktop / Tablet View: Interactive with scroll buttons) */}
       <div
         ref={scrollRef}
-        className="mt-4 flex w-full max-w-full min-w-0 overflow-x-auto gap-5 pb-4 pt-1 px-1 snap-x snap-mandatory scrollbar-hide scroll-smooth"
+        className="hidden sm:flex mt-4 w-full max-w-full min-w-0 overflow-x-auto gap-5 pb-4 pt-1 px-1 snap-x snap-mandatory scrollbar-hide scroll-smooth"
       >
-
         {product.reviews?.map((review) => (
-
           <div
             key={review.id}
-            className="group shrink-0 w-[85%] xs:w-[75%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-14px)] snap-start rounded-3xl border border-[#810c2610] bg-white p-6 sm:p-8 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col justify-between"
+            className="group shrink-0 sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-14px)] snap-start rounded-3xl border border-[#810c2610] bg-white p-6 sm:p-8 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col justify-between"
           >
-
             <div>
               <div className="mb-4 sm:mb-6 flex items-center justify-between">
-
                 <div>
-
                   <h3 className="font-bold text-[#08376c]">
                     {review.name}
                   </h3>
-
                   <p className="text-sm text-gray-500">
                     {review.date}
                   </p>
-
                 </div>
 
                 <Quote
                   size={36}
                   className="text-[#810c26]/20"
                 />
-
               </div>
 
               <div className="mb-4 sm:mb-5 flex gap-1">
-
-                {[1,2,3,4,5].map((star)=>(
+                {[1, 2, 3, 4, 5].map((star) => (
                   <Star
                     key={star}
                     size={18}
@@ -180,18 +219,14 @@ const Reviews = ({ product }) => {
                     color="#810c26"
                   />
                 ))}
-
               </div>
 
               <p className="md:max-h-32 md:overflow-y-auto md:pr-1 leading-7 sm:leading-8 text-gray-600 text-sm sm:text-base">
                 {review.comment}
               </p>
             </div>
-
           </div>
-
         ))}
-
       </div>
 
     </section>

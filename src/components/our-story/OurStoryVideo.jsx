@@ -262,17 +262,15 @@ const OurStoryVideo = () => {
             </h2>
 
             <p className="mt-6 text-[14px] font-manrope leading-8 text-gray-600">
-             Every Bite Tells a Story.<br/>
-             What began in a small home kitchen with a simple dream—to create wholesome indulgence without compromising on taste—has grown into a new generation of premium healthy snacking.
+             Every Bite Tells A Story.<br/>
+            What began in a small home kitchen with a simple dream to create wholesome indulgence without compromising on taste has grown into a new generation of premium, healthy snacking.
 <br/>
-We believe that truly good food begins with truly good ingredients. That’s why we carefully select premium dates, handpicked nuts and nutrient-rich seeds, brought together with the richness of pure cow ghee and the natural sweetness of pure honey.
+We believe that truly good food begins with truly good ingredients. That’s why we carefully select premium dates, handpicked nuts, and nutrient-rich seeds, brought together with the richness of pure cow ghee and the natural sweetness of pure honey.
 
             </p>
 
             <p className="mt-5 font-manrope text-[14px] leading-8 text-gray-600">
-             Crafted with care and thoughtfully balanced for both taste and nourishment, every bite is a celebration of nature’s finest ingredients—pure, honest and deliciously satisfying.
-
-From our kitchen to your home, we’re redefining everyday snacking with food that feels as good as it tastes.
+             Crafted with care and thoughtfully balanced for both taste and nourishment, every bite is a celebration of nature’s finest ingredients. From our kitchen to your home, we’re redefining everyday snacking with sweets that feel as good as they taste.
             </p>
 
           </motion.div>

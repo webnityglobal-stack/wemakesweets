@@ -16,16 +16,8 @@ body {
 
 @import url("https://fonts.googleapis.com/css2?family=Chewy&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Vidaloka&display=swap");
-
-@import "tailwindcss";
-
-
-
-/* new fonts for by client*/
-/* 1. Sabse pehle Google Fonts load karo */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700&family=Noto+Sans+Gujarati:wght@400;500;600&display=swap');
 
-/* 2. Tailwind ko import karo (v4) */
 @import "tailwindcss";
 
 /* 3. (MAIN FIX) Tailwind v4 me fonts ko theme ki tarah define karo */
@@ -198,7 +190,7 @@ body {
 .top-banner-marquee {
   display: flex;
   width: max-content;
-  animation: topBannerMarquee 16s linear infinite;
+  animation: topBannerMarquee 20s linear infinite;
   will-change: transform;
 }
 
@@ -231,7 +223,7 @@ body {
 }
 
 .animate-occasion-slider {
-  animation: occasion-slider 30s infinite ease-in-out;
+  animation: occasion-slider 28s infinite ease-in-out;
 }
 
 
@@ -374,4 +366,79 @@ body {
 .animate-icon-slider {
   animation: iconSlider 18s linear infinite;
 }
+
+/* =========================================
+   REVIEWS MOBILE CONTINUOUS INFINITE SLIDER
+========================================= */
+@keyframes reviewSliderMove {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-review-slider {
+  display: flex;
+  width: max-content;
+  animation: reviewSliderMove 24s linear infinite;
+  will-change: transform;
+}
+
+.animate-review-slider:hover,
+.animate-review-slider:active {
+  animation-play-state: paused;
+}
+
+/* =========================================
+   HIGHLIGHTS MOBILE CONTINUOUS INFINITE SLIDER
+========================================= */
+@keyframes highlightSliderMove {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-highlight-slider {
+  display: flex;
+  width: max-content;
+  animation: highlightSliderMove 20s linear infinite;
+  will-change: transform;
+}
+
+.animate-highlight-slider:hover,
+.animate-highlight-slider:active {
+  animation-play-state: paused;
+}
+
+/* =========================================
+   MOBILE VIEW - BUTTON ON CLICK / ACTIVE COLOR (#60b396)
+========================================= */
+@media (max-width: 1023px) {
+  button:not(:disabled):not([aria-disabled="true"]):active,
+  [role="button"]:not(:disabled):not([aria-disabled="true"]):active,
+  input[type="button"]:not(:disabled):active,
+  input[type="submit"]:not(:disabled):active,
+  input[type="reset"]:not(:disabled):active,
+  a[role="button"]:active,
+  a.cursor-pointer:active,
+  .btn:not(:disabled):active {
+    background-color: #60b396 !important;
+    border-color: #60b396 !important;
+    color: #ffffff !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button:not(:disabled):not([aria-disabled="true"]):active *,
+  [role="button"]:not(:disabled):not([aria-disabled="true"]):active *,
+  a[role="button"]:active *,
+  a.cursor-pointer:active * {
+    color: #ffffff !important;
+  }
+}
+
 

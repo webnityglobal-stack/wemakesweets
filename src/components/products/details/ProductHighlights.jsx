@@ -37,11 +37,34 @@ const ProductHighlights = ({ product }) => {
 
       </div>
 
-      <div className="mt-6 md:mt-12 flex w-full max-w-full min-w-0 overflow-x-auto gap-4 pb-4 pt-1 px-1 snap-x snap-mandatory scrollbar-hide sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 sm:overflow-visible sm:p-0">
-        {product.highlights.map((item, index) => (
+      {/* Mobile View: Automatic Continuous Infinite Slider */}
+      <div className="sm:hidden mt-6 overflow-hidden w-full py-2">
+        <div className="flex animate-highlight-slider gap-4 w-max">
+          {[...(product.highlights || []), ...(product.highlights || [])].map((item, index) => (
+            <div
+              key={`mobile-hl-${index}`}
+              className="w-[220px] shrink-0 rounded-3xl border border-[#810c2615] bg-white p-5 text-center shadow-sm transition duration-300 flex flex-col items-center justify-center"
+            >
+              <div className="mb-3 inline-flex rounded-xl bg-[#f9e4bf] p-2.5 text-[#810c26]">
+                <span className="[&>svg]:h-5 [&>svg]:w-5">
+                  {icons[index % icons.length]}
+                </span>
+              </div>
+
+              <h3 className="text-[15px] font-semibold text-[#08376c]">
+                {item}
+              </h3>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Desktop / Tablet View: Grid */}
+      <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 mt-6 md:mt-12">
+        {product.highlights?.map((item, index) => (
           <div
-            key={index}
-            className="group flex-shrink-0 w-[68%] xs:w-[60%] sm:w-auto snap-center rounded-3xl border border-[#810c2615] bg-white p-5 text-center md:p-8 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-[#810c26] hover:shadow-xl flex flex-col items-center justify-center"
+            key={`desktop-hl-${index}`}
+            className="group rounded-3xl border border-[#810c2615] bg-white p-5 text-center md:p-8 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-[#810c26] hover:shadow-xl flex flex-col items-center justify-center"
           >
             <div className="mb-3 inline-flex rounded-xl bg-[#f9e4bf] p-2.5 text-[#810c26] transition group-hover:bg-[#810c26] group-hover:text-white md:mb-5 md:rounded-2xl md:p-4">
               <span className="[&>svg]:h-5 [&>svg]:w-5 md:[&>svg]:h-6 md:[&>svg]:w-6">

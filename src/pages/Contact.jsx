@@ -211,7 +211,20 @@ export default function Contact() {
                 </div>
 
                 {/* Email */}
-                <div className="flex gap-4 sm:gap-5 rounded-[24px] sm:rounded-[28px] bg-[#603917] p-4 sm:p-6 shadow-lg items-start">
+                <a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=cs@wemakesweets.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => {
+                    const isMobile =
+                      /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+                      window.innerWidth < 768;
+                    if (isMobile) {
+                      window.location.href = "https://mail.google.com/mail/?view=cm&fs=1&to=cs@wemakesweets.com";
+                    }
+                  }}
+                  className="flex gap-4 sm:gap-5 rounded-[24px] sm:rounded-[28px] bg-[#603917] p-4 sm:p-6 shadow-lg items-start transition hover:-translate-y-1 hover:shadow-xl cursor-pointer"
+                >
                   <div className="flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-2xl bg-[#DE6239] text-white">
                     <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
@@ -219,11 +232,11 @@ export default function Contact() {
                     <h3 className="text-base sm:text-lg md:text-xl font-bold text-[#f9e4bf]">
                       Email Address
                     </h3>
-                    <p className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-lg font-semibold break-all text-[#f9e4bf]">
+                    <p className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-lg font-semibold break-all text-[#f9e4bf] hover:underline">
                       cs@wemakesweets.com
                     </p>
                   </div>
-                </div>
+                </a>
 
                 {/* Timing */}
                 <div className="flex gap-4 sm:gap-5 rounded-[24px] sm:rounded-[28px] bg-[#572340] p-4 sm:p-6 shadow-lg items-start">
@@ -563,10 +576,23 @@ export default function Contact() {
             </a>
 
             <a
-              href="mailto:cs@wemakesweets.com"
-              className="rounded-full text-white hover:text-white bg-pink-600 hover:bg-[#60b396] hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] px-8 py-3.5 sm:py-4 font-semibold transition-all duration-300 text-sm sm:text-base cursor-pointer"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=cs@wemakesweets.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                const isMobile =
+                  /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+                  window.innerWidth < 768;
+                if (isMobile) {
+                  // Direct Gmail web compose link to prevent Outlook from opening
+                  window.location.href = "https://mail.google.com/mail/?view=cm&fs=1&to=cs@wemakesweets.com";
+                }
+              }}
+              className="group inline-flex items-center justify-center min-w-[160px] md:min-w-[220px] rounded-full text-white hover:text-white bg-pink-600 hover:bg-[#60b396] hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] px-8 py-3.5 sm:py-4 font-semibold transition-all duration-300 text-sm sm:text-base cursor-pointer"
             >
-              ✉ Email Us
+              <span className="md:hidden">✉ Mail Us</span>
+              <span className="hidden md:inline md:group-hover:hidden">✉ Mail Us</span>
+              <span className="hidden md:group-hover:inline tracking-normal font-bold">✉ cs@wemakesweets.com</span>
             </a>
 
           </div>
