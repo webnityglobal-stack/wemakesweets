@@ -77,108 +77,61 @@ const OccasionCard = ({ item }) => {
   }, []);
 
   return (
-    <div className="group [perspective:1200px] md:px-4 px-2">
+    <div className="group [perspective:1200px] md:px-4 px-2 select-none">
       <div
-        className={`
-          relative
-          w-full
-          transition-transform
-          duration-700
-          [transform-style:preserve-3d]
-          ${isFlipped ? "[transform:rotateY(180deg)]" : ""}
-        `}
+        className="relative w-full transition-transform duration-700 [transform-style:preserve-3d]"
+        style={{
+          transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+          WebkitTransform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+        }}
       >
         {/* ================= FRONT ================= */}
-
         <div
           style={{
             backgroundColor: item.bg,
             borderColor: item.color + "40",
+            WebkitBackfaceVisibility: "hidden",
+            backfaceVisibility: "hidden",
+            transform: "rotateY(0deg) translateZ(1px)",
+            WebkitTransform: "rotateY(0deg) translateZ(1px)",
           }}
-          className="
-            relative
-            min-h-[260px]
-            overflow-hidden
-            rounded-3xl
-            border
-            transition-all
-            duration-500
-            hover:shadow-2xl
-            [backface-visibility:hidden]
-          "
+          className={`relative min-h-[260px] overflow-hidden rounded-3xl border transition-opacity duration-300 ${
+            isFlipped ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
         >
           {/* Background Image */}
           <img
             src={item.image}
             alt={item.title}
-            className="
-              absolute
-              inset-0
-              h-full
-              w-full
-              object-cover
-              opacity-[1]
-              transition-all
-              duration-700
-              group-hover:scale-110
-              group-hover:opacity-[0.22]
-            "
+            className="absolute inset-0 h-full w-full object-cover opacity-[1] transition-all duration-700 group-hover:scale-110 group-hover:opacity-[0.22]"
           />
 
           {/* Overlay */}
           <div
             className="absolute inset-0"
             style={{
-              // background: `${item.bg}40`,
               background: `${item.bg}B0`,
             }}
           />
 
           {/* Decorative Glow */}
+          <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-[#E8B357]/10 blur-3xl transition-all duration-500 group-hover:scale-150" />
+
+          {/* Content (Elevated in 3D space with translateZ so Safari never hides text under image/overlay) */}
           <div
-            className="
-              absolute
-              right-0
-              top-0
-              h-32
-              w-32
-              rounded-full
-              bg-[#E8B357]/10
-              blur-3xl
-              transition-all
-              duration-500
-              group-hover:scale-150
-            "
-          />
-
-          {/* Content */}
-          <div className="relative z-10 p-7">
-
+            className="relative z-20 p-7"
+            style={{
+              transform: "translateZ(30px)",
+              WebkitTransform: "translateZ(30px)",
+            }}
+          >
             {/* Icon */}
-            <div
-              className="
-                flex
-                h-16
-                w-16
-                items-center
-                justify-center
-                rounded-2xl
-                border
-                border-white/20
-                bg-[#f9e4bf]/15
-                text-[#f9e4bf]
-                backdrop-blur-md
-                transition-all
-                duration-500
-                group-hover:rotate-6
-                group-hover:scale-110
-              "
-            >
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/30 bg-white/20 text-[#f9e4bf] shadow-sm transition-all duration-500 group-hover:rotate-6 group-hover:scale-110">
               <Icon size={30} />
             </div>
 
             {/* Title */}
-            <h3 className="mt-6 md:text-xl font-cormorant font-semibold text-2xl  text-[#f9e4bf]">
+            <h3 className="mt-6 md:text-xl font-cormorant font-semibold text-2xl text-[#f9e4bf]">
               {item.title}
             </h3>
 
@@ -186,32 +139,25 @@ const OccasionCard = ({ item }) => {
             <p className="mt-3 leading-7 md:text-[18px] font-manrope font-normal text-[#f9e4bf]/90">
               {item.desc}
             </p>
-
           </div>
         </div>
 
         {/* ================= BACK ================= */}
-
         <div
-          className="
-            absolute
-            inset-0
-            overflow-hidden
-            rounded-3xl
-            [backface-visibility:hidden]
-            [transform:rotateY(180deg)]
-          "
+          style={{
+            WebkitBackfaceVisibility: "hidden",
+            backfaceVisibility: "hidden",
+            transform: "rotateY(180deg) translateZ(1px)",
+            WebkitTransform: "rotateY(180deg) translateZ(1px)",
+          }}
+          className={`absolute inset-0 overflow-hidden rounded-3xl transition-opacity duration-300 ${
+            isFlipped ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
         >
           <img
             src={item.image}
             alt={item.title}
-            className="
-              absolute
-              inset-0
-              h-full
-              w-full
-              object-cover
-            "
+            className="absolute inset-0 h-full w-full object-cover"
           />
         </div>
       </div>
