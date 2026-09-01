@@ -151,7 +151,7 @@ const products = [
     salePrice: 999,
     mrp: 1199,
     rating: 4.9,
-    stock: 25,
+    stock: 25, 
     isBestSeller: true,
     images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
