@@ -119,7 +119,7 @@ const FlipCard = ({ data }) => {
             ))}
           </ul>
 
-          <button
+          {/* <button
             onClick={(e) => {
               e.stopPropagation();
             }}
@@ -146,7 +146,7 @@ const FlipCard = ({ data }) => {
             "
           >
             View Product
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
