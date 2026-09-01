@@ -67,11 +67,11 @@ const Login = () => {
         {/* Brand */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-cormorant font-bold text-[#572340]">
-            We Make Sweets
+            WeMake Sweets & Snacks
           </h1>
 
           <p className="mt-2 text-sm text-gray-600">
-            Welcome back! Login to continue.
+            Welcome back<b className="pl-[1px] pr-[2px]">!</b> Login to continue.
           </p>
         </div>
 
