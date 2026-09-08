@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
+import { authStorage } from "../utils/authStorage";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,42 +24,44 @@ const Login = () => {
     setError("");
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const { email, password } = formData;
+  const { email, password } = formData;
 
-    if (!email || !password) {
-      setError("Please enter your email and password.");
-      return;
-    }
+  if (!email || !password) {
+    setError("Please enter your email and password.");
+    return;
+  }
 
-    try {
-      setLoading(true);
-      setError("");
+  try {
+    setLoading(true);
+    setError("");
 
-      const response = await axiosInstance.post("/auth/login", {
-        email,
-        password,
-      });
+    const response = await axiosInstance.post("/auth/login", {
+      email,
+      password,
+    });
 
-      const { token, user } = response.data;
+    const { token, user } = response.data;
 
-      // Store authentication data
-      localStorage.setItem("accessToken", token);
-      localStorage.setItem("user", JSON.stringify(user));
+    // Store authentication data
+    authStorage.setAuth({
+      token,
+      user,
+    });
 
-      // Redirect after successful login
-      navigate("/");
-    } catch (error) {
-      setError(
-        error.response?.data?.message ||
-          "Invalid email or password. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+    // Redirect after successful login
+    navigate("/cart");
+  } catch (error) {
+    setError(
+      error.response?.data?.message ||
+        "Invalid email or password. Please try again."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className=" bg-[#f5ebda] flex md:items-center justify-center px-4 pt-4 md:px-4 md:pt-6">

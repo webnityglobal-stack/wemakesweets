@@ -1,9 +1,57 @@
 import { Link } from "react-router-dom";
 import { Heart, Star } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const ProductCard = ({ product }) => {
-  const discount =
-    product.mrp && product.salePrice
+
+const WISHLIST_KEY = "wms_wishlist";
+
+const [isWishlisted, setIsWishlisted] = useState(false);
+
+useEffect(() => {
+  try {
+    const savedWishlist = JSON.parse(
+      localStorage.getItem(WISHLIST_KEY) || "[]"
+    );
+
+    setIsWishlisted(savedWishlist.includes(product._id));
+  } catch (error) {
+    console.error("Unable to load wishlist", error);
+  }
+}, [product._id]);
+
+
+const toggleWishlist = () => {
+  try {
+    const savedWishlist = JSON.parse(
+      localStorage.getItem(WISHLIST_KEY) || "[]"
+    );
+
+    let updatedWishlist;
+
+    if (savedWishlist.includes(product._id)) {
+      updatedWishlist = savedWishlist.filter(
+        (id) => id !== product._id
+      );
+    } else {
+      updatedWishlist = [...savedWishlist, product._id];
+    }
+
+    localStorage.setItem(
+      WISHLIST_KEY,
+      JSON.stringify(updatedWishlist)
+    );
+
+    setIsWishlisted(updatedWishlist.includes(product._id));
+
+    window.dispatchEvent(new Event("wishlistUpdated"));
+  } catch (error) {
+    console.error("Unable to update wishlist", error);
+  }
+};
+
+
+  const discount = product.mrp && product.salePrice
       ? Math.round(((product.mrp - product.salePrice) / product.mrp) * 100)
       : 0;
 
@@ -84,7 +132,12 @@ const ProductCard = ({ product }) => {
         {/* Wishlist */}
         <button
           type="button"
-          onClick={(e) => e.preventDefault()}
+ onClick={toggleWishlist}
+  aria-label={
+    isWishlisted
+      ? "Remove from wishlist"
+      : "Add to wishlist"
+  }
           className="
             absolute bottom-1 right-1 hidden h-7 w-7 items-center justify-center
             rounded-full bg-white shadow-md transition-all duration-300
@@ -96,6 +149,8 @@ const ProductCard = ({ product }) => {
             size={15}
             className="text-[#8b183d] sm:h-5 sm:w-5"
             strokeWidth={2}
+            fill={isWishlisted ? "#8b183d" : "none"}
+
           />
         </button>
 

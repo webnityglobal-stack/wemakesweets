@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useSignUp from "../hooks/auth/useSignUp";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -7,14 +8,14 @@ const Signup = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone:"",
     password: "",
     confirmPassword: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  
 
   const handleChange = (e) => {
     setFormData({
@@ -25,59 +26,62 @@ const Signup = () => {
     setError("");
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    const { name, email, password, confirmPassword } = formData;
+  const {
+    signup,
+    loading,
+    error,
+    setError,
+  } = useSignUp();
 
-    if (!name || !email || !password || !confirmPassword) {
-      setError("Please fill in all fields.");
-      return;
-    }
 
-    if (password !== confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters.");
-      return;
-    }
+  const {
+    name,
+    email,
+    phone,
+    password,
+    confirmPassword,
+  } = formData;
 
-    try {
-      setLoading(true);
+  if (
+    !name ||
+    !email ||
+    !phone ||
+    !password ||
+    !confirmPassword
+  ) {
+    setError("Please fill in all fields.");
+    return;
+  }
 
-      const response = await fetch(
-        "http://localhost:5000/api/auth/signup",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            password,
-          }),
-        }
-      );
+  if (password !== confirmPassword) {
+    setError("Passwords do not match.");
+    return;
+  }
 
-      const data = await response.json();
+  if (password.length < 6) {
+    setError("Password must be at least 6 characters.");
+    return;
+  }
 
-      if (!response.ok) {
-        throw new Error(data.message || "Signup failed");
-      }
-
-      // Signup successful
-      navigate("/login");
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+  const signupData = {
+    name,
+    email,
+    phone,
+    password,
   };
 
+  const result = await signup(signupData);
+
+  if (result.success) {
+    navigate("/login");
+  }
+};
+
+  
   return (
     <div className="bg-[#f5ebda] flex md:items-center justify-center px-5 pt-4 md:px-4 md:py-8">
 
@@ -158,7 +162,31 @@ const Signup = () => {
               />
             </div>
 
-            {/* Password */}
+
+{/* Phone Number */}
+<div>
+  <label
+    htmlFor="phone"
+    className="block text-sm font-medium text-gray-700 mb-2"
+  >
+    Phone Number
+  </label>
+
+  <input
+    id="phone"
+    type="tel"
+    name="phone"
+    value={formData.phone}
+    onChange={handleChange}
+    placeholder="Enter your Phone Number"
+    inputMode="numeric"
+    maxLength={10}
+    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-[#572340] focus:ring-1 focus:ring-[#572340]"
+  />
+</div>
+
+          <div className="flex gap-4">
+              {/* Password */}
             <div>
               <label
                 htmlFor="password"
@@ -174,8 +202,8 @@ const Signup = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="Create a password"
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 pr-20 text-sm outline-none transition focus:border-[#572340] focus:ring-1 focus:ring-[#572340]"
+                  placeholder="Enter password"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 pr-15 text-sm outline-none transition focus:border-[#572340] focus:ring-1 focus:ring-[#572340]"
                 />
 
                 <button
@@ -206,8 +234,8 @@ const Signup = () => {
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  placeholder="Confirm your password"
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 pr-20 text-sm outline-none transition focus:border-[#572340] focus:ring-1 focus:ring-[#572340]"
+                  placeholder="Confirm password"
+                  className="w-full rounded-lg border border-gray-300 px-2 py-3 pr-16 text-sm outline-none transition focus:border-[#572340] focus:ring-1 focus:ring-[#572340]"
                 />
 
                 <button
@@ -221,6 +249,7 @@ const Signup = () => {
                 </button>
               </div>
             </div>
+          </div>
 
             {/* Terms */}
             <div className="flex items-start gap-2">
@@ -242,7 +271,7 @@ const Signup = () => {
               disabled={loading}
               className="w-full rounded-lg py-3.5 text-sm font-semibold text-white hover:text-white bg-pink-600 hover:bg-[#60b396] hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
             >
-              {loading ? "Creating Account..." : "Create Account"}
+                {loading ? "Creating Account..." : "Create Account"}
             </button>
 
           </form>

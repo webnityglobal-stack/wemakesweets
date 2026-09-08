@@ -1,5 +1,8 @@
+import { authStorage } from "@/utils/authStorage";
 import { Search, User, ShoppingCart, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 
 const navLinks = [
   { name: "Home", path: "/", color: "#572340" }, // Date Bite
@@ -11,6 +14,13 @@ const navLinks = [
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+const isLoggedIn = authStorage.isAuthenticated();
+
+const token = localStorage.getItem("token");
+
+
+console.log("Token:", token);
+console.log("isLoggedIn:", isLoggedIn);
 
   return (
     <header className="w-full font-manrope bg-[#f9e4bf] px-4 md:px-8 lg:px-10 z-50">
@@ -28,12 +38,12 @@ function Navbar() {
         </a>
 
         {/* Desktop Menu */}
-        <ul className="hidden lg:flex font-cormorant font-semibold  items-center gap-5 xl:gap-7">
+        <ul className="hidden lg:flex font-manrope font-medium items-center gap-5 xl:gap-7">
           {navLinks.map((item) => (
             <li key={item.name}>
               <a
                 href={item.path}
-                className="px-5 py-2  font-cormorant  rounded-full text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="px-5 py-2 font-manrope font-medium rounded-full text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl text-sm"
                 style={{
                   backgroundColor: item.color,
                 }}
@@ -52,13 +62,16 @@ function Navbar() {
             className="cursor-pointer transition hover:scale-110"
             color="#572340"
           /> */}
-<a href='/login'>
+<Link to={isLoggedIn ? "/my-account" : "/login"}>
+
           <User
             size={23}
             className="cursor-pointer transition hover:scale-110"
             color="#603917"
           />
-</a>
+</Link>
+
+<a href='/cart'>
           <div className="relative cursor-pointer">
             <ShoppingCart
               size={25}
@@ -73,6 +86,7 @@ function Navbar() {
               0
             </span>
           </div>
+          </a>
         </div>
 
 
@@ -85,12 +99,11 @@ function Navbar() {
 <div className="flex lg:hidden items-center gap-5">
 
   {/* User */}
-<User
-  size={23}
-  className={`cursor-pointer text-[#603917] transition-all duration-300 hover:text-[#3e5a2c] hover:scale-110 ${
-    open ? "hidden" : "block"
-  }`}
-/>
+
+<Link to={isLoggedIn ? "/my-account" : "/login"}>
+<User size={23} className={`cursor-pointer text-[#603917] transition-all duration-300 hover:text-[#3e5a2c] hover:scale-110 ${open ? "hidden" : "block"}`}/>
+</Link>
+
 
   {/* Cart */}
   <div className={`relative cursor-pointer group ${open ? "hidden" : "block"}`}>
@@ -148,7 +161,7 @@ function Navbar() {
           <a
             href={item.path}
             onClick={() => setOpen(false)}
-            className="block text-center py-3 font-cormorant font-bold rounded-full text-white transition"
+            className="block text-center py-3 font-manrope font-medium text-sm rounded-full text-white transition"
             style={{
               backgroundColor: item.color,
             }}
