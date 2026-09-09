@@ -104,8 +104,8 @@ const MyOrders = () => {
                 onClick={() => setActiveFilter(filter)}
                 className={`shrink-0 rounded-full border px-5 py-2.5 font-manrope text-xs font-semibold transition-all duration-200 ${
                   isActive
-                    ? "border-[#8b183d] bg-[#8b183d] text-white"
-                    : "border-[#603 917]/15 bg-white text-[#603917] hover:border-[#8b183d]/40 hover:text-[#8b183d]"
+                    ? "border- bg-pink-600 text-white"
+                    : "border-[#603 917]/15 bg-white text-pink-600 hover:border-pink-600/40 hover:text-pink-700"
                 }`}
               >
                 {filter}

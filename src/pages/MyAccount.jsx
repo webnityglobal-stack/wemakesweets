@@ -16,9 +16,11 @@ import {
   Truck,
   ShieldCheck,
 } from "lucide-react";
+import useLogout from "@/hooks/auth/useLogout";
 
 const MyAccount = () => {
   const [activeSection, setActiveSection] = useState("profile");
+const { logout } = useLogout();
 
   const menuItems = [
     {
@@ -103,7 +105,7 @@ const MyAccount = () => {
 
               <div className="flex items-center gap-3">
 
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#572340] text-white">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-pink-600 text-white">
                   <span className="font-cormorant text-xl font-bold">
                     C
                   </span>
@@ -134,8 +136,8 @@ const MyAccount = () => {
                   <div
                     className={`flex w-full items-center justify-between rounded-2xl px-4 py-3.5 transition-all ${
                       isActive
-                        ? "bg-[#572340] text-white"
-                        : "text-[#603917]/70 hover:bg-[#f9f5ed] hover:text-[#572340]"
+                        ? "bg-pink-600 text-white"
+                        : "text-[#603917]/70 hover:bg-pink-600 hover:text-white"
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -181,9 +183,10 @@ const MyAccount = () => {
               <button
                 type="button"
                 className="mt-2 flex w-full items-center gap-3 rounded-2xl px-4 py-3.5 text-left text-[#8b183d] transition-colors hover:bg-[#8b183d]/5"
+                onClick={logout}
               >
-                <LogOut className="h-[17px] w-[17px]" />
-
+                <LogOut className="h-[17px] w-[17px]"/>
+ 
                 <span className="font-manrope text-xs font-semibold">
                   Logout
                 </span>
@@ -208,7 +211,7 @@ const MyAccount = () => {
 
                   <div className="relative">
 
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#572340] text-white sm:h-24 sm:w-24">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-pink-600 text-white sm:h-24 sm:w-24">
                       <span className="font-cormorant text-4xl font-bold">
                         C
                       </span>
@@ -216,7 +219,7 @@ const MyAccount = () => {
 
                     <button
                       type="button"
-                      className="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-[#8b183d] text-white shadow-sm"
+                      className="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-pink-600 text-white shadow-sm"
                       aria-label="Edit profile photo"
                     >
                       <Pencil className="h-3.5 w-3.5" />

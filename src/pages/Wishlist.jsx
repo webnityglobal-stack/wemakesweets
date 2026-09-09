@@ -206,7 +206,7 @@ const Wishlist = () => {
               <button
                 type="button"
                 onClick={clearWishlist}
-                className="inline-flex items-center gap-2 self-start rounded-full border border-[#603917]/15 bg-white px-4 py-2.5 font-manrope text-xs font-semibold text-[#603917]/70 transition-colors hover:border-[#8b183d]/30 hover:text-[#8b183d]"
+                className="inline-flex items-center gap-2 self-start rounded-full border border-[#603917]/15 bg-white px-4 py-2.5 font-manrope text-xs font-semibold text-pink-600/70 transition-colors hover:border-[#8b183d]/30 hover:text-pink-700"
               >
                 <Trash2 className="h-3.5 w-3.5" />
                 Clear Wishlist
@@ -258,7 +258,7 @@ const Wishlist = () => {
                       {/* Discount */}
 
                       {discount > 0 && (
-                        <span className="absolute left-4 top-4 rounded-full bg-[#8b183d] px-3 py-1.5 font-manrope text-[10px] font-bold text-white">
+                        <span className="absolute left-4 top-4 rounded-full bg-pink-600 hover:bg-[#60b396] text-white hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:scale-105 cursor-pointer px-3 py-1.5 font-manrope text-[10px] font-bold text-white">
                           {discount}% OFF
                         </span>
                       )}
@@ -283,7 +283,7 @@ const Wishlist = () => {
                           removeFromWishlist(product._id)
                         }
                         aria-label={`Remove ${product.name} from wishlist`}
-                        className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-[#8b183d] shadow-sm transition-all hover:bg-[#8b183d] hover:text-white"
+                        className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full     text-pink-600 hover:text-white hover:bg-pink-600 bg-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:scale-105 cursor-pointer"
                       >
                         <Heart
                           className="h-4 w-4"
@@ -350,7 +350,7 @@ const Wishlist = () => {
                             removeFromWishlist(product._id)
                           }
                           aria-label="Remove from wishlist"
-                          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#603917]/15 bg-white text-[#603917]/60 transition-colors hover:border-[#8b183d]/30 hover:text-[#8b183d]"
+                          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#603917]/15  hover:border-[#8b183d]/30         text-pink-600 hover:text-white hover:bg-pink-600  shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:scale-105 cursor-pointer"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>

@@ -14,6 +14,9 @@ export const authStorage = {
     if (user) {
       localStorage.setItem(USER_KEY, JSON.stringify(user));
     }
+
+    // Notify the application that authentication has changed
+    window.dispatchEvent(new Event("authUpdated"));
   },
 
   getUser: () => {
@@ -29,6 +32,9 @@ export const authStorage = {
   clearAuth: () => {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     localStorage.removeItem(USER_KEY);
+
+    // Notify the application that authentication has changed
+    window.dispatchEvent(new Event("authUpdated"));
   },
 
   isAuthenticated: () => {

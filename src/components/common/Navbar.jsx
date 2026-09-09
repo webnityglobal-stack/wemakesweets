@@ -1,33 +1,45 @@
 import { authStorage } from "@/utils/authStorage";
 import { Search, User, ShoppingCart, Menu, X } from "lucide-react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useEffect, useState } from "react";
 
 const navLinks = [
   { name: "Home", path: "/", color: "#572340" }, // Date Bite
-  { name: "Products", path: "/products",  color: "#3e5a2c" }, // Anjeer
+  { name: "Products", path: "/products", color: "#3e5a2c" }, // Anjeer
   { name: "Our Story", path: "/our-story", color: "#603917" }, // Date Elaichi
   { name: "Benefits", path: "/benefits", color: "#164984" }, // Multi Seed
   { name: "Contact", path: "/contact", color: "#8b183d" }, // Rice Crispy
 ];
 
 function Navbar() {
+
   const [open, setOpen] = useState(false);
-const isLoggedIn = authStorage.isAuthenticated();
 
-const token = localStorage.getItem("token");
+const [isLoggedIn, setIsLoggedIn] = useState(
+  authStorage.isAuthenticated()
+);
 
+useEffect(() => {
+  const syncAuth = () => {
+    setIsLoggedIn(authStorage.isAuthenticated());
+  };
 
-console.log("Token:", token);
-console.log("isLoggedIn:", isLoggedIn);
+  window.addEventListener("authUpdated", syncAuth);
+
+  return () => {
+    window.removeEventListener("authUpdated", syncAuth);
+  };
+}, []);
+
+  console.log("isLoggedIn:", isLoggedIn);
+
 
   return (
     <header className="w-full font-manrope bg-[#f9e4bf] px-4 md:px-8 lg:px-10 z-50">
-      
-      
+
+
       <nav className="h-20 relative flex items-center justify-between">
-<div className="absolute top-6 left-25 text-[11px] text-black"  >®</div>
+        <div className="absolute top-6 left-25 text-[11px] text-black"  >®</div>
         {/* Logo */}
         <a href="/">
           <img
@@ -62,30 +74,29 @@ console.log("isLoggedIn:", isLoggedIn);
             className="cursor-pointer transition hover:scale-110"
             color="#572340"
           /> */}
-<Link to={isLoggedIn ? "/my-account" : "/login"}>
-
-          <User
-            size={23}
-            className="cursor-pointer transition hover:scale-110"
-            color="#603917"
-          />
+       <Link to={isLoggedIn ? "/my-account" : "/login"}>
+  <User
+    size={23}
+    className="cursor-pointer transition hover:scale-110"
+    color="#603917"
+  />
 </Link>
 
-<a href='/cart'>
-          <div className="relative cursor-pointer">
-            <ShoppingCart
-              size={25}
-              color="#3e5a2c"
-              className="transition hover:scale-110"
-            />
+          <a href='/cart'>
+            <div className="relative cursor-pointer">
+              <ShoppingCart
+                size={25}
+                color="#3e5a2c"
+                className="transition hover:scale-110"
+              />
 
-            <span
-              className="absolute -top-2 -right-2 h-5 w-5 rounded-full text-[10px] text-white flex items-center justify-center font-semibold"
-              style={{ backgroundColor: "#8b183d" }}
-            >
-              0
-            </span>
-          </div>
+              <span
+                className="absolute -top-2 -right-2 h-5 w-5 rounded-full text-[10px] text-white flex items-center justify-center font-semibold"
+                style={{ backgroundColor: "#8b183d" }}
+              >
+                0
+              </span>
+            </div>
           </a>
         </div>
 
@@ -95,40 +106,40 @@ console.log("isLoggedIn:", isLoggedIn);
 
 
 
- {/* Mobile Icons + Menu */}
-<div className="flex lg:hidden items-center gap-5">
+        {/* Mobile Icons + Menu */}
+        <div className="flex lg:hidden items-center gap-5">
 
-  {/* User */}
+          {/* User */}
 
-<Link to={isLoggedIn ? "/my-account" : "/login"}>
-<User size={23} className={`cursor-pointer text-[#603917] transition-all duration-300 hover:text-[#3e5a2c] hover:scale-110 ${open ? "hidden" : "block"}`}/>
-</Link>
+          <Link to={isLoggedIn ? "/my-account" : "/login"}>
+            <User size={23} className={`cursor-pointer text-[#603917] transition-all duration-300 hover:text-[#3e5a2c] hover:scale-110 ${open ? "hidden" : "block"}`} />
+          </Link>
 
 
-  {/* Cart */}
-  <div className={`relative cursor-pointer group ${open ? "hidden" : "block"}`}>
-    <ShoppingCart
-      size={24}
-      className="text-[#3e5a2c] transition-all duration-300 group-hover:text-[#164984] group-hover:scale-110"
-    />
+          {/* Cart */}
+          <div className={`relative cursor-pointer group ${open ? "hidden" : "block"}`}>
+            <ShoppingCart
+              size={24}
+              className="text-[#3e5a2c] transition-all duration-300 group-hover:text-[#164984] group-hover:scale-110"
+            />
 
-    <span
-      className="absolute -top-2 -right-2 h-5 w-5 rounded-full text-[10px] text-white flex items-center justify-center transition-all duration-300 group-hover:bg-[#572340]"
-      style={{ backgroundColor: "#8b183d" }}
-    >
-      0
-    </span>
-  </div>
+            <span
+              className="absolute -top-2 -right-2 h-5 w-5 rounded-full text-[10px] text-white flex items-center justify-center transition-all duration-300 group-hover:bg-[#572340]"
+              style={{ backgroundColor: "#8b183d" }}
+            >
+              0
+            </span>
+          </div>
 
-  {/* Hamburger */}
-  <button
-    onClick={() => setOpen(!open)}
-    className="text-[#572340]"
-  >
-    {open ? <X size={30} /> : <Menu size={30} />}
-  </button>
+          {/* Hamburger */}
+          <button
+            onClick={() => setOpen(!open)}
+            className="text-[#572340]"
+          >
+            {open ? <X size={30} /> : <Menu size={30} />}
+          </button>
 
-</div>
+        </div>
 
 
 
@@ -148,32 +159,32 @@ console.log("isLoggedIn:", isLoggedIn);
 
 
       {/* Mobile Menu */}
-    {/* Mobile Menu */}
-{open && (
-  <div className="lg:hidden rounded-3xl bg-[#f9e4bf] shadow-xl p-6 mb-4">
+      {/* Mobile Menu */}
+      {open && (
+        <div className="lg:hidden rounded-3xl bg-[#f9e4bf] shadow-xl p-6 mb-4">
 
-  
 
-    {/* Mobile Navigation */}
-    <ul className="space-y-4">
-      {navLinks.map((item) => (
-        <li key={item.name}>
-          <a
-            href={item.path}
-            onClick={() => setOpen(false)}
-            className="block text-center py-3 font-manrope font-medium text-sm rounded-full text-white transition"
-            style={{
-              backgroundColor: item.color,
-            }}
-          >
-            {item.name}
-          </a>
-        </li>
-      ))}
-    </ul>
 
-  </div>
-)}
+          {/* Mobile Navigation */}
+          <ul className="space-y-4">
+            {navLinks.map((item) => (
+              <li key={item.name}>
+                <a
+                  href={item.path}
+                  onClick={() => setOpen(false)}
+                  className="block text-center py-3 font-manrope font-medium text-sm rounded-full text-white transition"
+                  style={{
+                    backgroundColor: item.color,
+                  }}
+                >
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+        </div>
+      )}
     </header>
   );
 }
