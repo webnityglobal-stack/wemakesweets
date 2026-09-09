@@ -65,6 +65,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import Signup from "@/pages/SignUp";
 import Login from "@/layout/Login";
 
+
 import AddToCart from "@/pages/AddToCart";
 import OrderConfirmation from "@/pages/OrderConfirmation";
 import MyOrders from "@/pages/MyOrders";
