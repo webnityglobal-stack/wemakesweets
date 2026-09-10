@@ -95,10 +95,14 @@ const AppRoutes = () => {
 
           <Route path="products" element={<AllProducts />} />
 
-          <Route
+          {/* <Route
             path="products/:slug"
             element={<ProductDetailsPage />}
-          />
+          /> */}
+          <Route
+  path="/products/:productId"
+  element={<ProductDetailsPage />}
+/>
 
           <Route path="sign-up" element={<Signup />} />
 

@@ -167,6 +167,7 @@ import {
 } from "lucide-react";
 
 const ProductDescription = ({ product }) => {
+  console.log("product wiegh ", product.weight, product.shelfLife)
   return (
     <section className="w-full">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -9,82 +9,75 @@ import {
   Truck,
   ShieldCheck,
 } from "lucide-react";
+import useCart from "@/hooks/cart/useCart";
 
-import products from "../constants/productData";
+
 
 const AddToCart = () => {
-  // --------------------------------------------------
-  // TEMPORARY CART DATA
-  // Filhal productData.js se 2 in-stock products
-  // --------------------------------------------------
-  const initialCart = useMemo(() => {
-    return products
-      .filter((product) => product.stock > 0)
-      .slice(0, 2)
-      .map((product) => ({
-        ...product,
-        quantity: 1,
-      }));
-  }, []);
 
-  const [cartItems, setCartItems] = useState(initialCart);
 
-  // --------------------------------------------------
-  // QUANTITY
-  // --------------------------------------------------
-  const increaseQuantity = (id) => {
-    setCartItems((items) =>
-      items.map((item) =>
-        item._id === id
-          ? {
-              ...item,
-              quantity: Math.min(item.quantity + 1, item.stock),
-            }
-          : item
-      )
+
+  // for add to cart and show cart api integration 
+  const {
+    cart,
+    loading,
+    error,
+    refetch,
+    removeCartItem,
+    updateCartItem,
+    updatingItemId,
+  } = useCart();
+
+
+  const increaseQuantity = (item) => {
+    const nextQuantity = item.quantity + 1;
+
+    if (nextQuantity > item.product.stock) {
+      return;
+    }
+
+    updateCartItem(item._id, nextQuantity);
+  };
+
+
+  const decreaseQuantity = (item) => {
+    const nextQuantity = item.quantity - 1;
+
+    if (nextQuantity < 1) {
+      return;
+    }
+
+    updateCartItem(item._id, nextQuantity);
+  };
+
+
+  const cartItems = cart?.items || [];
+
+
+
+
+  if (loading) {
+    return (
+      <section className="min-h-screen bg-[#f5ebda] flex items-center justify-center">
+        <p className="font-manrope text-gray-500">
+          Loading cart...
+        </p>
+      </section>
     );
-  };
+  }
 
-  const decreaseQuantity = (id) => {
-    setCartItems((items) =>
-      items
-        .map((item) =>
-          item._id === id
-            ? {
-                ...item,
-                quantity: item.quantity - 1,
-              }
-            : item
-        )
-        .filter((item) => item.quantity > 0)
+  if (error) {
+    return (
+      <section className="min-h-screen bg-[#f5ebda] flex items-center justify-center px-4">
+        <p className="font-manrope text-[#8b183d]">
+          {error}
+        </p>
+      </section>
     );
-  };
+  }
 
-  // --------------------------------------------------
-  // REMOVE
-  // --------------------------------------------------
-  const removeItem = (id) => {
-    setCartItems((items) => items.filter((item) => item._id !== id));
-  };
 
-  // --------------------------------------------------
-  // CALCULATIONS
-  // --------------------------------------------------
-  const subtotal = cartItems.reduce(
-    (total, item) => total + item.salePrice * item.quantity,
-    0
-  );
 
-  const mrpTotal = cartItems.reduce(
-    (total, item) => total + item.mrp * item.quantity,
-    0
-  );
-
-  const discount = mrpTotal - subtotal;
-
-  const delivery = subtotal === 0 ? 0 : subtotal >= 999 ? 0 : 49;
-
-  const total = subtotal + delivery;
 
   // --------------------------------------------------
   // EMPTY CART
@@ -135,6 +128,29 @@ const AddToCart = () => {
       </section>
     );
   }
+
+  const subtotal = cartItems.reduce((total, item) => {
+    const variant = item.product?.variants?.find(
+      (v) => v._id === item.variantId
+    );
+
+    const mrp = variant?.mrp || item.product?.mrp || 0;
+
+    return total + mrp * item.quantity;
+  }, 0);
+
+  const saleTotal = cartItems.reduce(
+    (total, item) => total + (item.price || 0) * item.quantity,
+    0
+  );
+
+  const discount = subtotal - saleTotal;
+
+  const delivery =
+    saleTotal === 0 ? 0 : saleTotal >= 350 ? 0 : 49;
+
+  const total = saleTotal + delivery;
+
 
   return (
     <section className="min-h-screen bg-[#f5ebda] px-4 py-5 sm:px-8 sm:py-5  lg:px-16 lg:py-8">
@@ -194,10 +210,23 @@ const AddToCart = () => {
                 CART CARDS
             ================================================== */}
             <div className="space-y-5">
-              {cartItems.map((product) => {
-                const itemDiscount =
-                  product.mrp - product.salePrice;
+              {cartItems.map((item) => {
+                const product = item.product;
 
+                const selectedVariant = product?.variants?.find(
+                  (variant) => variant._id === item.variantId
+                );
+
+                const itemPrice =
+                  item.price || selectedVariant?.salePrice || 0;
+
+                const itemMrp =
+                  selectedVariant?.mrp || product?.mrp || 0;
+
+                const itemStock =
+                  selectedVariant?.stock || 0;
+
+                const itemDiscount = itemMrp - itemPrice;
                 return (
                   <div
                     key={product._id}
@@ -259,13 +288,13 @@ const AddToCart = () => {
                             hover:bg-[#60b396] hover:text-white sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
                             "
                           >
-                            {product.category}
+                            {selectedVariant?.title || "Product"}
                           </span>
 
                           {/* Remove */}
                           <button
                             type="button"
-                            onClick={() => removeItem(product._id)}
+                            onClick={() => removeCartItem(item._id)}
                             className="
                               flex h-8 w-8 shrink-0 items-center justify-center
                               rounded-full
@@ -296,12 +325,10 @@ const AddToCart = () => {
 
                         {/* PRICE */}
                         <div className="mt-3 flex flex-wrap items-center gap-2">
-                          <span className="text-xl font-bold text-[#572340] font-manrope sm:text-2xl">
-                            ₹{product.salePrice}
-                          </span>
+
 
                           <span className="text-sm font-normal text-gray-400 line-through font-manrope">
-                            ₹{product.mrp}
+                            ₹{itemMrp}
                           </span>
 
                           {itemDiscount > 0 && (
@@ -339,9 +366,8 @@ const AddToCart = () => {
                           >
                             <button
                               type="button"
-                              onClick={() =>
-                                decreaseQuantity(product._id)
-                              }
+                              disabled={updatingItemId === item._id}
+                              onClick={() => decreaseQuantity(item)}
                               className="
                                 flex h-full w-10 items-center justify-center
                                 
@@ -356,17 +382,16 @@ const AddToCart = () => {
                             </button>
 
                             <span className="flex h-full min-w-10 items-center justify-center border-x border-[#60391720] text-sm font-semibold text-[#2d2d2d] font-manrope">
-                              {product.quantity}
+                              {item.quantity}
                             </span>
 
                             <button
                               type="button"
                               disabled={
-                                product.quantity >= product.stock
+                                updatingItemId === item._id ||
+                                item.quantity >= item.product.stock
                               }
-                              onClick={() =>
-                                increaseQuantity(product._id)
-                              }
+                              onClick={() => increaseQuantity(item)}
                               className="
                                 flex h-full w-10 items-center justify-center
                                 text-[#603917]
@@ -391,7 +416,7 @@ const AddToCart = () => {
                       </span>
 
                       <span className="text-base font-semibold text-[#572340] font-manrope">
-                        ₹{product.salePrice * product.quantity}
+                        ₹{itemPrice * item.quantity}
                       </span>
                     </div>
                   </div>
@@ -526,7 +551,7 @@ const AddToCart = () => {
                         Free Delivery
                       </p>
                       <p className="text-[10px] font-normal text-gray-500 font-manrope">
-                        On orders above ₹999
+                        On orders above ₹349
                       </p>
                     </div>
                   </div>

@@ -1,5 +1,6 @@
 import { Minus, Plus, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
 import { useMemo, useState } from "react";
+import useAddToCart from "../../../hooks/cart/useAddToCart";
 
 const ProductInfo = ({ product }) => {
   const [selectedVariant, setSelectedVariant] = useState(
@@ -7,14 +8,42 @@ const ProductInfo = ({ product }) => {
 );
   const [qty, setQty] = useState(1);
 
-  const discount = useMemo(() => {
-    if (!selectedVariant?.mrp || !selectedVariant?.price) return 0;
-    return Math.round(
-      ((selectedVariant.mrp - selectedVariant.price) / selectedVariant.mrp) * 100
-    );
-  }, [selectedVariant]);
+  
+const discount = useMemo(() => {
+  if (!selectedVariant?.mrp || !selectedVariant?.salePrice) {
+    return 0;
+  }
+
+  return Math.round(
+    ((selectedVariant.mrp - selectedVariant.salePrice) /
+      selectedVariant.mrp) *
+      100
+  );
+}, [selectedVariant]);
+
 
   const inStock = selectedVariant.stock > 0;
+
+
+
+// for add to cart api integration 
+const { addToCart, loading, error } = useAddToCart();
+const handleAddToCart = async () => {
+  if (!inStock || !selectedVariant?._id) {
+    return;
+  }
+
+  const result = await addToCart({
+    productId: product._id,
+    variantId: selectedVariant._id,
+    quantity: qty,
+  });
+
+  if (result.success) {
+    console.log("Product added to cart successfully");
+  }
+};
+
 
   return (
     <div className="md:space-y-7 space-y-3">
@@ -63,7 +92,7 @@ const ProductInfo = ({ product }) => {
         <div className="flex flex-wrap items-center gap-4">
 
           <span className="text-4xl font-bold text-[#810c26]">
-            ₹{selectedVariant.price } 
+            ₹{selectedVariant.salePrice } 
           </span>
 
           <span className="text-2xl text-gray-400 line-through">
@@ -93,7 +122,10 @@ const ProductInfo = ({ product }) => {
     {product.variants.map((variant) => (
       <button
         key={variant._id}
-        onClick={() => setSelectedVariant(variant)}
+        onClick={() => {
+  setSelectedVariant(variant);
+  setQty(1);
+}}
         className={`px-5 py-2 rounded-lg border font-medium transition   bg-pink-600
               hover:bg-[#60b396]
               text-black
@@ -175,7 +207,8 @@ const ProductInfo = ({ product }) => {
       <div className="grid gap-4 sm:grid-cols-2">
 
         <button
-          disabled={!inStock}
+        disabled={!inStock || loading}
+          onClick={handleAddToCart}
           className={`flex h-14 items-center justify-center gap-3 rounded-2xl text-lg font-semibold transition-all duration-300
 
           ${
@@ -185,9 +218,13 @@ const ProductInfo = ({ product }) => {
           }`}
         >
           <ShoppingBag size={20} />
-          Add To Cart
+            {loading ? "Adding..." : "Add To Cart"}
         </button>
-
+{error && (
+  <p className="mt-2 font-manrope text-sm text-[#8b183d]">
+    {error}
+  </p>
+)}
         <button
           disabled={!inStock}
           className={`flex h-14 items-center justify-center rounded-2xl text-lg font-semibold transition-all duration-300

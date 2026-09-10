@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Heart, Star } from "lucide-react";
 import { useEffect, useState } from "react";
+import useAddToCart from "../../hooks/cart/useAddToCart";
 
 const ProductCard = ({ product }) => {
 
@@ -57,9 +58,38 @@ const toggleWishlist = () => {
 
   const inStock = product.stock > 0;
 
+
+// for add to cart api  inegration 
+const { addToCart, loading } = useAddToCart();
+const handleQuickAdd = async (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  if (!inStock) return;
+
+  const variantId = product.variants?.[0]?._id;
+
+  if (!variantId) {
+    console.error("Variant ID is missing.");
+    return;
+  }
+
+  const result = await addToCart({
+    productId: product._id,
+    variantId,
+    quantity: 1,
+  });
+
+  if (result.success) {
+    console.log("Product added to cart");
+  }
+};
+
+
+
   return (
-    <Link
-      to={`/products/${product.slug}`}
+   <Link
+  to={`/products/${product._id}`}
       className="
         group block overflow-hidden rounded-lg border border-[#60391720] bg-[#f2ede1]
         transition-all duration-300
@@ -198,27 +228,8 @@ const toggleWishlist = () => {
         className="
           space-y-1 p-1.5
           sm:space-y-2 sm:p-5
-          
         "
       >
-        {/* Category */}
-        <span
-          className="
-            inline-flex max-w-full truncate whitespace-nowrap rounded-sm
-             px-1.5 py-0.5
-            text-[8px] font-medium 
-            font-manrope
-            sm:rounded-md sm:px-3 sm:py-1 sm:text-xs   bg-pink-600
-              hover:bg-[#60b396]
-              text-white
-              hover:text-white
-              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
-              cursor-pointer
-          "
-        >
-          {product.category}
-        </span>
-
         {/* Name */}
         <h2
           className="
@@ -234,18 +245,6 @@ const toggleWishlist = () => {
         >
           {product.name}
         </h2>
-
-        {/* Description */}
-        {/* <p
-          className="
-            line-clamp- min-h-[24px]
-            text-[10px] leading-[1.3] text-gray-500
-            sm:min-h-[48px] sm:text-[15px] sm:leading-6
-            lg:min-h-[8px]
-          "
-        >
-          {product.shortDescription}
-        </p> */}
 
         {/* Stock */}
         <div className="hidden text-[10px] font-semibold font-manrope sm:block sm:text-sm">
@@ -306,8 +305,8 @@ const toggleWishlist = () => {
         {/* Button */}
         <button
           type="button"
-          disabled={!inStock}
-          onClick={(e) => e.preventDefault()}
+          disabled={!inStock || loading}
+  onClick={handleQuickAdd}
           className={`
             h-7 w-full rounded-md
             text-[8px] font-bold uppercase tracking-normal
