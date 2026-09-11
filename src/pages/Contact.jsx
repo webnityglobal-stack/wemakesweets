@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { toast } from "sonner";
 import ScrollWavyUnderline from "@/components/common/ScrollWavyUnderline";
 import {
   Mail,
@@ -8,6 +10,29 @@ import {
 } from "lucide-react";
 
 export default function Contact() {
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!form.name || !form.email || !form.message) {
+      toast.error("Please fill in all required fields (Name, Email, Message).");
+      return;
+    }
+    toast.success("Thank you! Your message has been sent successfully.");
+    setForm({
+      name: "",
+      phone: "",
+      email: "",
+      subject: "",
+      message: "",
+    });
+  };
   return (
     <main className="overflow-hidden bg-[#f5ebda]">
 
@@ -74,17 +99,20 @@ export default function Contact() {
                   back to you as soon as possible.
                 </p>
 
-                <form className="mt-6 sm:mt-8 space-y-3 sm:space-y-2 text-[#f9e4bf]">
+                <form onSubmit={handleSubmit} className="mt-6 sm:mt-8 space-y-3 sm:space-y-2 text-[#f9e4bf]">
 
                   <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
 
                     <div>
                       <label className="mb-2 block font-semibold text-sm sm:text-base">
-                        Full Name
+                        Full Name *
                       </label>
                       <input
                         type="text"
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
                         placeholder="Your Name"
+                        required
                         className="w-full rounded-2xl text-[#810c26] border placeholder:text-[#810c26]/50 border-gray-300 bg-[#fdfaf3] px-4 sm:px-5 py-3 sm:py-4 outline-none transition focus:border-[#810c26] text-sm sm:text-base"
                       />
                     </div>
@@ -95,6 +123,8 @@ export default function Contact() {
                       </label>
                       <input
                         type="text"
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
                         placeholder="Your Phone"
                         className="w-full text-[#810c26] placeholder:text-[#810c26]/50 rounded-2xl border border-gray-300 bg-[#fdfaf3] px-4 sm:px-5 py-3 sm:py-4 outline-none transition focus:border-[#810c26] text-sm sm:text-base"
                       />
@@ -104,11 +134,14 @@ export default function Contact() {
 
                   <div>
                     <label className="mb-2 block font-semibold text-sm sm:text-base">
-                      Email Address
+                      Email Address *
                     </label>
                     <input
                       type="email"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
                       placeholder="you@example.com"
+                      required
                       className="w-full text-[#810c26] placeholder:text-[#810c26]/50 rounded-2xl border border-gray-300 bg-[#fdfaf3] px-4 sm:px-5 py-3 sm:py-4 outline-none transition focus:border-[#08376c] text-sm sm:text-base"
                     />
                   </div>
@@ -119,6 +152,8 @@ export default function Contact() {
                     </label>
                     <input
                       type="text"
+                      value={form.subject}
+                      onChange={(e) => setForm({ ...form, subject: e.target.value })}
                       placeholder="Enter Subject"
                       className="w-full text-[#810c26] placeholder:text-[#810c26]/50 rounded-2xl border border-gray-300 bg-[#fdfaf3] px-4 sm:px-5 py-3 sm:py-4 outline-none transition focus:border-[#2a4d25] text-sm sm:text-base"
                     />
@@ -126,17 +161,20 @@ export default function Contact() {
 
                   <div>
                     <label className="mb-2 block font-semibold text-sm sm:text-base">
-                      Message
+                      Message *
                     </label>
                     <textarea
                       rows={5}
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
                       placeholder="Write your message..."
+                      required
                       className="w-full text-[#810c26] placeholder:text-[#810c26]/50 rounded-2xl border border-gray-300 bg-[#fdfaf3] px-4 sm:px-5 py-3 sm:py-4 outline-none transition focus:border-[#552b12] text-sm sm:text-base"
                     />
                   </div>
 
                   <button
-                    type="button"
+                    type="submit"
                     className="flex items-center justify-center gap-3 rounded-full text-white hover:text-white bg-pink-600 hover:bg-[#60b396] hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] md:px-8 md:py-4 px-6 py-3.5 font-semibold transition-all duration-300 text-sm sm:text-base w-full sm:w-auto cursor-pointer"
                   >
                     <Send size={18} />

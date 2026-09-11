@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import cartService from "@/services/cartService";
 
 const useCart = () => {
@@ -44,10 +45,12 @@ const removeCartItem = async (cartItemId) => {
     const data = await cartService.removeCartItem(cartItemId);
 
     setCart(data.cart);
+    const msg = data.message || "Item removed from cart.";
+    toast.success(msg);
 
     return {
       success: true,
-      message: data.message,
+      message: msg,
     };
   } catch (error) {
     const message =
@@ -55,6 +58,7 @@ const removeCartItem = async (cartItemId) => {
       "Unable to remove item from cart.";
 
     setError(message);
+    toast.error(message);
 
     return {
       success: false,
@@ -128,6 +132,7 @@ const removeCartItem = async (cartItemId) => {
         "Unable to update cart.";
 
       setError(message);
+      toast.error(message);
 
       return {
         success: false,

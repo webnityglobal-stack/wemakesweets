@@ -17,20 +17,16 @@ import ProductCard from '@/components/products/ProductCard'
 import QucikMarket from '@/components/QuicMarket'
 
 const Home = () => {
-    const { products, loading, error } = useProducts();
+  const { products, loading, error } = useProducts();
 
   return (
     <div className='flex flex-col  bg-[#]'>
       <PremiumSlider />
       <Boxes />
-      {/* <Hero/> */}
-
-      {/* <ProductSlider/><OurProduct/> */}
       <ProductConsumption />
-
       <div>
         <section className="relative bg-[#f5ebda] py-4 md:px-[24px]">
-     {/* <Wave
+          {/* <Wave
     position="bottom"
     fill="#f9e4bf"
   /> */}
@@ -58,85 +54,85 @@ const Home = () => {
 
             {/* Products */}
             {/* Products */}
-    <div className="relative">
+            <div className="relative">
 
-  {loading ? (
-    <div className="flex min-h-[300px] items-center justify-center">
-      <p className="font-manrope text-sm text-[#603917] md:text-base">
-        Loading Products...
-      </p>
-    </div>
-  ) : error ? (
-    <div className="flex min-h-[300px] items-center justify-center">
-      <p className="font-manrope text-sm text-[#8b183d] md:text-base">
-        {error}
-      </p>
-    </div>
-  ) : (
-    <>
-      {/* Desktop Slider */}
-      <div
-        id="best-selling-slider"
-        className="hidden lg:block overflow-hidden"
-      >
-        <div
-          id="best-selling-track"
-          className="flex gap-5 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          {products.map((product) => (
-            <div
-              key={product._id}
-              className="shrink-0 w-[calc((100%-60px)/4)]"
-            >
-              <ProductCard product={product} />
+              {loading ? (
+                <div className="flex min-h-[300px] items-center justify-center">
+                  <p className="font-manrope text-sm text-[#603917] md:text-base">
+                    Loading Products...
+                  </p>
+                </div>
+              ) : error ? (
+                <div className="flex min-h-[300px] items-center justify-center">
+                  <p className="font-manrope text-sm text-[#8b183d] md:text-base">
+                    {error}
+                  </p>
+                </div>
+              ) : (
+                <>
+                  {/* Desktop Slider */}
+                  <div
+                    id="best-selling-slider"
+                    className="hidden lg:block overflow-hidden"
+                  >
+                    <div
+                      id="best-selling-track"
+                      className="flex gap-5 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                    >
+                      {products.map((product) => (
+                        <div
+                          key={product._id}
+                          className="shrink-0 w-[calc((100%-60px)/4)]"
+                        >
+                          <ProductCard product={product} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Mobile */}
+                  <div className="lg:hidden">
+                    <ProductGrid products={products} />
+                  </div>
+
+                  {/* Desktop Buttons */}
+                  <div className="hidden lg:flex absolute -top-16 right-0 gap-2">
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        document
+                          .getElementById("best-selling-track")
+                          ?.scrollBy({
+                            left: -350,
+                            behavior: "smooth",
+                          })
+                      }
+                      className="flex h-10 w-10 items-center justify-center rounded-full bg-pink-600 hover:bg-[#60b396] text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:scale-105 cursor-pointer"
+                    >
+                      ←
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        document
+                          .getElementById("best-selling-track")
+                          ?.scrollBy({
+                            left: 350,
+                            behavior: "smooth",
+                          })
+                      }
+                      className="flex h-10 w-10 items-center justify-center rounded-full bg-pink-600 hover:bg-[#60b396] text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:scale-105 cursor-pointer"
+                    >
+                      →
+                    </button>
+
+                  </div>
+                </>
+              )}
+
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Mobile */}
-      <div className="lg:hidden">
-        <ProductGrid products={products} />
-      </div>
-
-      {/* Desktop Buttons */}
-      <div className="hidden lg:flex absolute -top-16 right-0 gap-2">
-
-        <button
-          type="button"
-          onClick={() =>
-            document
-              .getElementById("best-selling-track")
-              ?.scrollBy({
-                left: -350,
-                behavior: "smooth",
-              })
-          }
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-pink-600 hover:bg-[#60b396] text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:scale-105 cursor-pointer"
-        >
-          ←
-        </button>
-
-        <button
-          type="button"
-          onClick={() =>
-            document
-              .getElementById("best-selling-track")
-              ?.scrollBy({
-                left: 350,
-                behavior: "smooth",
-              })
-          }
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-pink-600 hover:bg-[#60b396] text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:scale-105 cursor-pointer"
-        >
-          →
-        </button>
-
-      </div>
-    </>
-  )}
-
-</div>
 
 
             {/* Button */}
@@ -151,19 +147,12 @@ const Home = () => {
           </div>
         </section>
       </div>
-
-
-
-      {/* <HowrahBridge/> */}
       <HeroContent />
-      {/* <GatewayOfIndia/> */}
       <PerfectOccasion />
-      {/* <InspiredByHeritage/> */}
-      {/* <OurStory /> */}
       <ReelsSection />
       <IconPage />
       <OurStoryVideo />
-      <QucikMarket/>
+      <QucikMarket />
       <Testimonials />
       <FAQPage />
     </div>

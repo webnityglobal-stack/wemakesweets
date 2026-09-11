@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import {
   Minus,
   Plus,
@@ -14,6 +14,7 @@ import useCart from "@/hooks/cart/useCart";
 
 
 const AddToCart = () => {
+  const navigate = useNavigate();
 
 
 
@@ -33,6 +34,7 @@ const AddToCart = () => {
     const nextQuantity = item.quantity + 1;
 
     if (nextQuantity > item.product.stock) {
+      toast.warning(`Only ${item.product.stock} units available in stock.`);
       return;
     }
 
@@ -150,6 +152,25 @@ const AddToCart = () => {
     saleTotal === 0 ? 0 : saleTotal >= 350 ? 0 : 49;
 
   const total = saleTotal + delivery;
+
+  const handleProceedToCheckout = () => {
+    if (!cartItems.length) {
+      toast.error("Your cart is empty.");
+      return;
+    }
+    toast.success("Proceeding to checkout...");
+    navigate("/order-confirmation", {
+      state: {
+        order: {
+          items: cartItems,
+          subtotal,
+          discount,
+          delivery,
+          total,
+        },
+      },
+    });
+  };
 
 
   return (
@@ -517,6 +538,7 @@ const AddToCart = () => {
                 {/* CHECKOUT BUTTON */}
                 <button
                   type="button"
+                  onClick={handleProceedToCheckout}
                   className="
                     mt-2 flex h-13 w-full items-center justify-center gap-2
                     rounded-xl px-5
@@ -528,6 +550,7 @@ const AddToCart = () => {
                     hover:shadow-[3px_4px_0px_#000]
                     transition-all duration-200
                     hover:-translate-y-0.5
+                    cursor-pointer
                   "
                 >
                   Proceed to Checkout

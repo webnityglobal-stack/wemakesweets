@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import {
   Heart,
   ShoppingBag,
@@ -74,6 +75,7 @@ const Wishlist = () => {
   ============================================================ */
 
   const removeFromWishlist = (productId) => {
+    const removedProduct = products.find((p) => p._id === productId);
     const updatedWishlist = wishlistIds.filter(
       (id) => id !== productId
     );
@@ -84,6 +86,11 @@ const Wishlist = () => {
     );
 
     setWishlistIds(updatedWishlist);
+    toast.info(
+      removedProduct
+        ? `"${removedProduct.name}" removed from wishlist.`
+        : "Item removed from wishlist."
+    );
 
     window.dispatchEvent(new Event("wishlistUpdated"));
   };
@@ -96,6 +103,7 @@ const Wishlist = () => {
     localStorage.setItem(WISHLIST_KEY, JSON.stringify([]));
 
     setWishlistIds([]);
+    toast.info("Wishlist cleared.");
 
     window.dispatchEvent(new Event("wishlistUpdated"));
   };

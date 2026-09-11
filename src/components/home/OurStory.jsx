@@ -161,7 +161,7 @@ const OurStory = () => {
         <div
           className="relative min-h-[340px] bg-cover bg-center"
           style={{
-            backgroundImage: "url('/ourStory2.webp')",
+            // backgroundImage: "url('/ourStory2.webp')",
           }}
         >
           <div className="absolute inset-0 bg-[#164984]/45"></div>

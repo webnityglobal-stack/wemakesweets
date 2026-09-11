@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import cartService from "../../services/cartService";
+import { authStorage } from "../../utils/authStorage";
 
 const useAddToCart = () => {
   const [loading, setLoading] = useState(false);
@@ -10,7 +12,19 @@ const useAddToCart = () => {
     productId,
     variantId,
     quantity = 1,
+    productName,
   }) => {
+    if (!authStorage.isAuthenticated()) {
+      const msg = "Please login to add items to your cart.";
+      setError(msg);
+      toast.error(msg);
+      return {
+        success: false,
+        error: msg,
+        requiresAuth: true,
+      };
+    }
+
     try {
       setLoading(true);
       setError("");
@@ -22,7 +36,12 @@ const useAddToCart = () => {
         quantity,
       });
 
-      setSuccess(data?.message || "Product added to cart successfully.");
+      const successMsg = productName
+        ? `"${productName}" added to cart successfully!`
+        : data?.message || "Product added to cart successfully!";
+
+      setSuccess(successMsg);
+      toast.success(successMsg);
 
       return {
         success: true,
@@ -36,6 +55,7 @@ const useAddToCart = () => {
         "Unable to add product to cart. Please try again.";
 
       setError(message);
+      toast.error(message);
 
       return {
         success: false,

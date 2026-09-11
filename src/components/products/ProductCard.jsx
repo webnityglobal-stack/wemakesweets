@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Heart, Star } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import useAddToCart from "../../hooks/cart/useAddToCart";
 
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
 
 const WISHLIST_KEY = "wms_wishlist";
 
@@ -34,8 +36,10 @@ const toggleWishlist = () => {
       updatedWishlist = savedWishlist.filter(
         (id) => id !== product._id
       );
+      toast.info(`"${product.name}" removed from wishlist.`);
     } else {
       updatedWishlist = [...savedWishlist, product._id];
+      toast.success(`"${product.name}" added to wishlist!`);
     }
 
     localStorage.setItem(
@@ -48,6 +52,7 @@ const toggleWishlist = () => {
     window.dispatchEvent(new Event("wishlistUpdated"));
   } catch (error) {
     console.error("Unable to update wishlist", error);
+    toast.error("Unable to update wishlist.");
   }
 };
 
@@ -59,18 +64,22 @@ const toggleWishlist = () => {
   const inStock = product.stock > 0;
 
 
-// for add to cart api  inegration 
+// for add to cart api inegration 
 const { addToCart, loading } = useAddToCart();
 const handleQuickAdd = async (e) => {
   e.preventDefault();
   e.stopPropagation();
 
-  if (!inStock) return;
+  if (!inStock) {
+    toast.error("Sorry, this item is out of stock.");
+    return;
+  }
 
   const variantId = product.variants?.[0]?._id;
 
   if (!variantId) {
     console.error("Variant ID is missing.");
+    toast.error("Product variant not available.");
     return;
   }
 
@@ -78,10 +87,11 @@ const handleQuickAdd = async (e) => {
     productId: product._id,
     variantId,
     quantity: 1,
+    productName: product.name,
   });
 
-  if (result.success) {
-    console.log("Product added to cart");
+  if (result.requiresAuth) {
+    navigate("/login");
   }
 };
 

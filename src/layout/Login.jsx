@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { toast } from "sonner";
 import axiosInstance from "../api/axiosInstance";
 import { authStorage } from "../utils/authStorage";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -30,7 +32,9 @@ const Login = () => {
   const { email, password } = formData;
 
   if (!email || !password) {
-    setError("Please enter your email and password.");
+    const msg = "Please enter your email and password.";
+    setError(msg);
+    toast.error(msg);
     return;
   }
 
@@ -51,13 +55,18 @@ const Login = () => {
       user,
     });
 
-    // Redirect after successful login
-    navigate("/cart");
+    const userName = user?.name ? ` ${user.name}` : "";
+    toast.success(`Welcome back${userName}! Login successful.`);
+
+    // Redirect to intended page or cart
+    const redirectPath = location.state?.from?.pathname || "/cart";
+    navigate(redirectPath);
   } catch (error) {
-    setError(
+    const errorMsg =
       error.response?.data?.message ||
-        "Invalid email or password. Please try again."
-    );
+      "Invalid email or password. Please try again.";
+    setError(errorMsg);
+    toast.error(errorMsg);
   } finally {
     setLoading(false);
   }

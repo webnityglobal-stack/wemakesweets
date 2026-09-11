@@ -90,12 +90,12 @@ useEffect(() => {
                 className="transition hover:scale-110"
               />
 
-              <span
+              {/* <span
                 className="absolute -top-2 -right-2 h-5 w-5 rounded-full text-[10px] text-white flex items-center justify-center font-semibold"
                 style={{ backgroundColor: "#8b183d" }}
               >
                 0
-              </span>
+              </span> */}
             </div>
           </a>
         </div>

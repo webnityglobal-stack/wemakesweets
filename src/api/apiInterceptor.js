@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { authStorage } from "../utils/authStorage";
 
 const setupInterceptors = (axiosInstance) => {
@@ -24,6 +25,10 @@ const setupInterceptors = (axiosInstance) => {
     },
     (error) => {
       if (error.response?.status === 401) {
+        const isLoginAttempt = error.config?.url?.includes("/auth/login");
+        if (!isLoginAttempt && authStorage.getToken()) {
+          toast.error("Session expired. Please login again.");
+        }
         authStorage.clearAuth();
       }
 

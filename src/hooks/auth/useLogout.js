@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { authStorage } from "../../utils/authStorage";
 
 const useLogout = () => {
@@ -10,6 +11,8 @@ const useLogout = () => {
 
     // Notify other components
     window.dispatchEvent(new Event("authChanged"));
+
+    toast.success("Logged out successfully.");
 
     // Redirect to login
     navigate("/login");

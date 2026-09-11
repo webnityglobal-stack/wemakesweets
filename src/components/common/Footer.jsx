@@ -19,10 +19,10 @@ const quickLinks = [
 
 const customerCare = [
   // { name: "FAQs", path: "/" },
-  // { name: "Shipping & Delivery", path: "/" },
-  // { name: "Returns & Refunds", path: "/" },
-  { name: "Privacy Policy", path: "/" },
-  { name: "Terms & Conditions", path: "/" },
+  { name: "Shipping & Delivery", path: "/shipping-delivery" },
+  { name: "Returns, Cancellation & Refunds", path: "/return-cancellation-refund" },
+  { name: "Privacy Policy", path: "/privacy-policy  " },
+  { name: "Terms & Conditions", path: "/terms-condition" },
 ];
 
 const Footer = () => {

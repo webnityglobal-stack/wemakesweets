@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
 import useSignUp from "../hooks/auth/useSignUp";
 
 const Signup = () => {
@@ -34,6 +36,19 @@ const Signup = () => {
     setError,
   } = useSignUp();
 
+  const isPasswordMismatch = Boolean(
+    formData.confirmPassword &&
+    formData.password &&
+    formData.password !== formData.confirmPassword
+  );
+
+  const isPasswordMatch = Boolean(
+    formData.confirmPassword &&
+    formData.password &&
+    formData.password === formData.confirmPassword &&
+    formData.password.length >= 6
+  );
+
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -53,17 +68,23 @@ const handleSubmit = async (e) => {
     !password ||
     !confirmPassword
   ) {
-    setError("Please fill in all fields.");
+    const msg = "Please fill in all fields.";
+    setError(msg);
+    toast.error(msg);
     return;
   }
 
   if (password !== confirmPassword) {
-    setError("Passwords do not match.");
+    const msg = "Passwords do not match.";
+    setError(msg);
+    toast.error(msg);
     return;
   }
 
   if (password.length < 6) {
-    setError("Password must be at least 6 characters.");
+    const msg = "Password must be at least 6 characters.";
+    setError(msg);
+    toast.error(msg);
     return;
   }
 
@@ -77,7 +98,10 @@ const handleSubmit = async (e) => {
   const result = await signup(signupData);
 
   if (result.success) {
+    toast.success(result.message || "Account created successfully! Please login.");
     navigate("/login");
+  } else {
+    toast.error(result.error || "Unable to create account. Please try again.");
   }
 };
 
@@ -185,9 +209,9 @@ const handleSubmit = async (e) => {
   />
 </div>
 
-          <div className="flex gap-4">
-              {/* Password */}
-            <div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Password */}
+            <div className="w-full">
               <label
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700 mb-2"
@@ -203,7 +227,7 @@ const handleSubmit = async (e) => {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Enter password"
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 pr-15 text-sm outline-none transition focus:border-[#572340] focus:ring-1 focus:ring-[#572340]"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 pr-14 text-sm outline-none transition focus:border-[#572340] focus:ring-1 focus:ring-[#572340]"
                 />
 
                 <button
@@ -211,7 +235,7 @@ const handleSubmit = async (e) => {
                   onClick={() =>
                     setShowPassword((prev) => !prev)
                   }
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-[#572340]"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-[#572340] cursor-pointer"
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
@@ -219,7 +243,7 @@ const handleSubmit = async (e) => {
             </div>
 
             {/* Confirm Password */}
-            <div>
+            <div className="w-full">
               <label
                 htmlFor="confirmPassword"
                 className="block text-sm font-medium text-gray-700 mb-2"
@@ -235,7 +259,13 @@ const handleSubmit = async (e) => {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="Confirm password"
-                  className="w-full rounded-lg border border-gray-300 px-2 py-3 pr-16 text-sm outline-none transition focus:border-[#572340] focus:ring-1 focus:ring-[#572340]"
+                  className={`w-full rounded-lg border px-4 py-3 pr-14 text-sm outline-none transition ${
+                    isPasswordMismatch
+                      ? "border-red-500 bg-red-50/40 text-red-900 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                      : isPasswordMatch
+                      ? "border-emerald-500 bg-emerald-50/40 text-emerald-900 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
+                      : "border-gray-300 focus:border-[#572340] focus:ring-1 focus:ring-[#572340]"
+                  }`}
                 />
 
                 <button
@@ -243,13 +273,29 @@ const handleSubmit = async (e) => {
                   onClick={() =>
                     setShowConfirmPassword((prev) => !prev)
                   }
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-[#572340]"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-[#572340] cursor-pointer"
                 >
                   {showConfirmPassword ? "Hide" : "Show"}
                 </button>
               </div>
             </div>
           </div>
+
+          {/* Real-time Password Mismatch Warning */}
+          {isPasswordMismatch && (
+            <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3.5 py-2.5 text-xs text-red-600 transition-all">
+              <AlertCircle size={16} className="shrink-0 text-red-500" />
+              <span>Passwords do not match. Please verify your confirm password.</span>
+            </div>
+          )}
+
+          {/* Real-time Password Match Confirmation */}
+          {isPasswordMatch && (
+            <div className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3.5 py-2.5 text-xs text-emerald-700 transition-all">
+              <CheckCircle2 size={16} className="shrink-0 text-emerald-600" />
+              <span>Passwords match!</span>
+            </div>
+          )}
 
             {/* Terms */}
             <div className="flex items-start gap-2">

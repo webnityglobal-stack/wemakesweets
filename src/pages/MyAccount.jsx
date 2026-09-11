@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import {
   UserRound,
   Package,
@@ -17,10 +18,16 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import useLogout from "@/hooks/auth/useLogout";
+import { authStorage } from "@/utils/authStorage";
 
 const MyAccount = () => {
   const [activeSection, setActiveSection] = useState("profile");
-const { logout } = useLogout();
+  const { logout } = useLogout();
+  const user = authStorage.getUser();
+  const userName = user?.name || "Customer";
+  const userInitial = (user?.name?.[0] || "C").toUpperCase();
+  const userEmail = user?.email || "customer@example.com";
+  const userPhone = user?.phone || "Not provided";
 
   const menuItems = [
     {
@@ -182,7 +189,7 @@ const { logout } = useLogout();
               {/* Logout */}
               <button
                 type="button"
-                className="mt-2 flex w-full items-center gap-3 rounded-2xl px-4 py-3.5 text-left text-[#8b183d] transition-colors hover:bg-[#8b183d]/5"
+                className="mt-2 flex w-full items-center gap-3 rounded-2xl px-4 py-3.5 text-left text-[#8b183d] transition-colors hover:bg-[#8b183d]/5 cursor-pointer"
                 onClick={logout}
               >
                 <LogOut className="h-[17px] w-[17px]"/>
@@ -213,13 +220,14 @@ const { logout } = useLogout();
 
                     <div className="flex h-20 w-20 items-center justify-center rounded-full bg-pink-600 text-white sm:h-24 sm:w-24">
                       <span className="font-cormorant text-4xl font-bold">
-                        C
+                        {userInitial}
                       </span>
                     </div>
 
                     <button
                       type="button"
-                      className="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-pink-600 text-white shadow-sm"
+                      onClick={() => toast.info("Profile photo upload coming soon.")}
+                      className="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-pink-600 text-white shadow-sm cursor-pointer"
                       aria-label="Edit profile photo"
                     >
                       <Pencil className="h-3.5 w-3.5" />
@@ -233,11 +241,11 @@ const { logout } = useLogout();
                     </p>
 
                     <h2 className="mt-1 font-cormorant text-3xl font-semibold text-[#572340] sm:text-4xl">
-                      Customer Name
+                      {userName}
                     </h2>
 
                     <p className="mt-1 font-manrope text-xs text-[#603917]/50">
-                      Member since September 2026
+                      Member since {new Date().getFullYear()}
                     </p>
                   </div>
 
@@ -303,19 +311,19 @@ const { logout } = useLogout();
                   <InfoField
                     icon={UserRound}
                     label="Full Name"
-                    value="Customer Name"
+                    value={userName}
                   />
 
                   <InfoField
                     icon={Mail}
                     label="Email Address"
-                    value="customer@example.com"
+                    value={userEmail}
                   />
 
                   <InfoField
                     icon={Phone}
                     label="Phone Number"
-                    value="+91 98XXXXXX10"
+                    value={userPhone}
                   />
 
                   <InfoField

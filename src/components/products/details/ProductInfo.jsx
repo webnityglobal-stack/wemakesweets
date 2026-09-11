@@ -1,8 +1,10 @@
 import { Minus, Plus, ShieldCheck, ShoppingBag, Truck } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useAddToCart from "../../../hooks/cart/useAddToCart";
 
 const ProductInfo = ({ product }) => {
+  const navigate = useNavigate();
   const [selectedVariant, setSelectedVariant] = useState(
     product.variants[0]
 );
@@ -37,10 +39,30 @@ const handleAddToCart = async () => {
     productId: product._id,
     variantId: selectedVariant._id,
     quantity: qty,
+    productName: `${product.name} (${selectedVariant.title || ""})`,
+  });
+
+  if (result.requiresAuth) {
+    navigate("/login");
+  }
+};
+
+const handleBuyNow = async () => {
+  if (!inStock || !selectedVariant?._id) {
+    return;
+  }
+
+  const result = await addToCart({
+    productId: product._id,
+    variantId: selectedVariant._id,
+    quantity: qty,
+    productName: `${product.name} (${selectedVariant.title || ""})`,
   });
 
   if (result.success) {
-    console.log("Product added to cart successfully");
+    navigate("/cart");
+  } else if (result.requiresAuth) {
+    navigate("/login");
   }
 };
 
@@ -226,7 +248,8 @@ const handleAddToCart = async () => {
   </p>
 )}
         <button
-          disabled={!inStock}
+          disabled={!inStock || loading}
+          onClick={handleBuyNow}
           className={`flex h-14 items-center justify-center rounded-2xl text-lg font-semibold transition-all duration-300
 
           ${

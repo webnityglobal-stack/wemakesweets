@@ -74,6 +74,10 @@ import MyAccount from "@/pages/MyAccount";
 import Wishlist from "@/pages/Wishlist";
 
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import TermsAndConditions from "@/pages/TermsAndCondition";
+import ShippingDeliveryPolicy from "@/pages/ShippingDeliveryPolicy";
+import CancellationReturnRefundPolicy from "@/pages/CancellationReturnRefundPolicy";
 
 const AppRoutes = () => {
   return (
@@ -94,7 +98,10 @@ const AppRoutes = () => {
           <Route path="contact" element={<Contact />} />
 
           <Route path="products" element={<AllProducts />} />
-
+<Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
+<Route path='/terms-condition' element={<TermsAndConditions/>}/>
+<Route path='/shipping-delivery' element={<ShippingDeliveryPolicy/>}/>
+<Route path='/return-cancellation-refund' element={<CancellationReturnRefundPolicy/>}/>
           {/* <Route
             path="products/:slug"
             element={<ProductDetailsPage />}
