@@ -114,7 +114,7 @@ const handleSubmit = async (e) => {
         {/* Logo / Brand */}
         <div className="text-center mb-4">
           <h1 className="text-2xl md:text-4xl font-cormorant text-[#572340]">
-            We Make Sweets
+            WeMake Sweets
           </h1>
 
           <p className="mt-2 text-sm text-gray-600">
