@@ -123,12 +123,12 @@ useEffect(() => {
               className="text-[#3e5a2c] transition-all duration-300 group-hover:text-[#164984] group-hover:scale-110"
             />
 
-            <span
+            {/* <span
               className="absolute -top-2 -right-2 h-5 w-5 rounded-full text-[10px] text-white flex items-center justify-center transition-all duration-300 group-hover:bg-[#572340]"
               style={{ backgroundColor: "#8b183d" }}
             >
               0
-            </span>
+            </span> */}
           </div>
 
           {/* Hamburger */}
