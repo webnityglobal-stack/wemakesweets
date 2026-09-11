@@ -14,15 +14,23 @@ const WISHLIST_KEY = "wms_wishlist";
 const [isWishlisted, setIsWishlisted] = useState(false);
 
 useEffect(() => {
-  try {
-    const savedWishlist = JSON.parse(
-      localStorage.getItem(WISHLIST_KEY) || "[]"
-    );
+  const syncWishlist = () => {
+    try {
+      const savedWishlist = JSON.parse(
+        localStorage.getItem(WISHLIST_KEY) || "[]"
+      );
+      setIsWishlisted(savedWishlist.includes(product._id));
+    } catch (error) {
+      console.error("Unable to load wishlist", error);
+    }
+  };
 
-    setIsWishlisted(savedWishlist.includes(product._id));
-  } catch (error) {
-    console.error("Unable to load wishlist", error);
-  }
+  syncWishlist();
+  window.addEventListener("wishlistUpdated", syncWishlist);
+
+  return () => {
+    window.removeEventListener("wishlistUpdated", syncWishlist);
+  };
 }, [product._id]);
 
 // for wishlist api integration

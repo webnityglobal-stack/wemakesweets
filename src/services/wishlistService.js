@@ -12,7 +12,7 @@ const wishlistService = {
 
   // get wishlist
   getWishlist: async () => {
-    const response = await axiosInstance.get("/wishlist");
+    const response = await axiosInstance.get("/wishlist/");
     return response.data;
   },
 
