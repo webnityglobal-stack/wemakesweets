@@ -52,11 +52,11 @@ const MyAccount = () => {
       label: "Saved Addresses",
       icon: MapPin,
     },
-    {
-      id: "settings",
-      label: "Account Settings",
-      icon: Settings,
-    },
+    // {
+    //   id: "settings",
+    //   label: "Account Settings",
+    //   icon: Settings,
+    // },
   ];
 
   const handleMenuClick = (item) => {
