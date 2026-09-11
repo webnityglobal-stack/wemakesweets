@@ -16,9 +16,16 @@ const wishlistService = {
     return response.data;
   },
 
-  // remove from wishlist
-  removeFromWishlist: async (productId) => {
-    const response = await axiosInstance.delete(`/wishlist/${productId}`);
+  // remove / delete from wishlist
+  removeFromWishlist: async ({ productId, variantId }) => {
+    const response = await axiosInstance.delete(
+      `/wishlist/remove/${productId}`,
+      {
+        data: {
+          variantId,
+        },
+      }
+    );
     return response.data;
   },
 };

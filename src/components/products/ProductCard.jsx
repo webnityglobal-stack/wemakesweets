@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import useAddToCart from "../../hooks/cart/useAddToCart";
 import useAddToWishlist from "../../hooks/wishlist/useAddToWishlist";
+import useRemoveFromWishlist from "../../hooks/wishlist/useRemoveFromWishlist";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
@@ -24,8 +25,10 @@ useEffect(() => {
   }
 }, [product._id]);
 
-// for add to wishlist api integration
-const { addToWishlist, loading: wishlistLoading } = useAddToWishlist();
+// for wishlist api integration
+const { addToWishlist, loading: addLoading } = useAddToWishlist();
+const { removeFromWishlist, loading: removeLoading } = useRemoveFromWishlist();
+const wishlistLoading = addLoading || removeLoading;
 
 const handleWishlistClick = async (e) => {
   e.preventDefault();
@@ -39,31 +42,57 @@ const handleWishlistClick = async (e) => {
     return;
   }
 
-  const result = await addToWishlist({
-    productId: product._id,
-    variantId,
-    productName: product.name,
-  });
+  if (isWishlisted) {
+    const result = await removeFromWishlist({
+      productId: product._id,
+      variantId,
+      productName: product.name,
+    });
 
-  if (result.requiresAuth) {
-    navigate("/login");
-    return;
-  }
+    if (result.requiresAuth) {
+      navigate("/login");
+      return;
+    }
 
-  if (result.success) {
-    setIsWishlisted(true);
-    try {
-      const savedWishlist = JSON.parse(
-        localStorage.getItem(WISHLIST_KEY) || "[]"
-      );
-      if (!savedWishlist.includes(product._id)) {
-        localStorage.setItem(
-          WISHLIST_KEY,
-          JSON.stringify([...savedWishlist, product._id])
+    if (result.success) {
+      setIsWishlisted(false);
+      try {
+        const savedWishlist = JSON.parse(
+          localStorage.getItem(WISHLIST_KEY) || "[]"
         );
+        const updated = savedWishlist.filter((id) => id !== product._id);
+        localStorage.setItem(WISHLIST_KEY, JSON.stringify(updated));
+      } catch (err) {
+        console.error("Unable to update local wishlist", err);
       }
-    } catch (err) {
-      console.error("Unable to update local wishlist", err);
+    }
+  } else {
+    const result = await addToWishlist({
+      productId: product._id,
+      variantId,
+      productName: product.name,
+    });
+
+    if (result.requiresAuth) {
+      navigate("/login");
+      return;
+    }
+
+    if (result.success) {
+      setIsWishlisted(true);
+      try {
+        const savedWishlist = JSON.parse(
+          localStorage.getItem(WISHLIST_KEY) || "[]"
+        );
+        if (!savedWishlist.includes(product._id)) {
+          localStorage.setItem(
+            WISHLIST_KEY,
+            JSON.stringify([...savedWishlist, product._id])
+          );
+        }
+      } catch (err) {
+        console.error("Unable to update local wishlist", err);
+      }
     }
   }
 };
