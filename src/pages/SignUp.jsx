@@ -339,7 +339,7 @@ const handleSubmit = async (e) => {
 
         {/* Bottom */}
         <p className="text-center text-xs text-gray-500 mt-6">
-          © {new Date().getFullYear()} We Make Sweets
+          © {new Date().getFullYear()} WeMake Sweets
         </p>
 
       </div>
