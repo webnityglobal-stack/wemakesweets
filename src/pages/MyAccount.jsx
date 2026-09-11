@@ -223,7 +223,7 @@ const MyAccount = () => {
                         {userInitial}
                       </span>
                     </div>
-
+{/* 
                     <button
                       type="button"
                       onClick={() => toast.info("Profile photo upload coming soon.")}
@@ -231,7 +231,7 @@ const MyAccount = () => {
                       aria-label="Edit profile photo"
                     >
                       <Pencil className="h-3.5 w-3.5" />
-                    </button>
+                    </button> */}
 
                   </div>
 
@@ -326,11 +326,11 @@ const MyAccount = () => {
                     value={userPhone}
                   />
 
-                  <InfoField
+                  {/* <InfoField
                     icon={CalendarDays}
                     label="Date of Birth"
                     value="Not added"
-                  />
+                  /> */}
 
                 </div>
 
