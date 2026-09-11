@@ -3,6 +3,7 @@ import { Heart, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import useAddToCart from "../../hooks/cart/useAddToCart";
+import useAddToWishlist from "../../hooks/wishlist/useAddToWishlist";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
@@ -23,36 +24,47 @@ useEffect(() => {
   }
 }, [product._id]);
 
+// for add to wishlist api integration
+const { addToWishlist, loading: wishlistLoading } = useAddToWishlist();
 
-const toggleWishlist = () => {
-  try {
-    const savedWishlist = JSON.parse(
-      localStorage.getItem(WISHLIST_KEY) || "[]"
-    );
+const handleWishlistClick = async (e) => {
+  e.preventDefault();
+  e.stopPropagation();
 
-    let updatedWishlist;
+  const variantId = product.variants?.[0]?._id;
 
-    if (savedWishlist.includes(product._id)) {
-      updatedWishlist = savedWishlist.filter(
-        (id) => id !== product._id
+  if (!variantId) {
+    console.error("Variant ID is missing.");
+    toast.error("Product variant not available.");
+    return;
+  }
+
+  const result = await addToWishlist({
+    productId: product._id,
+    variantId,
+    productName: product.name,
+  });
+
+  if (result.requiresAuth) {
+    navigate("/login");
+    return;
+  }
+
+  if (result.success) {
+    setIsWishlisted(true);
+    try {
+      const savedWishlist = JSON.parse(
+        localStorage.getItem(WISHLIST_KEY) || "[]"
       );
-      toast.info(`"${product.name}" removed from wishlist.`);
-    } else {
-      updatedWishlist = [...savedWishlist, product._id];
-      toast.success(`"${product.name}" added to wishlist!`);
+      if (!savedWishlist.includes(product._id)) {
+        localStorage.setItem(
+          WISHLIST_KEY,
+          JSON.stringify([...savedWishlist, product._id])
+        );
+      }
+    } catch (err) {
+      console.error("Unable to update local wishlist", err);
     }
-
-    localStorage.setItem(
-      WISHLIST_KEY,
-      JSON.stringify(updatedWishlist)
-    );
-
-    setIsWishlisted(updatedWishlist.includes(product._id));
-
-    window.dispatchEvent(new Event("wishlistUpdated"));
-  } catch (error) {
-    console.error("Unable to update wishlist", error);
-    toast.error("Unable to update wishlist.");
   }
 };
 
@@ -172,12 +184,13 @@ const handleQuickAdd = async (e) => {
         {/* Wishlist */}
         <button
           type="button"
- onClick={toggleWishlist}
-  aria-label={
-    isWishlisted
-      ? "Remove from wishlist"
-      : "Add to wishlist"
-  }
+          disabled={wishlistLoading}
+          onClick={handleWishlistClick}
+          aria-label={
+            isWishlisted
+              ? "Remove from wishlist"
+              : "Add to wishlist"
+          }
           className="
             absolute bottom-1 right-1 hidden h-7 w-7 items-center justify-center
             rounded-full bg-white shadow-md transition-all duration-300
