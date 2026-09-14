@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import {
   ArrowLeft,
   Check,
@@ -9,10 +9,12 @@ import {
   Package,
   ShoppingBag,
   Truck,
+  Loader2,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import mockOrders from "../constants/mockOrders";
+import orderService from "@/services/orderService";
 
 const trackingSteps = [
   {
@@ -49,9 +51,98 @@ const trackingSteps = [
 
 const TrackOrder = () => {
   const { orderId } = useParams();
+  const location = useLocation();
   const [copied, setCopied] = useState(false);
+  const [fetchedOrder, setFetchedOrder] = useState(location.state?.order || null);
+  const [loading, setLoading] = useState(!location.state?.order);
 
-  const order = mockOrders.find((item) => item.orderId === orderId);
+  useEffect(() => {
+    if (location.state?.order) {
+      setFetchedOrder(location.state.order);
+      setLoading(false);
+      return;
+    }
+
+    const loadOrder = async () => {
+      try {
+        setLoading(true);
+        const data = await orderService.getMyOrders();
+        if (data?.orders) {
+          const matched = data.orders.find(
+            (item) => item.orderId === orderId || item._id === orderId
+          );
+          if (matched) setFetchedOrder(matched);
+        }
+      } catch (err) {
+        console.error("Unable to load order details:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadOrder();
+  }, [orderId, location.state]);
+
+  const rawOrder =
+    fetchedOrder || mockOrders.find((item) => item.orderId === orderId);
+
+  // Normalize order
+  const order = rawOrder
+    ? {
+        orderId: rawOrder.orderId,
+        date: rawOrder.createdAt
+          ? new Date(rawOrder.createdAt).toLocaleDateString("en-IN", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })
+          : rawOrder.date || "N/A",
+        status:
+          (rawOrder.orderStatus || rawOrder.status || "CONFIRMED").charAt(0).toUpperCase() +
+          (rawOrder.orderStatus || rawOrder.status || "CONFIRMED").slice(1).toLowerCase(),
+        rawStatus: (rawOrder.orderStatus || rawOrder.status || "CONFIRMED").toUpperCase(),
+        trackingNumber:
+          rawOrder.shiprocket?.awbCode ||
+          rawOrder.trackingNumber ||
+          "Pending Assignment",
+        expectedDelivery:
+          rawOrder.expectedDelivery ||
+          (rawOrder.shiprocket?.courierName
+            ? `Via ${rawOrder.shiprocket.courierName}`
+            : "3-5 Business Days"),
+        items: (rawOrder.items || []).map((it, idx) => ({
+          _id: it._id || it.variantId || idx,
+          name: it.name || it.product?.name || "Sweet Item",
+          image: it.product?.images?.[0] || it.image || "/products/product1.webp",
+          quantity: it.quantity || 1,
+          salePrice: it.price || it.salePrice || 0,
+          mrp: it.mrp || it.price || it.salePrice || 0,
+        })),
+        subtotal: rawOrder.subtotal || rawOrder.totalAmount || 0,
+        discount: rawOrder.discount || 0,
+        delivery: rawOrder.shippingCharge || rawOrder.delivery || 0,
+        total: rawOrder.totalAmount || rawOrder.total || 0,
+        paymentMethod: rawOrder.paymentMethod || "Online Payment",
+        customer: rawOrder.shippingAddress || rawOrder.customer || {
+          name: "Customer",
+          phone: "N/A",
+          email: "N/A",
+        },
+      }
+    : null;
+
+  if (loading) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#fbf8f2] px-5">
+        <div className="text-center">
+          <Loader2 className="mx-auto h-8 w-8 animate-spin text-pink-600" />
+          <p className="mt-4 font-manrope text-sm font-semibold text-[#572340]">
+            Loading order details...
+          </p>
+        </div>
+      </main>
+    );
+  }
 
   if (!order) {
     return (
@@ -81,8 +172,23 @@ const TrackOrder = () => {
     );
   }
 
+  const statusKeyMap = {
+    CONFIRMED: "Confirmed",
+    PENDING: "Confirmed",
+    PROCESSING: "Packed",
+    ORDER_CREATED: "Packed",
+    PACKED: "Packed",
+    SHIPPED: "Shipped",
+    IN_TRANSIT: "Shipped",
+    OUT_FOR_DELIVERY: "Out for Delivery",
+    DELIVERED: "Delivered",
+  };
+
+  const mappedKey =
+    statusKeyMap[order.rawStatus] || order.status;
+
   const currentStepIndex = trackingSteps.findIndex(
-    (step) => step.key === order.status
+    (step) => step.key.toLowerCase() === mappedKey.toLowerCase()
   );
 
   const handleCopy = async () => {

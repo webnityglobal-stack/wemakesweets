@@ -17,10 +17,17 @@ import {
   ShieldCheck,
   X,
   Loader2,
+  CheckCircle2,
+  AlertCircle,
+  Trash2,
 } from "lucide-react";
 import useLogout from "@/hooks/auth/useLogout";
 import useUserDashboard from "@/hooks/user/useUserDashboard";
 import useUpdateProfile from "@/hooks/user/useUpdateProfile";
+import useAddresses from "@/hooks/address/useAddresses";
+import useAddAddress from "@/hooks/address/useAddAddress";
+import useUpdateAddress from "@/hooks/address/useUpdateAddress";
+import useDeleteAddress from "@/hooks/address/useDeleteAddress";
 import { authStorage } from "@/utils/authStorage";
 
 const MyAccount = () => {
@@ -33,12 +40,69 @@ const MyAccount = () => {
     error: updateError,
     setError: setUpdateError,
   } = useUpdateProfile();
+  const {
+    addresses,
+    loading: addressesLoading,
+    error: addressesError,
+    refetch: refetchAddresses,
+  } = useAddresses();
+  const {
+    addAddress,
+    loading: addingAddress,
+    error: addAddressError,
+    setError: setAddAddressError,
+  } = useAddAddress();
+  const {
+    updateAddress,
+    loading: updatingAddress,
+    error: updateAddressError,
+    setError: setUpdateAddressError,
+  } = useUpdateAddress();
+  const {
+    deleteAddress,
+    loading: deletingAddress,
+    error: deleteAddressError,
+    setError: setDeleteAddressError,
+  } = useDeleteAddress();
+
+  const [isDeleteAddressModalOpen, setIsDeleteAddressModalOpen] =
+    useState(false);
+  const [addressToDelete, setAddressToDelete] = useState(null);
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editFormData, setEditFormData] = useState({
     name: "",
     email: "",
     phone: "",
+  });
+
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  const [addressFormData, setAddressFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    address: "",
+    address2: "",
+    city: "",
+    state: "",
+    pincode: "",
+    country: "India",
+    isDefault: false,
+  });
+
+  const [isEditAddressModalOpen, setIsEditAddressModalOpen] = useState(false);
+  const [editingAddressId, setEditingAddressId] = useState(null);
+  const [editAddressFormData, setEditAddressFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    address: "",
+    address2: "",
+    city: "",
+    state: "",
+    pincode: "",
+    country: "India",
+    isDefault: false,
   });
 
   const user = dashboardUser || authStorage.getUser();
@@ -84,6 +148,153 @@ const MyAccount = () => {
       await refetch();
     } else {
       toast.error(res.error || "Failed to update profile");
+    }
+  };
+
+  const handleOpenAddAddressModal = () => {
+    setAddressFormData({
+      name: user?.name || "",
+      phone: user?.phone && user?.phone !== "Not provided" ? user?.phone : "",
+      email: user?.email || "",
+      address: "",
+      address2: "",
+      city: "",
+      state: "",
+      pincode: "",
+      country: "India",
+      isDefault: addresses.length === 0,
+    });
+    setAddAddressError("");
+    setIsAddressModalOpen(true);
+  };
+
+  const handleAddressFormChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setAddressFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+    if (addAddressError) setAddAddressError("");
+  };
+
+  const handleAddAddressSubmit = async (e) => {
+    e.preventDefault();
+    if (!addressFormData.name.trim()) {
+      toast.error("Please enter recipient name");
+      return;
+    }
+    if (!addressFormData.phone.trim()) {
+      toast.error("Please enter phone number");
+      return;
+    }
+    if (!addressFormData.address.trim()) {
+      toast.error("Please enter street address");
+      return;
+    }
+    if (!addressFormData.city.trim()) {
+      toast.error("Please enter city");
+      return;
+    }
+    if (!addressFormData.state.trim()) {
+      toast.error("Please enter state");
+      return;
+    }
+    if (!addressFormData.pincode.trim()) {
+      toast.error("Please enter pincode");
+      return;
+    }
+
+    const res = await addAddress(addressFormData);
+    if (res.success) {
+      toast.success(res.message || "Address added successfully!");
+      setIsAddressModalOpen(false);
+      await refetchAddresses();
+    } else {
+      toast.error(res.error || "Failed to add address");
+    }
+  };
+
+  const handleOpenEditAddressModal = (addressItem) => {
+    setEditingAddressId(addressItem._id);
+    setEditAddressFormData({
+      name: addressItem.name || "",
+      phone: addressItem.phone || "",
+      email: addressItem.email || "",
+      address: addressItem.address || "",
+      address2: addressItem.address2 || "",
+      city: addressItem.city || "",
+      state: addressItem.state || "",
+      pincode: addressItem.pincode || "",
+      country: addressItem.country || "India",
+      isDefault: Boolean(addressItem.isDefault),
+    });
+    setUpdateAddressError("");
+    setIsEditAddressModalOpen(true);
+  };
+
+  const handleEditAddressFormChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setEditAddressFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+    if (updateAddressError) setUpdateAddressError("");
+  };
+
+  const handleEditAddressSubmit = async (e) => {
+    e.preventDefault();
+    if (!editAddressFormData.name.trim()) {
+      toast.error("Please enter recipient name");
+      return;
+    }
+    if (!editAddressFormData.phone.trim()) {
+      toast.error("Please enter phone number");
+      return;
+    }
+    if (!editAddressFormData.address.trim()) {
+      toast.error("Please enter street address");
+      return;
+    }
+    if (!editAddressFormData.city.trim()) {
+      toast.error("Please enter city");
+      return;
+    }
+    if (!editAddressFormData.state.trim()) {
+      toast.error("Please enter state");
+      return;
+    }
+    if (!editAddressFormData.pincode.trim()) {
+      toast.error("Please enter pincode");
+      return;
+    }
+
+    const res = await updateAddress(editingAddressId, editAddressFormData);
+    if (res.success) {
+      toast.success(res.message || "Address updated successfully!");
+      setIsEditAddressModalOpen(false);
+      setEditingAddressId(null);
+      await refetchAddresses();
+    } else {
+      toast.error(res.error || "Failed to update address");
+    }
+  };
+
+  const handleOpenDeleteAddressModal = (addressItem) => {
+    setAddressToDelete(addressItem);
+    setDeleteAddressError("");
+    setIsDeleteAddressModalOpen(true);
+  };
+
+  const handleConfirmDeleteAddress = async () => {
+    if (!addressToDelete?._id) return;
+    const res = await deleteAddress(addressToDelete._id);
+    if (res.success) {
+      toast.success(res.message || "Address deleted successfully!");
+      setIsDeleteAddressModalOpen(false);
+      setAddressToDelete(null);
+      await Promise.all([refetchAddresses(), refetch()]);
+    } else {
+      toast.error(res.error || "Failed to delete address");
     }
   };
 
@@ -358,7 +569,7 @@ const MyAccount = () => {
               <StatCard
                 icon={MapPin}
                 label="Addresses"
-                value={stats?.addresses ?? 0}
+                value={addresses?.length ?? stats?.addresses ?? 0}
               />
 
             </div>
@@ -422,33 +633,77 @@ const MyAccount = () => {
 
                   <button
                     type="button"
-                    className="inline-flex items-center justify-center rounded-full bg-pink-600 px-5 py-3 font-manrope text-xs font-semibold text-white shadow-[2px_3px_0px_#000] transition-all hover:bg-[#60b396] hover:shadow-[3px_4px_0px_#000]"
+                    onClick={handleOpenAddAddressModal}
+                    className="inline-flex items-center justify-center rounded-full bg-pink-600 px-5 py-3 font-manrope text-xs font-semibold text-white shadow-[2px_3px_0px_#000] transition-all hover:bg-[#60b396] hover:shadow-[3px_4px_0px_#000] cursor-pointer"
                   >
                     + Add New Address
                   </button>
 
                 </div>
 
-                <div className="mt-7 grid gap-4 md:grid-cols-2">
+                {/* Loading State */}
+                {addressesLoading && (
+                  <div className="py-14 text-center">
+                    <Loader2 className="mx-auto h-7 w-7 animate-spin text-pink-600" />
+                    <p className="mt-3 font-manrope text-xs font-semibold text-[#572340]">
+                      Loading saved addresses...
+                    </p>
+                  </div>
+                )}
 
-                  <AddressCard
-                    title="Home"
-                    name={userName}
-                    address="123, Your Street, Near Main Market"
-                    city="Surat, Gujarat - 395001"
-                    phone={userPhone}
-                    defaultAddress
-                  />
+                {/* Error State */}
+                {!addressesLoading && addressesError && (
+                  <div className="my-6 rounded-2xl border border-red-200 bg-red-50 p-5 text-center">
+                    <AlertCircle className="mx-auto h-6 w-6 text-red-600" />
+                    <p className="mt-2 font-manrope text-xs text-red-700">
+                      {addressesError}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={refetchAddresses}
+                      className="mt-3 rounded-full bg-pink-600 px-4 py-1.5 font-manrope text-xs font-semibold text-white shadow-[2px_3px_0px_#000] hover:bg-[#60b396] cursor-pointer"
+                    >
+                      Retry
+                    </button>
+                  </div>
+                )}
 
-                  <AddressCard
-                    title="Office"
-                    name={userName}
-                    address="45, Business Avenue"
-                    city="Surat, Gujarat - 395007"
-                    phone={userPhone}
-                  />
+                {/* Empty State */}
+                {!addressesLoading && !addressesError && addresses.length === 0 && (
+                  <div className="py-14 text-center">
+                    <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#8b183d]/10 text-[#8b183d]">
+                      <MapPin className="h-6 w-6" />
+                    </div>
+                    <h3 className="mt-4 font-cormorant text-2xl font-bold text-[#572340]">
+                      No Saved Addresses
+                    </h3>
+                    <p className="mt-1 font-manrope text-xs text-[#603917]/60">
+                      You have not added any delivery addresses yet.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={handleOpenAddAddressModal}
+                      className="mt-5 inline-flex items-center justify-center rounded-full bg-pink-600 px-5 py-2.5 font-manrope text-xs font-semibold text-white shadow-[2px_3px_0px_#000] transition-all hover:bg-[#60b396] hover:shadow-[3px_4px_0px_#000] cursor-pointer"
+                    >
+                      + Add Your First Address
+                    </button>
+                  </div>
+                )}
 
-                </div>
+                {/* Addresses Grid */}
+                {!addressesLoading && !addressesError && addresses.length > 0 && (
+                  <div className="mt-7 grid gap-5 md:grid-cols-2">
+                    {addresses.map((addressItem, index) => (
+                      <AddressCard
+                        key={addressItem._id || index}
+                        address={addressItem}
+                        index={index}
+                        onEdit={() => handleOpenEditAddressModal(addressItem)}
+                        onDelete={() => handleOpenDeleteAddressModal(addressItem)}
+                      />
+                    ))}
+                  </div>
+                )}
 
               </div>
             )}
@@ -679,6 +934,666 @@ const MyAccount = () => {
           </div>
         </div>
       )}
+
+      {/* ===============================================
+          ADD ADDRESS MODAL
+      =============================================== */}
+      {isAddressModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+            onClick={() => !addingAddress && setIsAddressModalOpen(false)}
+          />
+
+          {/* Modal Content */}
+          <div className="relative my-8 w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl border border-[#603917]/15 bg-[#fdfaf3] p-6 sm:p-8 shadow-2xl z-10">
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={() => setIsAddressModalOpen(false)}
+              disabled={addingAddress}
+              className="absolute right-5 top-5 rounded-full p-2 text-[#603917]/60 hover:bg-[#603917]/10 hover:text-[#572340] transition-colors cursor-pointer disabled:opacity-50"
+              aria-label="Close modal"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            {/* Header */}
+            <div className="flex items-center gap-3 border-b border-[#603917]/10 pb-4">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-pink-600 text-white shadow-sm">
+                <MapPin className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="font-manrope text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8b183d]">
+                  Delivery Address
+                </p>
+                <h2 className="font-cormorant text-2xl sm:text-3xl font-bold text-[#572340]">
+                  Add New Address
+                </h2>
+              </div>
+            </div>
+
+            {/* Error Alert */}
+            {addAddressError && (
+              <div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-700">
+                {addAddressError}
+              </div>
+            )}
+
+            {/* Form */}
+            <form onSubmit={handleAddAddressSubmit} className="mt-5 space-y-4">
+              {/* Row 1: Name & Phone */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="addr-name"
+                    className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                  >
+                    Recipient Name <span className="text-pink-600">*</span>
+                  </label>
+                  <input
+                    id="addr-name"
+                    name="name"
+                    type="text"
+                    required
+                    value={addressFormData.name}
+                    onChange={handleAddressFormChange}
+                    placeholder="Full name"
+                    className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="addr-phone"
+                    className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                  >
+                    Phone Number <span className="text-pink-600">*</span>
+                  </label>
+                  <input
+                    id="addr-phone"
+                    name="phone"
+                    type="tel"
+                    required
+                    value={addressFormData.phone}
+                    onChange={handleAddressFormChange}
+                    placeholder="10-digit mobile number"
+                    maxLength={15}
+                    className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                  />
+                </div>
+              </div>
+
+              {/* Row 2: Email */}
+              <div>
+                <label
+                  htmlFor="addr-email"
+                  className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                >
+                  Email Address
+                </label>
+                <input
+                  id="addr-email"
+                  name="email"
+                  type="email"
+                  value={addressFormData.email}
+                  onChange={handleAddressFormChange}
+                  placeholder="name@example.com (optional)"
+                  className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                />
+              </div>
+
+              {/* Row 3: Street Address */}
+              <div>
+                <label
+                  htmlFor="addr-address"
+                  className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                >
+                  Street Address / Flat / Building <span className="text-pink-600">*</span>
+                </label>
+                <input
+                  id="addr-address"
+                  name="address"
+                  type="text"
+                  required
+                  value={addressFormData.address}
+                  onChange={handleAddressFormChange}
+                  placeholder="e.g. Sec-4 Madhav Puram, Saraswati Lok"
+                  className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                />
+              </div>
+
+              {/* Row 4: Address Line 2 / Landmark */}
+              <div>
+                <label
+                  htmlFor="addr-address2"
+                  className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                >
+                  Area / Colony / Landmark
+                </label>
+                <input
+                  id="addr-address2"
+                  name="address2"
+                  type="text"
+                  value={addressFormData.address2}
+                  onChange={handleAddressFormChange}
+                  placeholder="Near Landmark (optional)"
+                  className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                />
+              </div>
+
+              {/* Row 5: City & State */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="addr-city"
+                    className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                  >
+                    City <span className="text-pink-600">*</span>
+                  </label>
+                  <input
+                    id="addr-city"
+                    name="city"
+                    type="text"
+                    required
+                    value={addressFormData.city}
+                    onChange={handleAddressFormChange}
+                    placeholder="City / District"
+                    className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="addr-state"
+                    className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                  >
+                    State <span className="text-pink-600">*</span>
+                  </label>
+                  <input
+                    id="addr-state"
+                    name="state"
+                    type="text"
+                    required
+                    value={addressFormData.state}
+                    onChange={handleAddressFormChange}
+                    placeholder="e.g. Uttar Pradesh, Maharashtra"
+                    className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                  />
+                </div>
+              </div>
+
+              {/* Row 6: Pincode & Country */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="addr-pincode"
+                    className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                  >
+                    Pincode <span className="text-pink-600">*</span>
+                  </label>
+                  <input
+                    id="addr-pincode"
+                    name="pincode"
+                    type="text"
+                    required
+                    maxLength={6}
+                    value={addressFormData.pincode}
+                    onChange={handleAddressFormChange}
+                    placeholder="6-digit pincode"
+                    className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="addr-country"
+                    className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                  >
+                    Country
+                  </label>
+                  <input
+                    id="addr-country"
+                    name="country"
+                    type="text"
+                    value={addressFormData.country}
+                    onChange={handleAddressFormChange}
+                    placeholder="Country"
+                    className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                  />
+                </div>
+              </div>
+
+              {/* Row 7: Set as default */}
+              <div className="pt-2">
+                <label className="flex items-center gap-2.5 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    name="isDefault"
+                    checked={addressFormData.isDefault}
+                    onChange={handleAddressFormChange}
+                    className="h-4 w-4 rounded border-gray-300 text-pink-600 accent-pink-600 focus:ring-pink-500"
+                  />
+                  <span className="font-manrope text-xs font-medium text-[#572340]">
+                    Set as default delivery address
+                  </span>
+                </label>
+              </div>
+
+              {/* Actions */}
+              <div className="mt-6 flex items-center justify-end gap-3 pt-3 border-t border-[#603917]/10">
+                <button
+                  type="button"
+                  disabled={addingAddress}
+                  onClick={() => setIsAddressModalOpen(false)}
+                  className="rounded-full border border-[#603917]/20 bg-white px-5 py-2.5 font-manrope text-xs font-semibold text-[#603917] transition-all hover:bg-gray-100 cursor-pointer disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="submit"
+                  disabled={addingAddress}
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-pink-600 px-6 py-2.5 font-manrope text-xs font-semibold text-white shadow-[2px_3px_0px_#000] transition-all hover:bg-[#60b396] hover:shadow-[3px_4px_0px_#000] cursor-pointer disabled:opacity-70"
+                >
+                  {addingAddress ? (
+                    <>
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                      Saving Address...
+                    </>
+                  ) : (
+                    "Save Address"
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ===============================================
+          EDIT ADDRESS MODAL
+      =============================================== */}
+      {isEditAddressModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+            onClick={() => !updatingAddress && setIsEditAddressModalOpen(false)}
+          />
+
+          {/* Modal Content */}
+          <div className="relative my-8 w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl border border-[#603917]/15 bg-[#fdfaf3] p-6 sm:p-8 shadow-2xl z-10">
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={() => setIsEditAddressModalOpen(false)}
+              disabled={updatingAddress}
+              className="absolute right-5 top-5 rounded-full p-2 text-[#603917]/60 hover:bg-[#603917]/10 hover:text-[#572340] transition-colors cursor-pointer disabled:opacity-50"
+              aria-label="Close modal"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            {/* Header */}
+            <div className="flex items-center gap-3 border-b border-[#603917]/10 pb-4">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#8b183d] text-white shadow-sm">
+                <Pencil className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="font-manrope text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8b183d]">
+                  Update Details
+                </p>
+                <h2 className="font-cormorant text-2xl sm:text-3xl font-bold text-[#572340]">
+                  Edit Address
+                </h2>
+              </div>
+            </div>
+
+            {/* Error Alert */}
+            {updateAddressError && (
+              <div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-700">
+                {updateAddressError}
+              </div>
+            )}
+
+            {/* Form */}
+            <form onSubmit={handleEditAddressSubmit} className="mt-5 space-y-4">
+              {/* Row 1: Name & Phone */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="edit-addr-name"
+                    className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                  >
+                    Recipient Name <span className="text-pink-600">*</span>
+                  </label>
+                  <input
+                    id="edit-addr-name"
+                    name="name"
+                    type="text"
+                    required
+                    value={editAddressFormData.name}
+                    onChange={handleEditAddressFormChange}
+                    placeholder="Full name"
+                    className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="edit-addr-phone"
+                    className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                  >
+                    Phone Number <span className="text-pink-600">*</span>
+                  </label>
+                  <input
+                    id="edit-addr-phone"
+                    name="phone"
+                    type="tel"
+                    required
+                    value={editAddressFormData.phone}
+                    onChange={handleEditAddressFormChange}
+                    placeholder="10-digit mobile number"
+                    maxLength={15}
+                    className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                  />
+                </div>
+              </div>
+
+              {/* Row 2: Email */}
+              <div>
+                <label
+                  htmlFor="edit-addr-email"
+                  className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                >
+                  Email Address
+                </label>
+                <input
+                  id="edit-addr-email"
+                  name="email"
+                  type="email"
+                  value={editAddressFormData.email}
+                  onChange={handleEditAddressFormChange}
+                  placeholder="name@example.com (optional)"
+                  className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                />
+              </div>
+
+              {/* Row 3: Street Address */}
+              <div>
+                <label
+                  htmlFor="edit-addr-address"
+                  className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                >
+                  Street Address / Flat / Building <span className="text-pink-600">*</span>
+                </label>
+                <input
+                  id="edit-addr-address"
+                  name="address"
+                  type="text"
+                  required
+                  value={editAddressFormData.address}
+                  onChange={handleEditAddressFormChange}
+                  placeholder="e.g. Sec-4 Madhav Puram, Saraswati Lok"
+                  className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                />
+              </div>
+
+              {/* Row 4: Address Line 2 / Landmark */}
+              <div>
+                <label
+                  htmlFor="edit-addr-address2"
+                  className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                >
+                  Area / Colony / Landmark
+                </label>
+                <input
+                  id="edit-addr-address2"
+                  name="address2"
+                  type="text"
+                  value={editAddressFormData.address2}
+                  onChange={handleEditAddressFormChange}
+                  placeholder="Near Landmark (optional)"
+                  className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                />
+              </div>
+
+              {/* Row 5: City & State */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="edit-addr-city"
+                    className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                  >
+                    City <span className="text-pink-600">*</span>
+                  </label>
+                  <input
+                    id="edit-addr-city"
+                    name="city"
+                    type="text"
+                    required
+                    value={editAddressFormData.city}
+                    onChange={handleEditAddressFormChange}
+                    placeholder="City / District"
+                    className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="edit-addr-state"
+                    className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                  >
+                    State <span className="text-pink-600">*</span>
+                  </label>
+                  <input
+                    id="edit-addr-state"
+                    name="state"
+                    type="text"
+                    required
+                    value={editAddressFormData.state}
+                    onChange={handleEditAddressFormChange}
+                    placeholder="e.g. Uttar Pradesh, Maharashtra"
+                    className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                  />
+                </div>
+              </div>
+
+              {/* Row 6: Pincode & Country */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="edit-addr-pincode"
+                    className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                  >
+                    Pincode <span className="text-pink-600">*</span>
+                  </label>
+                  <input
+                    id="edit-addr-pincode"
+                    name="pincode"
+                    type="text"
+                    required
+                    maxLength={6}
+                    value={editAddressFormData.pincode}
+                    onChange={handleEditAddressFormChange}
+                    placeholder="6-digit pincode"
+                    className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="edit-addr-country"
+                    className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
+                  >
+                    Country
+                  </label>
+                  <input
+                    id="edit-addr-country"
+                    name="country"
+                    type="text"
+                    value={editAddressFormData.country}
+                    onChange={handleEditAddressFormChange}
+                    placeholder="Country"
+                    className="w-full rounded-2xl border border-[#603917]/20 bg-white py-2.5 px-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
+                  />
+                </div>
+              </div>
+
+              {/* Row 7: Set as default */}
+              <div className="pt-2">
+                <label className="flex items-center gap-2.5 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    name="isDefault"
+                    checked={editAddressFormData.isDefault}
+                    onChange={handleEditAddressFormChange}
+                    className="h-4 w-4 rounded border-gray-300 text-pink-600 accent-pink-600 focus:ring-pink-500"
+                  />
+                  <span className="font-manrope text-xs font-medium text-[#572340]">
+                    Set as default delivery address
+                  </span>
+                </label>
+              </div>
+
+              {/* Actions */}
+              <div className="mt-6 flex items-center justify-end gap-3 pt-3 border-t border-[#603917]/10">
+                <button
+                  type="button"
+                  disabled={updatingAddress}
+                  onClick={() => setIsEditAddressModalOpen(false)}
+                  className="rounded-full border border-[#603917]/20 bg-white px-5 py-2.5 font-manrope text-xs font-semibold text-[#603917] transition-all hover:bg-gray-100 cursor-pointer disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="submit"
+                  disabled={updatingAddress}
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-pink-600 px-6 py-2.5 font-manrope text-xs font-semibold text-white shadow-[2px_3px_0px_#000] transition-all hover:bg-[#60b396] hover:shadow-[3px_4px_0px_#000] cursor-pointer disabled:opacity-70"
+                >
+                  {updatingAddress ? (
+                    <>
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                      Updating Address...
+                    </>
+                  ) : (
+                    "Update Address"
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ===============================================
+          DELETE ADDRESS CONFIRMATION MODAL
+      =============================================== */}
+      {isDeleteAddressModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+            onClick={() => !deletingAddress && setIsDeleteAddressModalOpen(false)}
+          />
+
+          {/* Modal Content */}
+          <div className="relative my-8 w-full max-w-md rounded-3xl border border-[#603917]/15 bg-[#fdfaf3] p-6 sm:p-7 shadow-2xl z-10">
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={() => setIsDeleteAddressModalOpen(false)}
+              disabled={deletingAddress}
+              className="absolute right-5 top-5 rounded-full p-2 text-[#603917]/60 hover:bg-[#603917]/10 hover:text-[#572340] transition-colors cursor-pointer disabled:opacity-50"
+              aria-label="Close modal"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            {/* Header */}
+            <div className="flex items-center gap-3 border-b border-[#603917]/10 pb-4">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-red-100 text-red-600 shadow-sm">
+                <Trash2 className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="font-manrope text-[10px] font-semibold uppercase tracking-[0.2em] text-red-600">
+                  Delete Address
+                </p>
+                <h2 className="font-cormorant text-2xl font-bold text-[#572340]">
+                  Are you sure?
+                </h2>
+              </div>
+            </div>
+
+            {/* Error Alert */}
+            {deleteAddressError && (
+              <div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-700">
+                {deleteAddressError}
+              </div>
+            )}
+
+            {/* Address Preview Box */}
+            <div className="mt-5 rounded-2xl border border-[#603917]/10 bg-white p-4">
+              <p className="font-manrope text-sm font-bold text-[#572340]">
+                {addressToDelete?.name}
+              </p>
+              <p className="mt-1 font-manrope text-xs leading-5 text-[#603917]/70">
+                {[addressToDelete?.address, addressToDelete?.address2]
+                  .filter(Boolean)
+                  .join(", ")}
+                <br />
+                {[
+                  addressToDelete?.city,
+                  addressToDelete?.state,
+                  addressToDelete?.pincode ? `- ${addressToDelete.pincode}` : "",
+                ]
+                  .filter(Boolean)
+                  .join(", ")}
+              </p>
+              {addressToDelete?.phone && (
+                <p className="mt-2 font-manrope text-xs text-[#603917]/60">
+                  Phone: {addressToDelete.phone}
+                </p>
+              )}
+            </div>
+
+            <p className="mt-4 font-manrope text-xs text-[#603917]/65 leading-relaxed">
+              This will permanently delete this delivery address from your account. You cannot undo this action.
+            </p>
+
+            {/* Actions */}
+            <div className="mt-6 flex items-center justify-end gap-3 pt-3 border-t border-[#603917]/10">
+              <button
+                type="button"
+                disabled={deletingAddress}
+                onClick={() => setIsDeleteAddressModalOpen(false)}
+                className="rounded-full border border-[#603917]/20 bg-white px-5 py-2.5 font-manrope text-xs font-semibold text-[#603917] transition-all hover:bg-gray-100 cursor-pointer disabled:opacity-50"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                disabled={deletingAddress}
+                onClick={handleConfirmDeleteAddress}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-6 py-2.5 font-manrope text-xs font-semibold text-white shadow-[2px_3px_0px_#000] transition-all hover:bg-red-700 hover:shadow-[3px_4px_0px_#000] cursor-pointer disabled:opacity-70"
+              >
+                {deletingAddress ? (
+                  <>
+                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                    Deleting...
+                  </>
+                ) : (
+                  "Delete Address"
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 };
@@ -767,67 +1682,107 @@ const InfoField = ({ icon: Icon, label, value }) => {
    ADDRESS CARD
 ============================================================ */
 
-const AddressCard = ({
-  title,
-  name,
-  address,
-  city,
-  phone,
-  defaultAddress,
-}) => {
-  return (
-    <div className="relative rounded-2xl border border-[#603917]/10 bg-[#fbf8f2] p-5">
+const AddressCard = ({ address, index, onEdit, onDelete }) => {
+  const isDefault = Boolean(address?.isDefault);
 
-      {defaultAddress && (
-        <span className="absolute right-4 top-4 rounded-full bg-[#3e5a2c]/10 px-3 py-1 font-manrope text-[9px] font-bold uppercase tracking-wider text-[#3e5a2c]">
+  const fullStreet = [address?.address, address?.address2]
+    .filter(Boolean)
+    .join(", ");
+
+  const cityStateZip = [
+    address?.city,
+    address?.state,
+    address?.pincode ? `- ${address.pincode}` : "",
+  ]
+    .filter(Boolean)
+    .join(", ");
+
+  return (
+    <div
+      className={`relative rounded-3xl border p-5 sm:p-6 transition-all ${
+        isDefault
+          ? "border-[#3e5a2c]/30 bg-[#f9f7f0] shadow-[0_8px_30px_rgba(62,90,44,0.06)]"
+          : "border-[#603917]/10 bg-[#fbf8f2]"
+      }`}
+    >
+      {/* Default Badge */}
+      {isDefault && (
+        <span className="absolute right-4 top-4 sm:right-5 sm:top-5 inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 font-manrope text-[10px] font-bold uppercase tracking-wider text-emerald-800">
+          <CheckCircle2 className="h-3 w-3 text-emerald-600" />
           Default
         </span>
       )}
 
+      {/* Header */}
       <div className="flex items-center gap-2">
-
-        <MapPin className="h-4 w-4 text-[#8b183d]" />
+        <div
+          className={`flex h-8 w-8 items-center justify-center rounded-full ${
+            isDefault
+              ? "bg-[#3e5a2c]/10 text-[#3e5a2c]"
+              : "bg-[#8b183d]/10 text-[#8b183d]"
+          }`}
+        >
+          <MapPin className="h-4 w-4" />
+        </div>
 
         <h3 className="font-manrope text-xs font-bold uppercase tracking-wider text-[#572340]">
-          {title}
+          {isDefault ? "Default Address" : `Address #${index + 1}`}
         </h3>
-
       </div>
 
+      {/* Details */}
       <div className="mt-4">
-
-        <p className="font-manrope text-sm font-bold text-[#572340]">
-          {name}
+        <p className="font-manrope text-base font-bold text-[#572340]">
+          {address?.name}
         </p>
 
-        <p className="mt-2 font-manrope text-xs leading-6 text-[#603917]/60">
-          {address}
+        <p className="mt-2 font-manrope text-xs leading-6 text-[#603917]/75">
+          {fullStreet}
           <br />
-          {city}
+          {cityStateZip}
+          {address?.country && (
+            <>
+              <br />
+              <span className="text-[#603917]/55">{address.country}</span>
+            </>
+          )}
         </p>
 
-        <p className="mt-2 font-manrope text-xs text-[#603917]/50">
-          {phone}
-        </p>
-
+        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-manrope text-xs text-[#603917]/60">
+          {address?.phone && (
+            <span className="inline-flex items-center gap-1.5">
+              <Phone className="h-3.5 w-3.5 text-[#8b183d]" />
+              {address.phone}
+            </span>
+          )}
+          {address?.email && (
+            <span className="inline-flex items-center gap-1.5">
+              <Mail className="h-3.5 w-3.5 text-[#8b183d]" />
+              {address.email}
+            </span>
+          )}
+        </div>
       </div>
 
-      <div className="mt-4 flex gap-2">
-
+      {/* Action Buttons */}
+      <div className="mt-5 flex items-center gap-2 border-t border-[#603917]/10 pt-3">
         <button
           type="button"
-          className="rounded-full border border-[#603917]/15 bg-white px-4 py-2 font-manrope text-[10px] font-semibold text-[#603917] hover:border-[#8b183d]/30 hover:text-[#8b183d]"
+          onClick={onEdit}
+          className="inline-flex items-center gap-1 rounded-full border border-[#603917]/15 bg-white px-4 py-1.5 font-manrope text-xs font-semibold text-[#603917] hover:border-[#8b183d]/30 hover:text-[#8b183d] transition-colors cursor-pointer"
         >
+          <Pencil className="h-3 w-3" />
           Edit
         </button>
 
         <button
           type="button"
-          className="rounded-full border border-[#603917]/15 bg-white px-4 py-2 font-manrope text-[10px] font-semibold text-[#603917]/60 hover:border-red-200 hover:text-red-600"
+          onClick={onDelete}
+          className="inline-flex items-center gap-1 rounded-full border border-[#603917]/15 bg-white px-4 py-1.5 font-manrope text-xs font-semibold text-[#603917]/60 hover:border-red-200 hover:text-red-600 transition-colors cursor-pointer"
         >
+          <Trash2 className="h-3 w-3" />
           Remove
         </button>
-
       </div>
     </div>
   );
