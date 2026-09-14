@@ -304,6 +304,10 @@ const TermsContent = () => {
               Gujarat, India.
             </p>
 
+ <p>
+              Account Holder Name: WeMake Sweets
+            </p>
+
             <p>
               Email:{" "}
               <a
@@ -317,10 +321,10 @@ const TermsContent = () => {
             <p>
               Customer support:{" "}
               <a
-                href="tel:18002032007"
+                href="tel:9714004058"
                 className="font-semibold text-[#572340] hover:underline"
               >
-                18002032007
+                9714004058
               </a>
             </p>
 

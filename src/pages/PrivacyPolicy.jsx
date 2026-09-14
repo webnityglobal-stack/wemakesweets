@@ -62,6 +62,11 @@ const PrivacyPolicyContent = () => {
 
           <p>
             For privacy questions or requests, contact us at{" "}
+
+ <p>
+              Account Holder Name: WeMake Sweets
+            </p>
+            
             <a
               href="mailto:cs@wemakesweets.com"
               className="font-semibold text-[#572340] underline decoration-[#572340]/30 underline-offset-4 transition hover:decoration-[#572340]"
@@ -70,10 +75,10 @@ const PrivacyPolicyContent = () => {
             </a>{" "}
             or{" "}
             <a
-              href="tel:18002032007"
+              href="tel:9714004058"
               className="font-semibold text-[#572340] underline decoration-[#572340]/30 underline-offset-4 transition hover:decoration-[#572340]"
             >
-              18002032007
+              9714004058
             </a>
             .
           </p>
@@ -346,7 +351,9 @@ const PrivacyPolicyContent = () => {
               Wemake Sweets & Snacks, Shakti Industrial Park, Bhada, Surat,
               Gujarat, India.
             </p>
-
+ <p>
+              Account Holder Name: WeMake Sweets
+            </p>
             <p>
               Email:{" "}
               <a
@@ -360,10 +367,10 @@ const PrivacyPolicyContent = () => {
             <p>
               Customer support:{" "}
               <a
-                href="tel:18002032007"
+                href="tel:9714004058"
                 className="font-semibold text-[#572340] hover:underline"
               >
-                18002032007
+                9714004058
               </a>
             </p>
 

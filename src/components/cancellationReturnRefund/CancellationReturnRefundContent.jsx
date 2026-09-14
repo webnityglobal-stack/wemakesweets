@@ -151,10 +151,10 @@ const CancellationReturnRefundContent = () => {
           <p>
             Customer support:{" "}
             <a
-              href="tel:18002032007"
+              href="tel:9714004058"
               className="font-semibold text-[#572340] underline decoration-[#572340]/30 underline-offset-4 hover:decoration-[#572340]"
             >
-              18002032007
+              9714004058
             </a>
           </p>
 
@@ -240,6 +240,11 @@ const CancellationReturnRefundContent = () => {
               Gujarat, India.
             </p>
 
+
+ <p>
+              Account Holder Name: WeMake Sweets
+            </p>
+
             <p>
               Email:{" "}
               <a
@@ -253,10 +258,10 @@ const CancellationReturnRefundContent = () => {
             <p>
               Customer support:{" "}
               <a
-                href="tel:18002032007"
+                href="tel:9714004058"
                 className="font-semibold text-[#572340] hover:underline"
               >
-                18002032007
+                9714004058
               </a>
             </p>
 
