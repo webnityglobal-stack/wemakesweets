@@ -63,7 +63,7 @@ const toggleSection = (section) => {
 
           <div className="lg:col-span-2">
 
-            <div className="flex justify-center lg:justify-start">
+            <div className="flex justify-center md:pl-24 lg:justify-start">
               <div className="relative inline-block">
                 <img
                   src="/footerLogo.png"
