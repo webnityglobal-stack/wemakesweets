@@ -8,7 +8,8 @@ import {
   ShoppingBag,
   ArrowRight,
   CalendarDays,
-  ChevronRight,
+  AlertCircle,
+  RotateCcw,
 } from "lucide-react";
 
 import products from "../constants/productData";
@@ -16,26 +17,41 @@ import products from "../constants/productData";
 const OrderConfirmation = () => {
   const location = useLocation();
 
-  /*
-   * ------------------------------------------------------
-   * TEMPORARY ORDER DATA
-   * ------------------------------------------------------
-   * Production me ye data backend / Shiprocket response
-   * se aayega.
-   *
-   * location.state?.order ko baad me directly use kar
-   * sakte hain.
-   */
+  // Read parameters sent back by Shiprocket checkout redirect
+  // e.g. <redirect_url>?oid=62f3d76a087fb021ee1c8b0e&ost=SUCCESS
+  const searchParams = new URLSearchParams(location.search);
+  const oid = searchParams.get("oid") || searchParams.get("order_id");
+  const ost = (searchParams.get("ost") || searchParams.get("status") || "").toUpperCase();
+
+  const isFailed = ost === "FAILED" || ost === "FAILURE";
+  const stateOrder = location.state?.order;
+
+  // Format today's date dynamically
+  const todayFormatted = new Intl.DateTimeFormat("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date());
+
+  // Calculate expected delivery: 4 to 6 days from today
+  const now = new Date();
+  const deliveryStart = new Date(now.getTime() + 4 * 86400000);
+  const deliveryEnd = new Date(now.getTime() + 6 * 86400000);
+  const expectedDeliveryFormatted = `${deliveryStart.getDate()} - ${deliveryEnd.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  })}`;
 
   const cartProducts = products
     .filter((product) => product.stock > 0)
     .slice(0, 2);
 
   const order = {
-    orderId: "WMS-10001",
-    orderDate: "02 September 2026",
-    paymentStatus: "Paid",
-    orderStatus: "Confirmed",
+    orderId: oid || stateOrder?.orderId || "WMS-10001",
+    orderDate: todayFormatted,
+    paymentStatus: isFailed ? "Failed" : "Paid",
+    orderStatus: isFailed ? "Failed" : "Confirmed",
 
     customer: {
       name: "Customer Name",
@@ -52,64 +68,71 @@ const OrderConfirmation = () => {
       phone: "+91 98XXXXXX10",
     },
 
-    items: cartProducts.map((product) => ({
+    items: stateOrder?.items || cartProducts.map((product) => ({
       ...product,
       quantity: 1,
     })),
 
-    subtotal: cartProducts.reduce(
+    subtotal: stateOrder?.subtotal || cartProducts.reduce(
       (total, product) => total + product.salePrice,
       0
     ),
 
-    discount: cartProducts.reduce(
+    discount: stateOrder?.discount || cartProducts.reduce(
       (total, product) => total + (product.mrp - product.salePrice),
       0
     ),
 
-    delivery: 49,
+    delivery: stateOrder?.delivery ?? 49,
 
-    expectedDelivery: "5 - 7 September 2026",
+    expectedDelivery: expectedDeliveryFormatted,
   };
 
-  const total =
-    order.subtotal + order.delivery;
+  const total = stateOrder?.total || (order.subtotal + order.delivery);
 
   return (
     <section className="min-h-screen bg-[#f5ebda] px-4 py-7 sm:px-8 sm:py-7 lg:px-16 lg:py-10">
       <div className="mx-auto max-w-6xl">
 
         {/* =====================================================
-            SUCCESS HEADER
+            SUCCESS / FAILURE HEADER
         ====================================================== */}
 
         <div className="mx-auto max-w-3xl text-center">
 
-          {/* Success Icon */}
+          {/* Status Icon */}
 
           <div
-            className="
+            className={`
               mx-auto flex h-20 w-20 items-center justify-center
-              rounded-full bg-[#3e5a2c]
-              shadow-[3px_4px_0px_#000]
-              sm:h-24 sm:w-24  bg-pink-600 hover:bg-[#60b396] text-white hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
-            "
+              rounded-full text-white
+              sm:h-24 sm:w-24 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000]
+              ${isFailed ? "bg-red-600 hover:bg-red-700" : "bg-pink-600 hover:bg-[#60b396]"}
+            `}
           >
-            <Check
-              size={42}
-              strokeWidth={2.5}
-              className="text-white sm:h-12 sm:w-12"
-            />
+            {isFailed ? (
+              <AlertCircle
+                size={42}
+                strokeWidth={2.5}
+                className="text-white sm:h-12 sm:w-12"
+              />
+            ) : (
+              <Check
+                size={42}
+                strokeWidth={2.5}
+                className="text-white sm:h-12 sm:w-12"
+              />
+            )}
           </div>
 
           <p
-            className="
+            className={`
               mt-7 text-[10px] font-semibold uppercase
-              tracking-[0.25em] text-[#8b183d]
-              font-manrope sm:text-xs
-            "
+              tracking-[0.25em] font-manrope sm:text-xs
+              ${isFailed ? "text-red-700" : "text-[#8b183d]"}
+            `}
           >
-            Payment Successful
+            {isFailed ? "Payment Not Completed" : "Payment Successful"}
           </p>
 
           <h1
@@ -119,7 +142,9 @@ const OrderConfirmation = () => {
               sm:text-5xl lg:text-6xl
             "
           >
-            Your Order is Confirmed!
+            {isFailed
+              ? "Order Could Not Be Placed"
+              : "Your Order is Confirmed!"}
           </h1>
 
           <p
@@ -129,9 +154,9 @@ const OrderConfirmation = () => {
               font-manrope sm:text-base
             "
           >
-            Thank you for choosing We Make Sweets.
-            Your order has been successfully placed
-            and we're getting it ready for you.
+            {isFailed
+              ? "Your payment was not completed or was cancelled. You can return to your cart to retry the checkout."
+              : "Thank you for choosing We Make Sweets. Your order has been successfully placed and we're getting it ready for you."}
           </p>
         </div>
 
@@ -543,41 +568,83 @@ const OrderConfirmation = () => {
         ====================================================== */}
 
         <div className="mx-auto mt-9 flex max-w-4xl flex-col-reverse gap-4 sm:flex-row sm:justify-center">
+          {isFailed ? (
+            <>
+              <Link
+                to="/products"
+                className="
+                  flex h-12 items-center justify-center gap-2
+                  rounded-xl px-7
+                  text-sm font-semibold uppercase
+                  font-manrope
+                  border border-[#60391735]
+                  transition-all duration-200
+                  sm:h-13
+                  bg-white text-[#572340] hover:bg-gray-100
+                  shadow-[1px_2px_0px_#000]
+                "
+              >
+                Continue Shopping
+              </Link>
 
-          <Link
-            to="/products"
-            className="
-              flex h-12 items-center justify-center gap-2
-              rounded-xl px-7
-              text-sm font-semibold uppercase
-              font-manrope
-              border border-[#60391735]
-              transition-all duration-200
-              sm:h-13
-               bg-pink-600 hover:bg-[#60b396] text-white hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
-            "
-          >
-            Continue Shopping
-          </Link>
+              <Link
+                to="/cart"
+                className="
+                  flex h-12 items-center justify-center gap-2
+                  rounded-xl px-7
+                  text-sm font-semibold uppercase
+                  font-manrope
+                  bg-pink-600 hover:bg-[#60b396]
+                  text-white hover:text-white
+                  shadow-[2px_3px_0px_#000]
+                  hover:shadow-[3px_4px_0px_#000]
+                  transition-all duration-200
+                  sm:h-13
+                "
+              >
+                <RotateCcw size={17} />
+                Return to Cart & Retry
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/products"
+                className="
+                  flex h-12 items-center justify-center gap-2
+                  rounded-xl px-7
+                  text-sm font-semibold uppercase
+                  font-manrope
+                  border border-[#60391735]
+                  transition-all duration-200
+                  sm:h-13
+                  bg-white text-[#572340] hover:bg-gray-100
+                  shadow-[1px_2px_0px_#000]
+                "
+              >
+                Continue Shopping
+              </Link>
 
-          <Link
-            to={`/orders/${order.orderId}`}
-            className="
-              flex h-12 items-center justify-center gap-2
-              rounded-xl px-7
-              text-sm font-semibold uppercase
-              font-manrope
-              bg-pink-600 hover:bg-[#60b396]
-              text-white hover:text-white
-              shadow-[2px_3px_0px_#000]
-              hover:shadow-[3px_4px_0px_#000]
-              transition-all duration-200
-              sm:h-13
-            "
-          >
-            Track My Order
-            <ArrowRight size={17} />
-          </Link>
+              <Link
+                to={`/orders/${order.orderId}`}
+                className="
+                  flex h-12 items-center justify-center gap-2
+                  rounded-xl px-7
+                  text-sm font-semibold uppercase
+                  font-manrope
+                  bg-pink-600 hover:bg-[#60b396]
+                  text-white hover:text-white
+                  shadow-[2px_3px_0px_#000]
+                  hover:shadow-[3px_4px_0px_#000]
+                  transition-all duration-200
+                  sm:h-13
+                "
+              >
+                Track My Order
+                <ArrowRight size={17} />
+              </Link>
+            </>
+          )}
         </div>
 
         {/* =====================================================

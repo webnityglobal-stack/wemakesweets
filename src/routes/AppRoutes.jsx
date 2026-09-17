@@ -115,17 +115,16 @@ const AppRoutes = () => {
 
           <Route path="login" element={<Login />} />
 
+          <Route
+            path="order-confirmation"
+            element={<OrderConfirmation />}
+          />
 
           {/* ================= PROTECTED ROUTES ================= */}
 
           <Route element={<ProtectedRoute />}>
 
             <Route path="cart" element={<AddToCart />} />
-
-            <Route
-              path="order-confirmation"
-              element={<OrderConfirmation />}
-            />
 
             <Route
               path="my-orders"

@@ -10,6 +10,10 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import useCart from "@/hooks/cart/useCart";
+import {
+  launchShiprocketCheckout,
+  getShiprocketCheckoutToken,
+} from "@/services/shiprocketCheckout";
 
 
 
@@ -153,12 +157,31 @@ const AddToCart = () => {
 
   const total = saleTotal + delivery;
 
-  const handleProceedToCheckout = () => {
+  const handleProceedToCheckout = (e) => {
     if (!cartItems.length) {
       toast.error("Your cart is empty.");
       return;
     }
-    toast.success("Proceeding to checkout...");
+
+    const shiprocketToken = getShiprocketCheckoutToken();
+
+    if (shiprocketToken) {
+      const launched = launchShiprocketCheckout(e, shiprocketToken, {
+        fallbackUrl: `${window.location.origin}/cart`,
+        isInitiatedFromApp: false,
+      });
+
+      if (launched) {
+        toast.success("Opening Shiprocket Checkout...");
+        return;
+      }
+    }
+
+    // If Shiprocket token is not configured in .env
+    toast.info(
+      "Shiprocket Checkout Token .env me VITE_SHIPROCKET_CHECKOUT_TOKEN me set karein. Fallback local confirmation par navigate kar rahe hain.",
+      { duration: 4000 }
+    );
     navigate("/order-confirmation", {
       state: {
         order: {
