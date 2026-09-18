@@ -12,6 +12,12 @@ const orderService = {
     const response = await axiosInstance.post("/orders/create", orderData);
     return response.data;
   },
+
+  // Fetch order details by orderId (e.g. WMS-1789715277772)
+  getOrderById: async (orderId) => {
+    const response = await axiosInstance.get(`/orders/${orderId}`);
+    return response.data;
+  },
 };
 
 export default orderService;

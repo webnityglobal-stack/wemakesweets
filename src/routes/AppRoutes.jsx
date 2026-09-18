@@ -68,6 +68,7 @@ import Login from "@/layout/Login";
 
 import AddToCart from "@/pages/AddToCart";
 import OrderConfirmation from "@/pages/OrderConfirmation";
+import PaymentSuccess from "@/pages/PaymentSuccess";
 import MyOrders from "@/pages/MyOrders";
 import TrackOrder from "@/pages/TrackOrder";
 import MyAccount from "@/pages/MyAccount";
@@ -116,8 +117,12 @@ const AppRoutes = () => {
           <Route path="login" element={<Login />} />
 
           <Route
+            path="payment/success"
+            element={<PaymentSuccess />}
+          />
+          <Route
             path="order-confirmation"
-            element={<OrderConfirmation />}
+            element={<PaymentSuccess />}
           />
 
           {/* ================= PROTECTED ROUTES ================= */}

@@ -66,6 +66,16 @@ const TrackOrder = () => {
     const loadOrder = async () => {
       try {
         setLoading(true);
+        try {
+          const res = await orderService.getOrderById(orderId);
+          if (res?.success && res?.order) {
+            setFetchedOrder(res.order);
+            return;
+          }
+        } catch (idErr) {
+          console.warn("Direct order fetch by ID failed, trying my-orders fallback:", idErr);
+        }
+
         const data = await orderService.getMyOrders();
         if (data?.orders) {
           const matched = data.orders.find(
