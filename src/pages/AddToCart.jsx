@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import {
@@ -8,17 +9,21 @@ import {
   ArrowRight,
   Truck,
   ShieldCheck,
+  Loader2,
 } from "lucide-react";
 import useCart from "@/hooks/cart/useCart";
 import {
   launchShiprocketCheckout,
   getShiprocketCheckoutToken,
 } from "@/services/shiprocketCheckout";
-
-
+import { authStorage } from "@/utils/authStorage";
+import orderService from "@/services/orderService";
+import paymentService from "@/services/paymentService";
+import addressService from "@/services/addressService";
 
 const AddToCart = () => {
   const navigate = useNavigate();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
 
 
@@ -157,42 +162,105 @@ const AddToCart = () => {
 
   const total = saleTotal + delivery;
 
-  const handleProceedToCheckout = (e) => {
+  const handleProceedToCheckout = async (e) => {
     if (!cartItems.length) {
       toast.error("Your cart is empty.");
       return;
     }
 
-    const shiprocketToken = getShiprocketCheckoutToken();
+    // 1. User authentication check
+    if (!authStorage.isAuthenticated()) {
+      toast.info("Please login to proceed to checkout.");
+      navigate("/login", { state: { from: "/cart" } });
+      return;
+    }
 
-    if (shiprocketToken) {
-      const launched = launchShiprocketCheckout(e, shiprocketToken, {
+    setIsCheckingOut(true);
+    const toastId = toast.loading("Initiating checkout session...");
+
+    try {
+      // 2. Resolve shipping address
+      let shippingAddress = null;
+      try {
+        const addressRes = await addressService.getAddresses();
+        const addresses = addressRes?.addresses || [];
+        if (addresses.length > 0) {
+          shippingAddress = addresses.find((a) => a.isDefault) || addresses[0];
+        }
+      } catch (addrErr) {
+        console.warn("Could not fetch user addresses:", addrErr);
+      }
+
+      const user = authStorage.getUser() || {};
+      const finalShippingAddress = {
+        name: shippingAddress?.name || user?.name || "Valued Customer",
+        phone: shippingAddress?.phone || user?.phone || "9999999999",
+        email: shippingAddress?.email || user?.email || "",
+        address: shippingAddress?.address || "Customer Address",
+        address2: shippingAddress?.address2 || "",
+        city: shippingAddress?.city || "Meerut",
+        state: shippingAddress?.state || "Uttar Pradesh",
+        pincode: shippingAddress?.pincode || "250002",
+        country: shippingAddress?.country || "India",
+      };
+
+      // 3. Format items
+      const items = cartItems.map((item) => ({
+        product: item.product?._id || item.productId,
+        variantId: item.variantId || item.variant?._id,
+        quantity: item.quantity,
+        price: item.price || item.product?.salePrice || item.product?.price || 0,
+      }));
+
+      // 4. Create Order in backend to get orderId (e.g. WMS-...)
+      toast.loading("Creating order...", { id: toastId });
+      const orderRes = await orderService.createOrder({
+        items,
+        paymentMethod: "ONLINE",
+        shippingAddress: finalShippingAddress,
+      });
+
+      const orderId = orderRes?.order?.orderId || orderRes?.order?.id;
+      if (!orderId) {
+        throw new Error(orderRes?.message || "Could not generate order ID");
+      }
+
+      // 5. Call POST /payment/create with orderId
+      toast.loading("Getting FastRR checkout token...", { id: toastId });
+      const paymentRes = await paymentService.createPayment(orderId);
+
+      const checkoutToken =
+        paymentRes?.checkoutToken ||
+        paymentRes?.fastrrResponse?.result?.token;
+
+      if (!checkoutToken) {
+        throw new Error(
+          paymentRes?.message || "Checkout token not returned from payment API"
+        );
+      }
+
+      toast.success("Opening Shiprocket FastRR Checkout...", { id: toastId });
+
+      // 6. Launch FastRR Headless Checkout with the fresh dynamic token!
+      const launched = launchShiprocketCheckout(e, checkoutToken, {
         fallbackUrl: `${window.location.origin}/cart`,
         isInitiatedFromApp: false,
       });
 
-      if (launched) {
-        toast.success("Opening Shiprocket Checkout...");
-        return;
+      if (!launched) {
+        toast.error("Could not launch checkout popup. Please try again.");
       }
+    } catch (err) {
+      console.error("Checkout initiation error:", err);
+      const msg =
+        err?.response?.data?.message ||
+        err?.response?.data?.error ||
+        err?.message ||
+        "Error initiating checkout";
+      toast.error(msg, { id: toastId, duration: 5000 });
+    } finally {
+      setIsCheckingOut(false);
     }
-
-    // If Shiprocket token is not configured in .env
-    toast.info(
-      "Shiprocket Checkout Token .env me VITE_SHIPROCKET_CHECKOUT_TOKEN me set karein. Fallback local confirmation par navigate kar rahe hain.",
-      { duration: 4000 }
-    );
-    navigate("/order-confirmation", {
-      state: {
-        order: {
-          items: cartItems,
-          subtotal,
-          discount,
-          delivery,
-          total,
-        },
-      },
-    });
   };
 
 
@@ -562,22 +630,31 @@ const AddToCart = () => {
                 <button
                   type="button"
                   onClick={handleProceedToCheckout}
-                  className="
+                  disabled={isCheckingOut}
+                  className={`
                     mt-2 flex h-13 w-full items-center justify-center gap-2
                     rounded-xl px-5
                     text-sm font-semibold uppercase tracking-wide
                     font-manrope
-                    bg-pink-600 hover:bg-[#60b396]
-                    text-white hover:text-white
-                    shadow-[2px_3px_0px_#000]
-                    hover:shadow-[3px_4px_0px_#000]
+                    ${
+                      isCheckingOut
+                        ? "bg-gray-400 cursor-not-allowed text-white"
+                        : "bg-pink-600 hover:bg-[#60b396] text-white shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] hover:-translate-y-0.5 cursor-pointer"
+                    }
                     transition-all duration-200
-                    hover:-translate-y-0.5
-                    cursor-pointer
-                  "
+                  `}
                 >
-                  Proceed to Checkout
-                  <ArrowRight size={17} />
+                  {isCheckingOut ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" />
+                      Initiating Checkout...
+                    </>
+                  ) : (
+                    <>
+                      Proceed to Checkout
+                      <ArrowRight size={17} />
+                    </>
+                  )}
                 </button>
               </div>
 
