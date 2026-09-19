@@ -10,11 +10,15 @@ import {
   ShoppingBag,
   Truck,
   Loader2,
+  XCircle,
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 
 import mockOrders from "../constants/mockOrders";
 import orderService from "@/services/orderService";
+import CancelOrderModal from "@/components/orders/CancelOrderModal";
+
 
 const trackingSteps = [
   {
@@ -55,6 +59,8 @@ const TrackOrder = () => {
   const [copied, setCopied] = useState(false);
   const [fetchedOrder, setFetchedOrder] = useState(location.state?.order || null);
   const [loading, setLoading] = useState(!location.state?.order);
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  const [cancelLoading, setCancelLoading] = useState(false);
 
   useEffect(() => {
     if (location.state?.order) {
@@ -116,10 +122,13 @@ const TrackOrder = () => {
           rawOrder.trackingNumber ||
           "Pending Assignment",
         expectedDelivery:
-          rawOrder.expectedDelivery ||
-          (rawOrder.shiprocket?.courierName
-            ? `Via ${rawOrder.shiprocket.courierName}`
-            : "3-5 Business Days"),
+          (rawOrder.orderStatus || rawOrder.status || "").toUpperCase() ===
+          "CANCELLED"
+            ? "Order Cancelled"
+            : rawOrder.expectedDelivery ||
+              (rawOrder.shiprocket?.courierName
+                ? `Via ${rawOrder.shiprocket.courierName}`
+                : "3-5 Business Days"),
         items: (rawOrder.items || []).map((it, idx) => ({
           _id: it._id || it.variantId || idx,
           name: it.name || it.product?.name || "Sweet Item",
@@ -214,6 +223,40 @@ const TrackOrder = () => {
     }
   };
 
+  const isCancelled = order?.rawStatus === "CANCELLED";
+  const canCancel = !isCancelled && order?.rawStatus !== "DELIVERED";
+
+  const handleConfirmCancel = async () => {
+    if (!order?.orderId) return;
+    try {
+      setCancelLoading(true);
+      const res = await orderService.cancelShiprocketOrder(
+        order.orderId,
+        rawOrder?._id
+      );
+      toast.success(res?.message || "Order cancelled successfully!");
+      setIsCancelModalOpen(false);
+      setFetchedOrder((prev) => ({
+        ...(prev || {}),
+        orderStatus: "CANCELLED",
+        status: "CANCELLED",
+        cancellationMessage: res?.data?.message || res?.message,
+        shiprocket: {
+          ...(prev?.shiprocket || {}),
+          status: "CANCELLED",
+        },
+      }));
+    } catch (err) {
+      console.error("Failed to cancel order:", err);
+      toast.error(
+        err.response?.data?.message ||
+          "Unable to cancel order at this time. Please try again or contact support."
+      );
+    } finally {
+      setCancelLoading(false);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#f5ebda]">
 
@@ -245,14 +288,31 @@ const TrackOrder = () => {
               </p>
             </div>
 
-            <div className="rounded-2xl bg-white px-5 py-4 shadow-sm">
-              <p className="font-manrope text-[10px] font-semibold uppercase tracking-wider text-[#603917]/45">
-                Current Status
-              </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="rounded-2xl bg-white px-5 py-4 shadow-sm">
+                <p className="font-manrope text-[10px] font-semibold uppercase tracking-wider text-[#603917]/45">
+                  Current Status
+                </p>
 
-              <p className="mt-1 font-manrope text-sm font-bold text-[#3e5a2c]">
-                {order.status}
-              </p>
+                <p
+                  className={`mt-1 font-manrope text-sm font-bold ${
+                    isCancelled ? "text-red-600" : "text-[#3e5a2c]"
+                  }`}
+                >
+                  {order.status}
+                </p>
+              </div>
+
+              {canCancel && (
+                <button
+                  type="button"
+                  onClick={() => setIsCancelModalOpen(true)}
+                  className="inline-flex items-center gap-2 rounded-2xl border border-red-300 bg-red-50/80 px-5 py-4 font-manrope text-xs font-bold text-red-600 hover:bg-red-100 hover:border-red-400 transition-all shadow-sm cursor-pointer"
+                >
+                  <XCircle className="h-4 w-4 text-red-500" />
+                  Cancel Order
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -265,6 +325,24 @@ const TrackOrder = () => {
 
           {/* ================= LEFT ================= */}
           <div className="space-y-7">
+            {/* Cancelled Alert Banner */}
+            {isCancelled && (
+              <div className="flex items-start gap-4 rounded-3xl border border-red-200 bg-red-50/90 p-5 sm:p-7 shadow-[0_8px_35px_rgba(239,68,68,0.06)]">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-red-100 text-red-600">
+                  <XCircle className="h-6 w-6" strokeWidth={2.2} />
+                </div>
+                <div>
+                  <h2 className="font-cormorant text-2xl sm:text-3xl font-bold text-red-900">
+                    Order Cancelled
+                  </h2>
+                  <p className="mt-1 font-manrope text-xs sm:text-sm text-red-700/90 leading-relaxed">
+                    {rawOrder?.cancellationMessage ||
+                      "This order has been cancelled and will not be shipped. If payment was deducted, any eligible refund will be initiated to your original payment method."}
+                  </p>
+                </div>
+              </div>
+            )}
+
 
             {/* Tracking */}
             <div className="rounded-3xl border border-[#603917]/10 bg-white p-5 shadow-[0_8px_35px_rgba(96,57,23,0.04)] sm:p-8">
@@ -560,22 +638,41 @@ const TrackOrder = () => {
                 </div>
               </div>
 
-              <div className="mt-6 rounded-2xl bg-[#3e5a2c]/5 px-4 py-4">
+              <div
+                className={`mt-6 rounded-2xl px-4 py-4 ${
+                  isCancelled ? "bg-red-50/80 border border-red-200" : "bg-[#3e5a2c]/5"
+                }`}
+              >
                 <div className="flex items-center gap-3">
-                  <CheckCircle2 className="h-4 w-4 text-[#3e5a2c]" />
+                  {isCancelled ? (
+                    <XCircle className="h-4 w-4 text-red-600 shrink-0" />
+                  ) : (
+                    <CheckCircle2 className="h-4 w-4 text-[#3e5a2c] shrink-0" />
+                  )}
 
                   <div>
-                    <p className="font-manrope text-xs font-bold text-[#3e5a2c]">
-                      Payment Successful
+                    <p
+                      className={`font-manrope text-xs font-bold ${
+                        isCancelled ? "text-red-700" : "text-[#3e5a2c]"
+                      }`}
+                    >
+                      {isCancelled ? "Order Cancelled" : "Payment Successful"}
                     </p>
 
-                    <p className="mt-0.5 font-manrope text-[10px] text-[#3e5a2c]/65">
-                      Paid via {order.paymentMethod}
+                    <p
+                      className={`mt-0.5 font-manrope text-[10px] ${
+                        isCancelled ? "text-red-600/70" : "text-[#3e5a2c]/65"
+                      }`}
+                    >
+                      {isCancelled
+                        ? "Shipment halted. Refund processing initiated if applicable."
+                        : `Paid via ${order.paymentMethod}`}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
+
 
             {/* Help */}
             <div className="rounded-3xl bg-[#572340] p-6 text-white sm:p-7">
@@ -600,8 +697,17 @@ const TrackOrder = () => {
           </aside>
         </div>
       </section>
+
+      {/* Cancel Order Confirmation Modal */}
+      <CancelOrderModal
+        isOpen={isCancelModalOpen}
+        onClose={() => !cancelLoading && setIsCancelModalOpen(false)}
+        onConfirm={handleConfirmCancel}
+        orderId={order?.orderId}
+        loading={cancelLoading}
+      />
     </main>
   );
 };
 
-export default TrackOrder;
+export default TrackOrder;

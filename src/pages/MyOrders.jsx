@@ -20,6 +20,8 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import useMyOrders from "@/hooks/orders/useMyOrders";
+import orderService from "@/services/orderService";
+import CancelOrderModal from "@/components/orders/CancelOrderModal";
 
 // Status configuration helper
 const getOrderStatusBadge = (rawStatus) => {
@@ -182,7 +184,39 @@ const MyOrders = () => {
     }
   };
 
+  const [cancellingOrder, setCancellingOrder] = useState(null);
+  const [cancelLoading, setCancelLoading] = useState(false);
+
+  const canCancelOrder = (order) => {
+    if (!order) return false;
+    const status = (order.orderStatus || "").toUpperCase();
+    return status !== "CANCELLED" && status !== "DELIVERED";
+  };
+
+  const handleConfirmCancel = async () => {
+    if (!cancellingOrder) return;
+    try {
+      setCancelLoading(true);
+      const res = await orderService.cancelShiprocketOrder(
+        cancellingOrder.orderId,
+        cancellingOrder._id
+      );
+      toast.success(res?.message || "Order cancelled successfully!");
+      setCancellingOrder(null);
+      await refetch();
+    } catch (err) {
+      console.error("Failed to cancel order:", err);
+      toast.error(
+        err.response?.data?.message ||
+          "Unable to cancel order at this time. Please try again or contact support."
+      );
+    } finally {
+      setCancelLoading(false);
+    }
+  };
+
   return (
+
     <main className="min-h-screen bg-[#f5ebda]">
       {/* ================= HEADER ================= */}
       <section className="relative overflow-hidden border-b border-[#603917]/10 bg-[#f4eee3]">
@@ -551,6 +585,18 @@ const MyOrders = () => {
                           </a>
                         )}
 
+                        {/* Cancel Order Button */}
+                        {canCancelOrder(order) && (
+                          <button
+                            type="button"
+                            onClick={() => setCancellingOrder(order)}
+                            className="inline-flex items-center gap-1.5 rounded-full border border-red-300 bg-red-50/70 px-4 py-2 font-manrope text-xs font-semibold text-red-600 hover:bg-red-100 hover:border-red-400 transition-colors cursor-pointer"
+                          >
+                            <XCircle className="h-3.5 w-3.5 text-red-500" />
+                            Cancel Order
+                          </button>
+                        )}
+
                         {/* View Order / Details Link */}
                         <Link
                           to={`/orders/${order.orderId}`}
@@ -569,7 +615,17 @@ const MyOrders = () => {
           </div>
         )}
       </section>
+
+      {/* Cancel Order Confirmation Modal */}
+      <CancelOrderModal
+        isOpen={Boolean(cancellingOrder)}
+        onClose={() => !cancelLoading && setCancellingOrder(null)}
+        onConfirm={handleConfirmCancel}
+        orderId={cancellingOrder?.orderId}
+        loading={cancelLoading}
+      />
     </main>
+
   );
 };
 

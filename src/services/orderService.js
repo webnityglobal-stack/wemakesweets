@@ -18,6 +18,30 @@ const orderService = {
     const response = await axiosInstance.get(`/orders/${orderId}`);
     return response.data;
   },
+
+  // Cancel order via Shiprocket API (PUT /shiprocket/cancel/:orderId)
+  cancelShiprocketOrder: async (orderId, mongoOrderId = null) => {
+    try {
+      const response = await axiosInstance.put(`/shiprocket/cancel/${orderId}`);
+      return response.data;
+    } catch (err) {
+      const errMsg = err.response?.data?.message?.toLowerCase() || "";
+      // If Shiprocket order does not exist yet, fallback to backend order cancel if mongoId provided
+      if (
+        (err.response?.status === 400 || err.response?.status === 404) &&
+        (errMsg.includes("shiprocket order does not exist") ||
+          errMsg.includes("shiprocket order not found")) &&
+        mongoOrderId
+      ) {
+        const fallbackRes = await axiosInstance.put(
+          `/orders/cancel/${mongoOrderId}`
+        );
+        return fallbackRes.data;
+      }
+      throw err;
+    }
+  },
 };
 
 export default orderService;
+
