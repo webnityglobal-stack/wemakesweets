@@ -1,10 +1,17 @@
 import axios from "axios";
 import { setupInterceptors } from "./apiInterceptor";
 
+const rawBaseURL =
+  import.meta.env.VITE_API_BASE_URL ||
+  "https://salmon-coyote-671066.hostingersite.com/api";
+
+const cleanBaseURL = rawBaseURL.trim().replace(/\/+$/, "");
+const baseURL = cleanBaseURL.endsWith("/api")
+  ? cleanBaseURL
+  : `${cleanBaseURL}/api`;
+
 const axiosInstance = axios.create({
-  baseURL:
-    import.meta.env.VITE_API_BASE_URL ||
-    "https://wemakesweets-backend.onrender.com/api",
+  baseURL,
   timeout: 30000,
 
   headers: {
