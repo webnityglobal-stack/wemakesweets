@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const ProductGallery = ({ images = [] }) => {
   const [selectedImage, setSelectedImage] = useState(
-    images[0] || "/products/product1.webp"
+    images[0] || "/product1.webp"
   );
 
   return (

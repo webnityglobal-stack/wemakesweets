@@ -125,7 +125,7 @@ const getProductImage = (item) => {
   if (item?.image) {
     return item.image;
   }
-  return "/products/product1.webp";
+  return "/product1.webp";
 };
 
 const MyOrders = () => {
@@ -450,7 +450,7 @@ const MyOrders = () => {
                                 alt={itemName}
                                 onError={(e) => {
                                   e.target.onerror = null;
-                                  e.target.src = "/products/product1.webp";
+                                  e.target.src = "/product1.webp";
                                 }}
                                 className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
                               />

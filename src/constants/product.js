@@ -19,7 +19,7 @@ const product = {
 
   isBestSeller: true,
 
-  images: ["/products/product1.webp"],
+  images: ["/product1.webp"],
 
   highlights: [
     "100% Natural Ingredients",

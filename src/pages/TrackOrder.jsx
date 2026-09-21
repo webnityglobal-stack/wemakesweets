@@ -132,7 +132,7 @@ const TrackOrder = () => {
         items: (rawOrder.items || []).map((it, idx) => ({
           _id: it._id || it.variantId || idx,
           name: it.name || it.product?.name || "Sweet Item",
-          image: it.product?.images?.[0] || it.image || "/products/product1.webp",
+          image: it.product?.images?.[0] || it.image || "/product1.webp",
           quantity: it.quantity || 1,
           salePrice: it.price || it.salePrice || 0,
           mrp: it.mrp || it.price || it.salePrice || 0,

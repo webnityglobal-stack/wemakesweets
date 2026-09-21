@@ -10,7 +10,7 @@ const products = [
     rating: 4.5,
     stock: 0,
     isBestSeller: true,
-    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
+    images: ["/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
 
   {
@@ -24,7 +24,7 @@ const products = [
     rating: 4.2,
     stock: 4,
     isBestSeller: false,
-    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
+    images: ["/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
 
   {
@@ -38,7 +38,7 @@ const products = [
     rating: 3.7,
     stock: 18,
     isBestSeller: false,
-    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
+    images: ["/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
 
   {
@@ -52,7 +52,7 @@ const products = [
     rating: 4.6,
     stock: 2,
     isBestSeller: false,
-    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
+    images: ["/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
 
   {
@@ -66,7 +66,7 @@ const products = [
     rating: 4.3,
     stock: 30,
     isBestSeller: true,
-    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
+    images: ["/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
 
 
@@ -81,7 +81,7 @@ const products = [
     rating: 4.4,
     stock: 15,
     isBestSeller: false,
-    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
+    images: ["/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
   {
     _id: "7",
@@ -94,7 +94,7 @@ const products = [
     rating: 4.1,
     stock: 8,
     isBestSeller: false,
-    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
+    images: ["/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
   {
     _id: "8",
@@ -107,7 +107,7 @@ const products = [
     rating: 4.8,
     stock: 20,
     isBestSeller: true,
-    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
+    images: ["/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
   {
     _id: "9",
@@ -120,7 +120,7 @@ const products = [
     rating: 4.0,
     stock: 1,
     isBestSeller: false,
-    images: ["/products/product1.webp", "/DateElaichi&NutCubes.webp"],
+    images: ["/product1.webp", "/DateElaichi&NutCubes.webp"],
   },
 ];
 

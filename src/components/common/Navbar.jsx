@@ -41,64 +41,52 @@ useEffect(() => {
       <nav className="h-20 relative flex items-center justify-between">
         <div className="absolute top-6 left-25 text-[11px] text-black"  >®</div>
         {/* Logo */}
-        <a href="/">
+        <Link to="/">
           <img
             src="/withoutBackground111.png"
             alt="Logo"
             className="h-12 w-auto object-contain"
           />
-        </a>
+        </Link>
 
         {/* Desktop Menu */}
         <ul className="hidden lg:flex font-manrope font-medium items-center gap-5 xl:gap-7">
           {navLinks.map((item) => (
             <li key={item.name}>
-              <a
-                href={item.path}
+              <Link
+                to={item.path}
                 className="px-5 py-2 font-manrope font-medium rounded-full text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl text-sm"
                 style={{
                   backgroundColor: item.color,
                 }}
               >
                 {item.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
         {/* Desktop Icons */}
         <div className="hidden lg:flex items-center gap-6">
+          <Link to={isLoggedIn ? "/my-account" : "/login"}>
+            <User
+              size={23}
+              className="cursor-pointer transition hover:scale-110"
+              color="#603917"
+            />
+          </Link>
 
-          {/* <Search
-            size={23}
-            className="cursor-pointer transition hover:scale-110"
-            color="#572340"
-          /> */}
-       <Link to={isLoggedIn ? "/my-account" : "/login"}>
-  <User
-    size={23}
-    className="cursor-pointer transition hover:scale-110"
-    color="#603917"
-  />
-</Link>
-
-          <a href='/cart'>
+          <Link to="/cart">
             <div className="relative cursor-pointer">
               <ShoppingCart
                 size={25}
                 color="#3e5a2c"
                 className="transition hover:scale-110"
               />
-
-              {/* <span
-                className="absolute -top-2 -right-2 h-5 w-5 rounded-full text-[10px] text-white flex items-center justify-center font-semibold"
-                style={{ backgroundColor: "#8b183d" }}
-              >
-                0
-              </span> */}
             </div>
-          </a>
+          </Link>
         </div>
+
 
 
 
@@ -117,19 +105,15 @@ useEffect(() => {
 
 
           {/* Cart */}
-          <div className={`relative cursor-pointer group ${open ? "hidden" : "block"}`}>
+          <Link
+            to="/cart"
+            className={`relative cursor-pointer group ${open ? "hidden" : "block"}`}
+          >
             <ShoppingCart
               size={24}
               className="text-[#3e5a2c] transition-all duration-300 group-hover:text-[#164984] group-hover:scale-110"
             />
-
-            {/* <span
-              className="absolute -top-2 -right-2 h-5 w-5 rounded-full text-[10px] text-white flex items-center justify-center transition-all duration-300 group-hover:bg-[#572340]"
-              style={{ backgroundColor: "#8b183d" }}
-            >
-              0
-            </span> */}
-          </div>
+          </Link>
 
           {/* Hamburger */}
           <button
@@ -140,37 +124,17 @@ useEffect(() => {
           </button>
 
         </div>
-
-
-
-
-
-
       </nav>
 
-
-
-
-
-
-
-
-
-
-
-      {/* Mobile Menu */}
       {/* Mobile Menu */}
       {open && (
         <div className="lg:hidden rounded-3xl bg-[#f9e4bf] shadow-xl p-6 mb-4">
-
-
-
           {/* Mobile Navigation */}
           <ul className="space-y-4">
             {navLinks.map((item) => (
               <li key={item.name}>
-                <a
-                  href={item.path}
+                <Link
+                  to={item.path}
                   onClick={() => setOpen(false)}
                   className="block text-center py-3 font-manrope font-medium text-sm rounded-full text-white transition"
                   style={{
@@ -178,13 +142,13 @@ useEffect(() => {
                   }}
                 >
                   {item.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
-
         </div>
       )}
+
     </header>
   );
 }

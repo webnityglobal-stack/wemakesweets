@@ -459,7 +459,7 @@ const PaymentSuccess = () => {
                     item.product?.images?.[0] ||
                     item.image ||
                     item.product?.image ||
-                    "/products/product1.webp";
+                    "/product1.webp";
 
                   const itemName =
                     item.name ||
@@ -474,7 +474,7 @@ const PaymentSuccess = () => {
                           alt={itemName}
                           className="h-full w-full object-cover"
                           onError={(e) => {
-                            e.currentTarget.src = "/products/product1.webp";
+                            e.currentTarget.src = "/product1.webp";
                           }}
                         />
                       </div>
