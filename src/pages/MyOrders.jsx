@@ -17,6 +17,7 @@ import {
   RotateCw,
   Copy,
   Check,
+  Star,
 } from "lucide-react";
 import { toast } from "sonner";
 import useMyOrders from "@/hooks/orders/useMyOrders";
@@ -475,6 +476,16 @@ const MyOrders = () => {
                                   </>
                                 )}
                               </div>
+
+                              {order.orderStatus?.toUpperCase() === "DELIVERED" && (
+                                <Link
+                                  to={`/products/${item.product?._id || item.product?.slug || item.product}#reviews`}
+                                  className="mt-2 inline-flex items-center gap-1 font-manrope text-xs font-bold text-[#8b183d] hover:text-[#572340] hover:underline transition"
+                                >
+                                  <Star size={13} fill="#8b183d" />
+                                  Rate & Review item
+                                </Link>
+                              )}
                             </div>
 
                             {/* Item Subtotal */}
