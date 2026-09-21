@@ -13,6 +13,10 @@ const ProductGallery = ({ images = [] }) => {
         <img
           src={selectedImage}
           alt="Product"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = "/product1.webp";
+          }}
           className="aspect-square w-full  object-cover transition duration-500 hover:scale-105"
         />
       </div>
@@ -36,6 +40,10 @@ const ProductGallery = ({ images = [] }) => {
             <img
               src={image}
               alt={`Thumbnail ${index + 1}`}
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = "/product1.webp";
+              }}
               className="h-20 w-20 object-cover"
             />
           </button>

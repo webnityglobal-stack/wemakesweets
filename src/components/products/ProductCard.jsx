@@ -160,8 +160,12 @@ const handleQuickAdd = async (e) => {
       <div className="relative aspect-square overflow-hidden bg-[#f9e4bf]/20 ">
         {/* First Image */}
         <img
-          src={product.images?.[0]}
+          src={product.images?.[0] || "/product1.webp"}
           alt={product.name}
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = "/product1.webp";
+          }}
           className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ${
             product.images?.[1]
               ? "group-hover:scale-105 group-hover:opacity-0"
