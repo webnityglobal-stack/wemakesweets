@@ -106,7 +106,7 @@ const toggleSection = (section) => {
             <div className="mt-2 flex gap-1">
 
               <a
-                href="#"
+                href="https://www.facebook.com/profile.php?id=100076647155144"
                 className="group flex h-8 w-8 items-center justify-center rounded-full border border-[#f4c02d]/25 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:bg-[#0866FF]"
               >
                 <img
@@ -117,7 +117,7 @@ const toggleSection = (section) => {
               </a>
 
               <a
-                href="#"
+                href="https://www.instagram.com/wemakesweetsandsnacks/"
                 className="group flex h-8 w-8 items-center justify-center rounded-full border border-[#f4c02d]/25 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:bg-[#E35A7E]"
               >
                 <img
@@ -128,7 +128,9 @@ const toggleSection = (section) => {
               </a>
 
               <a
-                href="#"
+                href="https://wa.me/916358271511"
+  target="_blank"
+  rel="noopener noreferrer"
                 className="group flex h-8 w-8 items-center justify-center rounded-full border border-[#f4c02d]/25 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:bg-[#25D366]"
               >
                 <img
