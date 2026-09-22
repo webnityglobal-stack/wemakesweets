@@ -6,8 +6,13 @@ const reviewService = {
    * @param {{ productId: string, rating: number, comment: string }} payload
    */
   addReview: async ({ productId, rating, comment }) => {
+    const cleanId =
+      typeof productId === "object"
+        ? productId?._id || productId?.id
+        : productId;
+
     const response = await axiosInstance.post("/reviews/add", {
-      productId,
+      productId: String(cleanId),
       rating: Number(rating),
       comment: String(comment || "").trim(),
     });
@@ -20,6 +25,24 @@ const reviewService = {
    */
   getProductReviews: async (productId) => {
     const response = await axiosInstance.get(`/reviews/product/${productId}`);
+    return response.data;
+  },
+
+  /**
+   * Update an existing review
+   * @param {string} reviewId
+   * @param {{ rating: number, comment: string }} payload
+   */
+  updateReview: async (reviewId, { rating, comment }) => {
+    const cleanId =
+      typeof reviewId === "object"
+        ? reviewId?._id || reviewId?.id
+        : reviewId;
+
+    const response = await axiosInstance.put(`/reviews/update/${cleanId}`, {
+      rating: Number(rating),
+      comment: String(comment || "").trim(),
+    });
     return response.data;
   },
 

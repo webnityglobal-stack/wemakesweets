@@ -21,8 +21,8 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import useMyOrders from "@/hooks/orders/useMyOrders";
-import orderService from "@/services/orderService";
 import CancelOrderModal from "@/components/orders/CancelOrderModal";
+import WriteReviewModal from "@/components/reviews/WriteReviewModal";
 
 // Status configuration helper
 const getOrderStatusBadge = (rawStatus) => {
@@ -133,6 +133,7 @@ const MyOrders = () => {
   const { orders, loading, error, refetch } = useMyOrders();
   const [activeFilter, setActiveFilter] = useState("ALL");
   const [copiedOrderId, setCopiedOrderId] = useState(null);
+  const [reviewingProduct, setReviewingProduct] = useState(null);
 
   const filterOptions = [
     { id: "ALL", label: "All Orders" },
@@ -478,13 +479,32 @@ const MyOrders = () => {
                               </div>
 
                               {order.orderStatus?.toUpperCase() === "DELIVERED" && (
-                                <Link
-                                  to={`/products/${item.product?._id || item.product?.slug || item.product}#reviews`}
-                                  className="mt-2 inline-flex items-center gap-1 font-manrope text-xs font-bold text-[#8b183d] hover:text-[#572340] hover:underline transition"
-                                >
-                                  <Star size={13} fill="#8b183d" />
-                                  Rate & Review item
-                                </Link>
+                                <div className="mt-2 flex flex-wrap items-center gap-2.5">
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      setReviewingProduct({
+                                        _id:
+                                          item.product?._id ||
+                                          item.product?.id ||
+                                          item.product ||
+                                          item.productId,
+                                        name: itemName,
+                                        image: itemImg,
+                                      })
+                                    }
+                                    className="inline-flex items-center gap-1 rounded-full bg-[#8b183d] px-3 py-1 font-manrope text-xs font-bold text-white shadow-sm hover:bg-[#572340] transition cursor-pointer"
+                                  >
+                                    <Star size={12} fill="white" />
+                                    Rate & Review
+                                  </button>
+                                  <Link
+                                    to={`/products/${item.product?._id || item.product?.id || item.product || item.productId}#reviews`}
+                                    className="font-manrope text-xs text-[#603917]/60 hover:text-[#8b183d] hover:underline transition"
+                                  >
+                                    All Reviews
+                                  </Link>
+                                </div>
                               )}
                             </div>
 
@@ -634,6 +654,17 @@ const MyOrders = () => {
         onConfirm={handleConfirmCancel}
         orderId={cancellingOrder?.orderId}
         loading={cancelLoading}
+      />
+
+      {/* Write Product Review Modal */}
+      <WriteReviewModal
+        isOpen={Boolean(reviewingProduct)}
+        onClose={() => setReviewingProduct(null)}
+        product={reviewingProduct}
+        onReviewSubmitted={() => {
+          setReviewingProduct(null);
+        }}
+        verifiedPurchase={true}
       />
     </main>
 
