@@ -71,7 +71,7 @@ useEffect(() => {
 
       <video
         ref={videoRef}
-        src={reel.videoUrl}
+        src={reel.videoUrl || reel.url}
         loop
         muted
         playsInline
