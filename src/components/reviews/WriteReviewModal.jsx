@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Star, X, Loader2, CheckCircle2, AlertCircle, ShoppingBag, Edit3 } from "lucide-react";
+import { Star, X, Loader2, CheckCircle2, AlertCircle, ShoppingBag, Edit3, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import reviewService from "@/services/reviewService";
@@ -27,12 +27,15 @@ const WriteReviewModal = ({
   product,
   existingReview = null,
   onReviewSubmitted,
+  onReviewDeleted,
   verifiedPurchase = true,
 }) => {
   const [rating, setRating] = useState(5);
   const [hoverRating, setHoverRating] = useState(0);
   const [comment, setComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const isEditMode = Boolean(existingReview?._id);
@@ -49,6 +52,8 @@ const WriteReviewModal = ({
       }
       setHoverRating(0);
       setErrorMessage("");
+      setShowDeleteConfirm(false);
+      setIsDeleting(false);
     }
   }, [existingReview, isOpen]);
 
@@ -64,6 +69,37 @@ const WriteReviewModal = ({
     (Array.isArray(product?.images) && product.images[0]) ||
     product?.image ||
     "/product1.webp";
+
+  const handleDeleteReview = async () => {
+    if (!existingReview?._id) return;
+    try {
+      setIsDeleting(true);
+      setErrorMessage("");
+      const res = await reviewService.deleteReview(existingReview._id);
+      if (res?.success) {
+        toast.success(res.message || "Review deleted successfully!");
+        if (typeof onReviewDeleted === "function") {
+          onReviewDeleted(existingReview._id);
+        }
+        onClose();
+      } else {
+        const msg = res?.message || "Failed to delete review.";
+        setErrorMessage(msg);
+        toast.error(msg);
+      }
+    } catch (err) {
+      console.error("Failed to delete review:", err);
+      const msg =
+        err.response?.data?.message ||
+        err.message ||
+        "Failed to delete review. Please try again.";
+      setErrorMessage(msg);
+      toast.error(msg);
+    } finally {
+      setIsDeleting(false);
+      setShowDeleteConfirm(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -298,31 +334,83 @@ const WriteReviewModal = ({
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center justify-end gap-3 pt-2">
-            <button
-              type="button"
-              onClick={onClose}
-              disabled={isSubmitting}
-              className="rounded-full border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 transition cursor-pointer"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              disabled={isSubmitting || !comment.trim()}
-              className="inline-flex items-center gap-2 rounded-full bg-[#810c26] px-6 py-2.5 text-sm font-bold text-white shadow-md hover:bg-[#68091e] transition disabled:opacity-60 cursor-pointer"
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 size={16} className="animate-spin" />
-                  {isEditMode ? "Updating..." : "Submitting..."}
-                </>
-              ) : isEditMode ? (
-                "Update Review"
-              ) : (
-                "Submit Review"
-              )}
-            </button>
+          <div className="pt-2">
+            {showDeleteConfirm ? (
+              <div className="rounded-2xl border border-red-200 bg-red-50/90 p-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 animate-in fade-in duration-150">
+                <div className="flex items-center gap-2 text-left">
+                  <AlertCircle size={18} className="text-red-600 shrink-0" />
+                  <p className="text-xs font-semibold text-red-900">
+                    Are you sure you want to permanently delete your review?
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto justify-end">
+                  <button
+                    type="button"
+                    onClick={() => setShowDeleteConfirm(false)}
+                    disabled={isDeleting}
+                    className="rounded-full border border-gray-300 bg-white px-3.5 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50 transition cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleDeleteReview}
+                    disabled={isDeleting}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-red-600 px-4 py-1.5 text-xs font-bold text-white shadow-sm hover:bg-red-700 transition cursor-pointer disabled:opacity-50"
+                  >
+                    {isDeleting ? (
+                      <Loader2 size={13} className="animate-spin" />
+                    ) : (
+                      <Trash2 size={13} />
+                    )}
+                    {isDeleting ? "Deleting..." : "Yes, Delete"}
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center justify-between gap-3">
+                {isEditMode ? (
+                  <button
+                    type="button"
+                    onClick={() => setShowDeleteConfirm(true)}
+                    disabled={isSubmitting || isDeleting}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50/70 px-4 py-2 text-xs font-bold text-red-600 hover:bg-red-100 hover:border-red-300 transition cursor-pointer disabled:opacity-50"
+                  >
+                    <Trash2 size={14} />
+                    Delete Review
+                  </button>
+                ) : (
+                  <div />
+                )}
+
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    disabled={isSubmitting || isDeleting}
+                    className="rounded-full border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 transition cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || isDeleting || !comment.trim()}
+                    className="inline-flex items-center gap-2 rounded-full bg-[#810c26] px-6 py-2.5 text-sm font-bold text-white shadow-md hover:bg-[#68091e] transition disabled:opacity-60 cursor-pointer"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 size={16} className="animate-spin" />
+                        {isEditMode ? "Updating..." : "Submitting..."}
+                      </>
+                    ) : isEditMode ? (
+                      "Update Review"
+                    ) : (
+                      "Submit Review"
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </form>
       </div>

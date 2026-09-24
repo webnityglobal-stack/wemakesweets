@@ -11,6 +11,7 @@ import {
   ShoppingBag,
   Lock,
   X,
+  Trash2,
 } from "lucide-react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { toast } from "sonner";
@@ -45,6 +46,11 @@ const Reviews = ({ product }) => {
   // Review Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingReview, setEditingReview] = useState(null);
+
+  // Review Delete state
+  const [reviewToDelete, setReviewToDelete] = useState(null);
+  const [isDeletingReview, setIsDeletingReview] = useState(false);
+  const [deletedReviewIds, setDeletedReviewIds] = useState(new Set());
 
   // Purchase verification state
   const [purchaseStatus, setPurchaseStatus] = useState({
@@ -200,17 +206,23 @@ const Reviews = ({ product }) => {
     // 1. Add product?.reviews from getProductById API
     if (Array.isArray(product?.reviews)) {
       product.reviews.forEach((r) => {
-        if (r && (r._id || r.id)) map.set(r._id || r.id, r);
+        const id = r?._id || r?.id;
+        if (id && !deletedReviewIds.has(String(id))) {
+          map.set(String(id), r);
+        }
       });
     }
     // 2. Add reviews from fetchReviews or newly added/updated reviews
     if (Array.isArray(reviews)) {
       reviews.forEach((r) => {
-        if (r && (r._id || r.id)) map.set(r._id || r.id, r);
+        const id = r?._id || r?.id;
+        if (id && !deletedReviewIds.has(String(id))) {
+          map.set(String(id), r);
+        }
       });
     }
     return Array.from(map.values());
-  }, [product?.reviews, reviews]);
+  }, [product?.reviews, reviews, deletedReviewIds]);
 
   // Sort by newest first and limit to max 6 latest reviews for the slider
   const displayReviews = useMemo(() => {
@@ -262,7 +274,7 @@ const Reviews = ({ product }) => {
   // Check if current user already submitted a review
   const currentUser = authStorage.getUser();
   const currentUserId = currentUser?._id || currentUser?.id;
-  const userExistingReview = reviews.find((r) => {
+  const userExistingReview = allReviews.find((r) => {
     const rUserId = r.user?._id || r.user;
     return currentUserId && String(rUserId) === String(currentUserId);
   });
@@ -310,11 +322,17 @@ const Reviews = ({ product }) => {
 
   const handleReviewSubmitted = (savedReview) => {
     if (savedReview) {
+      const savedId = String(savedReview._id || savedReview.id);
+      setDeletedReviewIds((prev) => {
+        const next = new Set(prev);
+        next.delete(savedId);
+        return next;
+      });
       setReviews((prev) => {
-        const exists = prev.some((r) => r._id === savedReview._id);
+        const exists = prev.some((r) => String(r._id || r.id) === savedId);
         if (exists) {
           return prev.map((r) =>
-            r._id === savedReview._id ? savedReview : r
+            String(r._id || r.id) === savedId ? savedReview : r
           );
         }
         return [savedReview, ...prev];
@@ -322,6 +340,47 @@ const Reviews = ({ product }) => {
     }
     setEditingReview(null);
     fetchReviews();
+  };
+
+  const handleDeleteReview = async (reviewId) => {
+    const cleanId =
+      typeof reviewId === "object"
+        ? reviewId?._id || reviewId?.id
+        : reviewId;
+
+    if (!cleanId) return;
+
+    try {
+      setIsDeletingReview(true);
+      const res = await reviewService.deleteReview(cleanId);
+      if (res?.success) {
+        toast.success(res.message || "Review deleted successfully!");
+        setDeletedReviewIds((prev) => new Set([...prev, String(cleanId)]));
+        setReviews((prev) =>
+          prev.filter((r) => String(r._id || r.id) !== String(cleanId))
+        );
+        setReviewToDelete(null);
+        if (
+          editingReview &&
+          String(editingReview._id || editingReview.id) === String(cleanId)
+        ) {
+          setEditingReview(null);
+          setIsModalOpen(false);
+        }
+        fetchReviews();
+      } else {
+        toast.error(res?.message || "Failed to delete review.");
+      }
+    } catch (err) {
+      console.error("Delete review error:", err);
+      const msg =
+        err.response?.data?.message ||
+        err.message ||
+        "Failed to delete review. Please try again.";
+      toast.error(msg);
+    } finally {
+      setIsDeletingReview(false);
+    }
   };
 
   return (
@@ -390,6 +449,15 @@ const Reviews = ({ product }) => {
                 >
                   <PenLine size={12} />
                   Edit My Review
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setReviewToDelete(userExistingReview)}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50 px-3 py-1.5 text-xs font-bold text-red-600 shadow-sm hover:bg-red-100 hover:border-red-300 transition cursor-pointer"
+                  title="Delete review"
+                >
+                  <Trash2 size={12} />
+                  Delete
                 </button>
               </div>
             </div>
@@ -573,16 +641,26 @@ const Reviews = ({ product }) => {
                             (review.user?._id === currentUserId ||
                               review.user === currentUserId ||
                               String(review.user) === String(currentUserId)) && (
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  setEditingReview(review);
-                                  setIsModalOpen(true);
-                                }}
-                                className="inline-flex items-center gap-0.5 text-[9px] font-bold text-[#810c26] hover:underline ml-1 cursor-pointer"
-                              >
-                                <PenLine size={9} /> Edit
-                              </button>
+                              <div className="flex items-center gap-1.5 ml-1">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setEditingReview(review);
+                                    setIsModalOpen(true);
+                                  }}
+                                  className="inline-flex items-center gap-0.5 text-[9px] font-bold text-[#810c26] hover:underline cursor-pointer"
+                                >
+                                  <PenLine size={9} /> Edit
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => setReviewToDelete(review)}
+                                  className="inline-flex items-center gap-0.5 text-[9px] font-bold text-red-600 hover:underline cursor-pointer"
+                                  title="Delete review"
+                                >
+                                  <Trash2 size={9} /> Delete
+                                </button>
+                              </div>
                             )}
                         </div>
                       </div>
@@ -654,16 +732,26 @@ const Reviews = ({ product }) => {
                           (review.user?._id === currentUserId ||
                             review.user === currentUserId ||
                             String(review.user) === String(currentUserId)) && (
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setEditingReview(review);
-                                setIsModalOpen(true);
-                              }}
-                              className="inline-flex items-center gap-1 rounded-full border border-[#810c26]/20 bg-white px-2 py-0.5 text-[10px] font-bold text-[#810c26] hover:bg-[#810c26] hover:text-white transition cursor-pointer"
-                            >
-                              <PenLine size={10} /> Edit
-                            </button>
+                            <div className="flex items-center gap-1.5">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setEditingReview(review);
+                                  setIsModalOpen(true);
+                                }}
+                                className="inline-flex items-center gap-1 rounded-full border border-[#810c26]/20 bg-white px-2 py-0.5 text-[10px] font-bold text-[#810c26] hover:bg-[#810c26] hover:text-white transition cursor-pointer"
+                              >
+                                <PenLine size={10} /> Edit
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setReviewToDelete(review)}
+                                className="inline-flex items-center gap-1 rounded-full border border-red-200 bg-red-50 px-2 py-0.5 text-[10px] font-bold text-red-600 hover:bg-red-600 hover:text-white transition cursor-pointer"
+                                title="Delete this review"
+                              >
+                                <Trash2 size={10} /> Delete
+                              </button>
+                            </div>
                           )}
                       </div>
                     </div>
@@ -710,8 +798,78 @@ const Reviews = ({ product }) => {
         product={product}
         existingReview={editingReview}
         onReviewSubmitted={handleReviewSubmitted}
+        onReviewDeleted={(deletedId) => {
+          setDeletedReviewIds((prev) => new Set([...prev, String(deletedId)]));
+          setReviews((prev) =>
+            prev.filter((r) => String(r._id || r.id) !== String(deletedId))
+          );
+          fetchReviews();
+        }}
         verifiedPurchase={purchaseStatus.hasDelivered}
       />
+
+      {/* ================= DELETE CONFIRMATION MODAL ================= */}
+      {reviewToDelete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="relative w-full max-w-sm rounded-3xl border border-red-100 bg-[#fffdfa] p-6 shadow-2xl text-center">
+            <button
+              type="button"
+              onClick={() => setReviewToDelete(null)}
+              disabled={isDeletingReview}
+              className="absolute right-4 top-4 rounded-full p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition cursor-pointer"
+            >
+              <X size={18} />
+            </button>
+
+            <div className="mx-auto flex h-13 w-13 items-center justify-center rounded-full bg-red-50 text-red-600 mb-3 border border-red-200">
+              <Trash2 size={24} />
+            </div>
+
+            <h3 className="text-lg font-bold text-gray-900 font-manrope">
+              Delete Review?
+            </h3>
+
+            <p className="mt-2 text-xs text-gray-600 leading-relaxed">
+              Are you sure you want to permanently delete your review for{" "}
+              <strong className="text-gray-900">
+                {product?.name || "this sweet"}
+              </strong>
+              ? This action cannot be undone.
+            </p>
+
+            <div className="mt-5 flex items-center justify-center gap-2.5">
+              <button
+                type="button"
+                onClick={() => setReviewToDelete(null)}
+                disabled={isDeletingReview}
+                className="w-full rounded-full border border-gray-300 px-4 py-2 font-manrope text-xs font-semibold text-gray-700 hover:bg-gray-100 transition cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  handleDeleteReview(reviewToDelete._id || reviewToDelete.id)
+                }
+                disabled={isDeletingReview}
+                className="w-full inline-flex items-center justify-center gap-1.5 rounded-full bg-red-600 px-4 py-2 font-manrope text-xs font-bold text-white shadow-md hover:bg-red-700 transition cursor-pointer disabled:opacity-50"
+              >
+                {isDeletingReview ? (
+                  <>
+                    <Loader2 size={13} className="animate-spin" />
+                    Deleting...
+                  </>
+                ) : (
+                  <>
+                    <Trash2 size={13} />
+                    Yes, Delete
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ================= NOT ELIGIBLE NOTICE MODAL ================= */}
       {notEligibleModalOpen && (

@@ -54,6 +54,21 @@ const reviewService = {
     const response = await axiosInstance.get(`/reviews/${reviewId}`);
     return response.data;
   },
+
+  /**
+   * Delete user's own review
+   * @param {string} reviewId
+   */
+  deleteReview: async (reviewId) => {
+    const cleanId =
+      typeof reviewId === "object"
+        ? reviewId?._id || reviewId?.id
+        : reviewId;
+
+    const response = await axiosInstance.delete(`/reviews/delete/${cleanId}`);
+    return response.data;
+  },
 };
 
 export default reviewService;
+
