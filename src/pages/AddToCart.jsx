@@ -357,8 +357,12 @@ const AddToCart = () => {
                       {/* IMAGE */}
                       <div className="relative h-52 w-full shrink-0 overflow-hidden rounded-xl bg-[#f9e4bf]/20 sm:h-44 sm:w-44 lg:h-48 lg:w-48">
                         <img
-                          src={product.images?.[0]}
+                          src={product.images?.[0] || "/product1.webp"}
                           alt={product.name}
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = "/product1.webp";
+                          }}
                           className="
                             h-full w-full object-cover
                             transition-transform duration-500
