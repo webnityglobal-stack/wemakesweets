@@ -124,7 +124,8 @@ useEffect(() => {
           </button>
 
         </div>
-      </nav>
+      </nav>   
+      
 
       {/* Mobile Menu */}
       {open && (
