@@ -19,12 +19,26 @@ const orderService = {
     return response.data;
   },
 
-  // Cancel order via Shiprocket API (PUT /shiprocket/cancel/:orderId)
+  // Live Track order via Shiprocket API (GET /shiprocket/track/:orderId)
+  getShiprocketTracking: async (orderId) => {
+    const response = await axiosInstance.get(`/shiprocket/track/${orderId}`);
+    return response.data;
+  },
+
+  // Cancel order via Shiprocket API (PUT or POST /shiprocket/cancel/:orderId)
   cancelShiprocketOrder: async (orderId, mongoOrderId = null) => {
     try {
       const response = await axiosInstance.put(`/shiprocket/cancel/${orderId}`);
       return response.data;
     } catch (err) {
+      // If PUT fails with 405 or 404, attempt POST
+      if (err.response?.status === 405 || err.response?.status === 404) {
+        try {
+          const postRes = await axiosInstance.post(`/shiprocket/cancel/${orderId}`);
+          return postRes.data;
+        } catch (_) {}
+      }
+
       const errMsg = err.response?.data?.message?.toLowerCase() || "";
       // If Shiprocket order does not exist yet, fallback to backend order cancel if mongoId provided
       if (
