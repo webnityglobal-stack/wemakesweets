@@ -64,6 +64,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 
 import Signup from "@/pages/SignUp";
 import Login from "@/layout/Login";
+import ForgotPassword from "@/pages/ForgotPassword";
 
 
 import AddToCart from "@/pages/AddToCart";
@@ -115,6 +116,8 @@ const AppRoutes = () => {
           <Route path="sign-up" element={<Signup />} />
 
           <Route path="login" element={<Login />} />
+
+          <Route path="forgot-password" element={<ForgotPassword />} />
 
           <Route
             path="payment/success"
