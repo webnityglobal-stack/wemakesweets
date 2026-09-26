@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import orderService from "@/services/orderService";
+import paymentService from "@/services/paymentService";
 
 const PaymentSuccess = () => {
   const location = useLocation();
@@ -56,6 +57,18 @@ const PaymentSuccess = () => {
       setLoading(true);
       setError(null);
       try {
+        // Sync FastRR payment details if returning from checkout
+        if (oid || ost === "SUCCESS") {
+          try {
+            await paymentService.paymentSuccess({
+              orderId: orderIdFromQuery,
+              gatewayOrderId: oid,
+            });
+          } catch (syncErr) {
+            console.warn("Payment sync error (continuing):", syncErr);
+          }
+        }
+
         // Primary: fetch by order ID endpoint /orders/:orderId
         const data = await orderService.getOrderById(orderIdFromQuery);
         if (data?.success && data?.order) {
@@ -236,7 +249,11 @@ const PaymentSuccess = () => {
               ${isFailed ? "text-red-700" : "text-[#3e5a2c]"}
             `}
           >
-            {isFailed ? "Payment Incomplete" : "Payment & Order Confirmed"}
+            {isFailed
+              ? "Payment Incomplete"
+              : order?.paymentMethod === "COD"
+              ? "Order Confirmed (Cash on Delivery)"
+              : "Payment & Order Confirmed"}
           </p>
 
           <h1 className="mt-2 text-4xl font-bold leading-tight text-[#2d2d2d] font-cormorant sm:text-5xl lg:text-6xl">
@@ -581,10 +598,15 @@ const PaymentSuccess = () => {
                   </span>
                 </div>
 
-                <div className="mt-3 flex items-center gap-2 rounded-lg bg-[#3e5a2c]/10 px-3 py-2">
-                  <Check size={14} className="text-[#3e5a2c]" />
-                  <span className="text-[10px] font-semibold text-[#3e5a2c] font-manrope">
-                    Payment Gateway: {order?.paymentId?.gateway || "FastRR"} (Verified)
+                <div className="mt-3 flex items-center justify-between rounded-lg bg-[#3e5a2c]/10 px-3 py-2">
+                  <div className="flex items-center gap-2">
+                    <Check size={14} className="text-[#3e5a2c]" />
+                    <span className="text-[10px] font-semibold text-[#3e5a2c] font-manrope">
+                      {order?.paymentMethod === "COD" ? "Cash On Delivery (COD)" : "Paid Online"}
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-medium text-gray-600 font-manrope">
+                    {order?.paymentMethod === "COD" ? "Pay on delivery" : "Verified"}
                   </span>
                 </div>
               </div>

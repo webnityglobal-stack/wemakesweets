@@ -76,8 +76,15 @@ const getOrderStatusBadge = (rawStatus) => {
   }
 };
 
-const getPaymentStatusBadge = (paymentStatus) => {
+const getPaymentStatusBadge = (paymentStatus, paymentMethod) => {
   const status = (paymentStatus || "").toUpperCase();
+  const method = (paymentMethod || "").toUpperCase();
+  if (method === "COD" && status === "PENDING") {
+    return {
+      label: "COD (Pay on Delivery)",
+      badgeClass: "bg-blue-50 text-blue-700 border-blue-200",
+    };
+  }
   switch (status) {
     case "PAID":
       return {
@@ -342,7 +349,7 @@ const MyOrders = () => {
             {filteredOrders.map((order) => {
               const status = getOrderStatusBadge(order.orderStatus);
               const StatusIcon = status.icon;
-              const payment = getPaymentStatusBadge(order.paymentStatus);
+              const payment = getPaymentStatusBadge(order.paymentStatus, order.paymentMethod);
 
               const totalQuantity = (order.items || []).reduce(
                 (total, item) => total + (item.quantity || 1),
