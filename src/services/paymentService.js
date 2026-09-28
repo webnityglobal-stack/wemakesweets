@@ -12,6 +12,18 @@ const paymentService = {
     });
     return response.data;
   },
+
+  /**
+   * Verify and sync FastRR payment and order status
+   * @param {string} orderId - The WMS order ID (e.g. WMS-1789627673274)
+   * @returns {Promise<Object>} Updated order and payment details
+   */
+  verifyPayment: async (orderId) => {
+    const response = await axiosInstance.post("/payment/verify", {
+      orderId,
+    });
+    return response.data;
+  },
 };
 
 export default paymentService;

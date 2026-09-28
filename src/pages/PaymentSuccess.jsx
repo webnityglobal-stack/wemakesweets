@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import orderService from "@/services/orderService";
+import paymentService from "@/services/paymentService";
 
 const PaymentSuccess = () => {
   const location = useLocation();
@@ -56,7 +57,19 @@ const PaymentSuccess = () => {
       setLoading(true);
       setError(null);
       try {
-        // Primary: fetch by order ID endpoint /orders/:orderId
+        // 1. Verify and sync with FastRR to ensure COD/ONLINE is properly resolved
+        try {
+          const verifyData = await paymentService.verifyPayment(orderIdFromQuery);
+          if (verifyData?.success && verifyData?.order) {
+            setOrder(verifyData.order);
+            setLoading(false);
+            return;
+          }
+        } catch (verifyErr) {
+          console.warn("Verify payment call skipped or failed, fallback to getOrderById:", verifyErr);
+        }
+
+        // 2. Primary: fetch by order ID endpoint /orders/:orderId
         const data = await orderService.getOrderById(orderIdFromQuery);
         if (data?.success && data?.order) {
           setOrder(data.order);
@@ -581,10 +594,15 @@ const PaymentSuccess = () => {
                   </span>
                 </div>
 
-                <div className="mt-3 flex items-center gap-2 rounded-lg bg-[#3e5a2c]/10 px-3 py-2">
-                  <Check size={14} className="text-[#3e5a2c]" />
-                  <span className="text-[10px] font-semibold text-[#3e5a2c] font-manrope">
-                    Payment Gateway: {order?.paymentId?.gateway || "FastRR"} (Verified)
+                <div className="mt-3 flex items-center justify-between rounded-lg bg-[#3e5a2c]/10 px-3 py-2">
+                  <div className="flex items-center gap-2">
+                    <Check size={14} className="text-[#3e5a2c]" />
+                    <span className="text-[10px] font-semibold text-[#3e5a2c] font-manrope">
+                      {order?.paymentMethod === "COD" ? "Cash on Delivery" : "Online Payment"}
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-bold text-[#3e5a2c] font-manrope uppercase">
+                    {order?.paymentMethod || "COD"}
                   </span>
                 </div>
               </div>
