@@ -113,6 +113,28 @@ const TrackOrder = () => {
       const res = await orderService.getShiprocketTracking(orderId);
       if (res?.success) {
         setLiveTrackingRes(res);
+        const data = extractTrackingData(res);
+        const err = typeof data?.error === "string" ? data.error : "";
+        const status = Number(data?.shipment_status || 0);
+        const isCancelledInRes =
+          res.isCancelled === true ||
+          res.orderStatus === "CANCELLED" ||
+          status === 8 ||
+          /cancel/i.test(err);
+
+        if (isCancelledInRes) {
+          setFetchedOrder((prev) => ({
+            ...(prev || {}),
+            orderStatus: "CANCELLED",
+            status: "CANCELLED",
+            cancellationMessage: err || "Order cancelled via Shiprocket",
+            shiprocket: {
+              ...(prev?.shiprocket || {}),
+              status: "CANCELLED",
+            },
+          }));
+        }
+
         if (showToast) {
           toast.success("Live tracking updated!");
         }
@@ -187,12 +209,38 @@ const TrackOrder = () => {
     rawOrder?.trackingNumber ||
     "";
 
-  const liveStatus =
-    shipmentTrack?.current_status ||
-    rawOrder?.shiprocket?.status ||
-    rawOrder?.orderStatus ||
-    rawOrder?.status ||
-    "CONFIRMED";
+  // Check cancellation from all sources: Shiprocket status 8, error text, current_status, or DB orderStatus
+  const trackingErrorMsg = typeof trackingData?.error === "string" ? trackingData.error : "";
+  const isShiprocketCancelled =
+    Number(trackingData?.shipment_status) === 8 ||
+    /cancel/i.test(trackingErrorMsg) ||
+    /cancel/i.test(shipmentTrack?.current_status || "") ||
+    /cancel/i.test(rawOrder?.orderStatus || "") ||
+    /cancel/i.test(rawOrder?.shiprocket?.status || "") ||
+    /cancel/i.test(rawOrder?.status || "") ||
+    liveTrackingRes?.isCancelled === true ||
+    liveTrackingRes?.orderStatus === "CANCELLED";
+
+  const rawLiveStatus = isShiprocketCancelled
+    ? "CANCELLED"
+    : shipmentTrack?.current_status ||
+      rawOrder?.shiprocket?.status ||
+      rawOrder?.orderStatus ||
+      rawOrder?.status ||
+      "CONFIRMED";
+
+  const formatStatusLabel = (statusStr) => {
+    if (!statusStr) return "Confirmed";
+    if (
+      isShiprocketCancelled ||
+      statusStr.toUpperCase() === "CANCELLED" ||
+      statusStr.toUpperCase() === "CANCELED"
+    ) {
+      return "Cancelled";
+    }
+    const cleaned = statusStr.replace(/_/g, " ").trim();
+    return cleaned.charAt(0).toUpperCase() + cleaned.slice(1).toLowerCase();
+  };
 
   const destination = shipmentTrack?.destination || "";
   const origin = shipmentTrack?.origin || "";
@@ -209,19 +257,16 @@ const TrackOrder = () => {
               year: "numeric",
             })
           : rawOrder.date || "N/A",
-        status:
-          (liveStatus || "CONFIRMED").charAt(0).toUpperCase() +
-          (liveStatus || "CONFIRMED").slice(1).toLowerCase(),
-        rawStatus: (liveStatus || "CONFIRMED").toUpperCase(),
+        status: formatStatusLabel(rawLiveStatus),
+        rawStatus: rawLiveStatus.toUpperCase(),
         trackingNumber: awbCode || "Pending Assignment",
-        expectedDelivery:
-          (liveStatus || "").toUpperCase() === "CANCELLED"
-            ? "Order Cancelled"
-            : edd
-            ? `Estimated by ${edd}`
-            : courierName
-            ? `Via ${courierName}`
-            : "3-5 Business Days",
+        expectedDelivery: isShiprocketCancelled
+          ? "Order Cancelled"
+          : edd
+          ? `Estimated by ${edd}`
+          : courierName
+          ? `Via ${courierName}`
+          : "3-5 Business Days",
         items: (rawOrder.items || []).map((it, idx) => ({
           _id: it._id || it.variantId || idx,
           name: it.name || it.product?.name || "Sweet Item",
@@ -316,8 +361,74 @@ const TrackOrder = () => {
     }
   };
 
-  const isCancelled = order?.rawStatus === "CANCELLED";
+  const isCancelled = isShiprocketCancelled || order?.rawStatus === "CANCELLED";
   const canCancel = !isCancelled && order?.rawStatus !== "DELIVERED";
+
+  const displaySteps = isCancelled
+    ? [
+        {
+          key: "Confirmed",
+          title: "Order Confirmed",
+          description: "Your order has been confirmed and payment received.",
+          icon: CheckCircle2,
+          isCompleted: true,
+          isCurrent: false,
+          isCancelledStep: false,
+          isVoided: false,
+        },
+        {
+          key: "Cancelled",
+          title: "Order Cancelled",
+          description:
+            trackingData?.error ||
+            rawOrder?.cancellationReason ||
+            rawOrder?.cancellationMessage ||
+            "This order was cancelled in Shiprocket dashboard. Courier dispatch has been stopped.",
+          icon: XCircle,
+          isCompleted: true,
+          isCurrent: true,
+          isCancelledStep: true,
+          isVoided: false,
+        },
+        {
+          key: "Shipped",
+          title: "In Transit",
+          description: "Cancelled — Order will not be dispatched.",
+          icon: Truck,
+          isCompleted: false,
+          isCurrent: false,
+          isCancelledStep: false,
+          isVoided: true,
+        },
+        {
+          key: "Out for Delivery",
+          title: "Out for Delivery",
+          description: "Cancelled — Courier delivery voided.",
+          icon: MapPin,
+          isCompleted: false,
+          isCurrent: false,
+          isCancelledStep: false,
+          isVoided: true,
+        },
+        {
+          key: "Delivered",
+          title: "Delivered",
+          description: "Cancelled — Delivery voided.",
+          icon: CheckCircle2,
+          isCompleted: false,
+          isCurrent: false,
+          isCancelledStep: false,
+          isVoided: true,
+        },
+      ]
+    : trackingSteps.map((step, index) => ({
+        ...step,
+        isCompleted: index <= currentStepIndex,
+        isCurrent: index === currentStepIndex,
+        isCancelledStep: false,
+        isVoided: false,
+      }));
+
 
   const handleConfirmCancel = async () => {
     if (!order?.orderId) return;
@@ -383,17 +494,24 @@ const TrackOrder = () => {
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
-              <div className="rounded-2xl bg-white px-5 py-4 shadow-sm">
+              <div
+                className={`rounded-2xl px-5 py-4 shadow-sm border ${
+                  isCancelled
+                    ? "bg-red-50/90 border-red-200"
+                    : "bg-white border-transparent"
+                }`}
+              >
                 <p className="font-manrope text-[10px] font-semibold uppercase tracking-wider text-[#603917]/45">
                   Current Status
                 </p>
 
                 <p
-                  className={`mt-1 font-manrope text-sm font-bold ${
+                  className={`mt-1 font-manrope text-sm font-bold flex items-center gap-1.5 ${
                     isCancelled ? "text-red-600" : "text-[#3e5a2c]"
                   }`}
                 >
-                  {order.status}
+                  {isCancelled && <XCircle className="h-4 w-4 text-red-500 inline shrink-0" />}
+                  <span>{order.status}</span>
                 </p>
               </div>
 
@@ -473,12 +591,22 @@ const TrackOrder = () => {
                     <span>{trackingLoading ? "Updating..." : "Refresh"}</span>
                   </button>
 
-                  <div className="rounded-2xl bg-[#f9f5ed] px-4 py-2.5 text-right">
+                  <div
+                    className={`rounded-2xl px-4 py-2.5 text-right border ${
+                      isCancelled
+                        ? "bg-red-50/80 border-red-200"
+                        : "bg-[#f9f5ed] border-transparent"
+                    }`}
+                  >
                     <p className="font-manrope text-[10px] uppercase tracking-wider text-[#603917]/45">
                       Expected Delivery
                     </p>
 
-                    <p className="mt-0.5 font-manrope text-xs font-bold text-[#3e5a2c]">
+                    <p
+                      className={`mt-0.5 font-manrope text-xs font-bold ${
+                        isCancelled ? "text-red-600" : "text-[#3e5a2c]"
+                      }`}
+                    >
                       {order.expectedDelivery}
                     </p>
                   </div>
@@ -555,25 +683,25 @@ const TrackOrder = () => {
                 </div>
               </div>
 
-              {/* Timeline (5 Major Milestones) */}
+              {/* Timeline (Major Milestones) */}
               <div className="mt-9">
-
-                {trackingSteps.map((step, index) => {
-                  const isCompleted = index <= currentStepIndex;
-                  const isCurrent = index === currentStepIndex;
+                {displaySteps.map((step, index) => {
                   const Icon = step.icon;
 
                   return (
                     <div
                       key={step.key}
-                      className="relative flex gap-4 sm:gap-5"
+                      className={`relative flex gap-4 sm:gap-5 ${
+                        step.isVoided ? "opacity-40" : ""
+                      }`}
                     >
-
                       {/* Vertical line */}
-                      {index !== trackingSteps.length - 1 && (
+                      {index !== displaySteps.length - 1 && (
                         <div
                           className={`absolute left-[19px] top-10 h-[calc(100%-8px)] w-px ${
-                            index < currentStepIndex
+                            step.isCancelledStep || step.isVoided
+                              ? "border-l border-dashed border-[#603917]/20"
+                              : step.isCompleted
                               ? "bg-[#3e5a2c]"
                               : "bg-[#603917]/10"
                           }`}
@@ -583,11 +711,15 @@ const TrackOrder = () => {
                       {/* Icon */}
                       <div
                         className={`relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 ${
-                          isCompleted
+                          step.isCancelledStep
+                            ? "border-red-500 bg-red-500 text-white ring-4 ring-red-500/20"
+                            : step.isCompleted
                             ? "border-[#3e5a2c] bg-[#3e5a2c] text-white"
+                            : step.isVoided
+                            ? "border-gray-200 bg-gray-100 text-gray-400"
                             : "border-[#603917]/15 bg-white text-[#603917]/30"
                         } ${
-                          isCurrent
+                          step.isCurrent && !step.isCancelledStep
                             ? "ring-4 ring-[#3e5a2c]/10"
                             : ""
                         }`}
@@ -598,23 +730,29 @@ const TrackOrder = () => {
                       {/* Content */}
                       <div
                         className={`pb-9 ${
-                          index === trackingSteps.length - 1
-                            ? "pb-0"
-                            : ""
+                          index === displaySteps.length - 1 ? "pb-0" : ""
                         }`}
                       >
                         <div className="flex flex-wrap items-center gap-2">
                           <h3
                             className={`font-manrope text-sm font-bold ${
-                              isCompleted
+                              step.isCancelledStep
+                                ? "text-red-700 font-extrabold"
+                                : step.isCompleted
                                 ? "text-[#572340]"
                                 : "text-[#603917]/35"
-                            }`}
+                            } ${step.isVoided ? "line-through text-gray-400" : ""}`}
                           >
                             {step.title}
                           </h3>
 
-                          {isCurrent && (
+                          {step.isCancelledStep && (
+                            <span className="rounded-full bg-red-100 px-2 py-0.5 font-manrope text-[9px] font-bold uppercase tracking-wider text-red-700 border border-red-200">
+                              Cancelled
+                            </span>
+                          )}
+
+                          {step.isCurrent && !step.isCancelledStep && (
                             <span className="rounded-full bg-[#3e5a2c]/10 px-2 py-1 font-manrope text-[9px] font-bold uppercase tracking-wider text-[#3e5a2c]">
                               Current
                             </span>
@@ -623,7 +761,9 @@ const TrackOrder = () => {
 
                         <p
                           className={`mt-1 max-w-lg font-manrope text-xs leading-6 ${
-                            isCompleted
+                            step.isCancelledStep
+                              ? "text-red-600/90 font-medium"
+                              : step.isCompleted
                               ? "text-[#603917]/60"
                               : "text-[#603917]/30"
                           }`}
@@ -692,13 +832,37 @@ const TrackOrder = () => {
                     ))}
                   </div>
                 ) : (
-                  <div className="rounded-2xl border border-dashed border-[#603917]/20 bg-[#fbf8f2]/60 p-5 text-center">
-                    <Package className="mx-auto h-7 w-7 text-[#8b183d]/60 mb-2" />
-                    <p className="font-manrope text-xs font-bold text-[#572340]">
-                      {trackingData?.error || "Shipment Manifested & Packed"}
+                  <div
+                    className={`rounded-2xl border p-5 text-center ${
+                      isCancelled
+                        ? "border-red-200 bg-red-50/70"
+                        : "border-dashed border-[#603917]/20 bg-[#fbf8f2]/60"
+                    }`}
+                  >
+                    {isCancelled ? (
+                      <XCircle className="mx-auto h-7 w-7 text-red-500 mb-2" />
+                    ) : (
+                      <Package className="mx-auto h-7 w-7 text-[#8b183d]/60 mb-2" />
+                    )}
+                    <p
+                      className={`font-manrope text-xs font-bold ${
+                        isCancelled ? "text-red-700 font-extrabold" : "text-[#572340]"
+                      }`}
+                    >
+                      {isCancelled
+                        ? (trackingData?.error || "This shipment has been cancelled.")
+                        : (trackingData?.error || "Shipment Manifested & Packed")}
                     </p>
-                    <p className="mt-1 font-manrope text-xs text-[#603917]/60 max-w-md mx-auto leading-relaxed">
-                      Your order has been registered with {courierName || "the courier partner"}. Detailed transit activity updates will appear here once the parcel is scanned at the local dispatch hub.
+                    <p
+                      className={`mt-1 font-manrope text-xs ${
+                        isCancelled ? "text-red-600/90" : "text-[#603917]/60"
+                      } max-w-md mx-auto leading-relaxed`}
+                    >
+                      {isCancelled
+                        ? "This shipment was cancelled in Shiprocket dashboard. Courier dispatch has been terminated and no further transit updates will be recorded."
+                        : `Your order has been registered with ${
+                            courierName || "the courier partner"
+                          }. Detailed transit activity updates will appear here once the parcel is scanned at the local dispatch hub.`}
                     </p>
                   </div>
                 )}

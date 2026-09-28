@@ -24,6 +24,24 @@ import useMyOrders from "@/hooks/orders/useMyOrders";
 import CancelOrderModal from "@/components/orders/CancelOrderModal";
 import WriteReviewModal from "@/components/reviews/WriteReviewModal";
 
+// Helper to determine if an order is cancelled from any status
+export const isOrderCancelled = (order) => {
+  if (!order) return false;
+  const os = (order.orderStatus || "").toUpperCase();
+  const ss = (order.shiprocket?.status || "").toUpperCase();
+  const s = (order.status || "").toUpperCase();
+  const reason = (order.cancellationReason || "").toUpperCase();
+  return (
+    os === "CANCELLED" ||
+    os === "CANCELED" ||
+    ss === "CANCELLED" ||
+    ss === "CANCELED" ||
+    s === "CANCELLED" ||
+    s === "CANCELED" ||
+    /cancel/i.test(reason)
+  );
+};
+
 // Status configuration helper
 const getOrderStatusBadge = (rawStatus) => {
   const status = (rawStatus || "").toUpperCase();
@@ -62,6 +80,7 @@ const getOrderStatusBadge = (rawStatus) => {
         badgeClass: "bg-emerald-50 text-emerald-700 border-emerald-200",
       };
     case "CANCELLED":
+    case "CANCELED":
       return {
         label: "Cancelled",
         icon: XCircle,
@@ -156,9 +175,13 @@ const MyOrders = () => {
     };
 
     orders.forEach((order) => {
-      const status = (order.orderStatus || "").toUpperCase();
-      if (counts[status] !== undefined) {
-        counts[status]++;
+      const cancelled = isOrderCancelled(order);
+      const effectiveStatus = cancelled
+        ? "CANCELLED"
+        : (order.orderStatus || "").toUpperCase();
+
+      if (counts[effectiveStatus] !== undefined) {
+        counts[effectiveStatus]++;
       }
     });
 
@@ -168,9 +191,13 @@ const MyOrders = () => {
   // Filter orders
   const filteredOrders = useMemo(() => {
     if (activeFilter === "ALL") return orders;
-    return orders.filter(
-      (order) => (order.orderStatus || "").toUpperCase() === activeFilter
-    );
+    return orders.filter((order) => {
+      const cancelled = isOrderCancelled(order);
+      const effectiveStatus = cancelled
+        ? "CANCELLED"
+        : (order.orderStatus || "").toUpperCase();
+      return effectiveStatus === activeFilter;
+    });
   }, [orders, activeFilter]);
 
   const handleCopyOrderId = async (orderId) => {
@@ -191,8 +218,9 @@ const MyOrders = () => {
 
   const canCancelOrder = (order) => {
     if (!order) return false;
+    if (isOrderCancelled(order)) return false;
     const status = (order.orderStatus || "").toUpperCase();
-    return status !== "CANCELLED" && status !== "DELIVERED";
+    return status !== "CANCELLED" && status !== "CANCELED" && status !== "DELIVERED";
   };
 
   const handleConfirmCancel = async () => {
@@ -340,7 +368,8 @@ const MyOrders = () => {
         {!loading && !error && filteredOrders.length > 0 && (
           <div className="space-y-6">
             {filteredOrders.map((order) => {
-              const status = getOrderStatusBadge(order.orderStatus);
+              const cancelled = isOrderCancelled(order);
+              const status = getOrderStatusBadge(cancelled ? "CANCELLED" : order.orderStatus);
               const StatusIcon = status.icon;
               const payment = getPaymentStatusBadge(order.paymentStatus);
 
@@ -569,7 +598,11 @@ const MyOrders = () => {
                               <p className="font-semibold">Standard Shipping</p>
                             )}
 
-                            {order.shiprocket?.awbCode ? (
+                            {cancelled ? (
+                              <p className="text-[11px] font-semibold text-red-600">
+                                Shipment cancelled on Shiprocket
+                              </p>
+                            ) : order.shiprocket?.awbCode ? (
                               <p className="font-mono text-[11px] text-[#603917]/70">
                                 AWB: {order.shiprocket.awbCode}
                               </p>
@@ -579,9 +612,13 @@ const MyOrders = () => {
                               </p>
                             )}
 
-                            {order.shiprocket?.status && (
-                              <p className="mt-0.5 text-[11px] text-[#603917]/60">
-                                Status: {order.shiprocket.status}
+                            {(order.shiprocket?.status || cancelled) && (
+                              <p
+                                className={`mt-0.5 text-[11px] font-semibold ${
+                                  cancelled ? "text-red-600 font-bold" : "text-[#603917]/60"
+                                }`}
+                              >
+                                Status: {cancelled ? "CANCELLED" : order.shiprocket?.status}
                               </p>
                             )}
                           </div>
