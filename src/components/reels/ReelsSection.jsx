@@ -1,37 +1,27 @@
 import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import reelService, { resolveReelVideoUrl } from "../../services/reelService";
 import ReelCard from "./ReelCard";
 import ScrollWavyUnderline from "../common/ScrollWavyUnderline";
 
-const autoplay = Autoplay({
-  delay: 4000,
-  stopOnInteraction: false,
-  stopOnMouseEnter: true,
-});
-
 const ReelsSection = () => {
   const [reels, setReels] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    {
-      loop: false,
-      align: "start",
-      dragFree: false,
-      skipSnaps: false,
-      duration: 30,
-    },
-    [autoplay]
-  );
-
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isSectionVisible, setIsSectionVisible] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const sectionRef = useRef(null);
 
-  // Fetch dynamic reels from API (admin panel uploads)
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    align: "start",
+    dragFree: false,
+    skipSnaps: false,
+    duration: 25,
+  });
+
+  // Fetch dynamic reels from backend API
   useEffect(() => {
     let isMounted = true;
 
@@ -84,17 +74,25 @@ const ReelsSection = () => {
     emblaApi.scrollNext();
   }, [emblaApi]);
 
-  const stopAutoplay = useCallback(() => {
-    if (reels.length > 1) {
-      autoplay.stop();
-    }
-  }, [reels.length]);
+  const toggleMute = useCallback(() => {
+    setIsMuted((prev) => !prev);
+  }, []);
 
-  const startAutoplay = useCallback(() => {
-    if (reels.length > 1) {
-      autoplay.play();
-    }
-  }, [reels.length]);
+  // When a reel finishes playing completely, auto-advance to next reel
+  const handleVideoEnded = useCallback(
+    (index) => {
+      if (!emblaApi) return;
+      if (index === selectedIndex) {
+        if (emblaApi.canScrollNext()) {
+          emblaApi.scrollNext();
+        } else {
+          // Loop back to the first reel smoothly
+          emblaApi.scrollTo(0);
+        }
+      }
+    },
+    [emblaApi, selectedIndex]
+  );
 
   // Re-init carousel when reels state updates
   useEffect(() => {
@@ -105,16 +103,11 @@ const ReelsSection = () => {
       align: "start",
       dragFree: false,
       skipSnaps: false,
-      duration: 30,
+      duration: 25,
     });
-
-    if (reels.length <= 1) {
-      autoplay.stop();
-    } else {
-      autoplay.play();
-    }
   }, [emblaApi, reels]);
 
+  // Track active slide index
   useEffect(() => {
     if (!emblaApi) return;
 
@@ -133,13 +126,14 @@ const ReelsSection = () => {
     };
   }, [emblaApi]);
 
+  // Pause playback when section is out of viewport, resume when in view
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsSectionVisible(entry.isIntersecting);
       },
       {
-        threshold: 0.5,
+        threshold: 0.25,
       }
     );
 
@@ -161,8 +155,8 @@ const ReelsSection = () => {
       className="relative overflow-hidden bg-[#f5ebda] py-8"
     >
       {/* Decorative Background */}
-      <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-[#810c26]/10 blur-[130px]" />
-      <div className="absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-[#08376c]/10 blur-[130px]" />
+      <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-[#810c26]/10 blur-[130px] pointer-events-none" />
+      <div className="absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-[#08376c]/10 blur-[130px] pointer-events-none" />
 
       <div className="relative mx-auto max-w-[1500px] px-4">
         {/* Heading */}
@@ -184,10 +178,11 @@ const ReelsSection = () => {
             </p>
           </div>
 
-          {/* Desktop Controls */}
+          {/* Desktop Navigation Arrows */}
           <div className="hidden gap-3 md:flex">
             <button
               onClick={scrollPrev}
+              aria-label="Previous reel"
               className="flex h-12 w-12 items-center justify-center rounded-full bg-pink-600 text-white hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:bg-[#60b396] hover:scale-105 cursor-pointer"
             >
               <ChevronLeft size={22} />
@@ -195,6 +190,7 @@ const ReelsSection = () => {
 
             <button
               onClick={scrollNext}
+              aria-label="Next reel"
               className="flex h-12 w-12 items-center justify-center rounded-full bg-pink-600 text-white hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:bg-[#60b396] hover:scale-105 cursor-pointer"
             >
               <ChevronRight size={22} />
@@ -202,7 +198,7 @@ const ReelsSection = () => {
           </div>
         </div>
 
-        {/* Embla or Loading Skeleton */}
+        {/* Carousel or Loading Skeleton */}
         {loading ? (
           <div className="flex gap-3 overflow-hidden">
             {[1, 2, 3, 4, 5].map((i) => (
@@ -215,43 +211,52 @@ const ReelsSection = () => {
             ))}
           </div>
         ) : (
-          <div
-            ref={emblaRef}
-            className="overflow-hidden"
-            onMouseEnter={stopAutoplay}
-            onMouseLeave={startAutoplay}
-          >
+          <div ref={emblaRef} className="overflow-hidden">
             <div className="flex">
-              {reels.map((reel, index) => (
-                <div
-                  key={reel.id}
-                  className="min-w-0 flex-[0_0_72%] px-3 sm:flex-[0_0_48%] lg:flex-[0_0_24%] xl:flex-[0_0_20%]"
-                >
-                  <ReelCard
-                    reel={reel}
-                    active={selectedIndex === index}
-                    visible={isSectionVisible}
-                    onClick={() => emblaApi?.scrollTo(index)}
-                  />
-                </div>
-              ))}
+              {reels.map((reel, index) => {
+                const isCurrentOrNext =
+                  index === selectedIndex ||
+                  index === (selectedIndex + 1) % reels.length;
+
+                return (
+                  <div
+                    key={reel.id}
+                    className="min-w-0 flex-[0_0_72%] px-3 sm:flex-[0_0_48%] lg:flex-[0_0_24%] xl:flex-[0_0_20%]"
+                  >
+                    <ReelCard
+                      reel={reel}
+                      index={index}
+                      active={selectedIndex === index}
+                      visible={isSectionVisible}
+                      isMuted={isMuted}
+                      onToggleMute={toggleMute}
+                      onEnded={() => handleVideoEnded(index)}
+                      onClick={() => emblaApi?.scrollTo(index)}
+                      preload={isCurrentOrNext ? "auto" : "metadata"}
+                    />
+                  </div>
+                );
+              })}
             </div>
 
-            <div className="mt-10 flex justify-center gap-3">
+            {/* Indicator Dots */}
+            <div className="mt-8 flex justify-center gap-2.5">
               {reels.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => emblaApi?.scrollTo(index)}
+                  aria-label={`Go to reel ${index + 1}`}
                   className={`
                     transition-all
                     duration-300
                     rounded-full
+                    cursor-pointer
                     ${
                       selectedIndex === index
-                        ? "w-10 bg-[#810c26]"
-                        : "w-3 bg-[#810c26]/30 hover:bg-[#810c26]"
+                        ? "w-8 bg-[#810c26]"
+                        : "w-2.5 bg-[#810c26]/30 hover:bg-[#810c26]/60"
                     }
-                    h-3
+                    h-2.5
                   `}
                 />
               ))}
