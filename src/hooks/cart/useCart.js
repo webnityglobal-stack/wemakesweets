@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import cartService from "@/services/cartService";
+import { emitCartUpdated } from "@/utils/cartEvents";
 
 const useCart = () => {
   const [cart, setCart] = useState(null);
@@ -17,14 +18,17 @@ const useCart = () => {
 
       if (data?.success) {
         setCart(data.cart);
+        emitCartUpdated(data.cart);
       } else {
         setCart(null);
+        emitCartUpdated(null);
         setError(data?.message || "Unable to load cart.");
       }
     } catch (error) {
       console.error("Unable to fetch cart:", error);
 
       setCart(null);
+      emitCartUpdated(null);
 
       setError(
         error.response?.data?.message ||
@@ -45,6 +49,7 @@ const removeCartItem = async (cartItemId) => {
     const data = await cartService.removeCartItem(cartItemId);
 
     setCart(data.cart);
+    emitCartUpdated(data.cart);
     const msg = data.message || "Item removed from cart.";
     toast.success(msg);
 
@@ -115,6 +120,7 @@ const removeCartItem = async (cartItemId) => {
       // ----------------------------------
 
       setCart(data.cart);
+      emitCartUpdated(data.cart);
 
       return {
         success: true,
@@ -126,6 +132,7 @@ const removeCartItem = async (cartItemId) => {
       // ----------------------------------
 
       setCart(previousCart);
+      emitCartUpdated(previousCart);
 
       const message =
         error.response?.data?.message ||

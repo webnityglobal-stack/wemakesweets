@@ -2,6 +2,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import cartService from "../../services/cartService";
 import { authStorage } from "../../utils/authStorage";
+import { emitCartUpdated } from "../../utils/cartEvents";
 
 const useAddToCart = () => {
   const [loading, setLoading] = useState(false);
@@ -35,6 +36,8 @@ const useAddToCart = () => {
         variantId,
         quantity,
       });
+
+      emitCartUpdated(data?.cart || null);
 
       const successMsg = productName
         ? `"${productName}" added to cart successfully!`

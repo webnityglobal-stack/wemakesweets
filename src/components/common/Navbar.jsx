@@ -1,7 +1,9 @@
 import { authStorage } from "@/utils/authStorage";
 import { Search, User, ShoppingCart, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import cartService from "@/services/cartService";
+import { getCartItemCount } from "@/utils/cartEvents";
 
 const navLinks = [
   { name: "Home", path: "/", color: "#572340" }, // Date Bite
@@ -12,26 +14,62 @@ const navLinks = [
 ];
 
 function Navbar() {
-
   const [open, setOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
-const [isLoggedIn, setIsLoggedIn] = useState(
-  authStorage.isAuthenticated()
-);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    authStorage.isAuthenticated()
+  );
 
-useEffect(() => {
-  const syncAuth = () => {
-    setIsLoggedIn(authStorage.isAuthenticated());
-  };
+  const fetchCartCount = useCallback(async () => {
+    if (!authStorage.isAuthenticated()) {
+      setCartCount(0);
+      return;
+    }
+    try {
+      const data = await cartService.getCart();
+      if (data?.success && data?.cart) {
+        setCartCount(getCartItemCount(data.cart));
+      } else {
+        setCartCount(0);
+      }
+    } catch {
+      setCartCount(0);
+    }
+  }, []);
 
-  window.addEventListener("authUpdated", syncAuth);
+  useEffect(() => {
+    fetchCartCount();
 
-  return () => {
-    window.removeEventListener("authUpdated", syncAuth);
-  };
-}, []);
+    const syncAuth = () => {
+      const authed = authStorage.isAuthenticated();
+      setIsLoggedIn(authed);
+      if (authed) {
+        fetchCartCount();
+      } else {
+        setCartCount(0);
+      }
+    };
 
-  console.log("isLoggedIn:", isLoggedIn);
+    const handleCartUpdated = (e) => {
+      const updatedCart = e.detail?.cart;
+      if (updatedCart !== undefined && updatedCart !== null) {
+        setCartCount(getCartItemCount(updatedCart));
+      } else if (authStorage.isAuthenticated()) {
+        fetchCartCount();
+      } else {
+        setCartCount(0);
+      }
+    };
+
+    window.addEventListener("authUpdated", syncAuth);
+    window.addEventListener("cartUpdated", handleCartUpdated);
+
+    return () => {
+      window.removeEventListener("authUpdated", syncAuth);
+      window.removeEventListener("cartUpdated", handleCartUpdated);
+    };
+  }, [fetchCartCount]);
 
 
   return (
@@ -76,13 +114,18 @@ useEffect(() => {
             />
           </Link>
 
-          <Link to="/cart">
+          <Link to="/cart" aria-label="Shopping Cart">
             <div className="relative cursor-pointer">
               <ShoppingCart
                 size={25}
                 color="#3e5a2c"
                 className="transition hover:scale-110"
               />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#8b183d] px-1 font-manrope text-[10px] font-bold leading-none text-white shadow-sm ring-2 ring-[#f9e4bf]">
+                  {cartCount > 99 ? "99+" : cartCount}
+                </span>
+              )}
             </div>
           </Link>
         </div>
@@ -107,12 +150,18 @@ useEffect(() => {
           {/* Cart */}
           <Link
             to="/cart"
+            aria-label="Shopping Cart"
             className={`relative cursor-pointer group ${open ? "hidden" : "block"}`}
           >
             <ShoppingCart
               size={24}
               className="text-[#3e5a2c] transition-all duration-300 group-hover:text-[#164984] group-hover:scale-110"
             />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#8b183d] px-1 font-manrope text-[10px] font-bold leading-none text-white shadow-sm ring-2 ring-[#f9e4bf]">
+                {cartCount > 99 ? "99+" : cartCount}
+              </span>
+            )}
           </Link>
 
           {/* Hamburger */}

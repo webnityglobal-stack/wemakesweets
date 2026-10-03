@@ -341,9 +341,25 @@ const TrackOrder = () => {
     const s = (statusStr || "").toUpperCase();
     if (s.includes("DELIVER")) return 4;
     if (s.includes("OUT FOR") || s.includes("OUT_FOR") || s.includes("OUTFOR")) return 3;
-    if (s.includes("TRANSIT") || s.includes("SHIPP") || s.includes("PICK")) return 2;
-    if (s.includes("PACK") || s.includes("AWB") || s.includes("MANIFEST") || s.includes("CREATED") || s.includes("PROCESS")) return 1;
-    return 0; // Confirmed / Pending
+    if (
+      s.includes("TRANSIT") ||
+      s.includes("SHIPP") ||
+      s.includes("DISPATCH") ||
+      s.includes("PICKED UP") ||
+      s.includes("PICKED_UP")
+    ) {
+      return 2;
+    }
+    if (
+      s.includes("PACK") ||
+      s.includes("MANIFEST") ||
+      s.includes("READY_TO_SHIP") ||
+      s.includes("READY TO SHIP") ||
+      s.includes("PICKUP")
+    ) {
+      return 1;
+    }
+    return 0; // Confirmed / Order Created / Processing / Placed / Pending
   };
 
   const currentStepIndex = getStepIndex(order.rawStatus);
@@ -701,7 +717,7 @@ const TrackOrder = () => {
                           className={`absolute left-[19px] top-10 h-[calc(100%-8px)] w-px ${
                             step.isCancelledStep || step.isVoided
                               ? "border-l border-dashed border-[#603917]/20"
-                              : step.isCompleted
+                              : index < currentStepIndex
                               ? "bg-[#3e5a2c]"
                               : "bg-[#603917]/10"
                           }`}
