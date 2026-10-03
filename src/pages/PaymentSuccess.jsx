@@ -18,6 +18,7 @@ import {
 import { toast } from "sonner";
 import orderService from "@/services/orderService";
 import paymentService from "@/services/paymentService";
+import { emitCartUpdated } from "@/utils/cartEvents";
 
 const PaymentSuccess = () => {
   const location = useLocation();
@@ -39,6 +40,12 @@ const PaymentSuccess = () => {
   const [loading, setLoading] = useState(Boolean(orderIdFromQuery && !location.state?.order));
   const [error, setError] = useState(null);
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (!isFailed) {
+      emitCartUpdated({ items: [] });
+    }
+  }, [isFailed]);
 
   useEffect(() => {
     if (!orderIdFromQuery) {
