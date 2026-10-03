@@ -146,6 +146,18 @@ const handleQuickAdd = async (e) => {
 
 
 
+  const [imgSrc, setImgSrc] = useState(
+    product.images?.[0] || "/product1.webp"
+  );
+  const [secondImgSrc, setSecondImgSrc] = useState(
+    product.images?.[1] || "/product1.webp"
+  );
+
+  useEffect(() => {
+    setImgSrc(product.images?.[0] || "/product1.webp");
+    setSecondImgSrc(product.images?.[1] || "/product1.webp");
+  }, [product.images]);
+
   return (
    <Link
   to={`/products/${product._id}`}
@@ -160,11 +172,14 @@ const handleQuickAdd = async (e) => {
       <div className="relative aspect-square overflow-hidden bg-[#f9e4bf]/20 ">
         {/* First Image */}
         <img
-          src={product.images?.[0] || "/product1.webp"}
+          src={imgSrc}
           alt={product.name}
-          onError={(e) => {
-            e.currentTarget.onerror = null;
-            e.currentTarget.src = "/product1.webp";
+          referrerPolicy="no-referrer"
+          loading="lazy"
+          onError={() => {
+            if (imgSrc !== "/product1.webp") {
+              setImgSrc("/product1.webp");
+            }
           }}
           className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ${
             product.images?.[1]
@@ -176,8 +191,15 @@ const handleQuickAdd = async (e) => {
         {/* Second Image */}
         {product.images?.[1] && (
           <img
-            src={product.images[1]}
+            src={secondImgSrc}
             alt={product.name}
+            referrerPolicy="no-referrer"
+            loading="lazy"
+            onError={() => {
+              if (secondImgSrc !== "/product1.webp") {
+                setSecondImgSrc("/product1.webp");
+              }
+            }}
             className="
               absolute inset-0 h-full w-full scale-105 object-cover
               opacity-0 transition-all duration-700

@@ -485,9 +485,13 @@ const PaymentSuccess = () => {
                         <img
                           src={imageUrl}
                           alt={itemName}
+                          referrerPolicy="no-referrer"
+                          loading="lazy"
                           className="h-full w-full object-cover"
                           onError={(e) => {
-                            e.currentTarget.src = "/product1.webp";
+                            if (!e.currentTarget.src.includes("/product1.webp")) {
+                              e.currentTarget.src = "/product1.webp";
+                            }
                           }}
                         />
                       </div>

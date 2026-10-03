@@ -172,8 +172,15 @@ const Wishlist = () => {
                         <div className="aspect-[1.15/1] overflow-hidden">
 
                           <img
-                            src={product.images?.[0]}
+                            src={product.images?.[0] || "/product1.webp"}
                             alt={product.name}
+                            referrerPolicy="no-referrer"
+                            loading="lazy"
+                            onError={(e) => {
+                              if (!e.currentTarget.src.includes("/product1.webp")) {
+                                e.currentTarget.src = "/product1.webp";
+                              }
+                            }}
                             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
 

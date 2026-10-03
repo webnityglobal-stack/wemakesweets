@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const ProductGallery = ({ images = [] }) => {
   const [selectedImage, setSelectedImage] = useState(
     images[0] || "/product1.webp"
   );
+
+  useEffect(() => {
+    if (images && images.length > 0) {
+      setSelectedImage(images[0]);
+    }
+  }, [images]);
 
   return (
     <div className="space-y-5">
@@ -13,9 +19,12 @@ const ProductGallery = ({ images = [] }) => {
         <img
           src={selectedImage}
           alt="Product"
+          referrerPolicy="no-referrer"
+          loading="lazy"
           onError={(e) => {
-            e.currentTarget.onerror = null;
-            e.currentTarget.src = "/product1.webp";
+            if (!e.currentTarget.src.includes("/product1.webp")) {
+              e.currentTarget.src = "/product1.webp";
+            }
           }}
           className="aspect-square w-full  object-cover transition duration-500 hover:scale-105"
         />
@@ -40,9 +49,12 @@ const ProductGallery = ({ images = [] }) => {
             <img
               src={image}
               alt={`Thumbnail ${index + 1}`}
+              referrerPolicy="no-referrer"
+              loading="lazy"
               onError={(e) => {
-                e.currentTarget.onerror = null;
-                e.currentTarget.src = "/product1.webp";
+                if (!e.currentTarget.src.includes("/product1.webp")) {
+                  e.currentTarget.src = "/product1.webp";
+                }
               }}
               className="h-20 w-20 object-cover"
             />

@@ -215,9 +215,12 @@ const WriteReviewModal = ({
               <img
                 src={productImage}
                 alt={productName}
+                referrerPolicy="no-referrer"
+                loading="lazy"
                 onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = "/product1.webp";
+                  if (!e.target.src.includes("/product1.webp")) {
+                    e.target.src = "/product1.webp";
+                  }
                 }}
                 className="h-full w-full object-cover"
               />

@@ -897,9 +897,16 @@ const TrackOrder = () => {
                   >
                     <div className="h-20 w-20 shrink-0 overflow-hidden rounded-2xl bg-[#f9e4bf]/30 sm:h-24 sm:w-24">
                       <img
-                        src={item.image}
+                        src={item.image || "/product1.webp"}
                         alt={item.name}
+                        referrerPolicy="no-referrer"
+                        loading="lazy"
                         className="h-full w-full object-cover"
+                        onError={(e) => {
+                          if (!e.currentTarget.src.includes("/product1.webp")) {
+                            e.currentTarget.src = "/product1.webp";
+                          }
+                        }}
                       />
                     </div>
 

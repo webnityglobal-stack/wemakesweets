@@ -359,9 +359,12 @@ const AddToCart = () => {
                         <img
                           src={product.images?.[0] || "/product1.webp"}
                           alt={product.name}
+                          referrerPolicy="no-referrer"
+                          loading="lazy"
                           onError={(e) => {
-                            e.currentTarget.onerror = null;
-                            e.currentTarget.src = "/product1.webp";
+                            if (!e.currentTarget.src.includes("/product1.webp")) {
+                              e.currentTarget.src = "/product1.webp";
+                            }
                           }}
                           className="
                             h-full w-full object-cover
