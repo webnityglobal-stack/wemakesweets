@@ -18,6 +18,7 @@ import {
 import { toast } from "sonner";
 import orderService from "@/services/orderService";
 import paymentService from "@/services/paymentService";
+import cartService from "@/services/cartService";
 import { emitCartUpdated } from "@/utils/cartEvents";
 
 const PaymentSuccess = () => {
@@ -43,6 +44,9 @@ const PaymentSuccess = () => {
 
   useEffect(() => {
     if (!isFailed) {
+      cartService.clearCart().catch((err) => {
+        console.warn("Could not clear cart after order:", err);
+      });
       emitCartUpdated({ items: [] });
     }
   }, [isFailed]);

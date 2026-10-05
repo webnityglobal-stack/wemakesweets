@@ -35,8 +35,23 @@ const AddToCart = () => {
     refetch,
     removeCartItem,
     updateCartItem,
+    clearCart,
     updatingItemId,
   } = useCart();
+
+  const [isClearing, setIsClearing] = useState(false);
+
+  const handleClearCart = async () => {
+    if (!cartItems.length || isClearing) return;
+    if (window.confirm("Are you sure you want to clear your cart?")) {
+      setIsClearing(true);
+      try {
+        await clearCart();
+      } finally {
+        setIsClearing(false);
+      }
+    }
+  };
 
 
   const increaseQuantity = (item) => {
@@ -349,7 +364,7 @@ const AddToCart = () => {
           ================================================== */}
           <div>
             {/* Cart top bar */}
-            <div className="mb-5 flex items-center justify-between">
+            <div className="mb-5 flex items-center justify-between gap-3 flex-wrap">
               <div>
                 <h2 className="text-2xl font-semibold text-[#2d2d2d] font-cormorant sm:text-3xl">
                   Your Cart
@@ -362,15 +377,28 @@ const AddToCart = () => {
                 </p>
               </div>
 
-              <div className="hidden items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm sm:flex">
-                <ShoppingBag size={15} className="text-[#8b183d]" />
-                <span className="text-xs font-medium text-[#603917] font-manrope">
-                  {cartItems.reduce(
-                    (total, item) => total + item.quantity,
-                    0
-                  )}{" "}
-                  Items
-                </span>
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <button
+                  type="button"
+                  onClick={handleClearCart}
+                  disabled={isClearing || !cartItems.length}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-red-300 bg-white hover:bg-red-50 text-red-600 px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold font-manrope shadow-sm transition-all hover:scale-105 active:scale-95 cursor-pointer disabled:opacity-50"
+                  title="Clear all items from your cart"
+                >
+                  <Trash2 size={13} className="text-red-500" />
+                  <span>{isClearing ? "Clearing..." : "Clear Cart"}</span>
+                </button>
+
+                <div className="hidden items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm sm:flex">
+                  <ShoppingBag size={15} className="text-[#8b183d]" />
+                  <span className="text-xs font-medium text-[#603917] font-manrope">
+                    {cartItems.reduce(
+                      (total, item) => total + item.quantity,
+                      0
+                    )}{" "}
+                    Items
+                  </span>
+                </div>
               </div>
             </div>
 

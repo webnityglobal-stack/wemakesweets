@@ -37,6 +37,12 @@ const cartService = {
     return response.data;
   },
 
+  // Clear entire cart
+  clearCart: async () => {
+    const response = await axiosInstance.delete("/cart/");
+    return response.data;
+  },
+
 };
 
 export default cartService;

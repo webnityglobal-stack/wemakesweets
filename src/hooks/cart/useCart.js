@@ -186,6 +186,47 @@ const useCart = () => {
 
 
 
+  const clearCart = async () => {
+    try {
+      setLoading(true);
+      setError("");
+
+      const data = await cartService.clearCart();
+
+      const emptyCart = { items: [], totalAmount: 0 };
+      setCart(emptyCart);
+      emitCartUpdated(emptyCart);
+
+      const msg = data?.message || "Cart cleared successfully.";
+      toast.success(msg);
+
+      return {
+        success: true,
+        message: msg,
+      };
+    } catch (error) {
+      console.error("Unable to clear cart:", error);
+
+      // Optimistically clear
+      const emptyCart = { items: [], totalAmount: 0 };
+      setCart(emptyCart);
+      emitCartUpdated(emptyCart);
+
+      const message =
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        "Cart cleared.";
+      toast.info(message);
+
+      return {
+        success: true,
+        message,
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchCart();
 
@@ -199,15 +240,16 @@ const useCart = () => {
     };
   }, []);
 
-return {
+  return {
     cart,
     loading,
     error,
     refetch: fetchCart,
-removeCartItem,
+    removeCartItem,
     updateCartItem,
+    clearCart,
     updatingItemId,
-};
+  };
 };
 
 export default useCart;
