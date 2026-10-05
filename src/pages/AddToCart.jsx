@@ -300,6 +300,9 @@ const AddToCart = () => {
         items,
         paymentMethod: "ONLINE",
         shippingAddress: finalShippingAddress,
+        shippingCharge: delivery,
+        subtotal: saleTotal,
+        totalAmount: total,
       });
 
       const orderId = orderRes?.order?.orderId || orderRes?.order?.id;
