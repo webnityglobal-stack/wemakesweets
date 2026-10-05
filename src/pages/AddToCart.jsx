@@ -40,10 +40,16 @@ const AddToCart = () => {
 
 
   const increaseQuantity = (item) => {
-    const nextQuantity = item.quantity + 1;
+    const product = item?.product;
+    const isObject = product && typeof product === "object";
+    const selectedVariant = isObject
+      ? product?.variants?.find((v) => v._id === item?.variantId)
+      : null;
+    const maxStock = selectedVariant?.stock || (isObject ? product?.stock : 0) || 99;
+    const nextQuantity = (Number(item?.quantity) || 1) + 1;
 
-    if (nextQuantity > item.product.stock) {
-      toast.warning(`Only ${item.product.stock} units available in stock.`);
+    if (nextQuantity > maxStock) {
+      toast.warning(`Only ${maxStock} units available in stock.`);
       return;
     }
 
@@ -52,7 +58,7 @@ const AddToCart = () => {
 
 
   const decreaseQuantity = (item) => {
-    const nextQuantity = item.quantity - 1;
+    const nextQuantity = (Number(item?.quantity) || 1) - 1;
 
     if (nextQuantity < 1) {
       return;
@@ -62,7 +68,7 @@ const AddToCart = () => {
   };
 
 
-  const cartItems = cart?.items || [];
+  const cartItems = Array.isArray(cart?.items) ? cart.items : [];
 
 
 
@@ -80,9 +86,18 @@ const AddToCart = () => {
   if (error) {
     return (
       <section className="min-h-screen bg-[#f5ebda] flex items-center justify-center px-4">
-        <p className="font-manrope text-[#8b183d]">
-          {error}
-        </p>
+        <div className="text-center">
+          <p className="font-manrope text-[#8b183d] mb-4">
+            {error}
+          </p>
+          <button
+            type="button"
+            onClick={() => refetch?.()}
+            className="rounded-xl bg-pink-600 px-5 py-2 text-xs font-semibold uppercase text-white shadow-sm hover:bg-[#60b396] transition-all cursor-pointer font-manrope"
+          >
+            Try Again
+          </button>
+        </div>
       </section>
     );
   }
@@ -118,6 +133,19 @@ const AddToCart = () => {
               Add some delicious treats and make your cart a little sweeter.
             </p>
 
+            {!authStorage.isAuthenticated() && (
+              <p className="mt-3 text-xs text-gray-500 font-manrope">
+                Already have items saved?{" "}
+                <Link
+                  to="/login"
+                  state={{ from: "/cart" }}
+                  className="font-semibold text-[#8b183d] underline hover:text-[#572340]"
+                >
+                  Log in to your account
+                </Link>
+              </p>
+            )}
+
             <Link
               to="/products"
               className="
@@ -141,21 +169,33 @@ const AddToCart = () => {
   }
 
   const subtotal = cartItems.reduce((total, item) => {
-    const variant = item.product?.variants?.find(
-      (v) => v._id === item.variantId
-    );
+    const isObject = item?.product && typeof item.product === "object";
+    const variant = isObject
+      ? item.product?.variants?.find((v) => v._id === item?.variantId)
+      : null;
 
-    const mrp = variant?.mrp || item.product?.mrp || 0;
+    const mrp =
+      variant?.mrp || (isObject ? item.product?.mrp : null) || item?.price || 0;
 
-    return total + mrp * item.quantity;
+    return total + mrp * (Number(item?.quantity) || 1);
   }, 0);
 
-  const saleTotal = cartItems.reduce(
-    (total, item) => total + (item.price || 0) * item.quantity,
-    0
-  );
+  const saleTotal = cartItems.reduce((total, item) => {
+    const isObject = item?.product && typeof item.product === "object";
+    const variant = isObject
+      ? item.product?.variants?.find((v) => v._id === item?.variantId)
+      : null;
 
-  const discount = subtotal - saleTotal;
+    const price =
+      item?.price ||
+      variant?.salePrice ||
+      (isObject ? item.product?.salePrice || item.product?.price : 0) ||
+      0;
+
+    return total + price * (Number(item?.quantity) || 1);
+  }, 0);
+
+  const discount = Math.max(0, subtotal - saleTotal);
 
   const delivery =
     saleTotal === 0 ? 0 : saleTotal >= 350 ? 0 : 49;
@@ -205,11 +245,27 @@ const AddToCart = () => {
       };
 
       // 3. Format items
-      const items = cartItems.map((item) => ({
-        product: item.product?._id || item.productId,
+      const validItems = cartItems.filter(
+        (item) => item && (item.product?._id || item.productId || (typeof item.product === "string" && item.product))
+      );
+
+      if (!validItems.length) {
+        toast.error("Please add valid items to your cart before proceeding.");
+        return;
+      }
+
+      const items = validItems.map((item) => ({
+        product:
+          item.product?._id ||
+          item.productId ||
+          (typeof item.product === "string" ? item.product : ""),
         variantId: item.variantId || item.variant?._id,
-        quantity: item.quantity,
-        price: item.price || item.product?.salePrice || item.product?.price || 0,
+        quantity: Number(item.quantity) || 1,
+        price:
+          item.price ||
+          item.product?.salePrice ||
+          item.product?.price ||
+          0,
       }));
 
       // 4. Create Order in backend to get orderId (e.g. WMS-...)
@@ -322,26 +378,56 @@ const AddToCart = () => {
                 CART CARDS
             ================================================== */}
             <div className="space-y-5">
-              {cartItems.map((item) => {
-                const product = item.product;
+              {cartItems.map((item, index) => {
+                const product = item?.product;
+                const isObjectProduct = product && typeof product === "object";
 
-                const selectedVariant = product?.variants?.find(
-                  (variant) => variant._id === item.variantId
-                );
+                const selectedVariant = isObjectProduct
+                  ? product?.variants?.find(
+                      (variant) => variant._id === item.variantId
+                    )
+                  : null;
 
                 const itemPrice =
-                  item.price || selectedVariant?.salePrice || 0;
+                  item.price ||
+                  selectedVariant?.salePrice ||
+                  (isObjectProduct ? product?.salePrice || product?.price : 0) ||
+                  0;
 
                 const itemMrp =
-                  selectedVariant?.mrp || product?.mrp || 0;
+                  selectedVariant?.mrp ||
+                  (isObjectProduct ? product?.mrp : itemPrice) ||
+                  itemPrice;
 
                 const itemStock =
-                  selectedVariant?.stock || 0;
+                  selectedVariant?.stock ||
+                  (isObjectProduct ? product?.stock : 0) ||
+                  0;
 
-                const itemDiscount = itemMrp - itemPrice;
+                const itemDiscount = Math.max(0, itemMrp - itemPrice);
+                const itemKey =
+                  item._id ||
+                  (isObjectProduct && product._id
+                    ? `${product._id}-${item.variantId || index}`
+                    : `item-${index}`);
+
+                const productName =
+                  (isObjectProduct && product?.name) ||
+                  item.productName ||
+                  item.name ||
+                  "Product";
+
+                const productImage =
+                  (isObjectProduct && Array.isArray(product?.images) && product.images[0]) ||
+                  (isObjectProduct && typeof product?.image === "string" && product.image) ||
+                  (typeof item?.image === "string" && item.image) ||
+                  "/product1.webp";
+
+                const isUnavailable = !isObjectProduct && !item.productName && !item.name;
+
                 return (
                   <div
-                    key={product._id}
+                    key={itemKey}
                     className="
                       group overflow-hidden rounded-2xl
                       border border-[#60391720]
@@ -357,8 +443,8 @@ const AddToCart = () => {
                       {/* IMAGE */}
                       <div className="relative h-52 w-full shrink-0 overflow-hidden rounded-xl bg-[#f9e4bf]/20 sm:h-44 sm:w-44 lg:h-48 lg:w-48">
                         <img
-                          src={product.images?.[0] || "/product1.webp"}
-                          alt={product.name}
+                          src={productImage}
+                          alt={productName}
                           referrerPolicy="no-referrer"
                           loading="lazy"
                           onError={(e) => {
@@ -374,7 +460,7 @@ const AddToCart = () => {
                         />
 
                         {/* Bestseller */}
-                        {product.isBestSeller && (
+                        {isObjectProduct && product?.isBestSeller && (
                           <span
                             className="
                               absolute left-2 top-2
@@ -393,7 +479,7 @@ const AddToCart = () => {
 
                       {/* CONTENT */}
                       <div className="flex min-w-0 flex-1 flex-col px-1 pt-4 sm:px-5 sm:pt-0">
-                        {/* Category */}
+                        {/* Category / Variant title */}
                         <div className="mb-2 flex items-center justify-between gap-3">
                           <span
                             className="
@@ -413,20 +499,19 @@ const AddToCart = () => {
                           {/* Remove */}
                           <button
                             type="button"
-                            onClick={() => removeCartItem(item._id)}
+                            onClick={() => removeCartItem(item._id || item.productId || item.product?._id)}
                             className="
                               flex h-8 w-8 shrink-0 items-center justify-center
                               rounded-full
-                              
                               hover:scale-110
-                           
-                               text-white
-                                transition-colors
-                                hover:bg-[#60b396]
-                                hover:text-white
-                                bg-pink-600
+                              text-white
+                              transition-colors
+                              hover:bg-[#60b396]
+                              hover:text-white
+                              bg-pink-600
+                              cursor-pointer
                             "
-                            aria-label={`Remove ${product.name}`}
+                            aria-label={`Remove ${productName}`}
                           >
                             <Trash2 size={14} />
                           </button>
@@ -434,20 +519,32 @@ const AddToCart = () => {
 
                         {/* Product Name */}
                         <h3 className="text-xl font-semibold leading-tight text-[#2d2d2d] font-manrope sm:text-2xl">
-                          {product.name}
+                          {productName}
                         </h3>
 
+                        {isUnavailable && (
+                          <p className="mt-1 text-xs text-red-600 font-manrope font-medium">
+                            This item is no longer available. Please remove it from your cart.
+                          </p>
+                        )}
+
                         {/* Description */}
-                        <p className="mt-1 line-clamp-2 text-xs font-normal leading-5 text-gray-500 font-manrope sm:text-sm">
-                          {product.shortDescription}
-                        </p>
+                        {isObjectProduct && product?.shortDescription && (
+                          <p className="mt-1 line-clamp-2 text-xs font-normal leading-5 text-gray-500 font-manrope sm:text-sm">
+                            {product.shortDescription}
+                          </p>
+                        )}
 
                         {/* PRICE */}
                         <div className="mt-3 flex flex-wrap items-center gap-2">
+                          {itemMrp > itemPrice && (
+                            <span className="text-sm font-normal text-gray-400 line-through font-manrope">
+                              ₹{itemMrp}
+                            </span>
+                          )}
 
-
-                          <span className="text-sm font-normal text-gray-400 line-through font-manrope">
-                            ₹{itemMrp}
+                          <span className="text-base font-semibold text-[#572340] font-manrope">
+                            ₹{itemPrice}
                           </span>
 
                           {itemDiscount > 0 && (
@@ -470,7 +567,7 @@ const AddToCart = () => {
                         <div className="mt-auto flex items-center justify-between gap-3 pt-4">
                           {/* Stock */}
                           <span className="hidden text-xs font-medium text-[#3e5a2c] font-manrope sm:block">
-                            In Stock
+                            {isUnavailable ? "Unavailable" : "In Stock"}
                           </span>
 
                           {/* QUANTITY */}
@@ -485,16 +582,17 @@ const AddToCart = () => {
                           >
                             <button
                               type="button"
-                              disabled={updatingItemId === item._id}
+                              disabled={updatingItemId === item._id || isUnavailable}
                               onClick={() => decreaseQuantity(item)}
                               className="
                                 flex h-full w-10 items-center justify-center
-                                
                                 text-white
                                 transition-colors
                                 hover:bg-[#60b396]
                                 hover:text-white
                                 bg-pink-600
+                                disabled:opacity-50
+                                cursor-pointer
                               "
                             >
                               <Minus size={14} />
@@ -508,17 +606,19 @@ const AddToCart = () => {
                               type="button"
                               disabled={
                                 updatingItemId === item._id ||
-                                item.quantity >= item.product.stock
+                                isUnavailable ||
+                                (itemStock > 0 && item.quantity >= itemStock)
                               }
                               onClick={() => increaseQuantity(item)}
                               className="
                                 flex h-full w-10 items-center justify-center
-                                text-[#603917]
                                 text-white
                                 transition-colors
                                 hover:bg-[#60b396]
                                 hover:text-white
                                 bg-pink-600
+                                disabled:opacity-50
+                                cursor-pointer
                               "
                             >
                               <Plus size={14} />
@@ -535,7 +635,7 @@ const AddToCart = () => {
                       </span>
 
                       <span className="text-base font-semibold text-[#572340] font-manrope">
-                        ₹{itemPrice * item.quantity}
+                        ₹{itemPrice * (Number(item.quantity) || 1)}
                       </span>
                     </div>
                   </div>

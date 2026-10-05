@@ -147,16 +147,16 @@ const handleQuickAdd = async (e) => {
 
 
   const [imgSrc, setImgSrc] = useState(
-    product.images?.[0] || "/product1.webp"
+    product?.images?.[0] || product?.image || "/product1.webp"
   );
   const [secondImgSrc, setSecondImgSrc] = useState(
-    product.images?.[1] || "/product1.webp"
+    product?.images?.[1] || product?.image || "/product1.webp"
   );
 
   useEffect(() => {
-    setImgSrc(product.images?.[0] || "/product1.webp");
-    setSecondImgSrc(product.images?.[1] || "/product1.webp");
-  }, [product.images]);
+    setImgSrc(product?.images?.[0] || product?.image || "/product1.webp");
+    setSecondImgSrc(product?.images?.[1] || product?.image || "/product1.webp");
+  }, [product?.images, product?.image]);
 
   return (
    <Link
@@ -182,17 +182,17 @@ const handleQuickAdd = async (e) => {
             }
           }}
           className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ${
-            product.images?.[1]
+            product?.images?.[1]
               ? "group-hover:scale-105 group-hover:opacity-0"
               : "group-hover:scale-105"
           }`}
         />
 
         {/* Second Image */}
-        {product.images?.[1] && (
+        {product?.images?.[1] && (
           <img
             src={secondImgSrc}
-            alt={product.name}
+            alt={product?.name || "Product"}
             referrerPolicy="no-referrer"
             loading="lazy"
             onError={() => {

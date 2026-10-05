@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import cartService from "@/services/cartService";
 import { emitCartUpdated } from "@/utils/cartEvents";
+import { authStorage } from "@/utils/authStorage";
 
 const useCart = () => {
   const [cart, setCart] = useState(null);
@@ -10,30 +11,46 @@ const useCart = () => {
   const [updatingItemId, setUpdatingItemId] = useState(null);
 
   const fetchCart = async () => {
+    if (!authStorage.isAuthenticated()) {
+      setCart({ items: [] });
+      setLoading(false);
+      setError("");
+      return;
+    }
+
     try {
       setLoading(true);
       setError("");
 
       const data = await cartService.getCart();
 
-      if (data?.success) {
-        setCart(data.cart);
-        emitCartUpdated(data.cart);
+      if (data?.success && data?.cart) {
+        const items = Array.isArray(data.cart.items) ? data.cart.items : [];
+        const sanitizedCart = {
+          ...data.cart,
+          items,
+        };
+        setCart(sanitizedCart);
+        emitCartUpdated(sanitizedCart);
       } else {
-        setCart(null);
-        emitCartUpdated(null);
-        setError(data?.message || "Unable to load cart.");
+        setCart({ items: [] });
+        emitCartUpdated({ items: [] });
+        if (data?.message && !data?.success) {
+          setError(data.message);
+        }
       }
     } catch (error) {
       console.error("Unable to fetch cart:", error);
 
-      setCart(null);
-      emitCartUpdated(null);
+      setCart({ items: [] });
+      emitCartUpdated({ items: [] });
 
-      setError(
-        error.response?.data?.message ||
-          "Unable to load cart. Please try again."
-      );
+      if (error?.response?.status !== 401) {
+        setError(
+          error.response?.data?.message ||
+            "Unable to load cart. Please try again."
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -41,38 +58,54 @@ const useCart = () => {
 
 
 
-const removeCartItem = async (cartItemId) => {
-  try {
-    setLoading(true);
-    setError("");
+  const removeCartItem = async (cartItemId) => {
+    try {
+      setLoading(true);
+      setError("");
 
-    const data = await cartService.removeCartItem(cartItemId);
+      const data = await cartService.removeCartItem(cartItemId);
 
-    setCart(data.cart);
-    emitCartUpdated(data.cart);
-    const msg = data.message || "Item removed from cart.";
-    toast.success(msg);
+      const items = Array.isArray(data?.cart?.items) ? data.cart.items : [];
+      const sanitizedCart = data?.cart ? { ...data.cart, items } : { items: [] };
 
-    return {
-      success: true,
-      message: msg,
-    };
-  } catch (error) {
-    const message =
-      error.response?.data?.message ||
-      "Unable to remove item from cart.";
+      setCart(sanitizedCart);
+      emitCartUpdated(sanitizedCart);
+      const msg = data?.message || "Item removed from cart.";
+      toast.success(msg);
 
-    setError(message);
-    toast.error(message);
+      return {
+        success: true,
+        message: msg,
+      };
+    } catch (error) {
+      console.error("Unable to remove item from cart:", error);
 
-    return {
-      success: false,
-      error: message,
-    };
-  } finally {
-    setLoading(false);
-  }
-};
+      // Optimistically remove from state so the user is never stuck with a broken item
+      setCart((prevCart) => {
+        if (!prevCart) return { items: [] };
+        const updatedItems = (prevCart.items || []).filter(
+          (item) => item._id !== cartItemId && item.productId !== cartItemId
+        );
+        const updatedCart = { ...prevCart, items: updatedItems };
+        emitCartUpdated(updatedCart);
+        return updatedCart;
+      });
+
+      const message =
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        "Item removed from cart.";
+
+      toast.info(message);
+
+      return {
+        success: true,
+        error: message,
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
 
@@ -155,6 +188,15 @@ const removeCartItem = async (cartItemId) => {
 
   useEffect(() => {
     fetchCart();
+
+    const handleAuthSync = () => {
+      fetchCart();
+    };
+
+    window.addEventListener("authUpdated", handleAuthSync);
+    return () => {
+      window.removeEventListener("authUpdated", handleAuthSync);
+    };
   }, []);
 
 return {

@@ -80,6 +80,7 @@ import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsAndConditions from "@/pages/TermsAndCondition";
 import ShippingDeliveryPolicy from "@/pages/ShippingDeliveryPolicy";
 import CancellationReturnRefundPolicy from "@/pages/CancellationReturnRefundPolicy";
+import ErrorBoundary from "@/components/common/ErrorBoundary";
 
 const AppRoutes = () => {
   return (
@@ -128,11 +129,18 @@ const AppRoutes = () => {
             element={<PaymentSuccess />}
           />
 
+          <Route
+            path="cart"
+            element={
+              <ErrorBoundary>
+                <AddToCart />
+              </ErrorBoundary>
+            }
+          />
+
           {/* ================= PROTECTED ROUTES ================= */}
 
           <Route element={<ProtectedRoute />}>
-
-            <Route path="cart" element={<AddToCart />} />
 
             <Route
               path="my-orders"

@@ -1,6 +1,7 @@
 import './App.css'
 import AppRoutes from './routes/AppRoutes'
 import { Toaster } from 'sonner'
+import ErrorBoundary from './components/common/ErrorBoundary'
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
           },
         }}
       />
-      <AppRoutes/>
+      <ErrorBoundary>
+        <AppRoutes/>
+      </ErrorBoundary>
     </div>
   )
 }

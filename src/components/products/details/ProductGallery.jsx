@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 
 const ProductGallery = ({ images = [] }) => {
+  const safeImages = Array.isArray(images) ? images : [];
   const [selectedImage, setSelectedImage] = useState(
-    images[0] || "/product1.webp"
+    safeImages[0] || "/product1.webp"
   );
 
   useEffect(() => {
-    if (images && images.length > 0) {
-      setSelectedImage(images[0]);
+    if (safeImages.length > 0) {
+      setSelectedImage(safeImages[0]);
     }
   }, [images]);
 
@@ -33,7 +34,7 @@ const ProductGallery = ({ images = [] }) => {
       {/* Thumbnails */}
 
       <div className="flex gap-3 overflow-x-auto pb-2">
-        {images.map((image, index) => (
+        {safeImages.map((image, index) => (
           <button
             key={index}
             onClick={() => setSelectedImage(image)}

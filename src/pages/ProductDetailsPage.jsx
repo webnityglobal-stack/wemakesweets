@@ -102,7 +102,7 @@ const ProductDetailsPage = () => {
       <div className="grid gap-10 lg:grid-cols-2 w-full max-w-full min-w-0">
 
         <ProductGallery
-          images={product.images}
+          images={product?.images || []}
         />
 
         <ProductInfo

@@ -168,12 +168,12 @@ const Wishlist = () => {
 
                     <div className="relative overflow-hidden bg-[#f9e4bf]/20">
 
-                      <Link to={`/products/${product._id || product.slug}`}>
+                      <Link to={product?._id || product?.slug ? `/products/${product._id || product.slug}` : "#"}>
                         <div className="aspect-[1.15/1] overflow-hidden">
 
                           <img
-                            src={product.images?.[0] || "/product1.webp"}
-                            alt={product.name}
+                            src={product?.images?.[0] || product?.image || "/product1.webp"}
+                            alt={product?.name || "Product"}
                             referrerPolicy="no-referrer"
                             loading="lazy"
                             onError={(e) => {

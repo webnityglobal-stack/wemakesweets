@@ -393,62 +393,77 @@ const OrderConfirmation = () => {
             </div>
 
             <div className="divide-y divide-[#60391715]">
-              {order.items.map((product) => (
-                <div
-                  key={product._id}
-                  className="flex gap-4 p-4 sm:p-5"
-                >
-                  {/* Image */}
+              {order.items.map((item, index) => {
+                const prod = item?.product && typeof item.product === "object" ? item.product : item;
+                const img =
+                  (Array.isArray(prod?.images) && prod.images[0]) ||
+                  (Array.isArray(item?.product?.images) && item.product.images[0]) ||
+                  item?.image ||
+                  prod?.image ||
+                  "/product1.webp";
+                const name = prod?.name || item?.name || "Sweet Item";
+                const category = prod?.category || item?.category || "Sweets";
+                const shortDesc = prod?.shortDescription || item?.shortDescription || "";
+                const qty = Number(item?.quantity) || 1;
+                const price = Number(item?.salePrice || item?.price || prod?.salePrice || 0);
 
-                  <div className="h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-[#f9e4bf]/20 sm:h-28 sm:w-28">
-                    <img
-                      src={product.images?.[0] || "/product1.webp"}
-                      alt={product.name}
-                      referrerPolicy="no-referrer"
-                      loading="lazy"
-                      onError={(e) => {
-                        if (!e.currentTarget.src.includes("/product1.webp")) {
-                          e.currentTarget.src = "/product1.webp";
-                        }
-                      }}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
+                return (
+                  <div
+                    key={item?._id || prod?._id || index}
+                    className="flex gap-4 p-4 sm:p-5"
+                  >
+                    {/* Image */}
+                    <div className="h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-[#f9e4bf]/20 sm:h-28 sm:w-28">
+                      <img
+                        src={img}
+                        alt={name}
+                        referrerPolicy="no-referrer"
+                        loading="lazy"
+                        onError={(e) => {
+                          if (!e.currentTarget.src.includes("/product1.webp")) {
+                            e.currentTarget.src = "/product1.webp";
+                          }
+                        }}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
 
-                  {/* Info */}
-
-                  <div className="min-w-0 flex-1">
-                    <span
-                      className="
-                        inline-flex rounded-md px-2 py-1
-                        text-[8px] font-semibold uppercase
-                        font-manrope
-                         bg-pink-600 hover:bg-[#60b396] text-white hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
-                      "
-                    >
-                      {product.category}
-                    </span>
-
-                    <h3 className="mt-2 truncate text-xl font-bold text-[#2d2d2d] font-cormorant sm:text-2xl">
-                      {product.name}
-                    </h3>
-
-                    <p className="mt-0.5 line-clamp-1 text-[11px] text-gray-500 font-manrope sm:text-xs">
-                      {product.shortDescription}
-                    </p>
-
-                    <div className="mt-2 flex items-center justify-between">
-                      <span className="text-xs text-gray-500 font-manrope">
-                        Qty: {product.quantity}
+                    {/* Info */}
+                    <div className="min-w-0 flex-1">
+                      <span
+                        className="
+                          inline-flex rounded-md px-2 py-1
+                          text-[8px] font-semibold uppercase
+                          font-manrope
+                           bg-pink-600 hover:bg-[#60b396] text-white hover:text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
+                        "
+                      >
+                        {category}
                       </span>
 
-                      <span className="text-base font-bold text-[#572340] font-manrope">
-                        ₹{product.salePrice * product.quantity}
-                      </span>
+                      <h3 className="mt-2 truncate text-xl font-bold text-[#2d2d2d] font-cormorant sm:text-2xl">
+                        {name}
+                      </h3>
+
+                      {shortDesc && (
+                        <p className="mt-0.5 line-clamp-1 text-[11px] text-gray-500 font-manrope sm:text-xs">
+                          {shortDesc}
+                        </p>
+                      )}
+
+                      <div className="mt-2 flex items-center justify-between">
+                        <span className="text-xs text-gray-500 font-manrope">
+                          Qty: {qty}
+                        </span>
+
+                        <span className="text-base font-bold text-[#572340] font-manrope">
+                          ₹{price * qty}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
