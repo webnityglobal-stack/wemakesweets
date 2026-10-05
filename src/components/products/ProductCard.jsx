@@ -106,43 +106,48 @@ const handleWishlistClick = async (e) => {
 };
 
 
-  const discount = product.mrp && product.salePrice
-      ? Math.round(((product.mrp - product.salePrice) / product.mrp) * 100)
+  const firstVariant =
+    Array.isArray(product?.variants) && product.variants.length > 0
+      ? product.variants[0]
+      : null;
+
+  const currentSalePrice = firstVariant?.salePrice ?? product?.salePrice ?? 0;
+  const currentMrp = firstVariant?.mrp ?? product?.mrp ?? 0;
+  const currentStock = firstVariant?.stock ?? product?.stock ?? 0;
+
+  const discount =
+    currentMrp && currentSalePrice && currentMrp > currentSalePrice
+      ? Math.round(((currentMrp - currentSalePrice) / currentMrp) * 100)
       : 0;
 
-  const inStock = product.stock > 0;
+  const inStock = currentStock > 0;
+  const isBestseller = Boolean(product?.isBestSeller ?? product?.isBestseller);
 
+  // for add to cart api inegration 
+  const { addToCart, loading } = useAddToCart();
+  const handleQuickAdd = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
 
-// for add to cart api inegration 
-const { addToCart, loading } = useAddToCart();
-const handleQuickAdd = async (e) => {
-  e.preventDefault();
-  e.stopPropagation();
+    if (!inStock) {
+      toast.error("Sorry, this item is out of stock.");
+      return;
+    }
 
-  if (!inStock) {
-    toast.error("Sorry, this item is out of stock.");
-    return;
-  }
+    const prodId = product._id || product.id;
+    const variantId = firstVariant?._id || product.variants?.[0]?._id;
 
-  const variantId = product.variants?.[0]?._id;
+    const result = await addToCart({
+      productId: prodId,
+      variantId,
+      quantity: 1,
+      productName: product.name,
+    });
 
-  if (!variantId) {
-    console.error("Variant ID is missing.");
-    toast.error("Product variant not available.");
-    return;
-  }
-
-  const result = await addToCart({
-    productId: product._id,
-    variantId,
-    quantity: 1,
-    productName: product.name,
-  });
-
-  if (result.requiresAuth) {
-    navigate("/login");
-  }
-};
+    if (result.requiresAuth) {
+      navigate("/login");
+    }
+  };
 
 
 
@@ -209,7 +214,7 @@ const handleQuickAdd = async (e) => {
         )}
 
         {/* Bestseller */}
-        {product.isBestSeller && (
+        {isBestseller && (
           <span
             className="
               absolute left-1 top-1 rounded-sm
@@ -334,11 +339,11 @@ const handleQuickAdd = async (e) => {
 
         {/* Stock */}
         <div className="hidden text-[10px] font-semibold font-manrope sm:block sm:text-sm">
-          {product.stock === 0 ? (
+          {currentStock === 0 ? (
             <span className="text-[#8b183d]">Sold Out</span>
-          ) : product.stock <= 10 ? (
+          ) : currentStock <= 10 ? (
             <span className="text-[#DE6239]">
-              Only {product.stock} Left
+              Only {currentStock} Left
             </span>
           ) : (
             <span className="text-[#3e5a2c]">In Stock</span>
@@ -358,17 +363,19 @@ const handleQuickAdd = async (e) => {
               sm:text-3xl md:text-xl
             "
           >
-            ₹{product.salePrice}
+            ₹{currentSalePrice}
           </span>
 
-          <span
-            className="
-              text-[8px] text-gray-400 line-through
-              sm:text-lg font-manrope
-            "
-          >
-            ₹{product.mrp}
-          </span>
+          {currentMrp > 0 && (
+            <span
+              className="
+                text-[8px] text-gray-400 line-through
+                sm:text-lg font-manrope
+              "
+            >
+              ₹{currentMrp}
+            </span>
+          )}
 
           {discount > 0 && (
             <span
