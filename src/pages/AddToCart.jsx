@@ -269,19 +269,30 @@ const AddToCart = () => {
         return;
       }
 
-      const items = validItems.map((item) => ({
-        product:
-          item.product?._id ||
-          item.productId ||
-          (typeof item.product === "string" ? item.product : ""),
-        variantId: item.variantId || item.variant?._id,
-        quantity: Number(item.quantity) || 1,
-        price:
+      const items = validItems.map((item) => {
+        const isObject = item.product && typeof item.product === "object";
+        const selectedVariant = isObject
+          ? item.product?.variants?.find(
+              (v) => String(v._id) === String(item.variantId)
+            )
+          : null;
+
+        const effectivePrice =
+          selectedVariant?.salePrice ||
+          (isObject ? item.product?.salePrice || item.product?.price : null) ||
           item.price ||
-          item.product?.salePrice ||
-          item.product?.price ||
-          0,
-      }));
+          0;
+
+        return {
+          product:
+            item.product?._id ||
+            item.productId ||
+            (typeof item.product === "string" ? item.product : ""),
+          variantId: item.variantId || item.variant?._id,
+          quantity: Number(item.quantity) || 1,
+          price: Number(effectivePrice),
+        };
+      });
 
       // 4. Create Order in backend to get orderId (e.g. WMS-...)
       toast.loading("Creating order...", { id: toastId });
