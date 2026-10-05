@@ -450,9 +450,11 @@ const TrackOrder = () => {
     if (!order?.orderId) return;
     try {
       setCancelLoading(true);
+      const targetOrderId = order.orderId;
+      const targetMongoId = rawOrder?._id || order.orderId;
       const res = await orderService.cancelShiprocketOrder(
-        order.orderId,
-        rawOrder?._id
+        targetOrderId,
+        targetMongoId
       );
       toast.success(res?.message || "Order cancelled successfully!");
       setIsCancelModalOpen(false);
@@ -469,10 +471,12 @@ const TrackOrder = () => {
       fetchShiprocketTracking(false);
     } catch (err) {
       console.error("Failed to cancel order:", err);
-      toast.error(
+      const errMsg =
         err.response?.data?.message ||
-          "Unable to cancel order at this time. Please try again or contact support."
-      );
+        err.response?.data?.error ||
+        err.message ||
+        "Unable to cancel order at this time. Please try again or contact support.";
+      toast.error(errMsg);
     } finally {
       setCancelLoading(false);
     }

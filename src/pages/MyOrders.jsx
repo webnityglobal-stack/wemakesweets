@@ -227,19 +227,23 @@ const MyOrders = () => {
     if (!cancellingOrder) return;
     try {
       setCancelLoading(true);
+      const targetOrderId = cancellingOrder.orderId || cancellingOrder.id;
+      const targetMongoId = cancellingOrder._id || cancellingOrder.id || cancellingOrder.orderId;
       const res = await orderService.cancelShiprocketOrder(
-        cancellingOrder.orderId,
-        cancellingOrder._id
+        targetOrderId,
+        targetMongoId
       );
       toast.success(res?.message || "Order cancelled successfully!");
       setCancellingOrder(null);
       await refetch();
     } catch (err) {
       console.error("Failed to cancel order:", err);
-      toast.error(
+      const errMsg =
         err.response?.data?.message ||
-          "Unable to cancel order at this time. Please try again or contact support."
-      );
+        err.response?.data?.error ||
+        err.message ||
+        "Unable to cancel order at this time. Please try again or contact support.";
+      toast.error(errMsg);
     } finally {
       setCancelLoading(false);
     }
