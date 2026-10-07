@@ -92,7 +92,7 @@ const Home = () => {
 
                   {/* Mobile */}
                   <div className="lg:hidden">
-                    <ProductGrid products={products} />
+                    <ProductGrid products={products.slice(0, 4)} />
                   </div>
 
                   {/* Desktop Buttons */}
