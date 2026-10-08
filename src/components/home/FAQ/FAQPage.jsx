@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 import FAQItem from "./FAQItem";
+import contactService from "@/services/contactService";
+import { authStorage } from "@/utils/authStorage";
 
 const faqs = [
   {
@@ -61,6 +65,42 @@ const FAQPage = () => {
 
   const handleFAQToggle = (index) => {
     setOpenIndex((prev) => (prev === index ? null : index));
+  };
+
+  const [userQuestion, setUserQuestion] = useState("");
+  const [isSubmittingQuestion, setIsSubmittingQuestion] = useState(false);
+
+  const handleQuestionSubmit = async (e) => {
+    e?.preventDefault();
+    if (!userQuestion.trim()) {
+      toast.error("Please enter your question before submitting.");
+      return;
+    }
+
+    try {
+      setIsSubmittingQuestion(true);
+      const currentUser = authStorage.getUser();
+      const payload = {
+        question: userQuestion.trim(),
+        name: currentUser?.name || "Website Visitor",
+        email: currentUser?.email || "",
+        phone: currentUser?.phone || "",
+      };
+
+      const res = await contactService.submitFAQQuestion(payload);
+      toast.success(
+        res?.message || "Thank you! Your question has been submitted successfully."
+      );
+      setUserQuestion("");
+    } catch (error) {
+      console.error("FAQ question submission error:", error);
+      const errMsg =
+        error.response?.data?.message ||
+        "Failed to submit your question. Please try again later.";
+      toast.error(errMsg);
+    } finally {
+      setIsSubmittingQuestion(false);
+    }
   };
 
   return (
@@ -190,10 +230,16 @@ const FAQPage = () => {
             </p>
           </div>
 
-          <div className="mx-auto mt-6 flex max-w-2xl flex-col gap-3 sm:flex-row">
+          <form
+            onSubmit={handleQuestionSubmit}
+            className="mx-auto mt-6 flex max-w-2xl flex-col gap-3 sm:flex-row"
+          >
             <input
               type="text"
+              value={userQuestion}
+              onChange={(e) => setUserQuestion(e.target.value)}
               placeholder="Ask your question..."
+              required
               className="
         flex-1
         rounded-full
@@ -212,8 +258,10 @@ const FAQPage = () => {
             />
 
             <button
-              type="button"
-              className="
+              type="submit"
+              disabled={isSubmittingQuestion}
+              className={`
+                flex items-center justify-center gap-2
                 rounded-full
                 px-7 py-3
                 text-sm
@@ -230,11 +278,19 @@ const FAQPage = () => {
                 sm:shadow-[2px_3px_0px_#000]
                 hover:shadow-[3px_4px_0px_#000]
                 cursor-pointer
-              "
+                ${isSubmittingQuestion ? "opacity-75 cursor-not-allowed pointer-events-none" : ""}
+              `}
             >
-              Submit
+              {isSubmittingQuestion ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                "Submit"
+              )}
             </button>
-          </div>
+          </form>
         </div>
 
 
