@@ -7,7 +7,9 @@ import {
   MapPin,
   Clock3,
   Send,
+  Loader2,
 } from "lucide-react";
+import contactService from "@/services/contactService";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -17,21 +19,37 @@ export default function Contact() {
     subject: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       toast.error("Please fill in all required fields (Name, Email, Message).");
       return;
     }
-    toast.success("Thank you! Your message has been sent successfully.");
-    setForm({
-      name: "",
-      phone: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
+
+    try {
+      setIsSubmitting(true);
+      const res = await contactService.submitContactForm(form);
+      toast.success(
+        res?.message || "Thank you! Your message has been sent successfully."
+      );
+      setForm({
+        name: "",
+        phone: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Contact form submission error:", error);
+      const errMsg =
+        error.response?.data?.message ||
+        "Failed to send your message. Please try again later.";
+      toast.error(errMsg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return (
     <main className="overflow-hidden bg-[#f5ebda]">
@@ -175,10 +193,22 @@ export default function Contact() {
 
                   <button
                     type="submit"
-                    className="flex items-center justify-center gap-3 rounded-full text-white hover:text-white bg-pink-600 hover:bg-[#60b396] hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] md:px-8 md:py-4 px-6 py-3.5 font-semibold transition-all duration-300 text-sm sm:text-base w-full sm:w-auto cursor-pointer"
+                    disabled={isSubmitting}
+                    className={`flex items-center justify-center gap-3 rounded-full text-white hover:text-white bg-pink-600 hover:bg-[#60b396] hover:scale-105 shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] md:px-8 md:py-4 px-6 py-3.5 font-semibold transition-all duration-300 text-sm sm:text-base w-full sm:w-auto cursor-pointer ${
+                      isSubmitting ? "opacity-75 cursor-not-allowed pointer-events-none" : ""
+                    }`}
                   >
-                    <Send size={18} />
-                    Send Message
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 size={18} className="animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send size={18} />
+                        Send Message
+                      </>
+                    )}
                   </button>
 
                 </form>
