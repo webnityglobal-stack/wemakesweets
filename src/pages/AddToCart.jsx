@@ -483,7 +483,7 @@ const AddToCart = () => {
                   >
                     <div className="flex flex-col p-3 sm:flex-row sm:p-5">
                       {/* IMAGE */}
-                      <div className="relative h-52 w-full shrink-0 overflow-hidden rounded-xl bg-[#f9e4bf]/20 sm:h-44 sm:w-44 lg:h-48 lg:w-48">
+                      <div className="relative h-52 w-full shrink-0 overflow-hidden rounded-xl bg-white sm:bg-[#f9e4bf]/20 sm:h-44 sm:w-44 lg:h-48 lg:w-48 flex items-center justify-center">
                         <img
                           src={productImage}
                           alt={productName}
@@ -495,7 +495,8 @@ const AddToCart = () => {
                             }
                           }}
                           className="
-                            h-full w-full object-cover
+                            h-full w-full object-contain sm:object-cover
+                            p-1.5 sm:p-0
                             transition-transform duration-500
                             group-hover:scale-105
                           "
@@ -505,7 +506,7 @@ const AddToCart = () => {
                         {isObjectProduct && product?.isBestSeller && (
                           <span
                             className="
-                              absolute left-2 top-2
+                              absolute left-2 top-2 z-10
                               rounded-md px-2 py-1
                               text-[9px] uppercase
                               font-manrope font-medium

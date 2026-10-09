@@ -157,6 +157,7 @@
 // export default ProductDescription;
 
 
+import { useState, useEffect, useRef } from "react";
 import {
   BadgeCheck,
   Leaf,
@@ -164,10 +165,44 @@ import {
   Globe,
   Clock3,
   Archive,
+  X,
 } from "lucide-react";
 
 const ProductDescription = ({ product }) => {
-  console.log("product wiegh ", product.weight, product.shelfLife)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isClamped, setIsClamped] = useState(false);
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    const checkClamped = () => {
+      if (textRef.current) {
+        setIsClamped(textRef.current.scrollHeight > textRef.current.clientHeight);
+      }
+    };
+    checkClamped();
+    window.addEventListener("resize", checkClamped);
+    return () => window.removeEventListener("resize", checkClamped);
+  }, [product?.description]);
+
+  // Close modal on Escape key press and manage body scroll
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && isModalOpen) {
+        setIsModalOpen(false);
+      }
+    };
+
+    if (isModalOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "unset";
+    };
+  }, [isModalOpen]);
+
   return (
     <section className="w-full">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -184,9 +219,24 @@ const ProductDescription = ({ product }) => {
             Crafted With Premium Ingredients
           </h2>
 
-          <p className="mx-auto mt-4 max-w-3xl font-manrope text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">
-            {product.description}
-          </p>
+          <div className="mx-auto mt-4 max-w-3xl">
+            <p
+              ref={textRef}
+              className="font-manrope text-sm leading-6 text-gray-600 sm:text-base sm:leading-7 line-clamp-3"
+            >
+              {product?.description}
+            </p>
+
+            {(isClamped || (product?.description && product.description.length > 180)) && (
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(true)}
+                className="mt-1.5 inline-flex items-center gap-1 font-manrope text-sm font-semibold text-[#810c26] hover:text-[#08376c] underline underline-offset-4 cursor-pointer transition-colors"
+              >
+                ... more
+              </button>
+            )}
+          </div>
 
         </div>
 
@@ -280,6 +330,65 @@ const ProductDescription = ({ product }) => {
         </div>
 
       </div>
+
+      {/* ================= DESCRIPTION MODAL ================= */}
+      {isModalOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+        >
+          {/* Backdrop */}
+          <div
+            onClick={() => setIsModalOpen(false)}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity cursor-pointer"
+          />
+
+          {/* Modal Card */}
+          <div className="relative z-10 flex max-h-[85vh] w-full max-w-2xl flex-col overflow-hidden rounded-3xl border border-[#810c26]/20 bg-[#fdfcf9] p-6 shadow-2xl sm:p-8 animate-in fade-in zoom-in-95 duration-200">
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(false)}
+              aria-label="Close modal"
+              className="absolute right-4 top-4 rounded-full p-2 text-gray-500 hover:bg-[#810c26]/10 hover:text-[#810c26] transition-colors cursor-pointer"
+            >
+              <X size={20} />
+            </button>
+
+            {/* Modal Header */}
+            <div className="border-b border-[#810c26]/15 pb-4 pr-8">
+              <span className="font-manrope text-xs font-semibold uppercase tracking-[3px] text-[#810c26]">
+                Product Details
+              </span>
+              <h3 className="mt-1 font-cormorant text-2xl font-bold text-[#08376c] sm:text-3xl">
+                Crafted With Premium Ingredients
+              </h3>
+              {product?.name && (
+                <p className="mt-1 font-manrope text-xs sm:text-sm text-gray-500">
+                  {product.name}
+                </p>
+              )}
+            </div>
+
+            {/* Modal Content */}
+            <div className="mt-4 flex-1 overflow-y-auto pr-2 font-manrope text-sm leading-relaxed text-gray-700 sm:text-base sm:leading-loose whitespace-pre-line">
+              {product?.description}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="mt-6 flex justify-end border-t border-[#810c26]/10 pt-4">
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(false)}
+                className="rounded-full bg-[#810c26] px-6 py-2.5 font-manrope text-sm font-semibold text-white shadow-sm hover:bg-[#08376c] transition-colors cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
