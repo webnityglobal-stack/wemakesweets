@@ -247,17 +247,22 @@ const AddToCart = () => {
       }
 
       const user = authStorage.getUser() || {};
-      const finalShippingAddress = {
-        name: shippingAddress?.name || user?.name || "Valued Customer",
-        phone: shippingAddress?.phone || user?.phone || "9999999999",
-        email: shippingAddress?.email || user?.email || "",
-        address: shippingAddress?.address || "Customer Address",
-        address2: shippingAddress?.address2 || "",
-        city: shippingAddress?.city || "Meerut",
-        state: shippingAddress?.state || "Uttar Pradesh",
-        pincode: shippingAddress?.pincode || "250002",
-        country: shippingAddress?.country || "India",
-      };
+      const finalShippingAddress =
+        shippingAddress &&
+        shippingAddress.address &&
+        shippingAddress.address !== "Customer Address"
+          ? {
+              name: shippingAddress.name || user?.name || "Customer",
+              phone: shippingAddress.phone || user?.phone || "9999999999",
+              email: shippingAddress.email || user?.email || "",
+              address: shippingAddress.address,
+              address2: shippingAddress.address2 || "",
+              city: shippingAddress.city || "Meerut",
+              state: shippingAddress.state || "Uttar Pradesh",
+              pincode: shippingAddress.pincode || "250002",
+              country: shippingAddress.country || "India",
+            }
+          : null;
 
       // 3. Format items
       const validItems = cartItems.filter(
