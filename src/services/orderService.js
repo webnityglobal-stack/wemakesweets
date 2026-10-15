@@ -13,6 +13,14 @@ const orderService = {
     return response.data;
   },
 
+  // Update order shipping address
+  updateOrderAddress: async (orderId, shippingAddress) => {
+    const response = await axiosInstance.patch(`/orders/${orderId}/shipping-address`, {
+      shippingAddress,
+    });
+    return response.data;
+  },
+
   // Fetch order details by orderId (e.g. WMS-1789715277772)
   getOrderById: async (orderId) => {
     const response = await axiosInstance.get(`/orders/${orderId}`);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import {
@@ -24,6 +24,35 @@ import addressService from "@/services/addressService";
 const AddToCart = () => {
   const navigate = useNavigate();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const currentOrderIdRef = useRef(null);
+
+  // Listen for FastRR / Shiprocket checkout events in case live address is emitted from the popup
+  useEffect(() => {
+    const handleCheckoutMessage = async (event) => {
+      try {
+        const data = event.data;
+        if (!data || !currentOrderIdRef.current) return;
+
+        const addr =
+          data?.shipping_address ||
+          data?.shippingAddress ||
+          data?.data?.shipping_address ||
+          data?.data?.shippingAddress ||
+          data?.data?.address ||
+          data?.address;
+
+        if (addr && (addr.line1 || addr.address || addr.address1 || addr.pincode)) {
+          console.log("[Shiprocket Checkout] Live address detected from modal:", addr);
+          await orderService.updateOrderAddress(currentOrderIdRef.current, addr);
+        }
+      } catch (err) {
+        console.warn("[Shiprocket Checkout] Error handling window message:", err);
+      }
+    };
+
+    window.addEventListener("message", handleCheckoutMessage);
+    return () => window.removeEventListener("message", handleCheckoutMessage);
+  }, []);
 
 
 
@@ -234,37 +263,7 @@ const AddToCart = () => {
     const toastId = toast.loading("Initiating checkout session...");
 
     try {
-      // 2. Resolve shipping address
-      let shippingAddress = null;
-      try {
-        const addressRes = await addressService.getAddresses();
-        const addresses = addressRes?.addresses || [];
-        if (addresses.length > 0) {
-          shippingAddress = addresses.find((a) => a.isDefault) || addresses[0];
-        }
-      } catch (addrErr) {
-        console.warn("Could not fetch user addresses:", addrErr);
-      }
-
-      const user = authStorage.getUser() || {};
-      const finalShippingAddress =
-        shippingAddress &&
-        shippingAddress.address &&
-        shippingAddress.address !== "Customer Address"
-          ? {
-              name: shippingAddress.name || user?.name || "Customer",
-              phone: shippingAddress.phone || user?.phone || "9999999999",
-              email: shippingAddress.email || user?.email || "",
-              address: shippingAddress.address,
-              address2: shippingAddress.address2 || "",
-              city: shippingAddress.city || "Meerut",
-              state: shippingAddress.state || "Uttar Pradesh",
-              pincode: shippingAddress.pincode || "250002",
-              country: shippingAddress.country || "India",
-            }
-          : null;
-
-      // 3. Format items
+      // 2. Format items
       const validItems = cartItems.filter(
         (item) => item && (item.product?._id || item.productId || (typeof item.product === "string" && item.product))
       );
@@ -299,12 +298,14 @@ const AddToCart = () => {
         };
       });
 
-      // 4. Create Order in backend to get orderId (e.g. WMS-...)
+      // 3. Create Order in backend to get orderId (e.g. WMS-...)
+      // Note: shippingAddress is null initially because delivery address is selected/confirmed
+      // inside the Shiprocket FastRR Headless Checkout modal.
       toast.loading("Creating order...", { id: toastId });
       const orderRes = await orderService.createOrder({
         items,
         paymentMethod: "ONLINE",
-        shippingAddress: finalShippingAddress,
+        shippingAddress: null,
         shippingCharge: delivery,
         subtotal: saleTotal,
         totalAmount: total,
@@ -314,6 +315,7 @@ const AddToCart = () => {
       if (!orderId) {
         throw new Error(orderRes?.message || "Could not generate order ID");
       }
+      currentOrderIdRef.current = orderId;
 
       // 5. Call POST /payment/create with orderId
       toast.loading("Getting FastRR checkout token...", { id: toastId });
