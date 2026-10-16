@@ -148,17 +148,43 @@ const PaymentSuccess = () => {
   })}`;
 
   const items = order?.items || [];
-  const itemsSubtotal = items.reduce(
-    (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
-    0
+  const itemsSubtotal = order?.subtotal
+    ? Number(order.subtotal)
+    : items.reduce(
+        (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
+        0
+      );
+
+  const totalAmount = order?.totalAmount !== undefined
+    ? Number(order.totalAmount)
+    : itemsSubtotal;
+
+  const discountAmount = Number(
+    order?.discount ||
+    order?.couponDiscount ||
+    (itemsSubtotal > totalAmount ? itemsSubtotal - totalAmount : 0)
   );
-  const totalAmount = order?.totalAmount ?? itemsSubtotal;
-  const deliveryCharge = totalAmount > itemsSubtotal ? totalAmount - itemsSubtotal : 0;
+
+  const couponCode = order?.couponCode || null;
+
+  const deliveryCharge = order?.shippingCharge !== undefined
+    ? Number(order.shippingCharge)
+    : Math.max(0, Number((totalAmount + discountAmount - itemsSubtotal).toFixed(2)));
+
+  const formatAmount = (num) => {
+    if (!Number.isFinite(Number(num))) return "0";
+    const val = Number(num);
+    return val % 1 !== 0
+      ? val.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+      : val.toLocaleString("en-IN");
+  };
 
   const displayOrderId = order?.orderId || orderIdFromQuery || "N/A";
   const displayPaymentStatus = isFailed
     ? "Failed"
-    : order?.paymentStatus || "Paid";
+    : order?.paymentMethod === "COD"
+      ? "Cash on Delivery"
+      : order?.paymentStatus || "Paid";
   const displayOrderStatus = isFailed
     ? "Failed"
     : order?.orderStatus || "Confirmed";
@@ -520,11 +546,11 @@ const PaymentSuccess = () => {
 
                         <div className="mt-2 flex items-center justify-between">
                           <span className="text-xs text-gray-500 font-manrope">
-                            Qty: <strong className="text-gray-800">{item.quantity}</strong> × ₹{item.price}
+                            Qty: <strong className="text-gray-800">{item.quantity}</strong> × ₹{formatAmount(item.price)}
                           </span>
 
                           <span className="text-base font-bold text-[#572340] font-manrope">
-                            ₹{item.total || item.price * item.quantity}
+                            ₹{formatAmount(item.total || item.price * item.quantity)}
                           </span>
                         </div>
                       </div>
@@ -587,14 +613,25 @@ const PaymentSuccess = () => {
                 <div className="flex justify-between text-xs font-manrope">
                   <span className="text-gray-500">Items Subtotal</span>
                   <span className="font-semibold text-[#2d2d2d]">
-                    ₹{itemsSubtotal || totalAmount}
+                    ₹{formatAmount(itemsSubtotal || totalAmount)}
                   </span>
                 </div>
+
+                {discountAmount > 0 && (
+                  <div className="flex justify-between text-xs font-manrope">
+                    <span className="text-[#3e5a2c] font-medium flex items-center gap-1">
+                      Coupon Discount {couponCode ? `(${couponCode})` : ""}
+                    </span>
+                    <span className="font-semibold text-[#3e5a2c]">
+                      -₹{formatAmount(discountAmount)}
+                    </span>
+                  </div>
+                )}
 
                 <div className="flex justify-between text-xs font-manrope">
                   <span className="text-gray-500">Delivery Fee</span>
                   <span className="font-semibold text-[#3e5a2c]">
-                    {deliveryCharge > 0 ? `₹${deliveryCharge}` : "FREE"}
+                    {deliveryCharge > 0 ? `₹${formatAmount(deliveryCharge)}` : "FREE"}
                   </span>
                 </div>
 
@@ -605,7 +642,7 @@ const PaymentSuccess = () => {
                     Total Amount
                   </span>
                   <span className="text-2xl font-bold text-[#572340] font-manrope">
-                    ₹{totalAmount}
+                    ₹{formatAmount(totalAmount)}
                   </span>
                 </div>
 
