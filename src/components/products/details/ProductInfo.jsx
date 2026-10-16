@@ -121,10 +121,10 @@ const ProductInfo = ({ product }) => {
       </div>
 
       {/* Rating */}
-      <div className="flex items-center gap-2.5 sm:gap-3">
+      {/* <div className="flex items-center gap-2.5 sm:gap-3">
         <div className="shrink-0 whitespace-nowrap inline-flex items-center justify-center gap-1 rounded-full px-3.5 py-1 md:px-4 md:py-2 text-sm md:text-base font-semibold text-white bg-pink-600 hover:bg-[#60b396] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] cursor-pointer">
           ⭐ {product?.rating ?? "4.5"}
-        </div>
+        </div> */}
 
         <span className="text-xs sm:text-sm md:text-base text-gray-500">
           Trusted by hundreds of happy customers
