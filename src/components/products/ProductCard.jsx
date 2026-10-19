@@ -214,7 +214,7 @@ const handleWishlistClick = async (e) => {
         )}
 
         {/* Bestseller */}
-        {isBestseller && (
+        {/* {isBestseller && (
           <span
             className="
               absolute left-1 top-1 rounded-sm
@@ -229,7 +229,35 @@ const handleWishlistClick = async (e) => {
           >
             Bestseller
           </span>
-        )}
+        )} */}
+        
+{isBestseller && (
+  <span
+    className="
+      absolute left-1 top-1 z-10
+      -rotate-24 origin-center
+      rounded-sm
+      px-1 py-0.5
+      text-[6px] uppercase
+      font-manrope font-medium
+      bg-pink-600 text-white
+      shadow-[1px_2px_0px_#000]
+      cursor-pointer
+
+      sm:left-4 sm:top-4
+      sm:rounded-md
+      sm:px-3 sm:py-1
+      sm:text-xs
+      sm:shadow-[2px_3px_0px_#000]
+      hover:bg-[#60b396]
+      hover:shadow-[3px_4px_0px_#000]
+      transition-transform duration-200
+    "
+  >
+    Bestseller
+  </span>
+)}
+
 
         {/* Discount */}
         {discount > 0 && (
