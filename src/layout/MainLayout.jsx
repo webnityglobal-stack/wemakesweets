@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 import Navbar from '../components/common/Navbar'
 import Footer from '../components/common/Footer'
 import TopBanner from '../components/topbanner/TopBanner'
+import PromoPopupModal from '../components/common/PromoPopupModal'
 
 const MainLayout = () => {
   return (
@@ -16,6 +17,7 @@ const MainLayout = () => {
         <Outlet/>
     </div>
     <Footer/>
+    <PromoPopupModal />
      </div>
   )
 }
