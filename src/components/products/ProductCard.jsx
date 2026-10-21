@@ -234,7 +234,7 @@ const handleWishlistClick = async (e) => {
 {isBestseller && (
   <span
     className="
-      absolute left-1 top-1 z-10
+      absolute left-1 top-3 z-10
       -rotate-24 origin-center
       rounded-sm
       px-1 py-0.5
@@ -244,7 +244,7 @@ const handleWishlistClick = async (e) => {
       shadow-[1px_2px_0px_#000]
       cursor-pointer
 
-      sm:left-4 sm:top-4
+      sm:left-4 sm:top-8
       sm:rounded-md
       sm:px-3 sm:py-1
       sm:text-xs
