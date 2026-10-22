@@ -15,6 +15,7 @@ export const getCartItemCount = (cart) => {
   return 0;
 };
 
+
 export const emitCartUpdated = (cart = null) => {
   if (typeof window !== "undefined") {
     window.dispatchEvent(
