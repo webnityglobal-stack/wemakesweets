@@ -83,7 +83,7 @@ const OrderConfirmation = () => {
       0
     ),
 
-    delivery: stateOrder?.delivery ?? 49,
+    delivery: stateOrder?.delivery ?? 0,
 
     expectedDelivery: expectedDeliveryFormatted,
   };
@@ -553,7 +553,11 @@ const OrderConfirmation = () => {
                   </span>
 
                   <span className="font-semibold">
-                    ₹{order.delivery}
+                    {order.delivery === 0 ? (
+                      <span className="text-[#3e5a2c]">FREE</span>
+                    ) : (
+                      `₹${order.delivery}`
+                    )}
                   </span>
                 </div>
 

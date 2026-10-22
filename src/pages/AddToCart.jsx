@@ -241,8 +241,7 @@ const AddToCart = () => {
 
   const discount = Math.max(0, subtotal - saleTotal);
 
-  const delivery =
-    saleTotal === 0 ? 0 : saleTotal >= 350 ? 0 : 49;
+  const delivery = 0;
 
   const total = saleTotal + delivery;
 
@@ -831,7 +830,7 @@ const AddToCart = () => {
                         Free Delivery
                       </p>
                       <p className="text-[10px] font-normal text-gray-500 font-manrope">
-                        On orders above ₹349
+                        On all orders
                       </p>
                     </div>
                   </div>

@@ -274,7 +274,7 @@ const ProductInfo = ({ product }) => {
       <div className="space-y-2 md:space-y-4 rounded-3xl bg-[#f9e4bf]/20 p-2 md:p-6">
         <div className="flex items-center gap-3 text-[#552b12]">
           <Truck size={22} />
-          <span>Free Delivery on Orders Above ₹499</span>
+          <span>Free Delivery on All Orders</span>
         </div>
 
         <div className="flex items-center gap-3 text-[#552b12]">
