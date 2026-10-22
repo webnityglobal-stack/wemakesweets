@@ -215,7 +215,7 @@ const handleWishlistClick = async (e) => {
 
         {/* Bestseller Tag */}
         {isBestseller && (
-          <div className="absolute left-1 top-3 z-10 -rotate-24 origin-center sm:left-4 sm:top-8 pointer-events-none">
+          <div className="absolute left-1 top-3 z-10 origin-center sm:left-4 sm:top-8 pointer-events-none">
             <span
               className="
                 relative overflow-hidden inline-block
