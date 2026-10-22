@@ -213,51 +213,32 @@ const handleWishlistClick = async (e) => {
           />
         )}
 
-        {/* Bestseller */}
-        {/* {isBestseller && (
-          <span
-            className="
-              absolute left-1 top-1 rounded-sm
-              px-1 py-0.5 text-[6px] uppercase 
-              sm:left-4 sm:top-4 sm:rounded-md sm:px-3 sm:py-1 sm:text-xs font-manrope font-medium   bg-pink-600
-              hover:bg-[#60b396]
-              text-white
-              hover:text-white
-              shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
-              cursor-pointer
-            "
-          >
-            Bestseller
-          </span>
-        )} */}
-        
-{isBestseller && (
-  <span
-    className="
-      absolute left-1 top-3 z-10
-      -rotate-24 origin-center
-      rounded-sm
-      px-1 py-0.5
-      text-[6px] uppercase
-      font-manrope font-medium
-      bg-pink-600 text-white
-      shadow-[1px_2px_0px_#000]
-      cursor-pointer
-
-      sm:left-4 sm:top-8
-      sm:rounded-md
-      sm:px-3 sm:py-1
-      sm:text-xs
-      sm:shadow-[2px_3px_0px_#000]
-      hover:bg-[#60b396]
-      hover:shadow-[3px_4px_0px_#000]
-      transition-transform duration-200
-    "
-  >
-    Bestseller
-  </span>
-)}
-
+        {/* Bestseller Tag */}
+        {isBestseller && (
+          <div className="absolute left-1 top-3 z-10 -rotate-24 origin-center sm:left-4 sm:top-8 pointer-events-none">
+            <span
+              className="
+                relative overflow-hidden inline-block
+                rounded-sm sm:rounded-md
+                px-1.5 py-0.5 sm:px-3 sm:py-1
+                text-[7px] sm:text-xs
+                font-manrope font-extrabold uppercase tracking-wider
+                bg-pink-600 text-white
+                shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000]
+                hover:bg-[#60b396]
+                cursor-pointer pointer-events-auto
+                animate-bestseller-flash
+                transition-colors duration-200
+              "
+            >
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent animate-bestseller-shimmer"
+              />
+              <span className="relative z-10">Bestseller</span>
+            </span>
+          </div>
+        )}
 
         {/* Discount */}
         {discount > 0 && (

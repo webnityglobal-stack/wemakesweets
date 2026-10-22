@@ -442,3 +442,46 @@ body {
 }
 
 
+
+/* =========================================
+   BESTSELLER FLASH & SHIMMER ANIMATION
+========================================= */
+@keyframes bestsellerFlash {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1) drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+  }
+  15% {
+    transform: scale(1.1);
+    filter: brightness(1.35) drop-shadow(0 0 8px rgba(255, 230, 0, 0.9)) drop-shadow(0 0 14px rgba(236, 72, 153, 0.8));
+  }
+  30% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  45% {
+    transform: scale(1.14);
+    filter: brightness(1.45) drop-shadow(0 0 10px rgba(255, 255, 255, 1)) drop-shadow(0 0 18px rgba(255, 215, 0, 0.95));
+  }
+  60% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+@keyframes bestsellerShimmer {
+  0%, 20% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  60%, 100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+.animate-bestseller-flash {
+  animation: bestsellerFlash 2.4s ease-in-out infinite;
+}
+
+.animate-bestseller-shimmer {
+  animation: bestsellerShimmer 2.4s ease-in-out infinite;
+}

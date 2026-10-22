@@ -512,16 +512,21 @@ const AddToCart = () => {
                         {isObjectProduct && product?.isBestSeller && (
                           <span
                             className="
+                              relative overflow-hidden inline-flex items-center
                               absolute left-2 top-2 z-10
                               rounded-md px-2 py-1
-                              text-[9px] uppercase
-                              font-manrope font-medium
-                              bg-pink-600
-                              text-white
+                              text-[9px] uppercase tracking-wider
+                              font-manrope font-extrabold
+                              bg-pink-600 text-white
                               shadow-[1px_2px_0px_#000]
+                              animate-bestseller-flash
                             "
                           >
-                            Bestseller
+                            <span
+                              aria-hidden="true"
+                              className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent animate-bestseller-shimmer"
+                            />
+                            <span className="relative z-10">Bestseller</span>
                           </span>
                         )}
                       </div>

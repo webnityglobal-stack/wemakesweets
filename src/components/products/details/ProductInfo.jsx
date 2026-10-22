@@ -101,11 +101,17 @@ const ProductInfo = ({ product }) => {
       {/* Badge */}
       {isBestseller && (
         <span
-          className="inline-flex rounded-full px-4 py-2 text-sm font-semibold hover:scale-105
+          className="
+            relative overflow-hidden inline-flex items-center rounded-full px-4 py-1.5 text-sm font-bold uppercase tracking-wider
             bg-pink-600 hover:bg-[#60b396] text-white shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000]
-            cursor-pointer"
+            cursor-pointer animate-bestseller-flash transition-colors duration-200
+          "
         >
-          Bestseller
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent animate-bestseller-shimmer"
+          />
+          <span className="relative z-10">Bestseller</span>
         </span>
       )}
 
