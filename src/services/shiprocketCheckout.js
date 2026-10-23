@@ -30,7 +30,7 @@ export const getFallbackUrl = () => {
  * Launch Shiprocket Headless Checkout
  * @param {Event} event - Click event from button
  * @param {string} [customToken] - Optional token override
- * @param {Object} [options] - Additional options (fallbackUrl, isInitiatedFromApp)
+ * @param {Object} [options] - Additional options (fallbackUrl, isInitiatedFromApp, eventCallback)
  * @returns {boolean} Whether checkout was initiated successfully
  */
 export const launchShiprocketCheckout = (event, customToken, options = {}) => {
@@ -44,9 +44,13 @@ export const launchShiprocketCheckout = (event, customToken, options = {}) => {
 
   if (typeof window !== "undefined" && window.HeadlessCheckout?.addToCart) {
     try {
+      if (options.eventCallback && typeof options.eventCallback === "function") {
+        window.srCustomCheckoutCallBackFn = options.eventCallback;
+      }
       window.HeadlessCheckout.addToCart(event, token, {
         fallbackUrl,
         isInitiatedFromApp: Boolean(options.isInitiatedFromApp),
+        eventCallback: options.eventCallback,
       });
       return true;
     } catch (err) {

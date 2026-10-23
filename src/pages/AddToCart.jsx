@@ -26,13 +26,59 @@ const AddToCart = () => {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const currentOrderIdRef = useRef(null);
 
-  // Listen for FastRR / Shiprocket checkout events in case live address is emitted from the popup
+  // References for managing active checkout session
+  const isDismissingRef = useRef(false);
+
+  // Helper to mark pending order as CANCELLED when checkout is dismissed / backed out
+  const handleCheckoutDismiss = async (reason = "Checkout closed by user") => {
+    const orderIdToCancel = currentOrderIdRef.current;
+    if (!orderIdToCancel || isDismissingRef.current) return;
+
+    isDismissingRef.current = true;
+    currentOrderIdRef.current = null;
+    setIsCheckingOut(false);
+
+    try {
+      console.log(`[Shiprocket Checkout] Dismissed / Backed out for order: ${orderIdToCancel}`);
+      await paymentService.cancelPayment(orderIdToCancel, reason);
+      toast.info("Checkout was cancelled. Order has been marked as cancelled.");
+    } catch (err) {
+      console.warn("[Shiprocket Checkout] Error cancelling order on dismiss:", err);
+    } finally {
+      isDismissingRef.current = false;
+    }
+  };
+
+  // Listen for FastRR / Shiprocket checkout events (live address, close, back)
   useEffect(() => {
+    // 1. Window Message listener
     const handleCheckoutMessage = async (event) => {
       try {
         const data = event.data;
-        if (!data || !currentOrderIdRef.current) return;
+        if (!data) return;
 
+        const trigger = String(data?.trigger || "").toLowerCase();
+        const eventName = String(data?.event || "").toLowerCase();
+        const action = String(data?.action || "").toLowerCase();
+        const type = String(data?.type || "").toLowerCase();
+
+        // Detect checkout close / back events
+        if (
+          trigger === "headless-close" ||
+          trigger === "close" ||
+          eventName === "sr-headless-close" ||
+          action === "close" ||
+          type === "close" ||
+          data?.exitCheckout
+        ) {
+          console.log("[Shiprocket Checkout] Close message event detected:", data);
+          await handleCheckoutDismiss("User clicked back / close in checkout modal");
+          return;
+        }
+
+        if (!currentOrderIdRef.current) return;
+
+        // Detect live shipping address if emitted from popup
         const addr =
           data?.shipping_address ||
           data?.shippingAddress ||
@@ -51,7 +97,77 @@ const AddToCart = () => {
     };
 
     window.addEventListener("message", handleCheckoutMessage);
-    return () => window.removeEventListener("message", handleCheckoutMessage);
+
+    // 2. Global Shiprocket Custom Callback
+    window.srCustomCheckoutCallBackFn = (event) => {
+      console.log("[Shiprocket Checkout Custom Callback]:", event);
+      if (
+        event?.event === "sr-headless-close" ||
+        event?.exitCheckout ||
+        event?.type === "close"
+      ) {
+        handleCheckoutDismiss("Checkout closed / backed out");
+      }
+    };
+
+    // 3. DOM MutationObserver to detect when FastRR modal is closed / removed
+    let modalWasOpened = false;
+    const observer = new MutationObserver(() => {
+      const modalEl =
+        document.getElementById("fastrr-main-container") ||
+        document.getElementById("headless-container") ||
+        document.querySelector(".fastrr-checkout-modal") ||
+        document.querySelector("iframe[src*='shiprocket.com']") ||
+        document.querySelector("iframe[src*='fastrr']");
+
+      if (modalEl) {
+        modalWasOpened = true;
+      } else if (modalWasOpened) {
+        modalWasOpened = false;
+        if (currentOrderIdRef.current) {
+          console.log("[Shiprocket Checkout] Modal removed from DOM");
+          handleCheckoutDismiss("Checkout modal closed / backed out");
+        }
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // 4. Popstate listener (for browser / hardware back buttons)
+    const handlePopState = () => {
+      if (currentOrderIdRef.current) {
+        setTimeout(() => {
+          const modalEl =
+            document.getElementById("fastrr-main-container") ||
+            document.getElementById("headless-container");
+          if (!modalEl && currentOrderIdRef.current) {
+            handleCheckoutDismiss("User navigated back");
+          }
+        }, 150);
+      }
+    };
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("message", handleCheckoutMessage);
+      window.removeEventListener("popstate", handlePopState);
+      if (window.srCustomCheckoutCallBackFn) {
+        window.srCustomCheckoutCallBackFn = null;
+      }
+
+      // Cleanup pending order if user navigated away from cart page
+      if (
+        currentOrderIdRef.current &&
+        typeof window !== "undefined" &&
+        !window.location.pathname.includes("/payment/success") &&
+        !window.location.pathname.includes("/order-confirmation")
+      ) {
+        const oid = currentOrderIdRef.current;
+        currentOrderIdRef.current = null;
+        paymentService.cancelPayment(oid, "User left cart page during checkout");
+      }
+    };
   }, []);
 
 
@@ -336,6 +452,12 @@ const AddToCart = () => {
       const launched = launchShiprocketCheckout(e, checkoutToken, {
         fallbackUrl: `${window.location.origin}/cart`,
         isInitiatedFromApp: false,
+        eventCallback: (ev) => {
+          console.log("[FastRR eventCallback]", ev);
+          if (ev?.event === "sr-headless-close" || ev?.exitCheckout) {
+            handleCheckoutDismiss("Checkout closed by user");
+          }
+        },
       });
 
       if (!launched) {
