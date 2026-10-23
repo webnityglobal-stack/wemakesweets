@@ -292,6 +292,7 @@ const Reviews = ({ product }) => {
         },
       });
       return;
+      
     }
 
     // Purchase & delivery verification check
