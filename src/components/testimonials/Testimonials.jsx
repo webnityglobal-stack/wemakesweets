@@ -213,7 +213,7 @@ console.log('this is main reivew in compent ', reviews);
               </div>
 
               <p className="mt-10 font-manrope flex-1 text-center text-[14px] md:text-[15px] font-normal leading-9  text-[#f9e4bf]">
-                {item.comment}
+                "{item.comment}"
               </p>
 
               <div className="mt-8 border-t border-white/20 pt-5">
