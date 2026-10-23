@@ -631,7 +631,7 @@ const AddToCart = () => {
                         />
 
                         {/* Bestseller */}
-                        {isObjectProduct && product?.isBestSeller && (
+                        {/* {isObjectProduct && product?.isBestSeller && (
                           <span
                             className="
                               relative overflow-hidden inline-flex items-center
@@ -648,9 +648,9 @@ const AddToCart = () => {
                               aria-hidden="true"
                               className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent animate-bestseller-shimmer"
                             />
-                            <span className="relative z-10">Bestseller</span>
+                            <span className="relative z-10">ddBestseller</span>
                           </span>
-                        )}
+                        )} */}
                       </div>
 
                       {/* CONTENT */}
