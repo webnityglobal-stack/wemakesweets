@@ -1,5 +1,11 @@
 import { Star, Quote } from "lucide-react";
 import ScrollWavyUnderline from "../common/ScrollWavyUnderline";
+import { useEffect, useState } from "react";
+import reviewService from "@/services/reviewService";
+
+
+
+
 
 const testimonials = [
   {
@@ -47,6 +53,54 @@ const testimonials = [
 const data = [...testimonials, ...testimonials];
 
 export default function Testimonials() {
+const colors= ["#8b183d", "#603917", "#3e5a2c", "#164984"];
+
+
+
+ 
+ const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const response = await reviewService.getLatestReview();
+
+        setReviews(
+          response.reviews?.filter((review) => review.isApproved) ?? []
+        );
+      } catch (err) {
+        setError(
+          err.response?.data?.message || "Failed to load reviews"
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReviews();
+  }, []);
+
+  if (loading) return <p>Loading reviews...</p>;
+
+  if (error) {
+    return <p role="alert">{error}</p>;
+  }
+
+  if (reviews.length === 0) {
+    return <p>No reviews available yet.</p>;
+  }
+
+
+
+
+console.log('this is main reivew in compent ', reviews);
+
   return (
     <section className="overflow-hidden bg-gradient-to-b from-[#f9e4bf] via-[#f2ede1] to-[#f9e4bf] py-8">
 
@@ -69,7 +123,7 @@ export default function Testimonials() {
 
         <div className="animate-slider flex w-max gap-8">
 
-          {data.map((item, index) => (
+          {/* {data.map((item, index) => (
 
             <div
               key={index}
@@ -128,7 +182,73 @@ export default function Testimonials() {
 
             </div>
 
+          ))} */}
+
+ 
+{reviews.map((item, index) => (
+
+            <div
+              key={index}
+              className="group relative flex h-[310px] w-[330px] md:h-[320px] md:w-[290px] flex-col rounded-[28px] p-8 shadow-xl transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl md:w-[380px]"
+             style={{
+      background: colors[index % 4],
+    }}
+            >
+
+              <Quote
+                className="absolute left-7 top-7 text-white/20"
+                size={40}
+              />
+
+              <div className="flex justify-center gap-1">
+
+                {[...Array(item.rating)].map((_, i) => (
+                  <Star
+                    key={i}
+                    size={18}
+                    className="fill-[#F4C02D] text-[#F4C02D]"
+                  />
+                ))}
+
+              </div>
+
+              <p className="mt-10 font-manrope flex-1 text-center text-[14px] md:text-[15px] font-normal leading-9  text-[#f9e4bf]">
+                {item.comment}
+              </p>
+
+              <div className="mt-8 border-t border-white/20 pt-5">
+
+                <div className="flex items-center gap-4">
+
+                  <img
+                    src='/customers/customer.png'
+                    alt={item.user.name}
+                    className="h-14 w-14 rounded-full border-2 border-[#66BC9E] object-cover"
+                  />
+
+                  <div>
+
+                    <h4 className="font-semibold text-[#f9e4bf]">
+                      {item.user.name}
+                    </h4>
+
+                    {/* <p className="text-sm text-[#f9e4bf]/75">
+                      {item.city}
+                    </p> */}
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
           ))}
+
+
+
+
 
         </div>
 

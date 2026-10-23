@@ -1,6 +1,20 @@
 import axiosInstance from "../api/axiosInstance";
 
 const reviewService = {
+
+
+
+// get latest 12 review
+// get latest 12 reviews
+getLatestReview: async () => {
+  const response = await axiosInstance.get("/reviews/all");
+
+  console.log("This is all reviews:", response.data);
+
+  return response.data;
+},
+
+
   /**
    * Add a review for a product
    * @param {{ productId: string, rating: number, comment: string }} payload
