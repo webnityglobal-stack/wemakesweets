@@ -292,26 +292,26 @@ const Reviews = ({ product }) => {
         },
       });
       return;
-      
+
     }
 
     // Purchase & delivery verification check
-    if (purchaseStatus.checked) {
-      if (!purchaseStatus.hasPurchased) {
-        setNotEligibleMessage(
-          "You can only review a product after purchasing and receiving it."
-        );
-        setNotEligibleModalOpen(true);
-        return;
-      }
-      if (!purchaseStatus.hasDelivered) {
-        setNotEligibleMessage(
-          "You have ordered this product, but reviews can only be submitted once the order has been delivered to you."
-        );
-        setNotEligibleModalOpen(true);
-        return;
-      }
-    }
+    // if (purchaseStatus.checked) {
+    //   if (!purchaseStatus.hasPurchased) {
+    //     setNotEligibleMessage(
+    //       "You can only review a product after purchasing and receiving it."
+    //     );
+    //     setNotEligibleModalOpen(true);
+    //     return;
+    //   }
+    //   if (!purchaseStatus.hasDelivered) {
+    //     setNotEligibleMessage(
+    //       "You have ordered this product, but reviews can only be submitted once the order has been delivered to you."
+    //     );
+    //     setNotEligibleModalOpen(true);
+    //     return;
+    //   }
+    // }
 
     if (userExistingReview) {
       setEditingReview(userExistingReview);
