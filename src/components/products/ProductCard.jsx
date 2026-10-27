@@ -285,7 +285,7 @@ const handleWishlistClick = async (e) => {
         </button>
 
         {/* Rating */}
-        {/* <div
+        <div
           className="
             absolute bottom-1 left-1 flex items-center gap-0.5
             rounded-sm px-1.5 py-0.5
@@ -307,7 +307,7 @@ const handleWishlistClick = async (e) => {
           <span className="text-[7px] font-semibold font-manrope sm:text-sm">
             {product.rating}
           </span>
-        </div> */}
+        </div>
 
         {/* Sold Out */}
         {!inStock && (

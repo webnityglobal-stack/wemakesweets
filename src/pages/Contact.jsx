@@ -101,7 +101,7 @@ export default function Contact() {
             {/* CONTACT FORM */}
             {/* ======================================= */}
 
-            <div className="w-full">
+            <div className="w-full mt-[84px]">
               <div className="rounded-[28px] sm:rounded-[35px] bg-[#603917] p-6 sm:p-8 lg:p-10 shadow-2xl">
 
                 <span className="uppercase tracking-[4px] sm:tracking-[5px] text-[#f9e4bf] font-semibold text-xs sm:text-sm">
@@ -235,7 +235,7 @@ export default function Contact() {
 
                 <ScrollWavyUnderline className="justify-center lg:justify-start lg:pr-70" />
 
-                <p className="mt-4 sm:mt-6 leading-7 sm:leading-8 text-[#3e5a2c] text-sm sm:text-base">
+                <p className="mt-4 sm:mt-6 leading-7 text-[#3e5a2c] text-sm sm:text-base">
                   Have questions about our sweets,
                   bulk orders or corporate gifting?
                   Reach out to us anytime.
