@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import {
   Check,
@@ -20,6 +20,7 @@ import orderService from "@/services/orderService";
 import paymentService from "@/services/paymentService";
 import cartService from "@/services/cartService";
 import { emitCartUpdated } from "@/utils/cartEvents";
+import { trackPurchase } from "@/services/metaTrackingService";
 
 const PaymentSuccess = () => {
   const location = useLocation();
@@ -41,6 +42,18 @@ const PaymentSuccess = () => {
   const [loading, setLoading] = useState(Boolean(orderIdFromQuery && !location.state?.order));
   const [error, setError] = useState(null);
   const [copied, setCopied] = useState(false);
+  const trackedPurchaseOrderIdRef = useRef(null);
+
+  // Track Purchase in Meta Pixel + Conversions API
+  useEffect(() => {
+    if (order && !isFailed) {
+      const currentOrderId = String(order.orderId || order._id || orderIdFromQuery || "");
+      if (currentOrderId && trackedPurchaseOrderIdRef.current !== currentOrderId) {
+        trackedPurchaseOrderIdRef.current = currentOrderId;
+        trackPurchase(order);
+      }
+    }
+  }, [order, isFailed, orderIdFromQuery]);
 
   useEffect(() => {
     if (!isFailed) {

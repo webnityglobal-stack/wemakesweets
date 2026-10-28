@@ -40,6 +40,7 @@
 
 // export default ProductDetailsPage;
 
+import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 import NutritionFacts from "../components/products/details/NutritionFacts";
@@ -50,6 +51,7 @@ import ProductInfo from "../components/products/details/ProductInfo";
 import Reviews from "../components/products/details/Reviews";
 
 import useProduct from "../hooks/products/useProduct";
+import { trackViewContent } from "@/services/metaTrackingService";
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
@@ -59,6 +61,18 @@ const ProductDetailsPage = () => {
     loading,
     error,
   } = useProduct(productId);
+
+  const lastTrackedProductIdRef = useRef(null);
+
+  useEffect(() => {
+    if (product && (product._id || product.id)) {
+      const currentId = String(product._id || product.id);
+      if (lastTrackedProductIdRef.current !== currentId) {
+        lastTrackedProductIdRef.current = currentId;
+        trackViewContent(product);
+      }
+    }
+  }, [product]);
 
   if (loading) {
     return (

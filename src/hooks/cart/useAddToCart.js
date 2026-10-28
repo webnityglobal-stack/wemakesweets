@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import cartService from "../../services/cartService";
 import { authStorage } from "../../utils/authStorage";
 import { emitCartUpdated } from "../../utils/cartEvents";
+import { trackAddToCart } from "../../services/metaTrackingService";
 
 const useAddToCart = () => {
   const [loading, setLoading] = useState(false);
@@ -14,6 +15,7 @@ const useAddToCart = () => {
     variantId,
     quantity = 1,
     productName,
+    price = 0,
   }) => {
     if (!authStorage.isAuthenticated()) {
       const msg = "Please login to add items to your cart.";
@@ -38,6 +40,25 @@ const useAddToCart = () => {
       });
 
       emitCartUpdated(data?.cart || null);
+
+      // Meta Pixel + Conversions API: AddToCart
+      try {
+        const addedItem = data?.cart?.items?.find(
+          (i) =>
+            String(i.variantId || i.variant?._id || "") === String(variantId) ||
+            String(i.product || i.productId || "") === String(productId)
+        );
+        const effectivePrice = price || addedItem?.price || 0;
+        trackAddToCart({
+          productId,
+          variantId,
+          quantity,
+          productName,
+          price: effectivePrice,
+        });
+      } catch (trackErr) {
+        console.warn("Meta AddToCart tracking error:", trackErr);
+      }
 
       const successMsg = productName
         ? `"${productName}" added to cart successfully!`

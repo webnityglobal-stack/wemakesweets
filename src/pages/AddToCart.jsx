@@ -20,6 +20,7 @@ import { authStorage } from "@/utils/authStorage";
 import orderService from "@/services/orderService";
 import paymentService from "@/services/paymentService";
 import addressService from "@/services/addressService";
+import { trackInitiateCheckout } from "@/services/metaTrackingService";
 
 const AddToCart = () => {
   const navigate = useNavigate();
@@ -431,6 +432,17 @@ const AddToCart = () => {
         throw new Error(orderRes?.message || "Could not generate order ID");
       }
       currentOrderIdRef.current = orderId;
+
+      // Meta Pixel + Conversions API: InitiateCheckout
+      try {
+        trackInitiateCheckout({
+          items,
+          totalAmount: total,
+          orderId,
+        });
+      } catch (trackErr) {
+        console.warn("Meta InitiateCheckout tracking error:", trackErr);
+      }
 
       // 5. Call POST /payment/create with orderId
       toast.loading("Getting FastRR checkout token...", { id: toastId });
