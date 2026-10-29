@@ -11,8 +11,6 @@ export const getShiprocketCheckoutToken = () => {
 };
 
 export const getRedirectUrl = () => {
-  // Live frontend: https://wemakesweets.vercel.app/order-confirmation
-  // Local frontend: http://localhost:5173/order-confirmation
   if (typeof window !== "undefined" && window.location?.origin) {
     return `${window.location.origin}/order-confirmation`;
   }
@@ -29,118 +27,214 @@ export const getFallbackUrl = () => {
 };
 
 /**
- * Clear all FastRR / Shiprocket cookies, localStorage entries, and DOM elements
- * to ensure that switching accounts or logging out doesn't leak another user's session.
+ * Helper to generate a compliant UUID v4
+ */
+export const generateUUID = () => {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+};
+
+/**
+ * Rotate FastRR device & session UUIDs so Shiprocket's server cannot link the current
+ * browser instance to the previously logged-in user.
+ */
+export const rotateFastrrDeviceIds = () => {
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+
+  const newDeviceId = generateUUID();
+  const newSessionId = generateUUID();
+
+  const hostname = window.location.hostname;
+  const domainParts = hostname.split(".");
+  const domains = ["", hostname, `.${hostname}`];
+  if (domainParts.length > 2) {
+    domains.push(`.${domainParts.slice(-2).join(".")}`);
+  }
+
+  domains.forEach((dom) => {
+    const domStr = dom ? `; domain=${dom}` : "";
+    document.cookie = `fastrr_uuid=${newDeviceId}; path=/${domStr}; max-age=31536000; SameSite=Lax`;
+    document.cookie = `fastrr_usid=${newSessionId}; path=/${domStr}; max-age=31536000; SameSite=Lax`;
+  });
+};
+
+/**
+ * Thoroughly delete all FastRR / Shiprocket cookies across all domain and path combinations
+ * including SameSite=None; Secure required by Chrome for cross-site cookies.
+ */
+export const purgeAllFastrrCookies = () => {
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+
+  const cookieNames = [
+    "fastrr_uuid",
+    "fastrr_usid",
+    "fastrr_user_id",
+    "fastrr_user_profile_id",
+    "fastrrUserIdEventTriggered",
+    "fastrrPrefetchTriggered",
+    "fastrr_status",
+    "fastrr_transaction_id",
+    "fastrr_redirect_uuid",
+    "fastrr_redirect",
+    "fastrr_redirect_time",
+    "src_fca_utm",
+    "sr_checkout_utm",
+    "discount_nudge",
+    "discount_code",
+    "isPoweredBySrLogoVisible",
+    "EDD_check_uuid",
+    "e360_session",
+    "__oppref",
+    "__uc_site",
+    "_fbp",
+    "_fbc",
+  ];
+
+  if (document.cookie) {
+    document.cookie.split(";").forEach((c) => {
+      const name = c.split("=")[0].trim();
+      if (/fastrr|shiprocket|sr_|src_|pickrr|uc_/i.test(name) && !cookieNames.includes(name)) {
+        cookieNames.push(name);
+      }
+    });
+  }
+
+  const hostname = window.location.hostname;
+  const domainParts = hostname.split(".");
+  const domains = ["", hostname, `.${hostname}`];
+  if (domainParts.length > 2) {
+    domains.push(`.${domainParts.slice(-2).join(".")}`);
+  }
+
+  const paths = ["/", "/cart", "/checkout", "/my-account", window.location.pathname];
+  const flagCombos = [
+    "; SameSite=None; Secure",
+    "; SameSite=Lax",
+    "; SameSite=Strict",
+    "",
+  ];
+
+  cookieNames.forEach((name) => {
+    domains.forEach((dom) => {
+      paths.forEach((p) => {
+        flagCombos.forEach((flags) => {
+          const domStr = dom ? `; domain=${dom}` : "";
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=${p}${domStr}${flags}`;
+          document.cookie = `${name}=; max-age=0; path=${p}${domStr}${flags}`;
+        });
+      });
+    });
+  });
+};
+
+/**
+ * Clear all FastRR localStorage cached tokens and set srcUserPerformedLogout flag
+ * so Fastrr's React app will not automatically log in the previous user.
+ */
+export const purgeFastrrLocalStorage = () => {
+  if (typeof window === "undefined" || !window.localStorage) return;
+
+  const fastrrKeys = [
+    "refreshToken",
+    "refreshTokenValue",
+    "user_id",
+    "seller_id",
+    "pim_sid",
+    "expireTime",
+    "x-session-token",
+    "fastrr_user_id",
+    "fastrr_user_profile_id",
+    "fastrrCart",
+    "codFormAddress",
+    "logout_temp",
+    "checkoutToken",
+    "user_type",
+    "__uc_site",
+    "landingPageUrl",
+    "landingPageExpireTime",
+    "shopifyCart",
+    "shopifyCartItems",
+    "srCartSelectedFreebies",
+    "srFreebieSelector",
+    "configfetchAfterRedirectionTried",
+    "marketingConsent",
+    "isCardDesign",
+    "srcUserCookieOpted",
+    "src_pim_sid",
+    "src_refresh_token",
+    "src_is_logged_in",
+    "src_user_id",
+    "buyer_details",
+    "fastrr_buyer_details",
+    "customer_address",
+  ];
+
+  fastrrKeys.forEach((k) => localStorage.removeItem(k));
+
+  for (let i = localStorage.length - 1; i >= 0; i--) {
+    const key = localStorage.key(i);
+    if (key && /fastrr|shiprocket|pickrr|sr_|src_/i.test(key) && key !== FASTRR_ACTIVE_USER_KEY) {
+      localStorage.removeItem(key);
+    }
+  }
+
+  // FastRR internal flags to completely disable cached session auto-login
+  localStorage.setItem("srcUserPerformedLogout", "true");
+  localStorage.setItem("logout_temp", "true");
+};
+
+/**
+ * Complete FastRR session purge (cookies + device rotation + localStorage + DOM)
  */
 export const clearFastrrCheckoutSession = () => {
   if (typeof window === "undefined") return;
 
   try {
-    // 1. Delete FastRR / Shiprocket cookies across possible paths and domains
-    const knownCookies = [
-      "fastrr_uuid",
-      "fastrr_usid",
-      "fastrr_user_id",
-      "fastrrUserIdEventTriggered",
-      "fastrrPrefetchTriggered",
-      "fastrr_status",
-      "fastrr_transaction_id",
-      "fastrr_redirect_uuid",
-      "fastrr_redirect",
-      "fastrr_redirect_time",
-      "src_fca_utm",
-      "sr_checkout_utm",
-      "discount_nudge",
-      "discount_code",
-      "isPoweredBySrLogoVisible",
-      "EDD_check_uuid",
-      "e360_session",
-      "__oppref",
-      "_fbp",
-      "_fbc",
-    ];
+    purgeAllFastrrCookies();
+    rotateFastrrDeviceIds();
+    purgeFastrrLocalStorage();
 
-    const allCookieNames = new Set(knownCookies);
-    if (document.cookie) {
-      document.cookie.split(";").forEach((cookieStr) => {
-        const name = cookieStr.split("=")[0].trim();
-        if (/fastrr|shiprocket|sr_|src_|pickrr/i.test(name)) {
-          allCookieNames.add(name);
-        }
-      });
-    }
-
-    const host = window.location.hostname;
-    const domains = ["", host, `.${host}`];
-    const parts = host.split(".");
-    if (parts.length > 2) {
-      domains.push(`.${parts.slice(-2).join(".")}`);
-    }
-
-    const paths = ["/", "/cart", "/checkout", "/my-account", window.location.pathname];
-
-    allCookieNames.forEach((name) => {
-      domains.forEach((d) => {
-        paths.forEach((p) => {
-          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=${p}${d ? `; domain=${d}` : ""}`;
-        });
-      });
-    });
-
-    // 2. Clear FastRR / Shiprocket localStorage keys
-    const APP_PROTECTED_KEYS = new Set([
-      "accessToken",
-      "user",
-      "guest_wishlist",
-      FASTRR_ACTIVE_USER_KEY,
-    ]);
-
-    const toRemove = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (key && !APP_PROTECTED_KEYS.has(key)) {
-        toRemove.push(key);
-      }
-    }
-    toRemove.forEach((key) => localStorage.removeItem(key));
-
-    // 3. Clear sessionStorage
     try {
       sessionStorage.clear();
     } catch (_) {}
 
-    // 4. Clean up any open / stale Fastrr DOM elements
     const domSelectors = [
       "#fastrr-main-container",
       "#headless-container",
       "#headless-iframe",
       "#fastrr-pre-loader",
       "#prefetch-iframe",
+      "#fastrr-prefetch-container",
       ".fastrr-checkout-modal",
       "iframe[src*='shiprocket']",
       "iframe[src*='fastrr']",
     ];
+
     domSelectors.forEach((sel) => {
       try {
         document.querySelectorAll(sel).forEach((el) => el.remove());
       } catch (_) {}
     });
 
-    // 5. Reset global Fastrr variables
     if (window.srCustomCheckoutCallBackFn) {
       window.srCustomCheckoutCallBackFn = null;
     }
 
-    console.log("[Shiprocket Checkout] FastRR session cleared successfully.");
+    console.log("[Shiprocket Checkout] FastRR session thoroughly purged and device ID rotated.");
   } catch (err) {
-    console.warn("[Shiprocket Checkout] Error clearing FastRR session:", err);
+    console.warn("[Shiprocket Checkout] Error purging FastRR session:", err);
   }
 };
 
 /**
- * Check if the active FastRR session in browser belongs to the current logged-in user.
- * If user switched or logged out, purges stale FastRR data and binds to the new user.
- * @param {Object|null} currentUser - The currently authenticated user object from authStorage
+ * Synchronize FastRR session with the currently authenticated website user.
+ * If user switched accounts or logged out, purges previous session.
  */
 export const syncFastrrUserSession = (currentUser) => {
   if (typeof window === "undefined") return;
@@ -154,10 +248,9 @@ export const syncFastrrUserSession = (currentUser) => {
     lastActiveUser = localStorage.getItem(FASTRR_ACTIVE_USER_KEY) || "";
   } catch (_) {}
 
-  // If user has changed or logged out, clear the previous Fastrr session
   if (!currentIdentifier || lastActiveUser !== currentIdentifier) {
     console.log(
-      `[Shiprocket Checkout] User switch/logout detected (from "${lastActiveUser}" to "${currentIdentifier}"). Purging FastRR session.`
+      `[Shiprocket Checkout] User switch/logout: previous "${lastActiveUser}", current "${currentIdentifier}". Purging FastRR session.`
     );
     clearFastrrCheckoutSession();
     try {
@@ -174,7 +267,7 @@ export const syncFastrrUserSession = (currentUser) => {
  * Launch Shiprocket Headless Checkout
  * @param {Event} event - Click event from button
  * @param {string} [customToken] - Optional token override
- * @param {Object} [options] - Additional options (fallbackUrl, isInitiatedFromApp, eventCallback, currentUser)
+ * @param {Object} [options] - Additional options (fallbackUrl, isInitiatedFromApp, eventCallback, currentUser, userAddress)
  * @returns {boolean} Whether checkout was initiated successfully
  */
 export const launchShiprocketCheckout = (event, customToken, options = {}) => {
@@ -186,21 +279,30 @@ export const launchShiprocketCheckout = (event, customToken, options = {}) => {
     return false;
   }
 
-  // Ensure FastRR session is strictly synced with current user before launch
-  if (options.currentUser) {
-    syncFastrrUserSession(options.currentUser);
+  // 1. Sync & purge previous FastRR session if account changed
+  const effectiveUser =
+    options.currentUser ||
+    (typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("user") || "null")
+      : null);
+
+  if (effectiveUser) {
+    syncFastrrUserSession(effectiveUser);
   }
 
+  // 2. Launch via HeadlessCheckout.addToCart cleanly without breaking iframe src
   if (typeof window !== "undefined" && window.HeadlessCheckout?.addToCart) {
     try {
       if (options.eventCallback && typeof options.eventCallback === "function") {
         window.srCustomCheckoutCallBackFn = options.eventCallback;
       }
+
       window.HeadlessCheckout.addToCart(event, token, {
         fallbackUrl,
         isInitiatedFromApp: Boolean(options.isInitiatedFromApp),
         eventCallback: options.eventCallback,
       });
+
       return true;
     } catch (err) {
       console.error("Error invoking HeadlessCheckout.addToCart:", err);

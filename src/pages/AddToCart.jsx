@@ -15,6 +15,7 @@ import useCart from "@/hooks/cart/useCart";
 import {
   launchShiprocketCheckout,
   getShiprocketCheckoutToken,
+  syncFastrrUserSession,
 } from "@/services/shiprocketCheckout";
 import { authStorage } from "@/utils/authStorage";
 import orderService from "@/services/orderService";
@@ -49,6 +50,12 @@ const AddToCart = () => {
       isDismissingRef.current = false;
     }
   };
+
+  // Ensure FastRR session matches the currently logged-in user on cart mount
+  useEffect(() => {
+    const user = authStorage.getUser();
+    syncFastrrUserSession(user);
+  }, []);
 
   // Listen for FastRR / Shiprocket checkout events (live address, close, back)
   useEffect(() => {
@@ -375,6 +382,9 @@ const AddToCart = () => {
       return;
     }
 
+    const currentUser = authStorage.getUser();
+    syncFastrrUserSession(currentUser);
+
     setIsCheckingOut(true);
     const toastId = toast.loading("Initiating checkout session...");
 
@@ -414,14 +424,43 @@ const AddToCart = () => {
         };
       });
 
+      // 2.5 Fetch current user's default saved address before creating order
+      let userAddress = null;
+      try {
+        const addrRes = await addressService.getAddresses();
+        const list = addrRes?.addresses || addrRes?.data || (Array.isArray(addrRes) ? addrRes : []);
+        userAddress = list.find((a) => a.isDefault) || list[0] || null;
+      } catch (addrErr) {
+        console.warn("Address fetch error before createOrder:", addrErr);
+      }
+
+      let shippingAddressPayload = null;
+      if (userAddress && userAddress.address) {
+        shippingAddressPayload = {
+          name: userAddress.name || currentUser?.name || "Customer",
+          phone: userAddress.phone || currentUser?.phone || "",
+          email: userAddress.email || currentUser?.email || "",
+          address: userAddress.address,
+          address2: userAddress.address2 || "",
+          city: userAddress.city || "",
+          state: userAddress.state || "",
+          pincode: String(userAddress.pincode || ""),
+          country: userAddress.country || "India",
+        };
+      } else if (currentUser) {
+        shippingAddressPayload = {
+          name: currentUser.name || "Customer",
+          phone: currentUser.phone || "",
+          email: currentUser.email || "",
+        };
+      }
+
       // 3. Create Order in backend to get orderId (e.g. WMS-...)
-      // Note: shippingAddress is null initially because delivery address is selected/confirmed
-      // inside the Shiprocket FastRR Headless Checkout modal.
       toast.loading("Creating order...", { id: toastId });
       const orderRes = await orderService.createOrder({
         items,
         paymentMethod: "ONLINE",
-        shippingAddress: null,
+        shippingAddress: shippingAddressPayload,
         shippingCharge: delivery,
         subtotal: saleTotal,
         totalAmount: total,
@@ -462,6 +501,8 @@ const AddToCart = () => {
 
       // 6. Launch FastRR Headless Checkout with the fresh dynamic token!
       const launched = launchShiprocketCheckout(e, checkoutToken, {
+        currentUser,
+        userAddress,
         fallbackUrl: `${window.location.origin}/cart`,
         isInitiatedFromApp: false,
         eventCallback: (ev) => {
