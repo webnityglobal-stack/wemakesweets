@@ -16,6 +16,8 @@ import {
   launchShiprocketCheckout,
   getShiprocketCheckoutToken,
   syncFastrrUserSession,
+  clearFastrrCheckoutSession,
+  rotateFastrrDeviceIds,
 } from "@/services/shiprocketCheckout";
 import { authStorage } from "@/utils/authStorage";
 import orderService from "@/services/orderService";
@@ -383,7 +385,10 @@ const AddToCart = () => {
     }
 
     const currentUser = authStorage.getUser();
-    syncFastrrUserSession(currentUser);
+
+    // ALWAYS purge old FastRR session and rotate device UUID before every checkout
+    // This prevents stale device cookies from auto-logging in a previous user
+    clearFastrrCheckoutSession();
 
     setIsCheckingOut(true);
     const toastId = toast.loading("Initiating checkout session...");
@@ -498,6 +503,10 @@ const AddToCart = () => {
       }
 
       toast.success("Opening Shiprocket FastRR Checkout...", { id: toastId });
+
+      // Rotate device UUID one final time right before opening checkout iframe
+      // so FastRR cannot associate this browser with the previous user's device session
+      rotateFastrrDeviceIds();
 
       // 6. Launch FastRR Headless Checkout with the fresh dynamic token!
       const launched = launchShiprocketCheckout(e, checkoutToken, {
