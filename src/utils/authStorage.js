@@ -1,3 +1,8 @@
+import {
+  clearFastrrCheckoutSession,
+  syncFastrrUserSession,
+} from "../services/shiprocketCheckout";
+
 const ACCESS_TOKEN_KEY = "accessToken";
 const USER_KEY = "user";
 
@@ -14,6 +19,9 @@ export const authStorage = {
     if (user) {
       localStorage.setItem(USER_KEY, JSON.stringify(user));
     }
+
+    // Synchronize FastRR checkout session: if account changed, purge old FastRR data
+    syncFastrrUserSession(user);
 
     // Notify the application that authentication has changed
     window.dispatchEvent(new Event("authUpdated"));
@@ -32,6 +40,9 @@ export const authStorage = {
   clearAuth: () => {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     localStorage.removeItem(USER_KEY);
+
+    // Completely purge FastRR checkout session so next user doesn't see old details
+    clearFastrrCheckoutSession();
 
     // Notify the application that authentication has changed
     window.dispatchEvent(new Event("authUpdated"));
