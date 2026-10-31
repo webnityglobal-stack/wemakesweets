@@ -15,6 +15,7 @@ import useCart from "@/hooks/cart/useCart";
 import {
   launchShiprocketCheckout,
   getShiprocketCheckoutToken,
+  clearFastrrSession,
 } from "@/services/shiprocketCheckout";
 import { authStorage } from "@/utils/authStorage";
 import orderService from "@/services/orderService";
@@ -373,6 +374,18 @@ const AddToCart = () => {
       toast.info("Please login to proceed to checkout.");
       navigate("/login", { state: { from: "/cart" } });
       return;
+    }
+
+    // Ensure FastRR does not carry over stale cookies or buyer profile from another user account
+    const currentUser = authStorage.getUser();
+    const currentUserId = String(currentUser?._id || currentUser?.id || currentUser?.email || "");
+    const lastCheckoutUser = localStorage.getItem("wms_last_checkout_user_id");
+    if (currentUserId && lastCheckoutUser && lastCheckoutUser !== currentUserId) {
+      console.log("[FastRR] User account switched. Purging stale FastRR checkout session.");
+      clearFastrrSession();
+    }
+    if (currentUserId) {
+      localStorage.setItem("wms_last_checkout_user_id", currentUserId);
     }
 
     setIsCheckingOut(true);

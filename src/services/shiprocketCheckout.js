@@ -62,3 +62,76 @@ export const launchShiprocketCheckout = (event, customToken, options = {}) => {
     return false;
   }
 };
+
+/**
+ * Clear all FastRR / Shiprocket checkout cookies, session and cached buyers
+ */
+export const clearFastrrSession = () => {
+  if (typeof window === "undefined") return;
+
+  const cookiesToClear = [
+    "fastrr_uuid",
+    "fastrr_usid",
+    "fastrr_user_id",
+    "fastrrUserIdEventTriggered",
+    "fastrrPrefetchTriggered",
+    "e360_session",
+    "EDD_check_uuid",
+    "cxpToken",
+    "sr_user_id",
+    "sr_checkout_utm",
+    "src_fca_utm",
+    "discount_code",
+    "discount_nudge",
+  ];
+
+  const host = window.location.hostname;
+  const parts = host.split(".");
+  const domains = [
+    "",
+    host,
+    `.${host}`,
+    parts.length > 1 ? `.${parts.slice(-2).join(".")}` : "",
+  ].filter(Boolean);
+
+  cookiesToClear.forEach((name) => {
+    domains.forEach((dom) => {
+      document.cookie = `${name}=; Path=/; Domain=${dom}; Expires=Thu, 01 Jan 1970 00:00:01 GMT; Max-Age=0;`;
+    });
+    document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT; Max-Age=0;`;
+  });
+
+  try {
+    Object.keys(localStorage || {}).forEach((key) => {
+      if (/fastrr|shiprocket|checkout/i.test(key)) {
+        localStorage.removeItem(key);
+      }
+    });
+    Object.keys(sessionStorage || {}).forEach((key) => {
+      if (/fastrr|shiprocket|checkout/i.test(key)) {
+        sessionStorage.removeItem(key);
+      }
+    });
+  } catch (e) {
+    console.warn("Storage clear warning:", e);
+  }
+
+  try {
+    const ids = [
+      "fastrr-prefetch-container",
+      "headless-iframe",
+      "headless-container",
+      "fastrr-main-container",
+    ];
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    });
+    document
+      .querySelectorAll("iframe[src*='shiprocket'], iframe[src*='fastrr']")
+      .forEach((el) => el.remove());
+  } catch (e) {
+    console.warn("DOM cleanup warning:", e);
+  }
+};
+
