@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { authStorage } from "../../utils/authStorage";
-import { clearFastrrCheckoutSession } from "../../services/shiprocketCheckout";
+import { clearFastrrSession } from "@/services/shiprocketCheckout";
 
 const useLogout = () => {
   const navigate = useNavigate();
@@ -9,10 +9,20 @@ const useLogout = () => {
   const logout = () => {
     // Remove authentication data and FastRR checkout session
     authStorage.clearAuth();
-    clearFastrrCheckoutSession();
+
+    // Clear any FastRR / Shiprocket checkout cookies, local storage, and buyer sessions
+    try {
+      clearFastrrSession();
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("wms_last_checkout_user_id");
+      }
+    } catch (e) {
+      console.warn("Could not clear FastRR checkout session on logout:", e);
+    }
 
     // Notify other components
     window.dispatchEvent(new Event("authChanged"));
+    window.dispatchEvent(new Event("authUpdated"));
 
     toast.success("Logged out successfully.");
 
