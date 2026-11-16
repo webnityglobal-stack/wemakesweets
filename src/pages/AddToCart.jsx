@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "sonner";
 import {
   Minus,
@@ -377,12 +377,7 @@ const AddToCart = () => {
       return;
     }
 
-    // 1. User authentication check
-    if (!authStorage.isAuthenticated()) {
-      toast.info("Please login to proceed to checkout.");
-      navigate("/login", { state: { from: "/cart" } });
-      return;
-    }
+    // 1. Guest & Logged-in checkout supported
 
     // Ensure FastRR does not carry over stale cookies or buyer profile from another user account
     const currentUser = authStorage.getUser();
@@ -435,14 +430,16 @@ const AddToCart = () => {
         };
       });
 
-      // 2.5 Fetch current user's default saved address before creating order
+      // 2.5 Fetch current user's default saved address before creating order (if logged in)
       let userAddress = null;
-      try {
-        const addrRes = await addressService.getAddresses();
-        const list = addrRes?.addresses || addrRes?.data || (Array.isArray(addrRes) ? addrRes : []);
-        userAddress = list.find((a) => a.isDefault) || list[0] || null;
-      } catch (addrErr) {
-        console.warn("Address fetch error before createOrder:", addrErr);
+      if (authStorage.isAuthenticated()) {
+        try {
+          const addrRes = await addressService.getAddresses();
+          const list = addrRes?.addresses || addrRes?.data || (Array.isArray(addrRes) ? addrRes : []);
+          userAddress = list.find((a) => a.isDefault) || list[0] || null;
+        } catch (addrErr) {
+          console.warn("Address fetch error before createOrder:", addrErr);
+        }
       }
 
       let shippingAddressPayload = null;

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import cartService from "@/services/cartService";
 import { emitCartUpdated } from "@/utils/cartEvents";
-import { authStorage } from "@/utils/authStorage";
 
 const useCart = () => {
   const [cart, setCart] = useState(null);
@@ -11,13 +10,6 @@ const useCart = () => {
   const [updatingItemId, setUpdatingItemId] = useState(null);
 
   const fetchCart = async () => {
-    if (!authStorage.isAuthenticated()) {
-      setCart({ items: [] });
-      setLoading(false);
-      setError("");
-      return;
-    }
-
     try {
       setLoading(true);
       setError("");
@@ -55,8 +47,6 @@ const useCart = () => {
       setLoading(false);
     }
   };
-
-
 
   const removeCartItem = async (cartItemId) => {
     try {
@@ -107,9 +97,6 @@ const useCart = () => {
     }
   };
 
-
-
-
   const updateCartItem = async (cartItemId, quantity) => {
     if (!cartItemId || quantity < 1) return;
 
@@ -119,10 +106,7 @@ const useCart = () => {
       setUpdatingItemId(cartItemId);
       setError("");
 
-      // ----------------------------------
       // OPTIMISTIC UPDATE
-      // ----------------------------------
-
       setCart((prevCart) => {
         if (!prevCart) return prevCart;
 
@@ -139,19 +123,10 @@ const useCart = () => {
         };
       });
 
-      // ----------------------------------
       // API
-      // ----------------------------------
+      const data = await cartService.updateCartItem(cartItemId, quantity);
 
-      const data = await cartService.updateCartItem(
-        cartItemId,
-        quantity
-      );
-
-      // ----------------------------------
       // SERVER IS SOURCE OF TRUTH
-      // ----------------------------------
-
       setCart(data.cart);
       emitCartUpdated(data.cart);
 
@@ -160,16 +135,12 @@ const useCart = () => {
         cart: data.cart,
       };
     } catch (error) {
-      // ----------------------------------
       // ROLLBACK
-      // ----------------------------------
-
       setCart(previousCart);
       emitCartUpdated(previousCart);
 
       const message =
-        error.response?.data?.message ||
-        "Unable to update cart.";
+        error.response?.data?.message || "Unable to update cart.";
 
       setError(message);
       toast.error(message);
@@ -182,9 +153,6 @@ const useCart = () => {
       setUpdatingItemId(null);
     }
   };
-
-
-
 
   const clearCart = async () => {
     try {

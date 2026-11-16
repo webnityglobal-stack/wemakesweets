@@ -1,8 +1,7 @@
 import axiosInstance from "../api/axiosInstance";
 
 const cartService = {
-
-    // add cart 
+  // Add item to cart (Logged-in or Guest)
   addToCart: async ({ productId, variantId, quantity }) => {
     const response = await axiosInstance.post("/cart/add", {
       productId,
@@ -13,19 +12,20 @@ const cartService = {
     return response.data;
   },
 
-//   getcart product
+  // Get cart (Logged-in or Guest)
   getCart: async () => {
     const response = await axiosInstance.get("/cart/");
 
     return response.data;
   },
 
-
-   removeCartItem: async (cartItemId) => {
+  // Remove item from cart
+  removeCartItem: async (cartItemId) => {
     const response = await axiosInstance.delete(`/cart/${cartItemId}`);
     return response.data;
   },
 
+  // Update item quantity in cart
   updateCartItem: async (cartItemId, quantity) => {
     const response = await axiosInstance.put(
       `/cart/${cartItemId}`,
@@ -43,6 +43,13 @@ const cartService = {
     return response.data;
   },
 
+  // Merge guest cart into user cart when user logs in
+  mergeCart: async (guestId) => {
+    const response = await axiosInstance.post("/cart/merge", {
+      guestId,
+    });
+    return response.data;
+  },
 };
 
 export default cartService;

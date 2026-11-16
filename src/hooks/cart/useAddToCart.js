@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import cartService from "../../services/cartService";
-import { authStorage } from "../../utils/authStorage";
 import { emitCartUpdated } from "../../utils/cartEvents";
 import { trackAddToCart } from "../../services/metaTrackingService";
 
@@ -17,17 +16,6 @@ const useAddToCart = () => {
     productName,
     price = 0,
   }) => {
-    if (!authStorage.isAuthenticated()) {
-      const msg = "Please login to add items to your cart.";
-      setError(msg);
-      toast.error(msg);
-      return {
-        success: false,
-        error: msg,
-        requiresAuth: true,
-      };
-    }
-
     try {
       setLoading(true);
       setError("");

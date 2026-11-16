@@ -1,5 +1,6 @@
 import { toast } from "sonner";
 import { authStorage } from "../utils/authStorage";
+import { guestStorage } from "../utils/guestStorage";
 
 const setupInterceptors = (axiosInstance) => {
   // Request Interceptor
@@ -9,6 +10,12 @@ const setupInterceptors = (axiosInstance) => {
 
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
+      } else {
+        // Send guest ID for guest user tracking (cart, checkout, etc.)
+        const guestId = guestStorage.getGuestId();
+        if (guestId) {
+          config.headers["x-guest-id"] = guestId;
+        }
       }
 
       return config;
@@ -21,6 +28,10 @@ const setupInterceptors = (axiosInstance) => {
   // Response Interceptor
   axiosInstance.interceptors.response.use(
     (response) => {
+      // If backend generated or returned guestId, synchronize it
+      if (response?.data?.guestId) {
+        guestStorage.setGuestId(response.data.guestId);
+      }
       return response;
     },
     (error) => {

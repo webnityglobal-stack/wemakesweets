@@ -190,7 +190,7 @@ const toggleSection = (section) => {
   >
     <ul className="space-y-1 pt-1 lg:pt-0">
       {quickLinks.map((item) => (
-        <li key={item}>
+        <li key={item.path}>
          <Link
   to={item.path}
   className="group flex items-center gap-3 text-md transition-all duration-300 hover:text-white"
@@ -239,7 +239,7 @@ const toggleSection = (section) => {
   >
     <ul className="space-y-2 pt-1">
       {customerCare.map((item) => (
-        <li key={item}>
+        <li key={item.path}>
         <Link
   to={item.path}
   className="group flex items-center gap-3 text-md transition hover:text-white"

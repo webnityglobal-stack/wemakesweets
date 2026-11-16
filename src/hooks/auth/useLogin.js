@@ -1,6 +1,9 @@
 import { useState } from "react";
 import authService from "../../services/authService";
+import cartService from "../../services/cartService";
 import { authStorage } from "../../utils/authStorage";
+import { guestStorage } from "../../utils/guestStorage";
+import { emitCartUpdated } from "../../utils/cartEvents";
 
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
@@ -21,6 +24,20 @@ const useLogin = () => {
         token: data.token,
         user: data.user,
       });
+
+      // Merge guest cart into user account if active
+      try {
+        const guestId = guestStorage.getGuestId();
+        if (guestId) {
+          const mergeRes = await cartService.mergeCart(guestId);
+          if (mergeRes?.cart) {
+            emitCartUpdated(mergeRes.cart);
+          }
+          guestStorage.clearGuestId();
+        }
+      } catch (mergeErr) {
+        console.warn("Guest cart merge warning:", mergeErr);
+      }
 
       return {
         success: true,
