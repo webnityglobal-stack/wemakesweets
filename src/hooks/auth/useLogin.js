@@ -7,14 +7,74 @@ import { emitCartUpdated } from "../../utils/cartEvents";
 
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
+  const [resending, setResending] = useState(false);
   const [error, setError] = useState("");
 
-  const login = async (loginData) => {
+  const sendOtp = async (phone) => {
     try {
       setLoading(true);
       setError("");
 
-      const data = await authService.login(loginData);
+      const data = await authService.sendOtp(phone);
+      return {
+        success: true,
+        data,
+        message: data?.message || "OTP sent successfully.",
+      };
+    } catch (err) {
+      const message =
+        err.response?.data?.message ||
+        err.message ||
+        "Unable to send OTP. Please try again.";
+      setError(message);
+      return {
+        success: false,
+        error: message,
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const resendOtp = async (phone, retryType = "text") => {
+    try {
+      setResending(true);
+      setError("");
+
+      const data = await authService.resendOtp(phone, retryType);
+      return {
+        success: true,
+        data,
+        message: data?.message || "OTP resent successfully.",
+      };
+    } catch (err) {
+      const message =
+        err.response?.data?.message ||
+        err.message ||
+        "Unable to resend OTP. Please try again.";
+      setError(message);
+      return {
+        success: false,
+        error: message,
+      };
+    } finally {
+      setResending(false);
+    }
+  };
+
+  const verifyOtp = async ({ phone, otp, name }) => {
+    try {
+      setLoading(true);
+      setError("");
+
+      const guestId = guestStorage.getGuestId();
+
+      const data = await authService.verifyOtp({
+        phone,
+        otp,
+        name,
+        guestId,
+      });
 
       if (!data?.token) {
         throw new Error("Authentication token not received.");
@@ -25,18 +85,21 @@ const useLogin = () => {
         user: data.user,
       });
 
-      // Merge guest cart into user account if active
+      // Backend already merges guest cart & links guest orders on verify-otp.
+      // Clear local guestId and sync fresh cart into UI.
       try {
-        const guestId = guestStorage.getGuestId();
         if (guestId) {
-          const mergeRes = await cartService.mergeCart(guestId);
-          if (mergeRes?.cart) {
-            emitCartUpdated(mergeRes.cart);
+          if (!data.mergedGuestCart) {
+            await cartService.mergeCart(guestId).catch(() => null);
           }
           guestStorage.clearGuestId();
         }
-      } catch (mergeErr) {
-        console.warn("Guest cart merge warning:", mergeErr);
+        const cartRes = await cartService.getCart();
+        if (cartRes?.cart) {
+          emitCartUpdated(cartRes.cart);
+        }
+      } catch (cartSyncErr) {
+        console.warn("Post-login cart sync notice:", cartSyncErr);
       }
 
       return {
@@ -44,15 +107,15 @@ const useLogin = () => {
         message: data.message,
         token: data.token,
         user: data.user,
+        isNewUser: Boolean(data.isNewUser),
+        linkedGuestOrders: Number(data.linkedGuestOrders || 0),
       };
-    } catch (error) {
+    } catch (err) {
       const message =
-        error.response?.data?.message ||
-        error.message ||
-        "Unable to login. Please try again.";
-
+        err.response?.data?.message ||
+        err.message ||
+        "Invalid or expired OTP. Please try again.";
       setError(message);
-
       return {
         success: false,
         error: message,
@@ -63,8 +126,11 @@ const useLogin = () => {
   };
 
   return {
-    login,
+    sendOtp,
+    verifyOtp,
+    resendOtp,
     loading,
+    resending,
     error,
     setError,
   };

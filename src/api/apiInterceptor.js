@@ -36,8 +36,15 @@ const setupInterceptors = (axiosInstance) => {
     },
     (error) => {
       if (error.response?.status === 401) {
-        const isLoginAttempt = error.config?.url?.includes("/auth/login");
-        if (!isLoginAttempt && authStorage.getToken()) {
+        const reqUrl = error.config?.url || "";
+        const isAuthAttempt =
+          reqUrl.includes("/auth/login") ||
+          reqUrl.includes("/auth/send-otp") ||
+          reqUrl.includes("/auth/verify-otp") ||
+          reqUrl.includes("/auth/resend-otp") ||
+          reqUrl.includes("/auth/send-login-otp") ||
+          reqUrl.includes("/auth/verify-login-otp");
+        if (!isAuthAttempt && authStorage.getToken()) {
           toast.error("Session expired. Please login again.");
         }
         authStorage.clearAuth();

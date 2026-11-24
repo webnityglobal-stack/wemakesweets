@@ -35,17 +35,40 @@ const AddToCart = () => {
 
   // Helper to mark pending order as CANCELLED when checkout is dismissed / backed out
   const handleCheckoutDismiss = async (reason = "Checkout closed by user") => {
-    const orderIdToCancel = currentOrderIdRef.current;
+    const orderIdToCancel = currentOrderIdRef.current || sessionStorage.getItem("wms_pending_order_id");
     if (!orderIdToCancel || isDismissingRef.current) return;
+
+    // Agar user payment/success page pe ja raha hai toh cancel mat karo —
+    // woh page khud verify karega aur status set karega
+    if (
+      typeof window !== "undefined" &&
+      (
+        window.location.pathname.includes("/payment/success") ||
+        window.location.pathname.includes("/order-confirmation")
+      )
+    ) {
+      console.log("[Shiprocket Checkout] Redirect to success page detected — skipping cancel call");
+      currentOrderIdRef.current = null;
+      sessionStorage.removeItem("wms_pending_order_id");
+      setIsCheckingOut(false);
+      return;
+    }
 
     isDismissingRef.current = true;
     currentOrderIdRef.current = null;
+    sessionStorage.removeItem("wms_pending_order_id");
     setIsCheckingOut(false);
 
     try {
-      console.log(`[Shiprocket Checkout] Dismissed / Backed out for order: ${orderIdToCancel}`);
-      await paymentService.cancelPayment(orderIdToCancel, reason);
-      toast.info("Checkout was cancelled. Order has been marked as cancelled.");
+      console.log(`[Shiprocket Checkout] Dismissed / Backed out / Cancelled for order: ${orderIdToCancel}`);
+      const result = await paymentService.cancelPayment(orderIdToCancel, reason);
+      if (result?.success) {
+        toast.info("Payment was cancelled. Your order has been cancelled. You can retry from the cart.", {
+          duration: 5000,
+        });
+      } else {
+        toast.info("Checkout was closed. Please retry if needed.", { duration: 4000 });
+      }
     } catch (err) {
       console.warn("[Shiprocket Checkout] Error cancelling order on dismiss:", err);
     } finally {
@@ -54,9 +77,17 @@ const AddToCart = () => {
   };
 
   // Ensure FastRR session matches the currently logged-in user on cart mount
+  // and auto-cancel any abandoned checkout order if user returned to /cart
   useEffect(() => {
     const user = authStorage.getUser();
     syncFastrrUserSession(user);
+
+    const pendingOrderId = sessionStorage.getItem("wms_pending_order_id");
+    if (pendingOrderId) {
+      console.log(`[Shiprocket Checkout] Pending checkout detected on cart mount: ${pendingOrderId}. Cancelling.`);
+      sessionStorage.removeItem("wms_pending_order_id");
+      paymentService.cancelPayment(pendingOrderId, "User returned to cart without completing checkout").catch(() => {});
+    }
   }, []);
 
   // Listen for FastRR / Shiprocket checkout events (live address, close, back)
@@ -64,29 +95,63 @@ const AddToCart = () => {
     // 1. Window Message listener
     const handleCheckoutMessage = async (event) => {
       try {
-        const data = event.data;
+        let data = event.data;
         if (!data) return;
 
+        if (typeof data === "string") {
+          try {
+            data = JSON.parse(data);
+          } catch (_) {
+            const lowerStr = data.toLowerCase();
+            if (
+              lowerStr.includes("close") ||
+              lowerStr.includes("cancel") ||
+              lowerStr.includes("exit") ||
+              lowerStr.includes("fail")
+            ) {
+              console.log("[Shiprocket Checkout] String close/cancel message detected:", data);
+              await handleCheckoutDismiss("Checkout cancelled / closed by user");
+              return;
+            }
+          }
+        }
+
         const trigger = String(data?.trigger || "").toLowerCase();
-        const eventName = String(data?.event || "").toLowerCase();
+        const eventName = String(data?.event || data?.name || "").toLowerCase();
         const action = String(data?.action || "").toLowerCase();
         const type = String(data?.type || "").toLowerCase();
+        const status = String(data?.status || data?.payment_status || "").toLowerCase();
 
-        // Detect checkout close / back events
-        if (
+        // Detect checkout close / back / cancel / failure events
+        const isCloseOrCancelEvent =
           trigger === "headless-close" ||
           trigger === "close" ||
+          trigger.includes("cancel") ||
           eventName === "sr-headless-close" ||
+          eventName.includes("close") ||
+          eventName.includes("cancel") ||
+          eventName.includes("fail") ||
           action === "close" ||
+          action.includes("cancel") ||
+          action.includes("fail") ||
           type === "close" ||
-          data?.exitCheckout
-        ) {
-          console.log("[Shiprocket Checkout] Close message event detected:", data);
-          await handleCheckoutDismiss("User clicked back / close in checkout modal");
+          type.includes("cancel") ||
+          type.includes("fail") ||
+          status === "failed" ||
+          status === "cancelled" ||
+          status === "canceled" ||
+          Boolean(data?.exitCheckout);
+
+        if (isCloseOrCancelEvent) {
+          console.log("[Shiprocket Checkout] Close/Cancel message event detected:", data);
+          await handleCheckoutDismiss(
+            data?.reason || data?.message || "User clicked back / cancel in checkout modal"
+          );
           return;
         }
 
-        if (!currentOrderIdRef.current) return;
+        const activeOrderId = currentOrderIdRef.current || sessionStorage.getItem("wms_pending_order_id");
+        if (!activeOrderId) return;
 
         // Detect live shipping address if emitted from popup
         const addr =
@@ -99,7 +164,7 @@ const AddToCart = () => {
 
         if (addr && (addr.line1 || addr.address || addr.address1 || addr.pincode)) {
           console.log("[Shiprocket Checkout] Live address detected from modal:", addr);
-          await orderService.updateOrderAddress(currentOrderIdRef.current, addr);
+          await orderService.updateOrderAddress(activeOrderId, addr);
         }
       } catch (err) {
         console.warn("[Shiprocket Checkout] Error handling window message:", err);
@@ -111,18 +176,40 @@ const AddToCart = () => {
     // 2. Global Shiprocket Custom Callback
     window.srCustomCheckoutCallBackFn = (event) => {
       console.log("[Shiprocket Checkout Custom Callback]:", event);
+      const evName = String(event?.event || event?.name || "").toLowerCase();
+      const evType = String(event?.type || "").toLowerCase();
+      const evStatus = String(event?.status || "").toLowerCase();
       if (
-        event?.event === "sr-headless-close" ||
-        event?.exitCheckout ||
-        event?.type === "close"
+        evName === "sr-headless-close" ||
+        evName.includes("close") ||
+        evName.includes("cancel") ||
+        evName.includes("fail") ||
+        evType.includes("close") ||
+        evType.includes("cancel") ||
+        evStatus.includes("cancel") ||
+        evStatus.includes("fail") ||
+        Boolean(event?.exitCheckout)
       ) {
-        handleCheckoutDismiss("Checkout closed / backed out");
+        handleCheckoutDismiss("Checkout closed / cancelled by user");
       }
     };
 
-    // 3. DOM MutationObserver to detect when FastRR modal is closed / removed
+    // 3. DOM MutationObserver to detect when FastRR modal is closed / removed / hidden
     let modalWasOpened = false;
-    const observer = new MutationObserver(() => {
+    const isModalVisible = (el) => {
+      if (!el) return false;
+      try {
+        const style = window.getComputedStyle(el);
+        if (style.display === "none" || style.visibility === "hidden" || style.opacity === "0") {
+          return false;
+        }
+        return el.offsetParent !== null || el.offsetWidth > 0 || el.offsetHeight > 0;
+      } catch (_) {
+        return true;
+      }
+    };
+
+    const checkModalState = () => {
       const modalEl =
         document.getElementById("fastrr-main-container") ||
         document.getElementById("headless-container") ||
@@ -130,27 +217,38 @@ const AddToCart = () => {
         document.querySelector("iframe[src*='shiprocket.com']") ||
         document.querySelector("iframe[src*='fastrr']");
 
-      if (modalEl) {
+      const visible = Boolean(modalEl && isModalVisible(modalEl));
+      if (visible) {
         modalWasOpened = true;
       } else if (modalWasOpened) {
         modalWasOpened = false;
-        if (currentOrderIdRef.current) {
-          console.log("[Shiprocket Checkout] Modal removed from DOM");
+        const activeId = currentOrderIdRef.current || sessionStorage.getItem("wms_pending_order_id");
+        if (activeId) {
+          console.log("[Shiprocket Checkout] Modal removed or hidden in DOM");
           handleCheckoutDismiss("Checkout modal closed / backed out");
         }
       }
-    });
+    };
 
-    observer.observe(document.body, { childList: true, subtree: true });
+    const observer = new MutationObserver(checkModalState);
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["style", "class"] });
+
+    // Periodic safety poll while modal is open
+    const pollInterval = setInterval(() => {
+      if (modalWasOpened) {
+        checkModalState();
+      }
+    }, 1200);
 
     // 4. Popstate listener (for browser / hardware back buttons)
     const handlePopState = () => {
-      if (currentOrderIdRef.current) {
+      const activeId = currentOrderIdRef.current || sessionStorage.getItem("wms_pending_order_id");
+      if (activeId) {
         setTimeout(() => {
           const modalEl =
             document.getElementById("fastrr-main-container") ||
             document.getElementById("headless-container");
-          if (!modalEl && currentOrderIdRef.current) {
+          if (!modalEl || !isModalVisible(modalEl)) {
             handleCheckoutDismiss("User navigated back");
           }
         }, 150);
@@ -159,6 +257,7 @@ const AddToCart = () => {
     window.addEventListener("popstate", handlePopState);
 
     return () => {
+      clearInterval(pollInterval);
       observer.disconnect();
       window.removeEventListener("message", handleCheckoutMessage);
       window.removeEventListener("popstate", handlePopState);
@@ -167,15 +266,16 @@ const AddToCart = () => {
       }
 
       // Cleanup pending order if user navigated away from cart page
+      const pendingOid = currentOrderIdRef.current || sessionStorage.getItem("wms_pending_order_id");
       if (
-        currentOrderIdRef.current &&
+        pendingOid &&
         typeof window !== "undefined" &&
         !window.location.pathname.includes("/payment/success") &&
         !window.location.pathname.includes("/order-confirmation")
       ) {
-        const oid = currentOrderIdRef.current;
         currentOrderIdRef.current = null;
-        paymentService.cancelPayment(oid, "User left cart page during checkout");
+        sessionStorage.removeItem("wms_pending_order_id");
+        paymentService.cancelPayment(pendingOid, "User left cart page during checkout");
       }
     };
   }, []);
@@ -479,6 +579,7 @@ const AddToCart = () => {
         throw new Error(orderRes?.message || "Could not generate order ID");
       }
       currentOrderIdRef.current = orderId;
+      sessionStorage.setItem("wms_pending_order_id", orderId);
 
       // Meta Pixel + Conversions API: InitiateCheckout
       try {
@@ -519,8 +620,21 @@ const AddToCart = () => {
         isInitiatedFromApp: false,
         eventCallback: (ev) => {
           console.log("[FastRR eventCallback]", ev);
-          if (ev?.event === "sr-headless-close" || ev?.exitCheckout) {
-            handleCheckoutDismiss("Checkout closed by user");
+          const evName = String(ev?.event || ev?.name || "").toLowerCase();
+          const evType = String(ev?.type || "").toLowerCase();
+          const evStatus = String(ev?.status || "").toLowerCase();
+          if (
+            evName === "sr-headless-close" ||
+            evName.includes("close") ||
+            evName.includes("cancel") ||
+            evName.includes("fail") ||
+            evType.includes("close") ||
+            evType.includes("cancel") ||
+            evStatus.includes("cancel") ||
+            evStatus.includes("fail") ||
+            Boolean(ev?.exitCheckout)
+          ) {
+            handleCheckoutDismiss("Checkout closed / cancelled by user");
           }
         },
       });

@@ -136,8 +136,11 @@ const MyAccount = () => {
       toast.error("Please enter your name");
       return;
     }
-    if (!editFormData.email.trim()) {
-      toast.error("Please enter your email");
+    if (
+      editFormData.email.trim() &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(editFormData.email.trim())
+    ) {
+      toast.error("Please enter a valid email address");
       return;
     }
 
@@ -403,7 +406,7 @@ const MyAccount = () => {
                   </p>
 
                   <p className="truncate font-manrope text-[11px] text-[#603917]/50">
-                    {userEmail}
+                    {userEmail || userPhone}
                   </p>
                 </div>
 
@@ -597,7 +600,7 @@ const MyAccount = () => {
                   <InfoField
                     icon={Mail}
                     label="Email Address"
-                    value={userEmail}
+                    value={userEmail || "Not added"}
                   />
 
                   <InfoField
@@ -860,7 +863,7 @@ const MyAccount = () => {
                   htmlFor="profile-email"
                   className="mb-1.5 block font-manrope text-xs font-semibold uppercase tracking-wider text-[#603917]/75"
                 >
-                  Email Address <span className="text-pink-600">*</span>
+                  Email Address <span className="text-[#603917]/40 font-normal lowercase">(optional)</span>
                 </label>
                 <div className="relative">
                   <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#603917]/40">
@@ -870,10 +873,9 @@ const MyAccount = () => {
                     id="profile-email"
                     name="email"
                     type="email"
-                    required
                     value={editFormData.email}
                     onChange={handleFormChange}
-                    placeholder="Enter your email address"
+                    placeholder="Enter your email address (optional)"
                     className="w-full rounded-2xl border border-[#603917]/20 bg-white py-3 pl-10 pr-4 font-manrope text-sm text-[#572340] placeholder:text-[#603917]/30 outline-none transition focus:border-pink-600 focus:ring-1 focus:ring-pink-600"
                   />
                 </div>

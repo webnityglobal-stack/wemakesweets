@@ -1,43 +1,28 @@
 import axiosInstance from "../api/axiosInstance";
 
 const authService = {
-  signup: async (signupData) => {
-    const response = await axiosInstance.post(
-      "/auth/signup",
-      signupData
-    );
-console.log("this is api response", response);
-    return response.data;
-  },
-
-  login: async (loginData) => {
-    const response = await axiosInstance.post(
-      "/auth/login",
-      loginData
-    );
-
-    return response.data;
-  },
-
-  forgotPassword: async (identifier) => {
-    const response = await axiosInstance.post("/auth/forgot-password", {
-      identifier,
+  sendOtp: async (phone) => {
+    const response = await axiosInstance.post("/auth/send-otp", {
+      phone,
     });
     return response.data;
   },
 
-  verifyResetOTP: async (identifier, otp) => {
-    const response = await axiosInstance.post("/auth/verify-reset-otp", {
-      identifier,
+  verifyOtp: async ({ phone, otp, name, guestId }) => {
+    const payload = {
+      phone,
       otp,
-    });
+      ...(name ? { name } : {}),
+      ...(guestId ? { guestId } : {}),
+    };
+    const response = await axiosInstance.post("/auth/verify-otp", payload);
     return response.data;
   },
 
-  resetPassword: async (identifier, password) => {
-    const response = await axiosInstance.post("/auth/reset-password", {
-      identifier,
-      password,
+  resendOtp: async (phone, retryType = "text") => {
+    const response = await axiosInstance.post("/auth/resend-otp", {
+      phone,
+      retryType,
     });
     return response.data;
   },

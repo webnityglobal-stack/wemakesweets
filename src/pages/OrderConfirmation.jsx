@@ -1,3 +1,4 @@
+import paymentService from "@/services/paymentService";
 import { Link, useLocation } from "react-router-dom";
 import {
   Check,
@@ -23,7 +24,11 @@ const OrderConfirmation = () => {
   const oid = searchParams.get("oid") || searchParams.get("order_id");
   const ost = (searchParams.get("ost") || searchParams.get("status") || "").toUpperCase();
 
-  const isFailed = ost === "FAILED" || ost === "FAILURE";
+  const isFailed = ["FAILED", "FAILURE", "CANCELLED", "CANCELED", "CANCEL", "ABORTED", "DECLINED"].includes(ost) || Boolean(searchParams.get("error"));
+  if (isFailed && oid) {
+    paymentService.cancelPayment(oid, "Payment cancelled / failed at checkout").catch(() => {});
+    sessionStorage.removeItem("wms_pending_order_id");
+  }
   const stateOrder = location.state?.order;
 
   // Format today's date dynamically
@@ -51,7 +56,7 @@ const OrderConfirmation = () => {
     orderId: oid || stateOrder?.orderId || "WMS-10001",
     orderDate: todayFormatted,
     paymentStatus: isFailed ? "Failed" : "Paid",
-    orderStatus: isFailed ? "Failed" : "Confirmed",
+    orderStatus: isFailed ? "Cancelled" : "Confirmed",
 
     customer: {
       name: "Customer Name",

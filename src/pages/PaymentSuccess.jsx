@@ -35,8 +35,11 @@ const PaymentSuccess = () => {
     location.state?.orderId;
   const oid = searchParams.get("oid");
   const ost = (searchParams.get("ost") || searchParams.get("status") || "").toUpperCase();
+  const queryFailed =
+    ["FAILED", "FAILURE", "CANCELLED", "CANCELED", "CANCEL", "ABORTED", "DECLINED", "ERROR"].includes(ost) ||
+    Boolean(searchParams.get("error"));
 
-  const isFailed = ost === "FAILED" || ost === "FAILURE";
+  const [isFailed, setIsFailed] = useState(queryFailed);
 
   const [order, setOrder] = useState(location.state?.order || null);
   const [loading, setLoading] = useState(Boolean(orderIdFromQuery && !location.state?.order));
@@ -85,7 +88,26 @@ const PaymentSuccess = () => {
         try {
           const verifyData = await paymentService.verifyPayment(orderIdFromQuery);
           if (verifyData?.success && verifyData?.order) {
-            setOrder(verifyData.order);
+            const ord = verifyData.order;
+            setOrder(ord);
+            sessionStorage.removeItem("wms_pending_order_id");
+
+            // COD orders ke liye PENDING payment normal hoti hai — cancel mat karo
+            const isCOD = ord.paymentMethod === "COD";
+
+            const failed =
+              queryFailed ||
+              ord.paymentStatus === "FAILED" ||
+              ord.orderStatus === "CANCELLED" ||
+              (!isCOD && ord.paymentMethod === "ONLINE" && ord.paymentStatus !== "PAID");
+
+            if (failed) {
+              setIsFailed(true);
+              // Sirf ONLINE orders pe cancel call karo (COD pe nahi)
+              if (!isCOD) {
+                paymentService.cancelPayment(orderIdFromQuery, "Payment not completed / cancelled").catch(() => {});
+              }
+            }
             setLoading(false);
             return;
           }
@@ -96,7 +118,24 @@ const PaymentSuccess = () => {
         // 2. Primary: fetch by order ID endpoint /orders/:orderId
         const data = await orderService.getOrderById(orderIdFromQuery);
         if (data?.success && data?.order) {
-          setOrder(data.order);
+          const ord = data.order;
+          setOrder(ord);
+          sessionStorage.removeItem("wms_pending_order_id");
+
+          const isCOD = ord.paymentMethod === "COD";
+
+          const failed =
+            queryFailed ||
+            ord.paymentStatus === "FAILED" ||
+            ord.orderStatus === "CANCELLED" ||
+            (!isCOD && ord.paymentMethod === "ONLINE" && ord.paymentStatus !== "PAID");
+
+          if (failed) {
+            setIsFailed(true);
+            if (!isCOD) {
+              paymentService.cancelPayment(orderIdFromQuery, "Payment not completed / cancelled").catch(() => {});
+            }
+          }
         } else {
           throw new Error(data?.message || "Order not found");
         }
@@ -199,7 +238,7 @@ const PaymentSuccess = () => {
       ? "Cash on Delivery"
       : order?.paymentStatus || "Paid";
   const displayOrderStatus = isFailed
-    ? "Failed"
+    ? "Cancelled"
     : order?.orderStatus || "Confirmed";
 
   // 1. LOADING SKELETON

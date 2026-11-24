@@ -49,7 +49,7 @@
 // export default AppRoutes
 
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import MainLayout from "../layout/MainLayout";
 
@@ -114,11 +114,11 @@ const AppRoutes = () => {
   element={<ProductDetailsPage />}
 />
 
-          <Route path="sign-up" element={<Signup />} />
+          <Route path="sign-up" element={<Navigate to="/login" replace />} />
 
           <Route path="login" element={<Login />} />
 
-          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="forgot-password" element={<Navigate to="/login" replace />} />
 
           <Route
             path="payment/success"
