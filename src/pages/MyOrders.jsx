@@ -96,7 +96,16 @@ const getOrderStatusBadge = (rawStatus) => {
   }
 };
 
-const getPaymentStatusBadge = (paymentStatus) => {
+const getPaymentStatusBadge = (paymentStatus, paymentMethod) => {
+  if (paymentMethod === "COD") {
+    const isPaid = (paymentStatus || "").toUpperCase() === "PAID";
+    return {
+      label: isPaid ? "Paid (Cash)" : "Cash on Delivery",
+      badgeClass: isPaid
+        ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+        : "bg-amber-50 text-amber-700 border-amber-200",
+    };
+  }
   const status = (paymentStatus || "").toUpperCase();
   switch (status) {
     case "PAID":
@@ -376,7 +385,7 @@ const MyOrders = () => {
               const cancelled = isOrderCancelled(order);
               const status = getOrderStatusBadge(cancelled ? "CANCELLED" : order.orderStatus);
               const StatusIcon = status.icon;
-              const payment = getPaymentStatusBadge(order.paymentStatus);
+              const payment = getPaymentStatusBadge(order.paymentStatus, order.paymentMethod);
 
               const totalQuantity = (order.items || []).reduce(
                 (total, item) => total + (item.quantity || 1),

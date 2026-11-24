@@ -232,11 +232,14 @@ const PaymentSuccess = () => {
   };
 
   const displayOrderId = order?.orderId || orderIdFromQuery || "N/A";
-  const displayPaymentStatus = isFailed
-    ? "Failed"
-    : order?.paymentMethod === "COD"
-      ? "Cash on Delivery"
-      : order?.paymentStatus || "Paid";
+  const displayPaymentStatus =
+    order?.paymentMethod === "COD"
+      ? order?.paymentStatus === "PAID"
+        ? "Paid (Cash)"
+        : "Cash on Delivery"
+      : isFailed
+        ? "Failed"
+        : order?.paymentStatus || "Paid";
   const displayOrderStatus = isFailed
     ? "Cancelled"
     : order?.orderStatus || "Confirmed";
