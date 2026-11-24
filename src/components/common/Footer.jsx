@@ -304,7 +304,7 @@ const toggleSection = (section) => {
         <br />
         Bhada,
         <br />
-        Surat - 395006,
+        Surat - 394190,
         <br />
         Gujarat, India
       </p>

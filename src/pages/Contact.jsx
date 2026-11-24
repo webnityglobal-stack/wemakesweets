@@ -258,7 +258,7 @@ export default function Contact() {
                       <br />
                       Plot No.51, Shakti Industries,
                       <br />
-                      Bhada, Surat, Gujarat - 395006
+                      Bhada, Surat, Gujarat - 394190
                     </p>
                   </div>
                 </div>
