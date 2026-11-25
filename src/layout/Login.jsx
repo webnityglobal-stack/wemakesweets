@@ -270,7 +270,7 @@ const Login = () => {
                 </div>
 
                 <h2 className="text-2xl font-bold text-gray-800 font-manrope">
-                  {isFromOrderFlow ? "Track Your Orders" : "Login with Mobile"}
+                  {isFromOrderFlow ? "Login" : "Login with Mobile"}
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-500 font-manrope">
