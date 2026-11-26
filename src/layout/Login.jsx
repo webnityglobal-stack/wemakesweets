@@ -331,7 +331,7 @@ const Login = () => {
                 <button
                   type="submit"
                   disabled={loading || !isValidPhone}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-lg py-3.5 text-sm font-semibold text-white bg-pink-600 hover:bg-[#60b396] hover:scale-[1.02] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 cursor-pointer font-manrope"
+                  className="w-full inline-flex font-manrope items-center justify-center gap-2 rounded-lg py-3.5  font-semibold text-white bg-pink-600 hover:bg-[#60b396] hover:scale-[1.02] shadow-[1px_2px_0px_#000] sm:shadow-[2px_3px_0px_#000] hover:shadow-[3px_4px_0px_#000] transition-all duration-300 hover:scale-100 cursor-pointer font-manrope"
                 >
                   {loading ? (
                     <>
